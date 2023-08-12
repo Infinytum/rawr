@@ -8,18 +8,19 @@
 import SwiftUI
 
 struct TimelineView: View {
+    
     @State private var selectedTab = 0
     
     var body: some View {
         ZStack(alignment: .top) {
             if selectedTab == 0 {
-                Timeline(timelineContext: TimelineContext(timelineType: .HOME)).padding(.top, 60)
+                Timeline(timelineContext: TimelineContext(timelineType: .HOME)).padding(.top, 55)
             }
             if selectedTab == 1 {
-                Timeline(timelineContext: TimelineContext(timelineType: .LOCAL)).padding(.top, 60)
+                Timeline(timelineContext: TimelineContext(timelineType: .LOCAL)).padding(.top, 55)
             }
             if selectedTab == 2 {
-                Timeline(timelineContext: TimelineContext(timelineType: .GLOBAL)).padding(.top, 60)
+                Timeline(timelineContext: TimelineContext(timelineType: .GLOBAL)).padding(.top, 55)
             }
 
             ZStack {

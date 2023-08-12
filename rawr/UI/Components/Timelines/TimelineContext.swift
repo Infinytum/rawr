@@ -19,6 +19,7 @@ class TimelineContext: ObservableObject {
     private var lastNoteId: String?
     private var timeline: TimelineContextTimeline = TimelineContextTimeline.HOME
     
+    @Published var errorReason: String? = nil
     @Published var items = [NoteModel]()
     @Published var dataIsLoading = false
     
@@ -72,7 +73,8 @@ class TimelineContext: ObservableObject {
     
     private func handleTimelineUpdate(notes: [NoteModel]?, error: MisskeyKitError?) {
         guard let notes = notes else {
-            print(error ?? "No error")
+            self.errorReason = error?.localizedDescription ?? "Unknown Error"
+            print(error.debugDescription)
             return
         }
         Task {
@@ -80,6 +82,7 @@ class TimelineContext: ObservableObject {
                 items.append(contentsOf: notes)
                 itemsLoadedCount = items.count
                 self.lastNoteId = items.last?.id
+                self.errorReason = nil
                 dataIsLoading = false
             }
         }

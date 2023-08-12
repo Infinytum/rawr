@@ -9,6 +9,7 @@ import SwiftUI
 import MisskeyKit
 
 struct Timeline: View {
+
     @ObservedObject var timelineContext: TimelineContext
     
     init(timelineContext: TimelineContext) {
@@ -17,19 +18,29 @@ struct Timeline: View {
     }
     
     var body: some View {
-        ScrollView {
-          LazyVStack {
-            ForEach(timelineContext.items, id: \.id) { item in
-                NoteView(note: item)
-                    .listRowSeparator(.hidden)
-                    .onAppear { timelineContext.requestMoreItemsIfNeeded(note: item) }
-                Divider().listRowSeparator(.hidden)
-            }
+        Group {
+            if timelineContext.errorReason == nil {
+                ScrollView {
+                  LazyVStack {
+                    ForEach(timelineContext.items, id: \.id) { item in
+                        NoteView(note: item)
+                            .listRowSeparator(.hidden)
+                            .onAppear { timelineContext.requestMoreItemsIfNeeded(note: item) }
+                        Divider().listRowSeparator(.hidden)
+                    }
 
-            if timelineContext.dataIsLoading {
-              ProgressView()
+                    if timelineContext.dataIsLoading {
+                      ProgressView()
+                    }
+                  }.padding()
+                }
+            } else {
+                VStack {
+                    Spacer()
+                    Text(timelineContext.errorReason!)
+                    Spacer()
+                }
             }
-          }.padding()
         }
     }
 }
