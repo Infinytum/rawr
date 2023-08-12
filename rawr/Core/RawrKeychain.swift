@@ -14,12 +14,9 @@ internal enum KeychainKeys: String {
 }
 
 class RawrKeychain {
-    private let keychainAccessGroup: String = "YR8RBAQQAV.co.infinytum.rawr"
-    
     private let keychain: KeychainSwift
     init() {
         self.keychain = KeychainSwift()
-        self.keychain.accessGroup = self.keychainAccessGroup
         self.keychain.synchronizable = true
     }
     

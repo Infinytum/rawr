@@ -211,11 +211,11 @@
 		2068CC1F2A87C25B00F8A958 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
-				2068CC202A87C25B00F8A958 /* NoteFooter.swift */,
 				2068CC212A87C25B00F8A958 /* Bodies */,
-				2068CC252A87C25B00F8A958 /* NoteView.swift */,
 				2068CC262A87C25B00F8A958 /* Decorations */,
+				2068CC252A87C25B00F8A958 /* NoteView.swift */,
 				2068CC282A87C25B00F8A958 /* NoteHeader.swift */,
+				2068CC202A87C25B00F8A958 /* NoteFooter.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
