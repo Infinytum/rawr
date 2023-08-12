@@ -14,7 +14,7 @@ struct NoteView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if self.note.isRenote() {
-                NoteDecorationBoost(note: self.note).padding(.vertical, 10)
+                NoteDecorationBoost(note: self.note)
             }
             NoteHeader(note: self.note.isRenote() ? self.note.renote! : self.note)
             NoteBodyText(text: (self.note.isRenote() ? self.note.renote?.text : self.note.text) ?? "")
@@ -22,8 +22,8 @@ struct NoteView: View {
                 NoteBodyGallery(files: self.note.isRenote() ? self.note.renote!.files! : self.note.files!)
             }
             NoteBodyReactions(note: self.note.isRenote() ? self.note.renote! : self.note).padding(.top, 5)
-            NoteFooter(note: self.note.isRenote() ? self.note.renote! : self.note).padding(.all, 5)
-        }
+            NoteFooter(note: self.note.isRenote() ? self.note.renote! : self.note).padding(.horizontal, 5).padding(.top, 5)
+        }.padding(.vertical, 5)
     }
 }
  
