@@ -18,7 +18,9 @@ struct NoteBodyGallery: View {
                 if file.thumbnailUrl == nil {
                     Rectangle()
                         .foregroundStyle(.primary.opacity(0.1))
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                         .clipped().cornerRadius(11)
+                        .aspectRatio(1, contentMode: .fill)
                 } else {
                     NetworkImage(url: URL(string: file.thumbnailUrl!)) { image in
                         image
@@ -26,11 +28,17 @@ struct NoteBodyGallery: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                             .clipped()
-                            .aspectRatio(1, contentMode: .fit)
+                            .aspectRatio(1, contentMode: .fill)
                     } placeholder: {
+                        ProgressView()
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                            .aspectRatio(1, contentMode: .fill)
+                    } fallback: {
                         Rectangle()
                             .foregroundStyle(.primary.opacity(0.1))
-                    }.clipped().cornerRadius(11)
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                            .aspectRatio(1, contentMode: .fill)
+                    }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity).clipped().cornerRadius(11)
                 }
             }
         }
