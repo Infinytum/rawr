@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,32 @@
 		2068CBF02A87B5BC00F8A958 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBEF2A87B5BC00F8A958 /* ContentView.swift */; };
 		2068CBF22A87B5BF00F8A958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2068CBF12A87B5BF00F8A958 /* Assets.xcassets */; };
 		2068CBF62A87B5BF00F8A958 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2068CBF52A87B5BF00F8A958 /* Preview Assets.xcassets */; };
+		2068CBFE2A87B62100F8A958 /* SwiftKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2068CBFD2A87B62100F8A958 /* SwiftKit */; };
+		2068CC012A87B80300F8A958 /* RawrKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC002A87B80300F8A958 /* RawrKeychain.swift */; };
+		2068CC032A87B85500F8A958 /* ViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC022A87B85500F8A958 /* ViewContext.swift */; };
+		2068CC0E2A87B96D00F8A958 /* OnboardingWelcomeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC072A87B96D00F8A958 /* OnboardingWelcomeCard.swift */; };
+		2068CC0F2A87B96D00F8A958 /* OnboardingConnectCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC082A87B96D00F8A958 /* OnboardingConnectCard.swift */; };
+		2068CC102A87B96D00F8A958 /* OnboardingServerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC092A87B96D00F8A958 /* OnboardingServerCard.swift */; };
+		2068CC112A87B96D00F8A958 /* OnboardingMisskeyAuthModalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC0B2A87B96D00F8A958 /* OnboardingMisskeyAuthModalController.swift */; };
+		2068CC122A87B96D00F8A958 /* OnboardingMisskeyAuthModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC0C2A87B96D00F8A958 /* OnboardingMisskeyAuthModal.swift */; };
+		2068CC132A87B96D00F8A958 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC0D2A87B96D00F8A958 /* OnboardingView.swift */; };
+		2068CC162A87B9B500F8A958 /* MisskeyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2068CC152A87B9B500F8A958 /* MisskeyKit */; };
+		2068CC192A87BA1300F8A958 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2068CC182A87BA1300F8A958 /* KeychainSwift */; };
+		2068CC2B2A87C25B00F8A958 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC1D2A87C25B00F8A958 /* Timeline.swift */; };
+		2068CC2C2A87C25B00F8A958 /* TimelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC1E2A87C25B00F8A958 /* TimelineContext.swift */; };
+		2068CC2D2A87C25B00F8A958 /* NoteFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC202A87C25B00F8A958 /* NoteFooter.swift */; };
+		2068CC2E2A87C25B00F8A958 /* NoteBodyReactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC222A87C25B00F8A958 /* NoteBodyReactions.swift */; };
+		2068CC2F2A87C25B00F8A958 /* NoteBodyGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC232A87C25B00F8A958 /* NoteBodyGallery.swift */; };
+		2068CC302A87C25B00F8A958 /* NoteBodyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC242A87C25B00F8A958 /* NoteBodyText.swift */; };
+		2068CC312A87C25B00F8A958 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC252A87C25B00F8A958 /* NoteView.swift */; };
+		2068CC322A87C25B00F8A958 /* NoteDecorationBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC272A87C25B00F8A958 /* NoteDecorationBoost.swift */; };
+		2068CC332A87C25B00F8A958 /* NoteHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC282A87C25B00F8A958 /* NoteHeader.swift */; };
+		2068CC342A87C25B00F8A958 /* ProfileSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC2A2A87C25B00F8A958 /* ProfileSwitcher.swift */; };
+		2068CC362A87C27600F8A958 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC352A87C27600F8A958 /* TimelineView.swift */; };
+		2068CC392A87C2A100F8A958 /* NetworkImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2068CC382A87C2A100F8A958 /* NetworkImage */; };
+		2068CC3C2A87C2C800F8A958 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 2068CC3B2A87C2C800F8A958 /* WrappingHStack */; };
+		2068CC412A87C2EB00F8A958 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC3F2A87C2EB00F8A958 /* NoteModel.swift */; };
+		2068CC432A87C30A00F8A958 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC422A87C30A00F8A958 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +46,27 @@
 		2068CBF12A87B5BF00F8A958 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2068CBF32A87B5BF00F8A958 /* rawr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = rawr.entitlements; sourceTree = "<group>"; };
 		2068CBF52A87B5BF00F8A958 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2068CC002A87B80300F8A958 /* RawrKeychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawrKeychain.swift; sourceTree = "<group>"; };
+		2068CC022A87B85500F8A958 /* ViewContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewContext.swift; sourceTree = "<group>"; };
+		2068CC072A87B96D00F8A958 /* OnboardingWelcomeCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeCard.swift; sourceTree = "<group>"; };
+		2068CC082A87B96D00F8A958 /* OnboardingConnectCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingConnectCard.swift; sourceTree = "<group>"; };
+		2068CC092A87B96D00F8A958 /* OnboardingServerCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingServerCard.swift; sourceTree = "<group>"; };
+		2068CC0B2A87B96D00F8A958 /* OnboardingMisskeyAuthModalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingMisskeyAuthModalController.swift; sourceTree = "<group>"; };
+		2068CC0C2A87B96D00F8A958 /* OnboardingMisskeyAuthModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingMisskeyAuthModal.swift; sourceTree = "<group>"; };
+		2068CC0D2A87B96D00F8A958 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		2068CC1D2A87C25B00F8A958 /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
+		2068CC1E2A87C25B00F8A958 /* TimelineContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineContext.swift; sourceTree = "<group>"; };
+		2068CC202A87C25B00F8A958 /* NoteFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteFooter.swift; sourceTree = "<group>"; };
+		2068CC222A87C25B00F8A958 /* NoteBodyReactions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteBodyReactions.swift; sourceTree = "<group>"; };
+		2068CC232A87C25B00F8A958 /* NoteBodyGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteBodyGallery.swift; sourceTree = "<group>"; };
+		2068CC242A87C25B00F8A958 /* NoteBodyText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteBodyText.swift; sourceTree = "<group>"; };
+		2068CC252A87C25B00F8A958 /* NoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
+		2068CC272A87C25B00F8A958 /* NoteDecorationBoost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteDecorationBoost.swift; sourceTree = "<group>"; };
+		2068CC282A87C25B00F8A958 /* NoteHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteHeader.swift; sourceTree = "<group>"; };
+		2068CC2A2A87C25B00F8A958 /* ProfileSwitcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSwitcher.swift; sourceTree = "<group>"; };
+		2068CC352A87C27600F8A958 /* TimelineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
+		2068CC3F2A87C2EB00F8A958 /* NoteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
+		2068CC422A87C30A00F8A958 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +74,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2068CC192A87BA1300F8A958 /* KeychainSwift in Frameworks */,
+				2068CC392A87C2A100F8A958 /* NetworkImage in Frameworks */,
+				2068CBFE2A87B62100F8A958 /* SwiftKit in Frameworks */,
+				2068CC162A87B9B500F8A958 /* MisskeyKit in Frameworks */,
+				2068CC3C2A87C2C800F8A958 /* WrappingHStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,8 +104,12 @@
 		2068CBEC2A87B5BC00F8A958 /* rawr */ = {
 			isa = PBXGroup;
 			children = (
+				2068CBFF2A87B7DB00F8A958 /* Core */,
+				2068CC3D2A87C2EB00F8A958 /* Extensions */,
+				2068CC042A87B90B00F8A958 /* UI */,
 				2068CBED2A87B5BC00F8A958 /* rawrApp.swift */,
 				2068CBEF2A87B5BC00F8A958 /* ContentView.swift */,
+				2068CC022A87B85500F8A958 /* ViewContext.swift */,
 				2068CBF12A87B5BF00F8A958 /* Assets.xcassets */,
 				2068CBF32A87B5BF00F8A958 /* rawr.entitlements */,
 				2068CBF42A87B5BF00F8A958 /* Preview Content */,
@@ -67,6 +123,143 @@
 				2068CBF52A87B5BF00F8A958 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2068CBFF2A87B7DB00F8A958 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC002A87B80300F8A958 /* RawrKeychain.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		2068CC042A87B90B00F8A958 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC1B2A87C25B00F8A958 /* Components */,
+				2068CC1A2A87C24200F8A958 /* Timeline */,
+				2068CC052A87B96D00F8A958 /* Onboarding */,
+				2068CC422A87C30A00F8A958 /* MainView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		2068CC052A87B96D00F8A958 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC0D2A87B96D00F8A958 /* OnboardingView.swift */,
+				2068CC062A87B96D00F8A958 /* Cards */,
+				2068CC0A2A87B96D00F8A958 /* Modals */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		2068CC062A87B96D00F8A958 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC072A87B96D00F8A958 /* OnboardingWelcomeCard.swift */,
+				2068CC092A87B96D00F8A958 /* OnboardingServerCard.swift */,
+				2068CC082A87B96D00F8A958 /* OnboardingConnectCard.swift */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		2068CC0A2A87B96D00F8A958 /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC0B2A87B96D00F8A958 /* OnboardingMisskeyAuthModalController.swift */,
+				2068CC0C2A87B96D00F8A958 /* OnboardingMisskeyAuthModal.swift */,
+			);
+			path = Modals;
+			sourceTree = "<group>";
+		};
+		2068CC1A2A87C24200F8A958 /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC352A87C27600F8A958 /* TimelineView.swift */,
+			);
+			path = Timeline;
+			sourceTree = "<group>";
+		};
+		2068CC1B2A87C25B00F8A958 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC1C2A87C25B00F8A958 /* Timelines */,
+				2068CC1F2A87C25B00F8A958 /* Notes */,
+				2068CC292A87C25B00F8A958 /* Profile */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2068CC1C2A87C25B00F8A958 /* Timelines */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC1D2A87C25B00F8A958 /* Timeline.swift */,
+				2068CC1E2A87C25B00F8A958 /* TimelineContext.swift */,
+			);
+			path = Timelines;
+			sourceTree = "<group>";
+		};
+		2068CC1F2A87C25B00F8A958 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC202A87C25B00F8A958 /* NoteFooter.swift */,
+				2068CC212A87C25B00F8A958 /* Bodies */,
+				2068CC252A87C25B00F8A958 /* NoteView.swift */,
+				2068CC262A87C25B00F8A958 /* Decorations */,
+				2068CC282A87C25B00F8A958 /* NoteHeader.swift */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
+		2068CC212A87C25B00F8A958 /* Bodies */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC222A87C25B00F8A958 /* NoteBodyReactions.swift */,
+				2068CC232A87C25B00F8A958 /* NoteBodyGallery.swift */,
+				2068CC242A87C25B00F8A958 /* NoteBodyText.swift */,
+			);
+			path = Bodies;
+			sourceTree = "<group>";
+		};
+		2068CC262A87C25B00F8A958 /* Decorations */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC272A87C25B00F8A958 /* NoteDecorationBoost.swift */,
+			);
+			path = Decorations;
+			sourceTree = "<group>";
+		};
+		2068CC292A87C25B00F8A958 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC2A2A87C25B00F8A958 /* ProfileSwitcher.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		2068CC3D2A87C2EB00F8A958 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC3E2A87C2EB00F8A958 /* MisskeyKit */,
+				2068CC402A87C2EB00F8A958 /* SwiftUI */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2068CC3E2A87C2EB00F8A958 /* MisskeyKit */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC3F2A87C2EB00F8A958 /* NoteModel.swift */,
+			);
+			path = MisskeyKit;
+			sourceTree = "<group>";
+		};
+		2068CC402A87C2EB00F8A958 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +278,13 @@
 			dependencies = (
 			);
 			name = rawr;
+			packageProductDependencies = (
+				2068CBFD2A87B62100F8A958 /* SwiftKit */,
+				2068CC152A87B9B500F8A958 /* MisskeyKit */,
+				2068CC182A87BA1300F8A958 /* KeychainSwift */,
+				2068CC382A87C2A100F8A958 /* NetworkImage */,
+				2068CC3B2A87C2C800F8A958 /* WrappingHStack */,
+			);
 			productName = rawr;
 			productReference = 2068CBEA2A87B5BC00F8A958 /* rawr.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +313,13 @@
 				Base,
 			);
 			mainGroup = 2068CBE12A87B5BC00F8A958;
+			packageReferences = (
+				2068CBFC2A87B62100F8A958 /* XCRemoteSwiftPackageReference "SwiftKit" */,
+				2068CC142A87B9B500F8A958 /* XCLocalSwiftPackageReference "../../NilaTheDragon/MisskeyKit" */,
+				2068CC172A87BA1300F8A958 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				2068CC372A87C2A100F8A958 /* XCRemoteSwiftPackageReference "NetworkImage" */,
+				2068CC3A2A87C2C800F8A958 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+			);
 			productRefGroup = 2068CBEB2A87B5BC00F8A958 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,8 +346,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2068CC2C2A87C25B00F8A958 /* TimelineContext.swift in Sources */,
+				2068CC362A87C27600F8A958 /* TimelineView.swift in Sources */,
+				2068CC2F2A87C25B00F8A958 /* NoteBodyGallery.swift in Sources */,
+				2068CC112A87B96D00F8A958 /* OnboardingMisskeyAuthModalController.swift in Sources */,
+				2068CC032A87B85500F8A958 /* ViewContext.swift in Sources */,
+				2068CC0E2A87B96D00F8A958 /* OnboardingWelcomeCard.swift in Sources */,
+				2068CC132A87B96D00F8A958 /* OnboardingView.swift in Sources */,
+				2068CC412A87C2EB00F8A958 /* NoteModel.swift in Sources */,
+				2068CC342A87C25B00F8A958 /* ProfileSwitcher.swift in Sources */,
+				2068CC302A87C25B00F8A958 /* NoteBodyText.swift in Sources */,
 				2068CBF02A87B5BC00F8A958 /* ContentView.swift in Sources */,
+				2068CC2E2A87C25B00F8A958 /* NoteBodyReactions.swift in Sources */,
+				2068CC102A87B96D00F8A958 /* OnboardingServerCard.swift in Sources */,
+				2068CC012A87B80300F8A958 /* RawrKeychain.swift in Sources */,
 				2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */,
+				2068CC312A87C25B00F8A958 /* NoteView.swift in Sources */,
+				2068CC322A87C25B00F8A958 /* NoteDecorationBoost.swift in Sources */,
+				2068CC0F2A87B96D00F8A958 /* OnboardingConnectCard.swift in Sources */,
+				2068CC122A87B96D00F8A958 /* OnboardingMisskeyAuthModal.swift in Sources */,
+				2068CC432A87C30A00F8A958 /* MainView.swift in Sources */,
+				2068CC332A87C25B00F8A958 /* NoteHeader.swift in Sources */,
+				2068CC2B2A87C25B00F8A958 /* Timeline.swift in Sources */,
+				2068CC2D2A87C25B00F8A958 /* NoteFooter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +587,75 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		2068CC142A87B9B500F8A958 /* XCLocalSwiftPackageReference "../../NilaTheDragon/MisskeyKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../NilaTheDragon/MisskeyKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2068CBFC2A87B62100F8A958 /* XCRemoteSwiftPackageReference "SwiftKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Infinytum/SwiftKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		2068CC172A87BA1300F8A958 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 20.0.0;
+			};
+		};
+		2068CC372A87C2A100F8A958 /* XCRemoteSwiftPackageReference "NetworkImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/NetworkImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		2068CC3A2A87C2C800F8A958 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.10;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2068CBFD2A87B62100F8A958 /* SwiftKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2068CBFC2A87B62100F8A958 /* XCRemoteSwiftPackageReference "SwiftKit" */;
+			productName = SwiftKit;
+		};
+		2068CC152A87B9B500F8A958 /* MisskeyKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MisskeyKit;
+		};
+		2068CC182A87BA1300F8A958 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2068CC172A87BA1300F8A958 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		2068CC382A87C2A100F8A958 /* NetworkImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2068CC372A87C2A100F8A958 /* XCRemoteSwiftPackageReference "NetworkImage" */;
+			productName = NetworkImage;
+		};
+		2068CC3B2A87C2C800F8A958 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2068CC3A2A87C2C800F8A958 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2068CBE22A87B5BC00F8A958 /* Project object */;
 }

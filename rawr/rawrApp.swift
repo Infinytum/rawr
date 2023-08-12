@@ -11,7 +11,7 @@ import SwiftUI
 struct rawrApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(context: ViewContext())
         }
     }
 }

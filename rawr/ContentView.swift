@@ -6,19 +6,26 @@
 //
 
 import SwiftUI
+import MisskeyKit
 
 struct ContentView: View {
+    
+    @ObservedObject var context: ViewContext
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            if context.loggedIn {
+                MainView(context: context).onAppear {
+                    MisskeyKit.shared.changeInstance(instance: RawrKeychain().instanceHostname)
+                    MisskeyKit.shared.auth.setAPIKey(RawrKeychain().apiKey!)
+                }
+            } else {
+                OnboardingView(context: context).transition(.opacity)
+            }
         }
-        .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(context: ViewContext())
 }
