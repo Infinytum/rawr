@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -38,6 +38,7 @@
 		2068CC412A87C2EB00F8A958 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC3F2A87C2EB00F8A958 /* NoteModel.swift */; };
 		2068CC432A87C30A00F8A958 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC422A87C30A00F8A958 /* MainView.swift */; };
 		2068CC462A87EAFC00F8A958 /* ViewReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC452A87EAFC00F8A958 /* ViewReloader.swift */; };
+		20AE17AB2A88411A00C9AC07 /* MisskeyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20AE17AA2A88411A00C9AC07 /* MisskeyKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 				2068CBFE2A87B62100F8A958 /* SwiftKit in Frameworks */,
 				2068CC162A87B9B500F8A958 /* MisskeyKit in Frameworks */,
 				2068CC3C2A87C2C800F8A958 /* WrappingHStack in Frameworks */,
+				20AE17AB2A88411A00C9AC07 /* MisskeyKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +297,7 @@
 				2068CC182A87BA1300F8A958 /* KeychainSwift */,
 				2068CC382A87C2A100F8A958 /* NetworkImage */,
 				2068CC3B2A87C2C800F8A958 /* WrappingHStack */,
+				20AE17AA2A88411A00C9AC07 /* MisskeyKit */,
 			);
 			productName = rawr;
 			productReference = 2068CBEA2A87B5BC00F8A958 /* rawr.app */;
@@ -326,10 +329,10 @@
 			mainGroup = 2068CBE12A87B5BC00F8A958;
 			packageReferences = (
 				2068CBFC2A87B62100F8A958 /* XCRemoteSwiftPackageReference "SwiftKit" */,
-				2068CC142A87B9B500F8A958 /* XCLocalSwiftPackageReference "../../NilaTheDragon/MisskeyKit" */,
 				2068CC172A87BA1300F8A958 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				2068CC372A87C2A100F8A958 /* XCRemoteSwiftPackageReference "NetworkImage" */,
 				2068CC3A2A87C2C800F8A958 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+				20AE17A92A88411A00C9AC07 /* XCRemoteSwiftPackageReference "MisskeyKit" */,
 			);
 			productRefGroup = 2068CBEB2A87B5BC00F8A958 /* Products */;
 			projectDirPath = "";
@@ -602,13 +605,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		2068CC142A87B9B500F8A958 /* XCLocalSwiftPackageReference "../../NilaTheDragon/MisskeyKit" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../NilaTheDragon/MisskeyKit;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		2068CBFC2A87B62100F8A958 /* XCRemoteSwiftPackageReference "SwiftKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -642,6 +638,14 @@
 				minimumVersion = 2.2.10;
 			};
 		};
+		20AE17A92A88411A00C9AC07 /* XCRemoteSwiftPackageReference "MisskeyKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nilathedragon/MisskeyKit";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -668,6 +672,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2068CC3A2A87C2C800F8A958 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
 			productName = WrappingHStack;
+		};
+		20AE17AA2A88411A00C9AC07 /* MisskeyKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 20AE17A92A88411A00C9AC07 /* XCRemoteSwiftPackageReference "MisskeyKit" */;
+			productName = MisskeyKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

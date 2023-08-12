@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "misskeykit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nilathedragon/MisskeyKit",
+      "state" : {
+        "branch" : "master",
+        "revision" : "39d698bf2ba1fd9f0547329e9d334f26fac05bc6"
+      }
+    },
+    {
       "identity" : "networkimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gonzalezreal/NetworkImage",
