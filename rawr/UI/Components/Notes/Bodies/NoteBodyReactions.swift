@@ -11,9 +11,9 @@ import NetworkImage
 import WrappingHStack
 
 struct NoteBodyReactions: View {
-    let note: NoteModel
+    @ObservedObject var note: NoteModel
     
-    let columns = [
+    private let columns = [
         GridItem(.adaptive(minimum: 60))
     ]
 
@@ -21,7 +21,7 @@ struct NoteBodyReactions: View {
         WrappingHStack {
             ForEach((self.note.reactions ?? [:]).sorted(by: >), id: \.key) { key, value in
                 HStack {
-                    NetworkImage(url: URL(string: emojiUrlForReaction(name: key))) { image in
+                    NetworkImage(url: URL(string: note.emojiUrlForReaction(name: key))) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -34,23 +34,26 @@ struct NoteBodyReactions: View {
                     }.clipped()
                         .frame(width: 25, height: 25)
                     Text(String(value))
-                }.padding(5).background(.gray.opacity(0.1)).cornerRadius(5).padding(.trailing, 5)
+                }.padding(5).background(note.isMyReaction(key) ? .blue.opacity(1) : .gray.opacity(0.1)).cornerRadius(5).padding(.trailing, 5)
+                    .onTapGesture{
+                        self.onReaction(key)
+                    }
             }
         }
     }
     
-    func emojiUrlForReaction(name: String) -> String {
-        guard let emojis = note.emojis else {
-            return ""
+    private func onReaction(_ reaction: String) {
+        Task {
+            do {
+                if note.isMyReaction(reaction) {
+                    try await note.unreact()
+                } else {
+                    try await note.react(reaction)
+                }
+            } catch {
+                // TODO: Show error toasts on error
+            }
         }
-        
-        guard let foundEmoji = emojis.filter({ emoji in
-            ":" + (emoji.name ?? "") + ":" == name
-        }).first else {
-            return ""
-        }
-        
-        return foundEmoji.url ?? ""
     }
 }
 

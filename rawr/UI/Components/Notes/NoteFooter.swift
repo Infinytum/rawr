@@ -9,7 +9,7 @@ import SwiftUI
 import MisskeyKit
 
 struct NoteFooter: View {
-    let note: NoteModel
+    @ObservedObject var note: NoteModel
     
     var body: some View {
         HStack() {
@@ -24,7 +24,7 @@ struct NoteFooter: View {
             }
             Spacer()
             HStack {
-                Image(systemName: "star")
+                Image(systemName: self.note.myReaction != nil ? "star.fill" : "star")
                 Text(String(self.note.reactionsCount()))
             }
             Spacer()

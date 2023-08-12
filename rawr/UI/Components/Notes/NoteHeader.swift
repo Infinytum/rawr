@@ -11,7 +11,7 @@ import MisskeyKit
 import SwiftKit
 
 struct NoteHeader: View {
-    let note: NoteModel
+    @ObservedObject var note: NoteModel
 
     var body: some View {
         HStack {

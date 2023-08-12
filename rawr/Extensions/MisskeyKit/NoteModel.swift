@@ -8,7 +8,7 @@
 import Foundation
 import MisskeyKit
 
-extension NoteModel {
+extension NoteModel: ObservableObject {
     static var preview: NoteModel {
         let JSON = """
 {
@@ -85,6 +85,7 @@ extension NoteModel {
       "visibility": "public",
       "renoteCount": 2,
       "repliesCount": 0,
+      "myReaction": ":dragnyell@.:",
       "reactions": {
         ":dragnyell@.:": 1,
         ":dragnstar@.:": 12
@@ -164,12 +165,64 @@ extension NoteModel {
         return try! JSONDecoder().decode(NoteModel.self, from: jsonData)
     }
     
-    func hasFiles() -> Bool {
-        return isRenote() ? self.renote?.files != nil : self.files != nil
+    // MARK: Reactions
+    
+    /// Get the URL for any reaction that is present on this note
+    func emojiUrlForReaction(name: String) -> String {
+        guard let emojis = self.emojis else {
+            return ""
+        }
+        
+        guard let foundEmoji = emojis.filter({ emoji in
+            ":" + (emoji.name ?? "") + ":" == name
+        }).first else {
+            return ""
+        }
+        
+        return foundEmoji.url ?? ""
     }
     
-    func isRenote() -> Bool {
-        return self.renote != nil
+    /// Check whether the given reaction is already the users reaction for this note
+    func isMyReaction(_ reaction: String) -> Bool {
+        return (self.myReaction ?? "") == reaction
+    }
+    
+    /// Add a reactions to the note, replacing any existing reaction
+    func react(_ reaction: String) async throws {
+        if (self.myReaction ?? "") == reaction { return; }
+        
+        // Handle existing reaction and remove it if necessary
+        try await self.unreact()
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            MisskeyKit.shared.notes.createReaction(noteId: self.id!, reaction: reaction) { _, error in
+                guard let error = error else {
+                    self.myReaction = reaction
+                    self.reactions![self.myReaction!]! += 1
+                    self.objectWillChange.send()
+                    continuation.resume()
+                    return
+                }
+                continuation.resume(throwing: error)
+            }
+        }
+    }
+    
+    /// Remove any existing reaction from the note
+    func unreact() async throws {
+        guard let _ = self.myReaction else { return }
+        return try await withCheckedThrowingContinuation { continuation in
+            MisskeyKit.shared.notes.deleteReaction(noteId: self.id!) { _, error in
+                guard let error = error else {
+                    self.reactions![self.myReaction!]! -= 1
+                    self.myReaction = nil
+                    self.objectWillChange.send()
+                    continuation.resume()
+                    return
+                }
+                continuation.resume(throwing: error)
+            }
+        }
     }
     
     func reactionsCount() -> Int {
@@ -182,6 +235,16 @@ extension NoteModel {
             total += pair.value
         }
         return total
+    }
+    
+    // MARK: Random Helper Functions
+    
+    func hasFiles() -> Bool {
+        return isRenote() ? self.renote?.files != nil : self.files != nil
+    }
+    
+    func isRenote() -> Bool {
+        return self.renote != nil
     }
 
     func relativeCreatedAtTime() -> String {

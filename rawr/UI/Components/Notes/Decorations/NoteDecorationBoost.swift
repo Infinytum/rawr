@@ -9,7 +9,7 @@ import SwiftUI
 import MisskeyKit
 
 struct NoteDecorationBoost: View {
-    let note: NoteModel
+    @ObservedObject var note: NoteModel
 
     var body: some View {
         HStack {

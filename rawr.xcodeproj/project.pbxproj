@@ -37,6 +37,7 @@
 		2068CC3C2A87C2C800F8A958 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 2068CC3B2A87C2C800F8A958 /* WrappingHStack */; };
 		2068CC412A87C2EB00F8A958 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC3F2A87C2EB00F8A958 /* NoteModel.swift */; };
 		2068CC432A87C30A00F8A958 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC422A87C30A00F8A958 /* MainView.swift */; };
+		2068CC462A87EAFC00F8A958 /* ViewReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC452A87EAFC00F8A958 /* ViewReloader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		2068CC352A87C27600F8A958 /* TimelineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		2068CC3F2A87C2EB00F8A958 /* NoteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
 		2068CC422A87C30A00F8A958 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		2068CC452A87EAFC00F8A958 /* ViewReloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewReloader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				2068CBFF2A87B7DB00F8A958 /* Core */,
 				2068CC3D2A87C2EB00F8A958 /* Extensions */,
 				2068CC042A87B90B00F8A958 /* UI */,
+				2068CC442A87EADE00F8A958 /* Utilities */,
 				2068CBED2A87B5BC00F8A958 /* rawrApp.swift */,
 				2068CBEF2A87B5BC00F8A958 /* ContentView.swift */,
 				2068CC022A87B85500F8A958 /* ViewContext.swift */,
@@ -262,6 +265,14 @@
 			path = SwiftUI;
 			sourceTree = "<group>";
 		};
+		2068CC442A87EADE00F8A958 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				2068CC452A87EAFC00F8A958 /* ViewReloader.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -360,6 +371,7 @@
 				2068CC2E2A87C25B00F8A958 /* NoteBodyReactions.swift in Sources */,
 				2068CC102A87B96D00F8A958 /* OnboardingServerCard.swift in Sources */,
 				2068CC012A87B80300F8A958 /* RawrKeychain.swift in Sources */,
+				2068CC462A87EAFC00F8A958 /* ViewReloader.swift in Sources */,
 				2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */,
 				2068CC312A87C25B00F8A958 /* NoteView.swift in Sources */,
 				2068CC322A87C25B00F8A958 /* NoteDecorationBoost.swift in Sources */,

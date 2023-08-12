@@ -9,7 +9,7 @@ import SwiftUI
 import MisskeyKit
 
 struct NoteView: View {
-    var note: NoteModel
+    @ObservedObject var note: NoteModel
     
     var body: some View {
         VStack(alignment: .leading) {
