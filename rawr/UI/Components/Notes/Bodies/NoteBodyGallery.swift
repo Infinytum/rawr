@@ -10,6 +10,10 @@ import NetworkImage
 import MisskeyKit
 
 struct NoteBodyGallery: View {
+    @State private var isImagePresented = false
+    @State private var presentedImage: Image? = nil
+    @ObservedObject private var viewRefresher = ViewReloader()
+    
     let files: [File?]
 
     var body: some View {
@@ -29,6 +33,11 @@ struct NoteBodyGallery: View {
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                             .clipped()
                             .aspectRatio(1, contentMode: .fill)
+                            .onTapGesture {
+                                self.presentedImage = image
+                                self.viewRefresher.reloadView()
+                                self.isImagePresented = true
+                            }
                     } placeholder: {
                         ProgressView()
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
@@ -41,6 +50,20 @@ struct NoteBodyGallery: View {
                     }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity).clipped().cornerRadius(11)
                 }
             }
+        }.fullScreenCover(isPresented: $isImagePresented) {
+            ImageViewer(image: self.presentedImage!)
+                .overlay(alignment: .topTrailing) {
+                    Button {
+                        self.isImagePresented = false
+                        self.presentedImage = nil
+                     } label: {
+                         Image(systemName: "xmark")
+                             .font(.headline)
+                     }
+                     .buttonStyle(.bordered)
+                     .clipShape(Circle())
+                     .padding()
+                }
         }
     }
     
@@ -58,7 +81,6 @@ struct NoteBodyGallery: View {
         }.map { file in
             return file!
         }
-        
     }
 }
 
