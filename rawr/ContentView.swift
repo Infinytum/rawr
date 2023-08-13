@@ -15,9 +15,12 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if context.loggedIn {
-                MainView(context: context).onAppear {
-                    MisskeyKit.shared.changeInstance(instance: RawrKeychain().instanceHostname)
-                    MisskeyKit.shared.auth.setAPIKey(RawrKeychain().apiKey!)
+                if context.currentUser == nil {
+                    Spacer()
+                    ProgressView()
+                    Spacer()
+                } else {
+                    MainView(context: context)
                 }
             } else {
                 OnboardingView(context: context).transition(.opacity)

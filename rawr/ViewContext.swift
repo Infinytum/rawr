@@ -5,6 +5,7 @@
 //  Created by Nila on 12.08.2023.
 //
 
+import MisskeyKit
 import SwiftUI
 import Combine
 
@@ -13,6 +14,22 @@ class ViewContext: ObservableObject {
     
     init() {
         self.refreshContext() // Load inital data
+    }
+    
+    var currentUser: UserModel? = nil {
+        didSet {
+            withAnimation {
+                objectWillChange.send(self)
+            }
+        }
+    }
+    
+    var currentUserId: String = "" {
+        didSet {
+            withAnimation {
+                objectWillChange.send(self)
+            }
+        }
     }
     
     /// Check whether the current application state considers the user logged in
@@ -34,5 +51,16 @@ class ViewContext: ObservableObject {
     /// Force an assessment of the current situation and update the context properties accordingly
     func refreshContext() {
         self.loggedIn = RawrKeychain().loggedIn
+        if RawrKeychain().loggedIn {
+            MisskeyKit.shared.changeInstance(instance: RawrKeychain().instanceHostname)
+            MisskeyKit.shared.auth.setAPIKey(RawrKeychain().apiKey!)
+            MisskeyKit.shared.users.i { userModel, _ in
+                guard let userModel = userModel else {
+                    return
+                }
+                self.currentUserId = userModel.id
+                self.currentUser = userModel
+            }
+        }
     }
 }

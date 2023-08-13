@@ -46,19 +46,19 @@ class TimelineContext: ObservableObject {
         switch (self.timeline) {
         case .HOME:
             MisskeyKit.shared.notes.getTimeline(completion: self.handleTimelineUpdate)
-            _ = MisskeyKit.shared.streaming.connect(apiKey: RawrKeychain().apiKey!, channels: [.homeTimeline]) { response, _, _, _ in
+            _ = MisskeyKit.shared.streaming.connect(apiKey: RawrKeychain().apiKey ?? "", channels: [.homeTimeline]) { response, _, _, _ in
                 self.handleStreamMessage(response)
             }
             break;
         case .LOCAL:
             MisskeyKit.shared.notes.getLocalTimeline(completion: self.handleTimelineUpdate)
-            _ = MisskeyKit.shared.streaming.connect(apiKey: RawrKeychain().apiKey!, channels: [.localTimeline]) { response, _, _, _ in
+            _ = MisskeyKit.shared.streaming.connect(apiKey: RawrKeychain().apiKey ?? "", channels: [.localTimeline]) { response, _, _, _ in
                 self.handleStreamMessage(response)
             }
             break;
         case .GLOBAL:
             MisskeyKit.shared.notes.getGlobalTimeline(completion: self.handleTimelineUpdate)
-            _ = MisskeyKit.shared.streaming.connect(apiKey: RawrKeychain().apiKey!, channels: [.globalTimeline]) { response, _, _, _ in
+            _ = MisskeyKit.shared.streaming.connect(apiKey: RawrKeychain().apiKey ?? "", channels: [.globalTimeline]) { response, _, _, _ in
                 self.handleStreamMessage(response)
             }
             break;
@@ -90,6 +90,7 @@ class TimelineContext: ObservableObject {
     private func handleTimelineUpdate(notes: [NoteModel]?, error: MisskeyKitError?) {
         guard let notes = notes else {
             self.errorReason = error?.localizedDescription ?? "Unknown Error"
+            print("Error handling timeline update")
             print(error.debugDescription)
             return
         }

@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		204DA3F42A8869D900BB0598 /* MessageHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA3F32A8869D900BB0598 /* MessageHistoryModel.swift */; };
+		204DA3F62A886FB100BB0598 /* ChatListEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA3F52A886FB100BB0598 /* ChatListEntry.swift */; };
+		204DA3F82A88F6C600BB0598 /* ChatListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA3F72A88F6C600BB0598 /* ChatListHeader.swift */; };
+		204DA3FA2A88FF7500BB0598 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA3F92A88FF7500BB0598 /* ChatView.swift */; };
+		204DA3FC2A8900CC00BB0598 /* ChatHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA3FB2A8900CC00BB0598 /* ChatHeader.swift */; };
+		204DA3FE2A8901BE00BB0598 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA3FD2A8901BE00BB0598 /* RemoteImage.swift */; };
+		204DA4002A8907AB00BB0598 /* ChatContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA3FF2A8907AB00BB0598 /* ChatContext.swift */; };
+		204DA4022A890DEC00BB0598 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4012A890DEC00BB0598 /* ChatMessage.swift */; };
+		204DA4042A890E5E00BB0598 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4032A890E5E00BB0598 /* MessageModel.swift */; };
+		204DA4062A89167500BB0598 /* ChatBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4052A89167500BB0598 /* ChatBar.swift */; };
 		2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBED2A87B5BC00F8A958 /* rawrApp.swift */; };
 		2068CBF02A87B5BC00F8A958 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBEF2A87B5BC00F8A958 /* ContentView.swift */; };
 		2068CBF22A87B5BF00F8A958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2068CBF12A87B5BF00F8A958 /* Assets.xcassets */; };
@@ -40,9 +50,20 @@
 		2068CC462A87EAFC00F8A958 /* ViewReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC452A87EAFC00F8A958 /* ViewReloader.swift */; };
 		20AE17AB2A88411A00C9AC07 /* MisskeyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20AE17AA2A88411A00C9AC07 /* MisskeyKit */; };
 		20AE17AE2A88421A00C9AC07 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AE17AD2A88421A00C9AC07 /* ImageViewer.swift */; };
+		20D37D322A88577000BCC1C5 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D37D312A88577000BCC1C5 /* ChatListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		204DA3F32A8869D900BB0598 /* MessageHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHistoryModel.swift; sourceTree = "<group>"; };
+		204DA3F52A886FB100BB0598 /* ChatListEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListEntry.swift; sourceTree = "<group>"; };
+		204DA3F72A88F6C600BB0598 /* ChatListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListHeader.swift; sourceTree = "<group>"; };
+		204DA3F92A88FF7500BB0598 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		204DA3FB2A8900CC00BB0598 /* ChatHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHeader.swift; sourceTree = "<group>"; };
+		204DA3FD2A8901BE00BB0598 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
+		204DA3FF2A8907AB00BB0598 /* ChatContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContext.swift; sourceTree = "<group>"; };
+		204DA4012A890DEC00BB0598 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		204DA4032A890E5E00BB0598 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		204DA4052A89167500BB0598 /* ChatBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBar.swift; sourceTree = "<group>"; };
 		2068CBEA2A87B5BC00F8A958 /* rawr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rawr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2068CBED2A87B5BC00F8A958 /* rawrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rawrApp.swift; sourceTree = "<group>"; };
 		2068CBEF2A87B5BC00F8A958 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +93,7 @@
 		2068CC422A87C30A00F8A958 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2068CC452A87EAFC00F8A958 /* ViewReloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewReloader.swift; sourceTree = "<group>"; };
 		20AE17AD2A88421A00C9AC07 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
+		20D37D312A88577000BCC1C5 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +165,7 @@
 		2068CC042A87B90B00F8A958 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				20D37D2F2A88575300BCC1C5 /* Chat */,
 				2068CC1B2A87C25B00F8A958 /* Components */,
 				2068CC1A2A87C24200F8A958 /* Timeline */,
 				2068CC052A87B96D00F8A958 /* Onboarding */,
@@ -259,6 +282,8 @@
 			isa = PBXGroup;
 			children = (
 				2068CC3F2A87C2EB00F8A958 /* NoteModel.swift */,
+				204DA3F32A8869D900BB0598 /* MessageHistoryModel.swift */,
+				204DA4032A890E5E00BB0598 /* MessageModel.swift */,
 			);
 			path = MisskeyKit;
 			sourceTree = "<group>";
@@ -274,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				2068CC452A87EAFC00F8A958 /* ViewReloader.swift */,
+				204DA3FD2A8901BE00BB0598 /* RemoteImage.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -284,6 +310,29 @@
 				20AE17AD2A88421A00C9AC07 /* ImageViewer.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		20D37D2F2A88575300BCC1C5 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				20D37D332A88579200BCC1C5 /* Components */,
+				20D37D312A88577000BCC1C5 /* ChatListView.swift */,
+				204DA3F92A88FF7500BB0598 /* ChatView.swift */,
+				204DA3FF2A8907AB00BB0598 /* ChatContext.swift */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
+		20D37D332A88579200BCC1C5 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				204DA3F52A886FB100BB0598 /* ChatListEntry.swift */,
+				204DA3F72A88F6C600BB0598 /* ChatListHeader.swift */,
+				204DA4052A89167500BB0598 /* ChatBar.swift */,
+				204DA3FB2A8900CC00BB0598 /* ChatHeader.swift */,
+				204DA4012A890DEC00BB0598 /* ChatMessage.swift */,
+			);
+			name = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,16 +421,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				2068CC2C2A87C25B00F8A958 /* TimelineContext.swift in Sources */,
+				204DA3F82A88F6C600BB0598 /* ChatListHeader.swift in Sources */,
 				2068CC362A87C27600F8A958 /* TimelineView.swift in Sources */,
+				204DA4002A8907AB00BB0598 /* ChatContext.swift in Sources */,
 				2068CC2F2A87C25B00F8A958 /* NoteBodyGallery.swift in Sources */,
 				2068CC112A87B96D00F8A958 /* OnboardingMisskeyAuthModalController.swift in Sources */,
+				204DA3FC2A8900CC00BB0598 /* ChatHeader.swift in Sources */,
 				2068CC032A87B85500F8A958 /* ViewContext.swift in Sources */,
+				204DA3F42A8869D900BB0598 /* MessageHistoryModel.swift in Sources */,
 				2068CC0E2A87B96D00F8A958 /* OnboardingWelcomeCard.swift in Sources */,
+				20D37D322A88577000BCC1C5 /* ChatListView.swift in Sources */,
 				2068CC132A87B96D00F8A958 /* OnboardingView.swift in Sources */,
 				2068CC412A87C2EB00F8A958 /* NoteModel.swift in Sources */,
 				2068CC342A87C25B00F8A958 /* ProfileSwitcher.swift in Sources */,
 				2068CC302A87C25B00F8A958 /* NoteBodyText.swift in Sources */,
+				204DA3F62A886FB100BB0598 /* ChatListEntry.swift in Sources */,
 				2068CBF02A87B5BC00F8A958 /* ContentView.swift in Sources */,
+				204DA4022A890DEC00BB0598 /* ChatMessage.swift in Sources */,
 				2068CC2E2A87C25B00F8A958 /* NoteBodyReactions.swift in Sources */,
 				2068CC102A87B96D00F8A958 /* OnboardingServerCard.swift in Sources */,
 				20AE17AE2A88421A00C9AC07 /* ImageViewer.swift in Sources */,
@@ -389,9 +445,13 @@
 				2068CC462A87EAFC00F8A958 /* ViewReloader.swift in Sources */,
 				2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */,
 				2068CC312A87C25B00F8A958 /* NoteView.swift in Sources */,
+				204DA4062A89167500BB0598 /* ChatBar.swift in Sources */,
+				204DA3FA2A88FF7500BB0598 /* ChatView.swift in Sources */,
 				2068CC322A87C25B00F8A958 /* NoteDecorationBoost.swift in Sources */,
 				2068CC0F2A87B96D00F8A958 /* OnboardingConnectCard.swift in Sources */,
 				2068CC122A87B96D00F8A958 /* OnboardingMisskeyAuthModal.swift in Sources */,
+				204DA3FE2A8901BE00BB0598 /* RemoteImage.swift in Sources */,
+				204DA4042A890E5E00BB0598 /* MessageModel.swift in Sources */,
 				2068CC432A87C30A00F8A958 /* MainView.swift in Sources */,
 				2068CC332A87C25B00F8A958 /* NoteHeader.swift in Sources */,
 				2068CC2B2A87C25B00F8A958 /* Timeline.swift in Sources */,

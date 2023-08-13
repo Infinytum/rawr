@@ -23,7 +23,7 @@ struct MainView: View {
                  Image(systemName: "bell")
                  Text("Notifications")
                }
-            Text("Chats")
+            ChatListView(context: self.context)
               .tabItem {
                  Image(systemName: "message")
                  Text("Chats")
