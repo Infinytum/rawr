@@ -20,7 +20,11 @@ struct RemoteImage: View {
         NetworkImage(url: URL(string: self.url ?? "")) { image in
             image.resizable().aspectRatio(contentMode: .fill)
         } placeholder: {
-            ProgressView()
+            Rectangle()
+                .foregroundStyle(.primary.opacity(0.1))
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                .aspectRatio(1, contentMode: .fill)
+                .overlay(alignment: .center) { ProgressView() }
         } fallback: {
             Rectangle()
                 .foregroundStyle(.primary.opacity(0.1))
