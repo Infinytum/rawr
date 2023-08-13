@@ -10,7 +10,7 @@ import NetworkImage
 
 struct ProfileSwitcher: View {
     
-    @ObservedObject var context: ViewContext
+    @EnvironmentObject var context: ViewContext
     
     var body: some View {
         Menu {
@@ -37,7 +37,7 @@ struct ProfileSwitcher: View {
 #Preview {
     VStack {
         Spacer()
-        ProfileSwitcher(context: ViewContext())
+        ProfileSwitcher()
             .frame(width: 75, height: 75)
             .padding(.bottom, 20)
         Text("Profile Switcher")

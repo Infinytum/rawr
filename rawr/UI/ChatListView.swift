@@ -10,7 +10,6 @@ import MisskeyKit
 
 struct ChatListView: View {
     
-    @ObservedObject var context: ViewContext
     @ObservedObject var viewReloader: ViewReloader = ViewReloader()
     
     @State var histories: [MessageHistoryModel]? = nil
@@ -31,7 +30,7 @@ struct ChatListView: View {
                 } else {
                     List {
                         ForEach(self.histories ?? [], id: \.id) { item in
-                            ChatListEntry(context: self.context, history: item).listRowInsets(EdgeInsets(top: 10,leading: 0,bottom: 10,trailing: 0))
+                            ChatListEntry(history: item).listRowInsets(EdgeInsets(top: 10,leading: 0,bottom: 10,trailing: 0))
                                 .onTapGesture {
                                     self.selectedHistory = item
                                     self.viewReloader.reloadView()
@@ -41,9 +40,9 @@ struct ChatListView: View {
                     }.listStyle(.plain)
                 }
             }.padding(.horizontal).padding(.top, 55)
-            ChatListHeader(context: self.context)
+            ChatListHeader()
         }.onAppear(perform: self.loadChatHistory).sheet(isPresented: self.$chatSheetShown) {
-            ChatView(context: self.context, history: self.selectedHistory!)
+            ChatView(history: self.selectedHistory!)
         }
     }
     
@@ -60,5 +59,5 @@ struct ChatListView: View {
 }
 
 #Preview {
-    ChatListView(context: ViewContext(), histories: [.preview, .preview, .preview])
+    ChatListView(histories: [.preview, .preview, .preview])
 }

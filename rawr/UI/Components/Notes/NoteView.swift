@@ -9,7 +9,6 @@ import SwiftUI
 import MisskeyKit
 
 struct NoteView: View {
-    @ObservedObject var context: ViewContext
     @ObservedObject var note: NoteModel
     
     var body: some View {
@@ -23,7 +22,7 @@ struct NoteView: View {
                 NoteBodyGallery(files: self.note.isRenote() ? self.note.renote!.files! : self.note.files!)
             }
             NoteBodyReactions(note: self.note.isRenote() ? self.note.renote! : self.note).padding(.top, 5)
-            NoteFooter(context: self.context, note: self.note.isRenote() ? self.note.renote! : self.note).padding(.horizontal, 5).padding(.top, 5)
+            NoteFooter(note: self.note.isRenote() ? self.note.renote! : self.note).padding(.horizontal, 5).padding(.top, 5)
         }.padding(.vertical, 5)
     }
 }
@@ -32,7 +31,7 @@ struct NoteView: View {
     ScrollView {
         Text("Bounding Box Check")
         VStack {
-            NoteView(context: ViewContext(), note: .preview)
+            NoteView(note: .preview)
         }.background(.gray).padding()
     }
 }

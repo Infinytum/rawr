@@ -9,13 +9,13 @@ import SwiftUI
 
 struct TimelineHeader: View {
     
-    @ObservedObject var context: ViewContext
+    @EnvironmentObject var context: ViewContext
     @Binding var selectedTab: Int
     
     var body: some View {
         ZStack {
             HStack(alignment: .center) {
-                ProfileSwitcher(context: self.context)
+                ProfileSwitcher()
                     .frame(width: 40, height: 40)
                 Spacer()
                 Image(systemName: "antenna.radiowaves.left.and.right")
@@ -61,5 +61,5 @@ struct TimelineHeader: View {
 }
 
 #Preview {
-    TimelineHeader(context: ViewContext(), selectedTab: .constant(0))
+    TimelineHeader(selectedTab: .constant(0))
 }

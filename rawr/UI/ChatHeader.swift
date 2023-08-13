@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ChatHeader: View {
     
-    @ObservedObject var context: ViewContext
+    @EnvironmentObject var context: ViewContext
     
     let history: MessageHistoryModel
     
@@ -21,7 +21,7 @@ struct ChatHeader: View {
                     .frame(width: 40, height: 40)
                     .cornerRadius(11)
                 VStack(alignment: .leading) {
-                    Text(self.history.chatName(currentUserId: self.context.currentUser?.id ?? "") ?? "<No Name>")
+                    Text(self.history.chatName(currentUserId: self.context.currentUserId) ?? "<No Name>")
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(.primary)
                         .lineLimit(1)
@@ -36,5 +36,5 @@ struct ChatHeader: View {
 }
 
 #Preview {
-    ChatHeader(context: ViewContext(), history: .preview)
+    ChatHeader(history: .preview)
 }

@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ChatListHeader: View {
     
-    @ObservedObject var context: ViewContext
+    @EnvironmentObject var context: ViewContext
     
     var body: some View {
         ZStack {
             HStack(alignment: .center) {
-                ProfileSwitcher(context: self.context)
+                ProfileSwitcher()
                     .frame(width: 40, height: 40)
                 Spacer()
             }
@@ -29,5 +29,5 @@ struct ChatListHeader: View {
 }
 
 #Preview {
-    ChatListHeader(context: ViewContext())
+    ChatListHeader()
 }

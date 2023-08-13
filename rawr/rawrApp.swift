@@ -13,7 +13,7 @@ struct rawrApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(context: self.context).environmentObject(self.context)
+            ContentView().environmentObject(self.context)
         }
     }
 }

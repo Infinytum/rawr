@@ -10,13 +10,13 @@ import MisskeyKit
 
 struct ContentView: View {
     
-    @ObservedObject var context: ViewContext
+    @EnvironmentObject var context: ViewContext
     
     var body: some View {
         VStack {
             if context.loggedIn {
                 if context.applicationReady {
-                    MainView(context: context)
+                    MainView()
                 } else {
                     Spacer()
                     Text("Contacting your instance")
@@ -24,12 +24,12 @@ struct ContentView: View {
                     Spacer()
                 }
             } else {
-                OnboardingView(context: context).transition(.opacity)
+                OnboardingView().transition(.opacity)
             }
         }
     }
 }
 
 #Preview {
-    ContentView(context: ViewContext())
+    ContentView()
 }

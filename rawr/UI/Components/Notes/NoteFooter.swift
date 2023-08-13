@@ -9,7 +9,8 @@ import SwiftUI
 import MisskeyKit
 
 struct NoteFooter: View {
-    @ObservedObject var context: ViewContext
+    @EnvironmentObject var context: ViewContext
+
     @ObservedObject var note: NoteModel
     @State var didRenote: Bool = false
     
@@ -82,5 +83,5 @@ struct NoteFooter: View {
 }
 
 #Preview {
-    NoteFooter(context: ViewContext(), note: .preview.renote!)
+    NoteFooter(note: .preview.renote!)
 }

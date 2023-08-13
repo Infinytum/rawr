@@ -10,11 +10,9 @@ import MisskeyKit
 
 struct Timeline: View {
 
-    @ObservedObject var context: ViewContext
     @ObservedObject var timelineContext: TimelineContext
     
-    init(context: ViewContext, timelineContext: TimelineContext) {
-        self.context = context
+    init(timelineContext: TimelineContext) {
         self.timelineContext = timelineContext
         timelineContext.requestInitialSetOfItems()
     }
@@ -25,7 +23,7 @@ struct Timeline: View {
                 ScrollView {
                   LazyVStack {
                     ForEach(timelineContext.items, id: \.id) { item in
-                        NoteView(context: self.context, note: item)
+                        NoteView(note: item)
                             .listRowSeparator(.hidden)
                             .onAppear { timelineContext.requestMoreItemsIfNeeded(note: item) }
                         Divider().listRowSeparator(.hidden)
@@ -48,5 +46,5 @@ struct Timeline: View {
 }
 
 #Preview {
-    Timeline(context: ViewContext(), timelineContext: TimelineContext(timelineType: .HOME))
+    Timeline(timelineContext: TimelineContext(timelineType: .HOME))
 }

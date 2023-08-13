@@ -23,17 +23,15 @@ internal extension View{
  }
 
 struct ChatView: View {
-    
-    @ObservedObject var context: ViewContext
+    @EnvironmentObject var context: ViewContext
+
     @ObservedObject var chatContext: ChatContext
     
     let history: MessageHistoryModel
     
-    init(context: ViewContext, history: MessageHistoryModel) {
-        self.context = context
+    init(history: MessageHistoryModel) {
         self.history = history
-        self.chatContext = ChatContext(remoteUserId: self.history.remoteUserId(currentUserId: context.currentUserId) ?? "")
-        self.chatContext.requestInitialSetOfItems()
+        self.chatContext = ChatContext()
     }
     
     var body: some View {
@@ -42,21 +40,21 @@ struct ChatView: View {
                 if self.chatContext.errorReason == nil {
                     List {
                         ForEach(Array(self.chatContext.items.enumerated()), id: \.1.id) { (index, item) in
-                                ChatMessage(chatMessage: item, remote: (item.recipientId ?? "") == self.context.currentUserId)
-                                    .listRowSeparator(.hidden)
-                                    .listRowInsets(EdgeInsets())
-                                    .flippedUpsideDown()
-                                    .onAppear { self.chatContext.requestMoreItemsIfNeeded(message: item) }
-                                    .padding(
-                                        .top,
-                                        (index == 0 || self.chatContext.items[index-1].recipientId?.elementsEqual( item.recipientId ?? "") ?? false) ? 0 : 15)
-                                        }
+                            ChatMessage(chatMessage: item, remote: (item.recipientId ?? "") == self.context.currentUserId)
+                                .listRowSeparator(.hidden)
+                                .listRowInsets(EdgeInsets())
+                                .flippedUpsideDown()
+                                .onAppear { self.chatContext.requestMoreItemsIfNeeded(message: item) }
+                                .padding(
+                                    .top,
+                                    (index == 0 || self.chatContext.items[index-1].recipientId?.elementsEqual( item.recipientId ?? "") ?? false) ? 0 : 15)
+                        }
                         if self.chatContext.dataIsLoading || true {
                             ProgressView()
                         }
                     }.padding(.horizontal)
-                    .listStyle(.plain)
-                    .flippedUpsideDown()
+                        .listStyle(.plain)
+                        .flippedUpsideDown()
                 } else {
                     VStack {
                         Spacer()
@@ -67,9 +65,11 @@ struct ChatView: View {
                 ChatBar(chatContext: self.chatContext)
             }.padding(.top, 55)
             VStack {
-                ChatHeader(context: self.context, history: self.history)
+                ChatHeader(history: self.history)
             }
-        }.presentationDragIndicator(.visible)
+        }.presentationDragIndicator(.visible).onAppear {
+            self.chatContext.requestInitialSetOfItems(remoteUserId: self.history.remoteUserId(currentUserId: context.currentUserId) ?? "")
+        }
     }
 }
 
@@ -77,6 +77,6 @@ struct ChatView: View {
     VStack {
         
     }.sheet(isPresented: .constant(true), content: {
-        ChatView(context: ViewContext(), history: .preview)
+        ChatView(history: .preview)
     })
 }

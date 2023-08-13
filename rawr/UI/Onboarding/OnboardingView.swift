@@ -9,8 +9,7 @@ import SwiftUI
 import SwiftKit
 
 struct OnboardingView: View {
-
-    @ObservedObject var context: ViewContext
+    
     @State private var selection = 0
     
     var body: some View {
@@ -30,12 +29,12 @@ struct OnboardingView: View {
                 }.transition(.backslide)
             }
             if (selection == 2) {
-                OnboardingConnectCard(context: self.context).transition(.backslide)
+                OnboardingConnectCard().transition(.backslide)
             }
         }
     }
 }
 
 #Preview {
-    OnboardingView(context: ViewContext())
+    OnboardingView()
 }

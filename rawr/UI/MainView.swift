@@ -8,12 +8,9 @@
 import SwiftUI
 
 struct MainView: View {
-    
-    @ObservedObject var context: ViewContext
-    
     var body: some View {
         TabView {
-            TimelineView(context: self.context)
+            TimelineView()
               .tabItem {
                  Image(systemName: "house")
                  Text("Timeline")
@@ -23,7 +20,7 @@ struct MainView: View {
                  Image(systemName: "bell")
                  Text("Notifications")
                }
-            ChatListView(context: self.context)
+            ChatListView()
               .tabItem {
                  Image(systemName: "message")
                  Text("Chats")
@@ -38,5 +35,5 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView(context: ViewContext())
+    MainView()
 }

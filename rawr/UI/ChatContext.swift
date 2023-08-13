@@ -11,16 +11,12 @@ import MisskeyKit
 class ChatContext: ObservableObject {
     private var itemsLoadedCount = 0
     private var oldestMessageId: String?
-    public var remoteUserId: String
+    public var remoteUserId: String = ""
     private var endReached: Bool = false
     
     @Published var errorReason: String? = nil
     @Published var items = [MessageModel]()
     @Published var dataIsLoading = false
-    
-    init(remoteUserId: String) {
-        self.remoteUserId = remoteUserId
-    }
     
     /// Used for infinite scrolling. Only requests more items if pagination criteria is met.
     func requestMoreItemsIfNeeded(message: MessageModel) {
@@ -33,7 +29,8 @@ class ChatContext: ObservableObject {
         }
     }
     
-    func requestInitialSetOfItems() {
+    func requestInitialSetOfItems(remoteUserId: String) {
+        self.remoteUserId = remoteUserId
         oldestMessageId = nil
         items = []
         itemsLoadedCount = 0

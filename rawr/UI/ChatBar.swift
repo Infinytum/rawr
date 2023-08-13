@@ -55,5 +55,5 @@ struct ChatBar: View {
 }
 
 #Preview {
-    ChatBar(chatContext: ChatContext(remoteUserId: ""))
+    ChatBar(chatContext: ChatContext())
 }

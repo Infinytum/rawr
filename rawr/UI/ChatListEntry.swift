@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ChatListEntry: View {
     
-    @ObservedObject var context: ViewContext
+    @EnvironmentObject var context: ViewContext
     
     let history: MessageHistoryModel
     
@@ -52,5 +52,5 @@ struct ChatListEntry: View {
 }
 
 #Preview {
-    ChatListEntry(context: ViewContext(), history: .preview)
+    ChatListEntry(history: .preview)
 }

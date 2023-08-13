@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OnboardingConnectCard: View {
     
-    @ObservedObject var context: ViewContext
+    @EnvironmentObject var context: ViewContext
     @State var showModal = false
     @State var showSpinner = false
     
@@ -51,7 +51,7 @@ struct OnboardingConnectCard: View {
 
 #Preview {
     VStack {
-        OnboardingConnectCard(context: ViewContext())
+        OnboardingConnectCard()
     }.background(.gray.opacity(0.2)).cornerRadius(11).padding().frame(maxHeight: 300)
     
 }
