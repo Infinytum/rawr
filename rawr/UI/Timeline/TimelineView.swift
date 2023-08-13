@@ -15,13 +15,13 @@ struct TimelineView: View {
     var body: some View {
         ZStack(alignment: .top) {
             if selectedTab == 0 {
-                Timeline(timelineContext: TimelineContext(timelineType: .HOME)).padding(.top, 55)
+                Timeline(context: self.context, timelineContext: TimelineContext(timelineType: .HOME)).padding(.top, 55)
             }
             if selectedTab == 1 {
-                Timeline(timelineContext: TimelineContext(timelineType: .LOCAL)).padding(.top, 55)
+                Timeline(context: self.context, timelineContext: TimelineContext(timelineType: .LOCAL)).padding(.top, 55)
             }
             if selectedTab == 2 {
-                Timeline(timelineContext: TimelineContext(timelineType: .GLOBAL)).padding(.top, 55)
+                Timeline(context: self.context, timelineContext: TimelineContext(timelineType: .GLOBAL)).padding(.top, 55)
             }
             TimelineHeader(context: self.context, selectedTab: self.$selectedTab)
         }

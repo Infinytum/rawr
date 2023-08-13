@@ -9,6 +9,7 @@ import SwiftUI
 import MisskeyKit
 
 struct NoteFooter: View {
+    @ObservedObject var context: ViewContext
     @ObservedObject var note: NoteModel
     @State var didRenote: Bool = false
     
@@ -40,11 +41,28 @@ struct NoteFooter: View {
             HStack {
                 Image(systemName: self.note.myReaction != nil ? "star.fill" : "star")
                 Text(String(self.note.reactionsCount()))
+            }.onTapGesture {
+                self.onReact()
             }
             Spacer()
             Image(systemName: "face.smiling")
             Spacer()
             Image(systemName: "quote.bubble")
+        }
+    }
+    
+    private func onReact() {
+        let reaction = self.context.currentInstance?.defaultReaction ?? ":star:"
+        Task {
+            do {
+                if note.isMyReaction(reaction) {
+                    try await note.unreact()
+                } else {
+                    try await note.react(reaction)
+                }
+            } catch {
+                // TODO: Show error toasts on error
+            }
         }
     }
     
@@ -64,5 +82,5 @@ struct NoteFooter: View {
 }
 
 #Preview {
-    NoteFooter(note: .preview.renote!)
+    NoteFooter(context: ViewContext(), note: .preview.renote!)
 }
