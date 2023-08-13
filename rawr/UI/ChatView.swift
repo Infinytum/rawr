@@ -41,16 +41,22 @@ struct ChatView: View {
             VStack {
                 if self.chatContext.errorReason == nil {
                     List {
-                        ForEach(self.chatContext.items, id: \.id) { item in
-                            ChatMessage(chatMessage: item, remote: (item.recipientId ?? "") == self.context.currentUserId)
-                                .listRowSeparator(.hidden)
-                                .flippedUpsideDown()
-                                .onAppear { self.chatContext.requestMoreItemsIfNeeded(message: item) }
-                        }
+                        ForEach(Array(self.chatContext.items.enumerated()), id: \.1.id) { (index, item) in
+                                ChatMessage(chatMessage: item, remote: (item.recipientId ?? "") == self.context.currentUserId)
+                                    .listRowSeparator(.hidden)
+                                    .listRowInsets(EdgeInsets())
+                                    .flippedUpsideDown()
+                                    .onAppear { self.chatContext.requestMoreItemsIfNeeded(message: item) }
+                                    .padding(
+                                        .top,
+                                        (index == 0 || self.chatContext.items[index-1].recipientId?.elementsEqual( item.recipientId ?? "") ?? false) ? 0 : 15)
+                                        }
                         if self.chatContext.dataIsLoading || true {
                             ProgressView()
                         }
-                    }.listStyle(.plain).flippedUpsideDown()
+                    }.padding(.horizontal)
+                    .listStyle(.plain)
+                    .flippedUpsideDown()
                 } else {
                     VStack {
                         Spacer()
