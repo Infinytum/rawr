@@ -17,8 +17,17 @@ struct ChatMessage: View {
         VStack(alignment: self.remote ? .leading : .trailing) {
             HStack{ Spacer() }.frame(height: 0)
             VStack {
-                Text(self.chatMessage.text ?? "").foregroundColor(.white)
-            }.padding(.all, 10).background(self.remote ? .gray : .blue).cornerRadius(15)
+                Text(self.chatMessage.text ?? "").foregroundColor(
+                    self.remote ? .black : .white
+                )
+            }
+                .padding(.all, 10)
+                .background(self.remote ? .white : .accentColor)
+                .cornerRadius(15)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(self.remote ? .gray : .clear, lineWidth: 1)
+                )
         }
     }
 }
