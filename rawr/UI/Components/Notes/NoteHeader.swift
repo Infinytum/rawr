@@ -11,6 +11,8 @@ import MisskeyKit
 import SwiftKit
 
 struct NoteHeader: View {
+    
+    @EnvironmentObject var context: ViewContext
     @ObservedObject var note: NoteModel
 
     var body: some View {
@@ -30,15 +32,10 @@ struct NoteHeader: View {
             Spacer()
             VStack(alignment: .trailing) {
                 HStack {
-                    NetworkImage(url: URL(string: self.note.user?.instance?.iconUrl ?? "")) { image in
-                        image.resizable().aspectRatio(contentMode: .fill)
-                    } placeholder: {
-                        Rectangle()
-                            .foregroundColor(.gray.opacity(0.5))
-                    }
-                    .frame(width: 20, height: 20)
-                    .cornerRadius(6)
-                    Text(self.note.user?.instance?.name ?? "<no name>")
+                    RemoteImage(self.instanceUrl())
+                        .frame(width: 20, height: 20)
+                        .cornerRadius(6)
+                    Text(self.instanceName())
                         .lineLimit(1)
                         .font(.system(size: 15))
                         .foregroundStyle(.primary.opacity(0.7))
@@ -50,6 +47,14 @@ struct NoteHeader: View {
                     .padding(.top, -5)
             }
         }
+    }
+    
+    private func instanceName() -> String {
+        self.note.user?.instance?.name ?? self.context.currentInstance?.name ?? "<no name>"
+    }
+    
+    private func instanceUrl() -> String? {
+        self.note.user?.instance?.iconUrl ?? self.context.currentInstance?.iconUrl
     }
 }
 
