@@ -49,7 +49,6 @@ struct ChatBar: View {
                 return
             }
             self.messagetext = ""
-            self.chatContext.items.insert(message, at: 0)
         }
     }
 }

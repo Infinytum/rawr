@@ -36,6 +36,15 @@ class ChatContext: ObservableObject {
         itemsLoadedCount = 0
         
         MisskeyKit.shared.messaging.getMessageWithUser(userId: self.remoteUserId, limit: 25, markAsRead: true, result: self.handleChatUpdate)
+        _ = MisskeyKit.shared.streaming.connect(apiKey: RawrKeychain().apiKey ?? "", channels: [.main]) { response, _, _, _ in
+            self.handleStreamMessage(response)
+        }
+        do {
+            try MisskeyKit.shared.streaming.captureChat(self.remoteUserId)
+        } catch {
+            print("Registering for chat stream failed \(error)")
+            MisskeyKit.shared.streaming.disconnect()
+        }
     }
     
     private func handleStreamMessage(_ response: Any?) {
