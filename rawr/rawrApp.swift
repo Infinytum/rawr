@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct rawrApp: App {
+    let context: ViewContext = ViewContext()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView(context: ViewContext())
+            ContentView(context: self.context).environmentObject(self.context)
         }
     }
 }

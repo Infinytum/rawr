@@ -18,6 +18,7 @@
 		204DA4042A890E5E00BB0598 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4032A890E5E00BB0598 /* MessageModel.swift */; };
 		204DA4062A89167500BB0598 /* ChatBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4052A89167500BB0598 /* ChatBar.swift */; };
 		204DA4092A891EF200BB0598 /* TimelineHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4082A891EF200BB0598 /* TimelineHeader.swift */; };
+		204DA40B2A892A6000BB0598 /* MetaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA40A2A892A6000BB0598 /* MetaModel.swift */; };
 		2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBED2A87B5BC00F8A958 /* rawrApp.swift */; };
 		2068CBF02A87B5BC00F8A958 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBEF2A87B5BC00F8A958 /* ContentView.swift */; };
 		2068CBF22A87B5BF00F8A958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2068CBF12A87B5BF00F8A958 /* Assets.xcassets */; };
@@ -66,6 +67,7 @@
 		204DA4032A890E5E00BB0598 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		204DA4052A89167500BB0598 /* ChatBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBar.swift; sourceTree = "<group>"; };
 		204DA4082A891EF200BB0598 /* TimelineHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineHeader.swift; sourceTree = "<group>"; };
+		204DA40A2A892A6000BB0598 /* MetaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaModel.swift; sourceTree = "<group>"; };
 		2068CBEA2A87B5BC00F8A958 /* rawr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rawr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2068CBED2A87B5BC00F8A958 /* rawrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rawrApp.swift; sourceTree = "<group>"; };
 		2068CBEF2A87B5BC00F8A958 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				2068CC3F2A87C2EB00F8A958 /* NoteModel.swift */,
 				204DA3F32A8869D900BB0598 /* MessageHistoryModel.swift */,
 				204DA4032A890E5E00BB0598 /* MessageModel.swift */,
+				204DA40A2A892A6000BB0598 /* MetaModel.swift */,
 			);
 			path = MisskeyKit;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				2068CC2E2A87C25B00F8A958 /* NoteBodyReactions.swift in Sources */,
 				2068CC102A87B96D00F8A958 /* OnboardingServerCard.swift in Sources */,
 				20AE17AE2A88421A00C9AC07 /* ImageViewer.swift in Sources */,
+				204DA40B2A892A6000BB0598 /* MetaModel.swift in Sources */,
 				2068CC012A87B80300F8A958 /* RawrKeychain.swift in Sources */,
 				2068CC462A87EAFC00F8A958 /* ViewReloader.swift in Sources */,
 				2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */,

@@ -165,21 +165,25 @@ extension NoteModel: ObservableObject {
         return try! JSONDecoder().decode(NoteModel.self, from: jsonData)
     }
     
+    typealias NoteVisibility = Visibility
+    
+    // MARK: Commands
+    
     // MARK: Reactions
     
     /// Get the URL for any reaction that is present on this note
-    func emojiUrlForReaction(name: String) -> String {
+    func emojiUrlForReaction(name: String) -> String? {
         guard let emojis = self.emojis else {
-            return ""
+            return nil
         }
         
         guard let foundEmoji = emojis.filter({ emoji in
             ":" + (emoji.name ?? "") + ":" == name
         }).first else {
-            return ""
+            return nil
         }
         
-        return foundEmoji.url ?? ""
+        return foundEmoji.url
     }
     
     /// Check whether the given reaction is already the users reaction for this note
@@ -198,7 +202,8 @@ extension NoteModel: ObservableObject {
             MisskeyKit.shared.notes.createReaction(noteId: self.id!, reaction: reaction) { _, error in
                 guard let error = error else {
                     self.myReaction = reaction
-                    self.reactions![self.myReaction!]! += 1
+                    self.reactions = (self.reactions ?? [:])
+                    self.reactions![self.myReaction!] = (self.reactions![self.myReaction!] ?? 0) + 1
                     self.objectWillChange.send()
                     continuation.resume()
                     return
@@ -215,6 +220,9 @@ extension NoteModel: ObservableObject {
             MisskeyKit.shared.notes.deleteReaction(noteId: self.id!) { _, error in
                 guard let error = error else {
                     self.reactions![self.myReaction!]! -= 1
+                    if self.reactions![self.myReaction!]! == 0 {
+                        self.reactions!.removeValue(forKey: self.myReaction!)
+                    }
                     self.myReaction = nil
                     self.objectWillChange.send()
                     continuation.resume()

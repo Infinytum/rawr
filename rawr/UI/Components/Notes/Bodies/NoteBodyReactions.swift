@@ -11,6 +11,7 @@ import NetworkImage
 import WrappingHStack
 
 struct NoteBodyReactions: View {
+    @EnvironmentObject var context: ViewContext
     @ObservedObject var note: NoteModel
     
     private let columns = [
@@ -21,7 +22,7 @@ struct NoteBodyReactions: View {
         WrappingHStack {
             ForEach((self.note.reactions ?? [:]).sorted(by: >), id: \.key) { key, value in
                 HStack {
-                    RemoteImage(note.emojiUrlForReaction(name: key))
+                    RemoteImage(self.getEmojiUrl(key))
                         .frame(width: 25, height: 25)
                     Text(String(value))
                 }.padding(5).background(note.isMyReaction(key) ? .blue.opacity(1) : .gray.opacity(0.1)).cornerRadius(5).padding(.trailing, 5)
@@ -30,6 +31,14 @@ struct NoteBodyReactions: View {
                     }
             }
         }
+    }
+    
+    private func getEmojiUrl(_ emoji: String) -> String? {
+        let emojiNoteUrl = note.emojiUrlForReaction(name: emoji)
+        if emojiNoteUrl != nil {
+            return emojiNoteUrl
+        }
+        return self.context.currentInstance?.emojiUrlForReaction(name: emoji)
     }
     
     private func onReaction(_ reaction: String) {
@@ -48,5 +57,5 @@ struct NoteBodyReactions: View {
 }
 
 #Preview {
-    NoteBodyReactions(note: .preview.renote!)
+    NoteBodyReactions(note: .preview.renote!).environmentObject(ViewContext())
 }
