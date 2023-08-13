@@ -17,6 +17,13 @@ struct ChatListView: View {
     @State var chatSheetShown: Bool = false
     
     var body: some View {
+        let chatSheetShownProxy = Binding<Bool>(get: {
+                    self.chatSheetShown
+                }, set: {
+                    self.chatSheetShown = $0
+                    self.loadChatHistory()
+                })
+        
         ZStack(alignment: .top) {
             VStack {
                 if self.histories == nil {
@@ -41,7 +48,7 @@ struct ChatListView: View {
                 }
             }.padding(.horizontal).padding(.top, 55)
             ChatListHeader()
-        }.onAppear(perform: self.loadChatHistory).sheet(isPresented: self.$chatSheetShown) {
+        }.onAppear(perform: self.loadChatHistory).sheet(isPresented: chatSheetShownProxy) {
             ChatView(history: self.selectedHistory!)
         }
     }
