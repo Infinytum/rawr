@@ -10,45 +10,54 @@ import SwiftUI
 
 struct ChatBar: View {
     
-    
-    @State var messagetext: String = ""
-    
     @ObservedObject var chatContext: ChatContext
+    @State var messageText: String = ""
+    @State var sendInProgress: Bool = false
     
     var messageIsEmpty: Bool {
-        return messagetext.count == 0
+        return messageText.count == 0
     }
 
     var body: some View {
         VStack {
             HStack {
-                TextField("Message", text: self.$messagetext, axis: .vertical)
+                TextField("Message", text: self.$messageText, axis: .vertical)
                     .lineLimit(...5)
                     .textFieldStyle(.roundedBorder)
                     .cornerRadius(15)
-                Button(action: self.onSend) {
-                    Image(systemName: "arrow.up")
+                if self.sendInProgress {
+                    ProgressView()
                         .frame(width: 18, height: 18)
                         .padding(.all, 5)
-                        .background(
-                            self.messageIsEmpty ? .gray : .blue
-                        )
-                        .foregroundColor(.white)
+                } else {
+                    Button(action: self.onSend) {
+                        Image(systemName: "arrow.up")
+                            .frame(width: 18, height: 18)
+                            .padding(.all, 5)
+                            .background(
+                                self.messageIsEmpty ? .gray : .blue
+                            )
+                            .foregroundColor(.white)
+                    }
+                    .cornerRadius(.infinity)
+                    .disabled(self.messageIsEmpty)
                 }
-                .cornerRadius(.infinity)
-                .disabled(self.messageIsEmpty)
             }
         }.padding(.horizontal).padding(.vertical, 10).background(.thinMaterial)
     }
     
     private func onSend() {
-        MisskeyKit.shared.messaging.create(userId: self.chatContext.remoteUserId, text: self.messagetext) { message, error in
-            guard let message = message else {
+        self.sendInProgress = true
+        let messageText = self.messageText
+        self.messageText = ""
+        MisskeyKit.shared.messaging.create(userId: self.chatContext.remoteUserId, text: messageText) { message, error in
+            self.sendInProgress = false
+            guard let _ = message else {
+                self.messageText = messageText
                 print("Error sending chat message")
                 print(error ?? "")
                 return
             }
-            self.messagetext = ""
         }
     }
 }
