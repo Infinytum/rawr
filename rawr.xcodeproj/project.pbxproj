@@ -17,6 +17,7 @@
 		204DA4022A890DEC00BB0598 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4012A890DEC00BB0598 /* ChatMessage.swift */; };
 		204DA4042A890E5E00BB0598 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4032A890E5E00BB0598 /* MessageModel.swift */; };
 		204DA4062A89167500BB0598 /* ChatBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4052A89167500BB0598 /* ChatBar.swift */; };
+		204DA4092A891EF200BB0598 /* TimelineHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4082A891EF200BB0598 /* TimelineHeader.swift */; };
 		2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBED2A87B5BC00F8A958 /* rawrApp.swift */; };
 		2068CBF02A87B5BC00F8A958 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBEF2A87B5BC00F8A958 /* ContentView.swift */; };
 		2068CBF22A87B5BF00F8A958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2068CBF12A87B5BF00F8A958 /* Assets.xcassets */; };
@@ -64,6 +65,7 @@
 		204DA4012A890DEC00BB0598 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		204DA4032A890E5E00BB0598 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		204DA4052A89167500BB0598 /* ChatBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBar.swift; sourceTree = "<group>"; };
+		204DA4082A891EF200BB0598 /* TimelineHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineHeader.swift; sourceTree = "<group>"; };
 		2068CBEA2A87B5BC00F8A958 /* rawr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rawr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2068CBED2A87B5BC00F8A958 /* rawrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rawrApp.swift; sourceTree = "<group>"; };
 		2068CBEF2A87B5BC00F8A958 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -113,6 +115,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		204DA4072A891EE400BB0598 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				204DA4082A891EF200BB0598 /* TimelineHeader.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		2068CBE12A87B5BC00F8A958 = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +216,7 @@
 		2068CC1A2A87C24200F8A958 /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
+				204DA4072A891EE400BB0598 /* Components */,
 				2068CC352A87C27600F8A958 /* TimelineView.swift */,
 			);
 			path = Timeline;
@@ -420,6 +431,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				204DA4092A891EF200BB0598 /* TimelineHeader.swift in Sources */,
 				2068CC2C2A87C25B00F8A958 /* TimelineContext.swift in Sources */,
 				204DA3F82A88F6C600BB0598 /* ChatListHeader.swift in Sources */,
 				2068CC362A87C27600F8A958 /* TimelineView.swift in Sources */,
