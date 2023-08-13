@@ -165,6 +165,10 @@ extension NoteModel: ObservableObject {
         return try! JSONDecoder().decode(NoteModel.self, from: jsonData)
     }
     
+    typealias NoteVisibility = Visibility
+    
+    // MARK: Commands
+    
     // MARK: Reactions
     
     /// Get the URL for any reaction that is present on this note
