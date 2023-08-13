@@ -9,28 +9,27 @@ import SwiftUI
 import NetworkImage
 
 struct ProfileSwitcher: View {
+    
+    @ObservedObject var context: ViewContext
+    
     var body: some View {
         Menu {
-            Section("Available Accounts") {
-                Button("First") {  }
-                Button("Second") {  }
-            }
-            Button {
-            } label: {
-                Label("Add Account", systemImage: "person.badge.plus")
-            }
+//            Section("Available Accounts") {
+//                Button("First") {  }
+//                Button("Second") {  }
+//            }
+//            Button {
+//            } label: {
+//                Label("Add Account", systemImage: "person.badge.plus")
+//            }
             Button(role: .destructive) {
                 RawrKeychain().apiKey = nil
+                self.context.refreshContext()
             } label: {
                 Label("Logout", systemImage: "trash")
             }
         } label: {
-            NetworkImage(url: URL(string: "https://cdn.derg.social/calckey/thumbnail-0d7ce0df-da12-4c06-9d9d-c10c1ec3fcfd.webp")) { image in
-                image.resizable().aspectRatio(contentMode: .fill)
-            } placeholder: {
-                Rectangle()
-                    .foregroundColor(.gray.opacity(0.5))
-            }.cornerRadius(11)
+            RemoteImage(self.context.currentUser?.avatarUrl).cornerRadius(11)
         }
     }
 }
@@ -38,7 +37,7 @@ struct ProfileSwitcher: View {
 #Preview {
     VStack {
         Spacer()
-        ProfileSwitcher()
+        ProfileSwitcher(context: ViewContext())
             .frame(width: 75, height: 75)
             .padding(.bottom, 20)
         Text("Profile Switcher")

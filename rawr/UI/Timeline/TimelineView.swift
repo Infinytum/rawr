@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TimelineView: View {
     
+    @ObservedObject var context: ViewContext
     @State private var selectedTab = 0
     
     var body: some View {
@@ -25,7 +26,7 @@ struct TimelineView: View {
 
             ZStack {
                 HStack(alignment: .center) {
-                    ProfileSwitcher()
+                    ProfileSwitcher(context: self.context)
                         .frame(width: 40, height: 40)
                         .padding(.trailing, 10)
                         .padding(.top, 5)
@@ -48,7 +49,7 @@ struct TimelineView: View {
                     }
                 } label: {
                     VStack {
-                        Text("Derg Social").font(.system(size: 20, weight: .semibold)).foregroundColor(.primary)
+                        Text(self.context.currentInstanceName).font(.system(size: 20, weight: .semibold)).foregroundColor(.primary)
                         HStack {
                             Group {
                                 if (selectedTab == 0) {
@@ -77,5 +78,5 @@ struct TimelineView: View {
 }
 
 #Preview {
-    TimelineView()
+    TimelineView(context: ViewContext())
 }

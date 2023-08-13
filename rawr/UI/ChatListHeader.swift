@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct ChatListHeader: View {
+    
+    @ObservedObject var context: ViewContext
+    
     var body: some View {
         ZStack {
             HStack(alignment: .center) {
-                ProfileSwitcher()
+                ProfileSwitcher(context: self.context)
                     .frame(width: 40, height: 40)
                 Spacer()
             }
             VStack {
-                Text("Derg Social").font(.system(size: 20, weight: .semibold)).foregroundColor(.primary)
+                Text(self.context.currentInstanceName).font(.system(size: 20, weight: .semibold)).foregroundColor(.primary)
                 Text("Chats").foregroundColor(.primary.opacity(0.7))
                     .font(.system(size: 16))
                     .padding(.top, -12)
@@ -26,5 +29,5 @@ struct ChatListHeader: View {
 }
 
 #Preview {
-    ChatListHeader()
+    ChatListHeader(context: ViewContext())
 }

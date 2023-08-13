@@ -41,7 +41,7 @@ struct ChatListView: View {
                     }.listStyle(.plain)
                 }
             }.padding(.horizontal).padding(.top, 55)
-            ChatListHeader()
+            ChatListHeader(context: self.context)
         }.onAppear(perform: self.loadChatHistory).sheet(isPresented: self.$chatSheetShown) {
             ChatView(context: self.context, history: self.selectedHistory!)
         }

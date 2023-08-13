@@ -16,6 +16,8 @@ class ViewContext: ObservableObject {
         self.refreshContext() // Load inital data
     }
     
+    // MARK: User Information
+    
     var currentUser: UserModel? = nil {
         didSet {
             withAnimation {
@@ -24,11 +26,33 @@ class ViewContext: ObservableObject {
         }
     }
     
-    var currentUserId: String = "" {
+    var currentUserId: String  {
+        get {
+            self.currentUser?.id ?? ""
+        }
+    }
+    
+    // MARK: Instance Informatin
+    
+    var currentInstance: MetaModel? = nil {
         didSet {
             withAnimation {
                 objectWillChange.send(self)
             }
+        }
+    }
+    
+    var currentInstanceName: String  {
+        get {
+            self.currentInstance?.name ?? "rawr."
+        }
+    }
+    
+    // MARK: Helpers
+    
+    var applicationReady: Bool {
+        get {
+            self.currentUser != nil && self.currentInstance != nil
         }
     }
     
@@ -58,8 +82,13 @@ class ViewContext: ObservableObject {
                 guard let userModel = userModel else {
                     return
                 }
-                self.currentUserId = userModel.id
                 self.currentUser = userModel
+            }
+            MisskeyKit.shared.meta.get { meta, _ in
+                guard let meta = meta else {
+                    return
+                }
+                self.currentInstance = meta
             }
         }
     }

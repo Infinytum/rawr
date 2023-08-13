@@ -15,12 +15,13 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if context.loggedIn {
-                if context.currentUser == nil {
+                if context.applicationReady {
+                    MainView(context: context)
+                } else {
                     Spacer()
+                    Text("Contacting your instance")
                     ProgressView()
                     Spacer()
-                } else {
-                    MainView(context: context)
                 }
             } else {
                 OnboardingView(context: context).transition(.opacity)

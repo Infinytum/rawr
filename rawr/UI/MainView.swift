@@ -13,7 +13,7 @@ struct MainView: View {
     
     var body: some View {
         TabView {
-            TimelineView()
+            TimelineView(context: self.context)
               .tabItem {
                  Image(systemName: "house")
                  Text("Timeline")
