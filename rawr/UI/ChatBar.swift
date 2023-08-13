@@ -14,6 +14,10 @@ struct ChatBar: View {
     @State var messagetext: String = ""
     
     @ObservedObject var chatContext: ChatContext
+    
+    var messageIsEmpty: Bool {
+        return messagetext.count == 0
+    }
 
     var body: some View {
         VStack {
@@ -22,13 +26,17 @@ struct ChatBar: View {
                     .lineLimit(...5)
                     .textFieldStyle(.roundedBorder)
                     .cornerRadius(15)
-                Image(systemName: "arrow.up")
-                    .frame(width: 18, height: 18)
-                    .padding(.all, 5)
-                    .background(.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(.infinity)
-                    .onTapGesture(perform: self.onSend)
+                Button(action: self.onSend) {
+                    Image(systemName: "arrow.up")
+                        .frame(width: 18, height: 18)
+                        .padding(.all, 5)
+                        .background(
+                            self.messageIsEmpty ? .gray : .blue
+                        )
+                        .foregroundColor(.white)
+                }
+                .cornerRadius(.infinity)
+                .disabled(self.messageIsEmpty)
             }
         }.padding(.horizontal).padding(.vertical, 10).background(.thinMaterial)
     }
