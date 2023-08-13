@@ -46,14 +46,30 @@ class TimelineContext: ObservableObject {
         switch (self.timeline) {
         case .HOME:
             MisskeyKit.shared.notes.getTimeline(completion: self.handleTimelineUpdate)
+            _ = MisskeyKit.shared.streaming.connect(apiKey: RawrKeychain().apiKey!, channels: [.homeTimeline]) { response, _, _, _ in
+                self.handleStreamMessage(response)
+            }
             break;
         case .LOCAL:
             MisskeyKit.shared.notes.getLocalTimeline(completion: self.handleTimelineUpdate)
+            _ = MisskeyKit.shared.streaming.connect(apiKey: RawrKeychain().apiKey!, channels: [.localTimeline]) { response, _, _, _ in
+                self.handleStreamMessage(response)
+            }
             break;
         case .GLOBAL:
             MisskeyKit.shared.notes.getGlobalTimeline(completion: self.handleTimelineUpdate)
+            _ = MisskeyKit.shared.streaming.connect(apiKey: RawrKeychain().apiKey!, channels: [.globalTimeline]) { response, _, _, _ in
+                self.handleStreamMessage(response)
+            }
             break;
         }
+    }
+    
+    private func handleStreamMessage(_ response: Any?) {
+        guard let response = response, let message = response as? NoteModel else {
+            return
+        }
+        self.items.insert(message, at: 0)
     }
     
     private func requestItems(untilNoteId: String) {
