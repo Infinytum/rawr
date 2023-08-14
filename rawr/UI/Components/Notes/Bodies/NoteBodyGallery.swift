@@ -16,6 +16,8 @@ struct NoteBodyGallery: View {
     @State private var lastTranslation: CGSize = .zero
     @State private var offset: CGPoint = .zero
     
+    @State private var ignoreSwipe: Bool? = nil
+    
     @ObservedObject private var viewRefresher = ViewReloader()
     @State private var vDraggable = false
     
@@ -58,7 +60,11 @@ struct NoteBodyGallery: View {
         }
         .fullScreenCover(isPresented: self.$isImagePresented) {
             ZStack {
-                ImageViewer(image: self.presentedImage!, vDraggable: $vDraggable)
+                ImageViewer(
+                    image: self.presentedImage!,
+                    vDraggable: $vDraggable,
+                    ownSwipe: $ignoreSwipe
+                )
                         .overlay(alignment: .topTrailing) {
                             Button {
                                 hideImage()
@@ -99,10 +105,21 @@ struct NoteBodyGallery: View {
             return file!
         }
     }
-    
+
     var dragToDismiss: some Gesture {
         DragGesture()
             .onChanged() {value in
+                let deltaY = value.location.y - value.startLocation.y
+                let deltaX = value.location.x - value.startLocation.x
+                
+                if ignoreSwipe == nil {
+                    self.ignoreSwipe = abs(deltaX) > abs(deltaY)
+                }
+                
+                if ignoreSwipe! {
+                    return
+                }
+                
                 if value.translation.height > 0 {
                     let diff = CGPoint(
                         x: 0,
@@ -124,6 +141,7 @@ struct NoteBodyGallery: View {
                     }
                 }
                 lastTranslation = .zero
+                ignoreSwipe = nil
             }
     }
 }
