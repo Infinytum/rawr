@@ -18,17 +18,21 @@ public struct ImageViewer: View {
     @State private var lastTranslation: CGSize = .zero
     
     @State private var imageSize: CGSize = .zero
+    
+    @Binding var vDraggableBinding: Bool
+    
     private var simulatedSize: CGSize {
         let scaleTransform = CGAffineTransform(scaleX: scale, y: scale)
         return imageSize.applying(scaleTransform)
     }
     
-    public var vDragPossible: Bool {
+    private var vDragPossible: Bool {
         simulatedSize.height > UIScreen.main.bounds.height
     }
 
-    public init(image: Image) {
+    public init(image: Image, vDraggable: Binding<Bool>) {
         self.image = image
+        self._vDraggableBinding = vDraggable
     }
 
     public var body: some View {
@@ -65,6 +69,8 @@ public struct ImageViewer: View {
                 if abs(1 - delta) > 0.01 {
                     scale *= delta
                 }
+                
+                vDraggableBinding = self.vDragPossible
             }
             .onEnded { _ in
                 lastScale = 1
@@ -95,10 +101,6 @@ public struct ImageViewer: View {
     private func adjustMaxOffset(size: CGSize) {
         let maxOffsetX: CGFloat = (simulatedSize.width - size.width) / 2
         let maxOffsetY: CGFloat = max((simulatedSize.height - size.height) / 2, 0)
-
-        print(maxOffsetX)
-        print(maxOffsetY)
-        print(offset)
         
         var newOffsetX = offset.x
         var newOffsetY = offset.y
@@ -121,5 +123,6 @@ public struct ImageViewer: View {
 }
 
 #Preview {
-    ImageViewer(image: .init(.dergSocialIcon))
+    @State var draggable = false
+    return ImageViewer(image: .init(.dergSocialIcon), vDraggable: $draggable)
 }

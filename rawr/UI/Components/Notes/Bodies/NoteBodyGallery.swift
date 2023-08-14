@@ -12,7 +12,12 @@ import MisskeyKit
 struct NoteBodyGallery: View {
     @State private var isImagePresented = false
     @State private var presentedImage: Image? = nil
+    
+    @State private var lastTranslation: CGSize = .zero
+    @State private var offset: CGPoint = .zero
+    
     @ObservedObject private var viewRefresher = ViewReloader()
+    @State private var vDraggable = false
     
     let files: [File?]
 
@@ -50,21 +55,33 @@ struct NoteBodyGallery: View {
                     }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity).clipped().cornerRadius(11)
                 }
             }
-        }.fullScreenCover(isPresented: $isImagePresented) {
-            ImageViewer(image: self.presentedImage!)
-                .overlay(alignment: .topTrailing) {
-                    Button {
-                        self.isImagePresented = false
-                        self.presentedImage = nil
-                     } label: {
-                         Image(systemName: "xmark")
-                             .font(.headline)
-                     }
-                     .buttonStyle(.bordered)
-                     .clipShape(Circle())
-                     .padding()
-                }
         }
+        .fullScreenCover(isPresented: self.$isImagePresented) {
+            ZStack {
+                ImageViewer(image: self.presentedImage!, vDraggable: $vDraggable)
+                        .overlay(alignment: .topTrailing) {
+                            Button {
+                                hideImage()
+                            } label: {
+                                Image(systemName: "xmark")
+                                    .font(.headline)
+                            }
+                                .buttonStyle(.bordered)
+                                .clipShape(Circle())
+                                .padding()
+                        }
+                        .offset(x:0, y:offset.y)
+
+            }
+            .simultaneousGesture(dragToDismiss)
+                .background(TransparentBackground())
+                .opacity(1.0 - abs(offset.y) / 300.0)
+            }
+    }
+    
+    private func hideImage () {
+        self.isImagePresented = false
+        self.presentedImage = nil
     }
     
     func columns() -> [GridItem] {
@@ -82,7 +99,48 @@ struct NoteBodyGallery: View {
             return file!
         }
     }
+    
+    var dragToDismiss: some Gesture {
+        DragGesture()
+            .onChanged() {value in
+                if value.translation.height > 0 {
+                    let diff = CGPoint(
+                        x: 0,
+                        y: vDraggable ? 0 : value.translation.height - lastTranslation.height
+                    )
+                    
+                    offset = .init(x: offset.x + diff.x, y: offset.y + diff.y)
+                    lastTranslation = value.translation
+                }
+            }
+            .onEnded() {_ in
+                print(offset.y)
+                if abs(offset.y) > 150 {
+                    hideImage()
+                    offset = .zero
+                } else {
+                    withAnimation {
+                        offset.y = 0.0
+                    }
+                }
+                lastTranslation = .zero
+            }
+    }
 }
+
+struct TransparentBackground: UIViewRepresentable {
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+            DispatchQueue.main.async {
+                view.superview?.superview?.backgroundColor = .clear
+            }
+            return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {}
+}
+
 
 #Preview {
     NoteBodyGallery(files: NoteModel.preview.renote?.files ?? [])
