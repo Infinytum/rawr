@@ -96,3 +96,7 @@ public struct ImageViewer: View {
         self.lastTranslation = .zero
     }
 }
+
+#Preview {
+    ImageViewer(image: .init(.dergSocialIcon))
+}
