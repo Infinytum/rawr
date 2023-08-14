@@ -8,7 +8,7 @@
 import SwiftUI
 import MisskeyKit
 
-struct NoteView: View {
+struct Note: View {
     @ObservedObject var note: NoteModel
     
     var body: some View {
@@ -31,7 +31,7 @@ struct NoteView: View {
     ScrollView {
         Text("Bounding Box Check")
         VStack {
-            NoteView(note: .preview)
+            Note(note: .preview)
         }.background(.gray).padding()
     }
 }

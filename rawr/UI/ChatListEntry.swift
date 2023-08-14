@@ -52,5 +52,5 @@ struct ChatListEntry: View {
 }
 
 #Preview {
-    ChatListEntry(history: .preview)
+    ChatListEntry(history: .preview).environmentObject(ViewContext())
 }

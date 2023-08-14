@@ -19,6 +19,7 @@
 		204DA4062A89167500BB0598 /* ChatBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4052A89167500BB0598 /* ChatBar.swift */; };
 		204DA4092A891EF200BB0598 /* TimelineHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4082A891EF200BB0598 /* TimelineHeader.swift */; };
 		204DA40B2A892A6000BB0598 /* MetaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA40A2A892A6000BB0598 /* MetaModel.swift */; };
+		204DA4162A8A6D1A00BB0598 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4152A8A6D1A00BB0598 /* NoteView.swift */; };
 		2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBED2A87B5BC00F8A958 /* rawrApp.swift */; };
 		2068CBF02A87B5BC00F8A958 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBEF2A87B5BC00F8A958 /* ContentView.swift */; };
 		2068CBF22A87B5BF00F8A958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2068CBF12A87B5BF00F8A958 /* Assets.xcassets */; };
@@ -40,7 +41,7 @@
 		2068CC2E2A87C25B00F8A958 /* NoteBodyReactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC222A87C25B00F8A958 /* NoteBodyReactions.swift */; };
 		2068CC2F2A87C25B00F8A958 /* NoteBodyGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC232A87C25B00F8A958 /* NoteBodyGallery.swift */; };
 		2068CC302A87C25B00F8A958 /* NoteBodyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC242A87C25B00F8A958 /* NoteBodyText.swift */; };
-		2068CC312A87C25B00F8A958 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC252A87C25B00F8A958 /* NoteView.swift */; };
+		2068CC312A87C25B00F8A958 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC252A87C25B00F8A958 /* Note.swift */; };
 		2068CC322A87C25B00F8A958 /* NoteDecorationBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC272A87C25B00F8A958 /* NoteDecorationBoost.swift */; };
 		2068CC332A87C25B00F8A958 /* NoteHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC282A87C25B00F8A958 /* NoteHeader.swift */; };
 		2068CC342A87C25B00F8A958 /* ProfileSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC2A2A87C25B00F8A958 /* ProfileSwitcher.swift */; };
@@ -68,6 +69,7 @@
 		204DA4052A89167500BB0598 /* ChatBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBar.swift; sourceTree = "<group>"; };
 		204DA4082A891EF200BB0598 /* TimelineHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineHeader.swift; sourceTree = "<group>"; };
 		204DA40A2A892A6000BB0598 /* MetaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaModel.swift; sourceTree = "<group>"; };
+		204DA4152A8A6D1A00BB0598 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		2068CBEA2A87B5BC00F8A958 /* rawr..app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rawr..app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2068CBED2A87B5BC00F8A958 /* rawrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rawrApp.swift; sourceTree = "<group>"; };
 		2068CBEF2A87B5BC00F8A958 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -88,7 +90,7 @@
 		2068CC222A87C25B00F8A958 /* NoteBodyReactions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteBodyReactions.swift; sourceTree = "<group>"; };
 		2068CC232A87C25B00F8A958 /* NoteBodyGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteBodyGallery.swift; sourceTree = "<group>"; };
 		2068CC242A87C25B00F8A958 /* NoteBodyText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteBodyText.swift; sourceTree = "<group>"; };
-		2068CC252A87C25B00F8A958 /* NoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
+		2068CC252A87C25B00F8A958 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		2068CC272A87C25B00F8A958 /* NoteDecorationBoost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteDecorationBoost.swift; sourceTree = "<group>"; };
 		2068CC282A87C25B00F8A958 /* NoteHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteHeader.swift; sourceTree = "<group>"; };
 		2068CC2A2A87C25B00F8A958 /* ProfileSwitcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSwitcher.swift; sourceTree = "<group>"; };
@@ -125,6 +127,33 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		204DA4132A8A6CCD00BB0598 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				20D37D2F2A88575300BCC1C5 /* Chat */,
+				204DA4142A8A6D0400BB0598 /* Note */,
+				2068CC052A87B96D00F8A958 /* Onboarding */,
+				2068CC1A2A87C24200F8A958 /* Timeline */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		204DA4142A8A6D0400BB0598 /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				204DA4172A8A6FC700BB0598 /* Components */,
+				204DA4152A8A6D1A00BB0598 /* NoteView.swift */,
+			);
+			path = Note;
+			sourceTree = "<group>";
+		};
+		204DA4172A8A6FC700BB0598 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		2068CBE12A87B5BC00F8A958 = {
 			isa = PBXGroup;
 			children = (
@@ -147,7 +176,6 @@
 				2068CBFF2A87B7DB00F8A958 /* Core */,
 				2068CC3D2A87C2EB00F8A958 /* Extensions */,
 				2068CC042A87B90B00F8A958 /* UI */,
-				2068CC442A87EADE00F8A958 /* Utilities */,
 				2068CBED2A87B5BC00F8A958 /* rawrApp.swift */,
 				2068CBEF2A87B5BC00F8A958 /* ContentView.swift */,
 				2068CC022A87B85500F8A958 /* ViewContext.swift */,
@@ -177,10 +205,8 @@
 		2068CC042A87B90B00F8A958 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				20D37D2F2A88575300BCC1C5 /* Chat */,
 				2068CC1B2A87C25B00F8A958 /* Components */,
-				2068CC1A2A87C24200F8A958 /* Timeline */,
-				2068CC052A87B96D00F8A958 /* Onboarding */,
+				204DA4132A8A6CCD00BB0598 /* Views */,
 				2068CC422A87C30A00F8A958 /* MainView.swift */,
 			);
 			path = UI;
@@ -231,6 +257,7 @@
 				2068CC1F2A87C25B00F8A958 /* Notes */,
 				2068CC292A87C25B00F8A958 /* Profile */,
 				2068CC1C2A87C25B00F8A958 /* Timelines */,
+				2068CC442A87EADE00F8A958 /* Utilities */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -249,7 +276,7 @@
 			children = (
 				2068CC212A87C25B00F8A958 /* Bodies */,
 				2068CC262A87C25B00F8A958 /* Decorations */,
-				2068CC252A87C25B00F8A958 /* NoteView.swift */,
+				2068CC252A87C25B00F8A958 /* Note.swift */,
 				2068CC282A87C25B00F8A958 /* NoteHeader.swift */,
 				2068CC202A87C25B00F8A958 /* NoteFooter.swift */,
 			);
@@ -335,6 +362,7 @@
 				204DA3FF2A8907AB00BB0598 /* ChatContext.swift */,
 			);
 			name = Chat;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		20D37D332A88579200BCC1C5 /* Components */ = {
@@ -457,10 +485,11 @@
 				2068CC102A87B96D00F8A958 /* OnboardingServerCard.swift in Sources */,
 				20AE17AE2A88421A00C9AC07 /* ImageViewer.swift in Sources */,
 				204DA40B2A892A6000BB0598 /* MetaModel.swift in Sources */,
+				204DA4162A8A6D1A00BB0598 /* NoteView.swift in Sources */,
 				2068CC012A87B80300F8A958 /* RawrKeychain.swift in Sources */,
 				2068CC462A87EAFC00F8A958 /* ViewReloader.swift in Sources */,
 				2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */,
-				2068CC312A87C25B00F8A958 /* NoteView.swift in Sources */,
+				2068CC312A87C25B00F8A958 /* Note.swift in Sources */,
 				204DA4062A89167500BB0598 /* ChatBar.swift in Sources */,
 				204DA3FA2A88FF7500BB0598 /* ChatView.swift in Sources */,
 				2068CC322A87C25B00F8A958 /* NoteDecorationBoost.swift in Sources */,

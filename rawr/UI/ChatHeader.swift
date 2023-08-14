@@ -36,5 +36,5 @@ struct ChatHeader: View {
 }
 
 #Preview {
-    ChatHeader(history: .preview)
+    ChatHeader(history: .preview).environmentObject(ViewContext())
 }
