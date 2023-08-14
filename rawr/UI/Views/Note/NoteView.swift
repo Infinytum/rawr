@@ -32,14 +32,12 @@ struct NoteView: View {
             ScrollView {
                 Note(note: self.note!)
                     .onAppear(perform: self.loadReplies)
-                Divider()
-                HStack {
-                    Text("\(self.note?.repliesCount ?? 0) Replies")
-                }
-                Divider()
                 if self.replies == nil {
                     ProgressView()
                 } else {
+                    Divider()
+                    Text("\(self.replies?.count ?? 0) Replies").padding(.top, 1).foregroundColor(.primary.opacity(0.7))
+                    Divider()
                     ForEach(self.replies!, id: \.id) { reply in
                         Note(note: reply)
                             .onTapGesture {
@@ -70,7 +68,7 @@ struct NoteView: View {
     
     private func loadReplies() {
         guard let note = self.note else { return }
-        MisskeyKit.shared.notes.getChildren(noteId: note.isRenote() ? note.renote!.id! : note.id! ) { replies, error in
+        MisskeyKit.shared.notes.getChildren(noteId: note.isRenote() ? note.renote!.id! : self.noteId ) { replies, error in
             guard let replies = replies else {
                 print("Error fetching note replies")
                 print(error ?? "No Error")

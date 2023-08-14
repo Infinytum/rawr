@@ -16,14 +16,21 @@ struct Note: View {
             if self.note.isRenote() {
                 NoteDecorationBoost(note: self.note)
             }
-            NoteHeader(note: self.note.isRenote() ? self.note.renote! : self.note)
-            NoteBodyText(text: (self.note.isRenote() ? self.note.renote?.text : self.note.text) ?? "")
-            if self.note.hasFiles() {
-                NoteBodyGallery(files: self.note.isRenote() ? self.note.renote!.files! : self.note.files!)
+            NoteHeader(note: self.actualNote())
+            NoteBodyText(text: self.actualNote().text ?? "")
+            if self.actualNote().hasFiles() {
+                NoteBodyGallery(files: self.actualNote().files!).padding(.bottom, 5)
             }
-            NoteBodyReactions(note: self.note.isRenote() ? self.note.renote! : self.note).padding(.top, 5)
-            NoteFooter(note: self.note.isRenote() ? self.note.renote! : self.note).padding(.horizontal, 5).padding(.top, 5)
+            if self.actualNote().reactionsCount() > 0 {
+                NoteBodyReactions(note: self.actualNote())
+            }
+            Divider()
+            NoteFooter(note: self.actualNote()).padding(.horizontal, 5).padding(.top, 5)
         }.padding(.vertical, 5)
+    }
+    
+    private func actualNote() -> NoteModel {
+        return self.note.isRenote() ? self.note.renote! : self.note
     }
 }
  
@@ -31,7 +38,7 @@ struct Note: View {
     ScrollView {
         Text("Bounding Box Check")
         VStack {
-            Note(note: .preview)
-        }.background(.gray).padding()
-    }
+            Note(note: .preview).background(.white)
+        }.padding()
+    }.background(.gray)
 }
