@@ -16,6 +16,16 @@ public struct ImageViewer: View {
 
     @State private var offset: CGPoint = .zero
     @State private var lastTranslation: CGSize = .zero
+    
+    @State private var imageSize: CGSize = .zero
+    private var simulatedSize: CGSize {
+        let scaleTransform = CGAffineTransform(scaleX: scale, y: scale)
+        return imageSize.applying(scaleTransform)
+    }
+    
+    public var vDragPossible: Bool {
+        simulatedSize.height > UIScreen.main.bounds.height
+    }
 
     public init(image: Image) {
         self.image = image
@@ -31,6 +41,15 @@ public struct ImageViewer: View {
                     .offset(x: offset.x, y: offset.y)
                     .gesture(makeDragGesture(size: proxy.size))
                     .gesture(makeMagnificationGesture(size: proxy.size))
+                    .background() {
+                        GeometryReader {
+                            imProxy in
+                            Color.clear
+                                .onAppear {
+                                    imageSize = imProxy.size
+                                }
+                        }
+                    }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .edgesIgnoringSafeArea(.all)
@@ -63,7 +82,7 @@ public struct ImageViewer: View {
             .onChanged { value in
                 let diff = CGPoint(
                     x: value.translation.width - lastTranslation.width,
-                    y: value.translation.height - lastTranslation.height
+                    y: vDragPossible ? value.translation.height - lastTranslation.height : 0
                 )
                 offset = .init(x: offset.x + diff.x, y: offset.y + diff.y)
                 lastTranslation = value.translation
@@ -74,9 +93,13 @@ public struct ImageViewer: View {
     }
 
     private func adjustMaxOffset(size: CGSize) {
-        let maxOffsetX = (size.width * (scale - 1)) / 2
-        let maxOffsetY = (size.height * (scale - 1)) / 2
+        let maxOffsetX: CGFloat = (simulatedSize.width - size.width) / 2
+        let maxOffsetY: CGFloat = max((simulatedSize.height - size.height) / 2, 0)
 
+        print(maxOffsetX)
+        print(maxOffsetY)
+        print(offset)
+        
         var newOffsetX = offset.x
         var newOffsetY = offset.y
 
