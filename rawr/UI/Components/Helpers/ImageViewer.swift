@@ -16,9 +16,25 @@ public struct ImageViewer: View {
 
     @State private var offset: CGPoint = .zero
     @State private var lastTranslation: CGSize = .zero
+    
+    @State private var imageSize: CGSize = .zero
+    @Binding private var ownSwipe: Bool?
+    
+    @Binding var vDraggableBinding: Bool
+    
+    private var simulatedSize: CGSize {
+        let scaleTransform = CGAffineTransform(scaleX: scale, y: scale)
+        return imageSize.applying(scaleTransform)
+    }
+    
+    private var vDragPossible: Bool {
+        simulatedSize.height > UIScreen.main.bounds.height
+    }
 
-    public init(image: Image) {
+    public init(image: Image, vDraggable: Binding<Bool>, ownSwipe: Binding<Bool?>) {
         self.image = image
+        self._vDraggableBinding = vDraggable
+        self._ownSwipe = ownSwipe
     }
 
     public var body: some View {
@@ -31,6 +47,15 @@ public struct ImageViewer: View {
                     .offset(x: offset.x, y: offset.y)
                     .gesture(makeDragGesture(size: proxy.size))
                     .gesture(makeMagnificationGesture(size: proxy.size))
+                    .background() {
+                        GeometryReader {
+                            imProxy in
+                            Color.clear
+                                .onAppear {
+                                    imageSize = imProxy.size
+                                }
+                        }
+                    }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .edgesIgnoringSafeArea(.all)
@@ -46,6 +71,8 @@ public struct ImageViewer: View {
                 if abs(1 - delta) > 0.01 {
                     scale *= delta
                 }
+                
+                vDraggableBinding = self.vDragPossible
             }
             .onEnded { _ in
                 lastScale = 1
@@ -61,6 +88,10 @@ public struct ImageViewer: View {
     private func makeDragGesture(size: CGSize) -> some Gesture {
         DragGesture()
             .onChanged { value in
+                if (ownSwipe == nil ? true : !ownSwipe!) && !vDragPossible {
+                    return
+                }
+
                 let diff = CGPoint(
                     x: value.translation.width - lastTranslation.width,
                     y: value.translation.height - lastTranslation.height
@@ -74,9 +105,9 @@ public struct ImageViewer: View {
     }
 
     private func adjustMaxOffset(size: CGSize) {
-        let maxOffsetX = (size.width * (scale - 1)) / 2
-        let maxOffsetY = (size.height * (scale - 1)) / 2
-
+        let maxOffsetX: CGFloat = (simulatedSize.width - size.width) / 2
+        let maxOffsetY: CGFloat = max((simulatedSize.height - size.height) / 2, 0)
+        
         var newOffsetX = offset.x
         var newOffsetY = offset.y
 
@@ -95,4 +126,14 @@ public struct ImageViewer: View {
         }
         self.lastTranslation = .zero
     }
+}
+
+#Preview {
+    @State var draggable = false
+    @State var ownSwipe: Bool? = true
+    return ImageViewer(
+        image: .init(.dergSocialIcon),
+        vDraggable: $draggable,
+        ownSwipe: $ownSwipe
+    )
 }
