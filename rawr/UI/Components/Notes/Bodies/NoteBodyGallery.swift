@@ -80,7 +80,7 @@ struct NoteBodyGallery: View {
 
             }
             .simultaneousGesture(dragToDismiss)
-                .background(TransparentBackground())
+            .background(TransparentBackground().ignoresSafeArea())
                 .opacity(1.0 - abs(offset.y) / 300.0)
             }
     }
