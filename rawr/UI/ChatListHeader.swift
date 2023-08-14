@@ -29,5 +29,5 @@ struct ChatListHeader: View {
 }
 
 #Preview {
-    ChatListHeader()
+    ChatListHeader().environmentObject(ViewContext())
 }

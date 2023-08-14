@@ -17,8 +17,8 @@ struct NoteFooter: View {
     var body: some View {
         HStack() {
             HStack {
-                Image(systemName: "arrow.uturn.left")
-                Text(String(self.note.repliesCount ?? 0))
+                Image(systemName: "arrow.uturn.left").fontWeight(.bold)
+                Text(String(self.note.repliesCount ?? 0)).fontWeight(.regular)
             }
             Spacer()
             Menu {
@@ -34,21 +34,23 @@ struct NoteFooter: View {
             } label: {
                 HStack {
                     Image(systemName: "arrow.2.squarepath")
-                        .foregroundColor(self.didRenote ? .blue : .primary)
-                    Text(String(self.note.renoteCount ?? 0))
+                        .foregroundColor(self.didRenote ? .blue : .primary).fontWeight(.bold)
+                    Text(String(self.note.renoteCount ?? 0)).fontWeight(.regular)
                 }
             }.foregroundStyle(.primary)
             Spacer()
             HStack {
-                Image(systemName: self.note.myReaction != nil ? "star.fill" : "star")
-                Text(String(self.note.reactionsCount()))
+                Image(systemName: self.note.myReaction != nil ? "star.fill" : "star").fontWeight(.bold)
+                Text(String(self.note.reactionsCount())).fontWeight(.regular)
             }.onTapGesture {
                 self.onReact()
             }
             Spacer()
             Image(systemName: "face.smiling")
+                .fontWeight(.bold)
             Spacer()
             Image(systemName: "quote.bubble")
+                .fontWeight(.bold)
         }
     }
     
@@ -83,5 +85,5 @@ struct NoteFooter: View {
 }
 
 #Preview {
-    NoteFooter(note: .preview.renote!)
+    NoteFooter(note: .preview.renote!).padding(.horizontal)
 }

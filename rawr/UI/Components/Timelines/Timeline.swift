@@ -11,6 +11,10 @@ import MisskeyKit
 struct Timeline: View {
 
     @ObservedObject var timelineContext: TimelineContext
+    @ObservedObject var viewReloader = ViewReloader()
+    
+    @State var noteId: String? = nil
+    @State var noteDetailShown: Bool = false
     
     init(timelineContext: TimelineContext) {
         self.timelineContext = timelineContext
@@ -23,9 +27,14 @@ struct Timeline: View {
                 ScrollView {
                   LazyVStack {
                     ForEach(timelineContext.items, id: \.id) { item in
-                        NoteView(note: item)
+                        Note(note: item)
                             .listRowSeparator(.hidden)
                             .onAppear { timelineContext.requestMoreItemsIfNeeded(note: item) }
+                            .onTapGesture {
+                                self.noteId = item.id
+                                self.viewReloader.reloadView()
+                                self.noteDetailShown = true
+                            }
                         Divider().listRowSeparator(.hidden)
                     }
 
@@ -33,6 +42,8 @@ struct Timeline: View {
                       ProgressView()
                     }
                   }.padding()
+                }.sheet(isPresented: self.$noteDetailShown) {
+                    NoteView(noteId: self.noteId!)
                 }
             } else {
                 VStack {

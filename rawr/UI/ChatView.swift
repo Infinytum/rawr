@@ -77,6 +77,6 @@ struct ChatView: View {
     VStack {
         
     }.sheet(isPresented: .constant(true), content: {
-        ChatView(history: .preview)
+        ChatView(history: .preview).environmentObject(ViewContext())
     })
 }
