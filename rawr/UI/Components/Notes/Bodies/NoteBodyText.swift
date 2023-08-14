@@ -10,10 +10,31 @@ import SwiftUI
 struct NoteBodyText: View {
     let text: String
     
+    @ObservedObject var viewReloader = ViewReloader()
+    @State var renderedText: AnyView?
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Text(self.text)
-        }.padding(.top, 2)
+            if self.renderedText == nil {
+                Text(self.text)
+            } else {
+                self.renderedText
+            }
+        }.padding(.top, 2).onAppear {
+            render()
+        }
+    }
+    
+    private func render() {
+        Task {
+            let rendered = renderMFM(tokenize(self.text))
+            self.renderedText = AnyView(rendered)
+            DispatchQueue.main.async {
+                withAnimation {
+                    self.viewReloader.reloadView()
+                }
+            }
+        }
     }
 }
 
