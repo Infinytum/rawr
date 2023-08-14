@@ -68,7 +68,7 @@
 		204DA4052A89167500BB0598 /* ChatBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBar.swift; sourceTree = "<group>"; };
 		204DA4082A891EF200BB0598 /* TimelineHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineHeader.swift; sourceTree = "<group>"; };
 		204DA40A2A892A6000BB0598 /* MetaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaModel.swift; sourceTree = "<group>"; };
-		2068CBEA2A87B5BC00F8A958 /* rawr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rawr.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2068CBEA2A87B5BC00F8A958 /* rawr..app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rawr..app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2068CBED2A87B5BC00F8A958 /* rawrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rawrApp.swift; sourceTree = "<group>"; };
 		2068CBEF2A87B5BC00F8A958 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2068CBF12A87B5BF00F8A958 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 		2068CBEB2A87B5BC00F8A958 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2068CBEA2A87B5BC00F8A958 /* rawr.app */,
+				2068CBEA2A87B5BC00F8A958 /* rawr..app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -352,9 +352,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2068CBE92A87B5BC00F8A958 /* rawr */ = {
+		2068CBE92A87B5BC00F8A958 /* rawr. */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2068CBF92A87B5BF00F8A958 /* Build configuration list for PBXNativeTarget "rawr" */;
+			buildConfigurationList = 2068CBF92A87B5BF00F8A958 /* Build configuration list for PBXNativeTarget "rawr." */;
 			buildPhases = (
 				2068CBE62A87B5BC00F8A958 /* Sources */,
 				2068CBE72A87B5BC00F8A958 /* Frameworks */,
@@ -364,7 +364,7 @@
 			);
 			dependencies = (
 			);
-			name = rawr;
+			name = rawr.;
 			packageProductDependencies = (
 				2068CBFD2A87B62100F8A958 /* SwiftKit */,
 				2068CC152A87B9B500F8A958 /* MisskeyKit */,
@@ -374,7 +374,7 @@
 				20AE17AA2A88411A00C9AC07 /* MisskeyKit */,
 			);
 			productName = rawr;
-			productReference = 2068CBEA2A87B5BC00F8A958 /* rawr.app */;
+			productReference = 2068CBEA2A87B5BC00F8A958 /* rawr..app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -412,7 +412,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2068CBE92A87B5BC00F8A958 /* rawr */,
+				2068CBE92A87B5BC00F8A958 /* rawr. */,
 			);
 		};
 /* End PBXProject section */
@@ -607,6 +607,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = rawr.;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -625,7 +626,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.infinytum.rawr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -645,6 +647,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = rawr.;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -663,7 +666,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.infinytum.rawr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -682,7 +686,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2068CBF92A87B5BF00F8A958 /* Build configuration list for PBXNativeTarget "rawr" */ = {
+		2068CBF92A87B5BF00F8A958 /* Build configuration list for PBXNativeTarget "rawr." */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2068CBFA2A87B5BF00F8A958 /* Debug */,
