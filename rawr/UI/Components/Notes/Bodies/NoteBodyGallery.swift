@@ -36,10 +36,11 @@ struct NoteBodyGallery: View {
                     NetworkImage(url: URL(string: file.thumbnailUrl!)) { image in
                         image
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
+                            .aspectRatio(contentMode: .fit)
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                             .clipped()
-                            .aspectRatio(1, contentMode: .fill)
+                            .aspectRatio(1, contentMode: .fit)
+                            .background(image.blur(radius: 15))
                             .onTapGesture {
                                 self.presentedImage = image
                                 self.viewRefresher.reloadView()
