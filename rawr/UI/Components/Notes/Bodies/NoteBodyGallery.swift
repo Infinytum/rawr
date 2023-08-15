@@ -12,6 +12,7 @@ import MisskeyKit
 struct NoteBodyGallery: View {
     @State private var isImagePresented = false
     @State private var presentedImage: Image? = nil
+    @State private var presentedImageIndex: Int? = nil
     
     @State private var lastTranslation: CGSize = .zero
     @State private var offset: CGPoint = .zero
@@ -21,11 +22,13 @@ struct NoteBodyGallery: View {
     @ObservedObject private var viewRefresher = ViewReloader()
     @State private var vDraggable = false
     
+    @State private var menusOffset: CGFloat = .zero
+    
     let files: [File?]
 
     var body: some View {
         LazyVGrid(columns: columns()) {
-            ForEach(self.fileList(), id: \.id) { file in
+            ForEach(Array(self.fileList().enumerated()), id: \.1.id) { (index, file) in
                 if file.thumbnailUrl == nil {
                     Rectangle()
                         .foregroundStyle(.primary.opacity(0.1))
@@ -45,6 +48,7 @@ struct NoteBodyGallery: View {
                                 self.presentedImage = image
                                 self.viewRefresher.reloadView()
                                 self.isImagePresented = true
+                                self.presentedImageIndex = index
                             }
                     } placeholder: {
                         ProgressView()
@@ -66,23 +70,62 @@ struct NoteBodyGallery: View {
                     vDraggable: $vDraggable,
                     ownSwipe: $ignoreSwipe
                 )
-                        .overlay(alignment: .topTrailing) {
-                            Button {
-                                hideImage()
-                            } label: {
-                                Image(systemName: "xmark")
-                                    .font(.headline)
-                            }
-                                .buttonStyle(.bordered)
-                                .clipShape(Circle())
-                                .padding()
-                        }
-                        .offset(x:0, y:offset.y)
-
+                .offset(x:0, y:offset.y)
+                .background(.black)
+                .onTapGesture {
+                    withAnimation {
+                        menusOffset = menusOffset == 60 ? 0 : 60
+                    }
+                }
             }
             .simultaneousGesture(dragToDismiss)
             .background(TransparentBackground().ignoresSafeArea())
                 .opacity(1.0 - abs(offset.y) / 300.0)
+                .overlay() {
+                    GeometryReader(){proxy in
+                        VStack() {
+                            HStack() {
+                                Button {
+                                    hideImage()
+                                } label: {
+                                    Image(systemName: "chevron.left")
+                                    Text("Backsies")
+                                }
+                                .foregroundStyle(.white)
+                                .bold()
+                                .underline()
+                                
+                                Spacer()
+                                
+                                Menu() {
+                                    Button() {
+                                        
+                                        UIImageWriteToSavedPhotosAlbum(
+                                            ImageRenderer(content: presentedImage!).uiImage!, nil, nil, nil)
+                                    } label: {
+                                        Image(systemName: "square.and.arrow.down")
+                                        Text("Save image")
+                                    }
+                                } label: {
+                                    Image(systemName:"ellipsis.circle")
+                                }
+                            }
+                            .frame(height: 60)
+                            .background(.black.opacity(0.7))
+                            .offset(x:0, y: -menusOffset)
+                            
+                            Spacer()
+                            HStack() {
+                                Text("Image \(presentedImageIndex!+1) of \(files.count)")
+                            }
+                            .frame(width: proxy.size.width, height: 60)
+                            .background(.black.opacity(0.7))
+                            .offset(x:0, y: menusOffset)
+                            .foregroundStyle(.white)
+                        }
+                    }
+                    .opacity(0.7 - abs(offset.y) / 300.0)
+                }
             }
     }
     
@@ -150,11 +193,11 @@ struct NoteBodyGallery: View {
 struct TransparentBackground: UIViewRepresentable {
 
     func makeUIView(context: Context) -> UIView {
-        let view = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-            DispatchQueue.main.async {
-                view.superview?.superview?.backgroundColor = .clear
-            }
-            return view
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        DispatchQueue.main.async {
+            view.superview?.superview?.backgroundColor = .clear
+        }
+        return view
     }
 
     func updateUIView(_ uiView: UIView, context: Context) {}
