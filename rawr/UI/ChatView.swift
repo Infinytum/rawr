@@ -35,40 +35,39 @@ struct ChatView: View {
     }
     
     var body: some View {
-        ZStack(alignment: .top) {
-            VStack {
-                if self.chatContext.errorReason == nil {
-                    List {
+        VStack(alignment: .center) {
+            ChatHeader(history: self.history)
+            if self.chatContext.errorReason == nil {
+                ScrollView {
+                    LazyVStack(spacing: 0){
                         ForEach(Array(self.chatContext.items.enumerated()), id: \.1.id) { (index, item) in
                             ChatMessage(chatMessage: item, remote: (item.recipientId ?? "") == self.context.currentUserId)
-                                .listRowSeparator(.hidden)
-                                .listRowInsets(EdgeInsets())
                                 .flippedUpsideDown()
                                 .onAppear { self.chatContext.requestMoreItemsIfNeeded(message: item) }
                                 .padding(
                                     .top,
                                     (index == 0 || self.chatContext.items[index-1].recipientId?.elementsEqual( item.recipientId ?? "") ?? false) ? 0 : 15)
                         }
+                        
                         if self.chatContext.dataIsLoading || true {
                             ProgressView()
                         }
-                    }.padding(.horizontal)
-                        .listStyle(.plain)
-                        .flippedUpsideDown()
-                } else {
-                    VStack {
-                        Spacer()
-                        Text(self.chatContext.errorReason!)
-                        Spacer()
                     }
+                        .padding(.horizontal)
                 }
-                ChatBar(chatContext: self.chatContext)
-            }.padding(.top, 55)
-            VStack {
-                ChatHeader(history: self.history)
+                    .flippedUpsideDown()
+            } else {
+                VStack {
+                    Spacer()
+                    Text(self.chatContext.errorReason!)
+                    Spacer()
+                }
             }
+            ChatBar(chatContext: self.chatContext)
+            
         }.presentationDragIndicator(.visible).onAppear {
             self.chatContext.requestInitialSetOfItems(remoteUserId: self.history.remoteUserId(currentUserId: context.currentUserId) ?? "")
+            
         }
     }
 }
