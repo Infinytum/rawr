@@ -9,18 +9,27 @@ import SwiftUI
 import NetworkImage
 import MisskeyKit
 
+enum Direction {
+    case vertical
+    case horizontal
+}
+
 struct NoteBodyGallery: View {
     @State private var isImagePresented = false
-    @State private var presentedImage: Image? = nil
+    private var presentedImage: Image? {
+        images[presentedImageIndex!]!
+    }
+    @State private var images: [Int: Image?] = [:]
     @State private var presentedImageIndex: Int? = nil
     
     @State private var lastTranslation: CGSize = .zero
     @State private var offset: CGPoint = .zero
     
-    @State private var ignoreSwipe: Bool? = nil
+    @State private var swipeDirection: Direction? = nil
     
     @ObservedObject private var viewRefresher = ViewReloader()
-    @State private var vDraggable = false
+    @State private var vSwipeChildOwned = false
+    @State private var hSwipeChildOwned = false
     
     @State private var menusOffset: CGFloat = .zero
     
@@ -33,23 +42,29 @@ struct NoteBodyGallery: View {
                     Rectangle()
                         .foregroundStyle(.primary.opacity(0.1))
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                        .clipped().cornerRadius(11)
+                        .clipShape(RoundedRectangle(cornerRadius: 11))
                         .aspectRatio(1, contentMode: .fill)
                 } else {
                     NetworkImage(url: URL(string: file.thumbnailUrl!)) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                            .clipped()
-                            .aspectRatio(1, contentMode: .fit)
-                            .background(image.blur(radius: 15))
-                            .onTapGesture {
-                                self.presentedImage = image
-                                self.viewRefresher.reloadView()
-                                self.isImagePresented = true
-                                self.presentedImageIndex = index
-                            }
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0)
+                                .aspectRatio(1, contentMode: .fit)
+                                .background(alignment: .center){
+                                    image
+                                        .resizable()
+                                        .blur(radius: 15)
+                                        .aspectRatio(contentMode: .fit)
+                                }
+                                .onAppear {
+                                    images[index] = image
+                                }
+                                .onTapGesture {
+                                    self.viewRefresher.reloadView()
+                                    self.isImagePresented = true
+                                    self.presentedImageIndex = index
+                                }
                     } placeholder: {
                         ProgressView()
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
@@ -59,27 +74,45 @@ struct NoteBodyGallery: View {
                             .foregroundStyle(.primary.opacity(0.1))
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                             .aspectRatio(1, contentMode: .fill)
-                    }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity).clipped().cornerRadius(11)
+                    }
+                    .clipShape(RoundedRectangle(cornerRadius: 11))
                 }
             }
         }
         .fullScreenCover(isPresented: self.$isImagePresented) {
             ZStack {
+                if images[presentedImageIndex!-1] != nil {
+                    ImageViewer(
+                        image: images[presentedImageIndex!-1]!!,
+                        vSwipeOwned: false,
+                        hSwipeOwned: false
+                    )
+                    .offset(x:offset.x - UIScreen.main.bounds.width, y:0)
+                }
                 ImageViewer(
                     image: self.presentedImage!,
-                    vDraggable: $vDraggable,
-                    ownSwipe: $ignoreSwipe
+                    vSwipeOwned: $vSwipeChildOwned,
+                    hSwipeOwned: $hSwipeChildOwned
                 )
-                .offset(x:0, y:offset.y)
-                .background(.black)
+                .offset(x:offset.x, y:offset.y)
                 .onTapGesture {
                     withAnimation {
                         menusOffset = menusOffset == 60 ? 0 : 60
                     }
                 }
+                if images[presentedImageIndex!+1] != nil {
+                        ImageViewer(
+                            image: images[presentedImageIndex!+1]!!,
+                            vSwipeOwned: false,
+                            hSwipeOwned: false
+                        )
+                        .offset(x: offset.x + UIScreen.main.bounds.width, y:0)
+                    }
             }
-            .simultaneousGesture(dragToDismiss)
-            .background(TransparentBackground().ignoresSafeArea())
+                .simultaneousGesture(dragToDismiss)
+                .simultaneousGesture(dragToChangeImage)
+                .background(.black)
+                .background(TransparentBackground().ignoresSafeArea())
                 .opacity(1.0 - abs(offset.y) / 300.0)
                 .overlay() {
                     GeometryReader(){proxy in
@@ -99,7 +132,6 @@ struct NoteBodyGallery: View {
                                 
                                 Menu() {
                                     Button() {
-                                        
                                         UIImageWriteToSavedPhotosAlbum(
                                             ImageRenderer(content: presentedImage!).uiImage!, nil, nil, nil)
                                     } label: {
@@ -131,7 +163,7 @@ struct NoteBodyGallery: View {
     
     private func hideImage () {
         self.isImagePresented = false
-        self.presentedImage = nil
+        self.presentedImageIndex = nil
     }
     
     func columns() -> [GridItem] {
@@ -156,26 +188,30 @@ struct NoteBodyGallery: View {
                 let deltaY = value.location.y - value.startLocation.y
                 let deltaX = value.location.x - value.startLocation.x
                 
-                if ignoreSwipe == nil {
-                    self.ignoreSwipe = abs(deltaX) > abs(deltaY)
+                if swipeDirection == nil {
+                    self.swipeDirection = abs(deltaX) > abs(deltaY) ? .horizontal : .vertical
                 }
                 
-                if ignoreSwipe! {
+                if swipeDirection != .vertical ||
+                   vSwipeChildOwned {
                     return
                 }
                 
                 if value.translation.height > 0 {
                     let diff = CGPoint(
                         x: 0,
-                        y: vDraggable ? 0 : value.translation.height - lastTranslation.height
+                        y: value.translation.height - lastTranslation.height
                     )
                     
-                    offset = .init(x: offset.x + diff.x, y: offset.y + diff.y)
+                    offset = .init(x: 0, y: offset.y + diff.y)
                     lastTranslation = value.translation
                 }
             }
             .onEnded() {_ in
-                print(offset.y)
+                if(swipeDirection != .vertical){
+                    return
+                }
+                
                 if abs(offset.y) > 150 {
                     hideImage()
                     offset = .zero
@@ -185,7 +221,64 @@ struct NoteBodyGallery: View {
                     }
                 }
                 lastTranslation = .zero
-                ignoreSwipe = nil
+                swipeDirection = nil
+            }
+    }
+    
+    var dragToChangeImage: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                let goingRight = value.translation.width < 0
+
+                if swipeDirection != .horizontal ||
+                    vSwipeChildOwned {
+                    return
+                }
+                
+                if (goingRight && images.count > presentedImageIndex! + 1) ||
+                    (!goingRight && presentedImageIndex! > 0) {
+                    offset = .init(x: value.translation.width, y: 0)
+                } else {
+                    offset = .init(x: value.translation.width / 2, y: 0)
+                }
+            }
+            .onEnded { value in
+                if swipeDirection != .horizontal {
+                    return
+                }
+                
+                let goingRight = value.predictedEndTranslation.width < 0
+                if abs(value.predictedEndTranslation.width) < UIScreen.main.bounds.width / 2 {
+                    withAnimation {
+                        offset = .zero
+                    }
+                } else if (goingRight && images.count > presentedImageIndex! + 1) ||
+                        (!goingRight && presentedImageIndex! > 0) {
+                    if goingRight {
+                        withAnimation(.easeOut(duration: 0.3)) {
+                            offset.x = -UIScreen.main.bounds.width
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            presentedImageIndex! += 1
+                            offset = .zero
+                        }
+                        
+                    } else {
+                        withAnimation(.easeOut(duration: 0.3)) {
+                            offset.x = UIScreen.main.bounds.width
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            presentedImageIndex! -= 1
+                            offset = .zero
+                        }
+                    }
+                } else {
+                    withAnimation {
+                        offset = .zero
+                    }
+                }
+                lastTranslation = .zero
+                swipeDirection = nil
             }
     }
 }
@@ -205,5 +298,5 @@ struct TransparentBackground: UIViewRepresentable {
 
 
 #Preview {
-    NoteBodyGallery(files: NoteModel.preview.renote?.files ?? [])
+    return NoteBodyGallery(files: NoteModel.preview.renote?.files ?? [])
 }

@@ -18,9 +18,13 @@ public struct ImageViewer: View {
     @State private var lastTranslation: CGSize = .zero
     
     @State private var imageSize: CGSize = .zero
-    @Binding private var ownSwipe: Bool?
     
-    @Binding var vDraggableBinding: Bool
+    @Binding var vSwipeOwned: Bool
+    @Binding var hSwipeOwned: Bool
+    
+    @State var disableVSwipe = false
+    @State var disableHSwipe = false
+    @State var swipeDirection: Direction? = nil
     
     private var simulatedSize: CGSize {
         let scaleTransform = CGAffineTransform(scaleX: scale, y: scale)
@@ -30,13 +34,24 @@ public struct ImageViewer: View {
     private var vDragPossible: Bool {
         simulatedSize.height > UIScreen.main.bounds.height
     }
-
-    public init(image: Image, vDraggable: Binding<Bool>, ownSwipe: Binding<Bool?>) {
-        self.image = image
-        self._vDraggableBinding = vDraggable
-        self._ownSwipe = ownSwipe
+    
+    private var hDragPossible: Bool {
+        simulatedSize.width > UIScreen.main.bounds.width
     }
 
+    public init(image: Image, vSwipeOwned: Binding<Bool>, hSwipeOwned: Binding<Bool>) {
+        self.image = image
+        self._vSwipeOwned = vSwipeOwned
+        self._hSwipeOwned = hSwipeOwned
+    }
+    
+    public init(image: Image, vSwipeOwned: Bool, hSwipeOwned: Bool) {
+        self.image = image
+        self.disableHSwipe = !hSwipeOwned
+        self.disableVSwipe = !vSwipeOwned
+        self._vSwipeOwned = .constant(vSwipeOwned)
+        self._hSwipeOwned = .constant(hSwipeOwned)
+    }
     public var body: some View {
         GeometryReader { proxy in
             ZStack {
@@ -72,7 +87,13 @@ public struct ImageViewer: View {
                     scale *= delta
                 }
                 
-                vDraggableBinding = self.vDragPossible
+                if !disableVSwipe {
+                    vSwipeOwned = self.vDragPossible
+                }
+                
+                if !disableHSwipe {
+                    hSwipeOwned = self.hDragPossible
+                }
             }
             .onEnded { _ in
                 lastScale = 1
@@ -88,14 +109,34 @@ public struct ImageViewer: View {
     private func makeDragGesture(size: CGSize) -> some Gesture {
         DragGesture()
             .onChanged { value in
-                if (ownSwipe == nil ? true : !ownSwipe!) && !vDragPossible {
+                if disableVSwipe && disableHSwipe {
                     return
                 }
 
-                let diff = CGPoint(
-                    x: value.translation.width - lastTranslation.width,
-                    y: value.translation.height - lastTranslation.height
-                )
+                let deltaY = value.location.y - value.startLocation.y
+                let deltaX = value.location.x - value.startLocation.x
+                
+                if swipeDirection == nil {
+                    self.swipeDirection = abs(deltaX) > abs(deltaY) ? .horizontal : .vertical
+                }
+
+                if !vSwipeOwned && !hSwipeOwned {
+                    return
+                }
+
+                var diff: CGPoint = .zero
+                
+                if vSwipeOwned && hSwipeOwned {
+                    diff = CGPoint(
+                        x: value.translation.width - lastTranslation.width,
+                        y: value.translation.height - lastTranslation.height
+                    )
+                } else if vSwipeOwned {
+                    diff.y = value.translation.height - lastTranslation.height
+                } else {
+                    diff.x = value.translation.width - lastTranslation.width
+                }
+                
                 offset = .init(x: offset.x + diff.x, y: offset.y + diff.y)
                 lastTranslation = value.translation
             }
@@ -129,11 +170,12 @@ public struct ImageViewer: View {
 }
 
 #Preview {
-    @State var draggable = false
-    @State var ownSwipe: Bool? = true
+    @State var vSwipeOwnedChild = false
+    @State var hSwipeOwnedChild = false
+    @State var ownVSwipe: Bool? = true
     return ImageViewer(
         image: .init(.dergSocialIcon),
-        vDraggable: $draggable,
-        ownSwipe: $ownSwipe
+        vSwipeOwned: $vSwipeOwnedChild,
+        hSwipeOwned: $hSwipeOwnedChild
     )
 }
