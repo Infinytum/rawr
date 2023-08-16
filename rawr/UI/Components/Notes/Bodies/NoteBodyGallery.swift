@@ -163,8 +163,14 @@ struct NoteBodyGallery: View {
     }
     
     private func hideImage () {
-        self.isImagePresented = false
-        self.presentedImageIndex = nil
+        withAnimation(.easeOut(duration: 0.3)) {
+            offset.y = 300
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.isImagePresented = false
+            self.presentedImageIndex = nil
+            offset = .zero
+        }
     }
     
     func columns() -> [GridItem] {
@@ -208,14 +214,13 @@ struct NoteBodyGallery: View {
                     lastTranslation = value.translation
                 }
             }
-            .onEnded() {_ in
+            .onEnded() {value in
                 if(swipeDirection != .vertical){
                     return
                 }
                 
-                if abs(offset.y) > 150 {
+                if value.predictedEndTranslation.height > 150 {
                     hideImage()
-                    offset = .zero
                 } else {
                     withAnimation {
                         offset.y = 0.0
