@@ -17,7 +17,7 @@ internal struct FlippedUpsideDown: ViewModifier {
  }
 
 internal extension View{
-    func flippedUpsideDown() -> some View{
+    func flippedUpsideDown() -> some View {
       self.modifier(FlippedUpsideDown())
     }
  }
@@ -25,17 +25,12 @@ internal extension View{
 struct ChatView: View {
     @EnvironmentObject var context: ViewContext
 
-    @ObservedObject var chatContext: ChatContext
+    @ObservedObject var chatContext = ChatContext()
     
     let history: MessageHistoryModel
     
-    init(history: MessageHistoryModel) {
-        self.history = history
-        self.chatContext = ChatContext()
-    }
-    
     var body: some View {
-        VStack(alignment: .center) {
+        VStack {
             ChatHeader(history: self.history)
             if self.chatContext.errorReason == nil {
                 ScrollView {
@@ -49,7 +44,7 @@ struct ChatView: View {
                                     (index == 0 || self.chatContext.items[index-1].recipientId?.elementsEqual( item.recipientId ?? "") ?? false) ? 0 : 15)
                         }
                         
-                        if self.chatContext.dataIsLoading || true {
+                        if self.chatContext.dataIsLoading{
                             ProgressView()
                         }
                     }
@@ -65,17 +60,19 @@ struct ChatView: View {
             }
             ChatBar(chatContext: self.chatContext)
             
-        }.presentationDragIndicator(.visible).onAppear {
-            self.chatContext.requestInitialSetOfItems(remoteUserId: self.history.remoteUserId(currentUserId: context.currentUserId) ?? "")
-            
         }
+            .presentationDragIndicator(.visible)
+            .onAppear {
+                self.chatContext.requestInitialSetOfItems(remoteUserId: self.history.remoteUserId(currentUserId: context.currentUserId) ?? "")
+                
+            }
     }
 }
 
 #Preview {
-    VStack {
-        
-    }.sheet(isPresented: .constant(true), content: {
-        ChatView(history: .preview).environmentObject(ViewContext())
-    })
+    VStack(content:{})
+        .sheet(isPresented: .constant(true)) {
+        ChatView(history: .preview)
+            .environmentObject(ViewContext())
+    }
 }
