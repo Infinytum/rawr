@@ -55,7 +55,8 @@ struct NoteBodyGallery: View {
                                     image
                                         .resizable()
                                         .blur(radius: 15)
-                                        .aspectRatio(contentMode: .fit)
+                                        .aspectRatio(contentMode: .fill)
+                                        .clipped()
                                 }
                                 .onAppear {
                                     images[index] = image
