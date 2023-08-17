@@ -18,6 +18,7 @@ public struct ImageViewer: View {
     @State private var lastTranslation: CGSize = .zero
     
     @State private var imageSize: CGSize = .zero
+    @State private var containerSize: CGSize = .zero
     
     @Binding var vSwipeOwned: Bool
     @Binding var hSwipeOwned: Bool
@@ -60,8 +61,8 @@ public struct ImageViewer: View {
                     .aspectRatio(contentMode: .fit)
                     .scaleEffect(scale)
                     .offset(x: offset.x, y: offset.y)
-                    .gesture(makeDragGesture(size: proxy.size))
-                    .gesture(makeMagnificationGesture(size: proxy.size))
+                    .gesture(dragGesture)
+                    .gesture(magnificationGesture)
                     .background() {
                         GeometryReader {
                             imProxy in
@@ -71,20 +72,37 @@ public struct ImageViewer: View {
                                 }
                         }
                     }
+                    .onTapGesture(count: 2) { location in
+                        withAnimation {
+                            if self.scale > 1 {
+                                self.scale = 1
+                            } else {
+                                self.scale = 3
+                                offset.x = (imageSize.width / 2 - location.x) * 3
+                                offset.y = (imageSize.height / 2 - location.y) * 3
+                                
+                            }
+                        }
+                        adjustMaxOffset()
+                    }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .edgesIgnoringSafeArea(.all)
+            .onAppear {
+                containerSize = proxy.size
+            }
         }
+        .border(.red)
     }
 
-    private func makeMagnificationGesture(size: CGSize) -> some Gesture {
+    private var magnificationGesture: some Gesture {
         MagnificationGesture()
             .onChanged { value in
                 let delta = value / lastScale
                 lastScale = value
 
                 if abs(1 - delta) > 0.01 {
-                    scale *= delta
+                    scale = min(scale * delta, 5)
                 }
                 
                 if !disableVSwipe {
@@ -102,11 +120,11 @@ public struct ImageViewer: View {
                         scale = 1
                     }
                 }
-                adjustMaxOffset(size: size)
+                adjustMaxOffset()
             }
     }
 
-    private func makeDragGesture(size: CGSize) -> some Gesture {
+    private var dragGesture: some Gesture {
         DragGesture()
             .onChanged { value in
                 if disableVSwipe && disableHSwipe {
@@ -141,13 +159,13 @@ public struct ImageViewer: View {
                 lastTranslation = value.translation
             }
             .onEnded { _ in
-                adjustMaxOffset(size: size)
+                adjustMaxOffset()
             }
     }
 
-    private func adjustMaxOffset(size: CGSize) {
-        let maxOffsetX: CGFloat = (simulatedSize.width - size.width) / 2
-        let maxOffsetY: CGFloat = max((simulatedSize.height - size.height) / 2, 0)
+    private func adjustMaxOffset() {
+        let maxOffsetX: CGFloat = (simulatedSize.width - containerSize.width) / 2
+        let maxOffsetY: CGFloat = max((simulatedSize.height - containerSize.height) / 2, 0)
         
         var newOffsetX = offset.x
         var newOffsetY = offset.y
@@ -170,8 +188,8 @@ public struct ImageViewer: View {
 }
 
 #Preview {
-    @State var vSwipeOwnedChild = false
-    @State var hSwipeOwnedChild = false
+    @State var vSwipeOwnedChild = true
+    @State var hSwipeOwnedChild = true
     @State var ownVSwipe: Bool? = true
     return ImageViewer(
         image: .init(.dergSocialIcon),
