@@ -13,6 +13,11 @@ enum Direction {
     case vertical
     case horizontal
 }
+extension Array where Element: Equatable {
+    mutating func removeAll(_ element: Element) {
+        removeAll(where: {$0 == element})
+    }
+}
 
 struct NoteBodyGallery: View {
     @State private var isImagePresented = false
@@ -32,6 +37,8 @@ struct NoteBodyGallery: View {
     @State private var hSwipeChildOwned = false
     
     @State private var menusOffset: CGFloat = .zero
+    
+    @State private var nsfwDismissed: [String] = []
     
     let files: [File?]
 
@@ -62,9 +69,44 @@ struct NoteBodyGallery: View {
                                     images[index] = image
                                 }
                                 .onTapGesture {
-                                    self.viewRefresher.reloadView()
-                                    self.isImagePresented = true
-                                    self.presentedImageIndex = index
+                                    if file.isSensitive ?? false && !nsfwDismissed.contains(file.id!) {
+                                        withAnimation{
+                                            nsfwDismissed.append(file.id!)
+                                        }
+                                    } else {
+                                        self.viewRefresher.reloadView()
+                                        self.isImagePresented = true
+                                        self.presentedImageIndex = index
+                                    }
+                                }
+                                .blur(radius: file.isSensitive ?? false && !nsfwDismissed.contains(file.id!) ? 15 : 0)
+                                .overlay {
+                                    if file.isSensitive ?? false && !nsfwDismissed.contains(file.id!) {
+                                        VStack {
+                                            Image(systemName: "exclamationmark.triangle")
+                                            Text("NSFW")
+                                        }
+                                        .foregroundStyle(.white)
+                                    }
+                                }
+                                .overlay(alignment: .topTrailing) {
+                                    if file.isSensitive ?? false && nsfwDismissed.contains(file.id!) {
+                                        Button {
+                                            withAnimation {
+                                                nsfwDismissed.removeAll(file.id!)
+                                            }
+                                        } label: {
+                                            Image(systemName: "eye.slash")
+                                        }
+                                        .foregroundStyle(.white)
+                                        .frame(width: 30, height: 30)
+                                        .background(
+                                            .gray
+                                                .opacity(0.75)
+                                        )
+                                        .clipShape(Circle())
+                                        .padding([.top, .trailing],5)
+                                    }
                                 }
                     } placeholder: {
                         ProgressView()

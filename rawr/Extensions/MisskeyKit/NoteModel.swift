@@ -158,7 +158,7 @@ extension NoteModel: ObservableObject {
             "type": "image/jpeg",
             "md5": "bba124e474dec667d1cb9f5cfcb3434a",
             "size": 2910659,
-            "isSensitive": false,
+            "isSensitive": true,
             "properties": {
                 "width": 3072,
                 "height": 4080
