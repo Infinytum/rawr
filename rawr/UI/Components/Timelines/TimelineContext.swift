@@ -115,6 +115,6 @@ class TimelineContext: ObservableObject {
     }
     
     private func noteToTimelineItem(note: NoteModel) -> TimelineItem {
-        return TimelineItem(note: note, renderedNote: renderMFM(tokenize(note.text ?? ""), emojis: note.emojis ?? note.renote?.emojis ?? []))
+        return TimelineItem(note: note, renderedNote: renderMFM(tokenize(note.text ?? note.renote?.text ?? ""), emojis: note.emojis ?? note.renote?.emojis ?? []))
     }
 }
