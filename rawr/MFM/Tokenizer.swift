@@ -135,7 +135,7 @@ func tokenize(_ input: String) -> MFMNodeProtocol {
             let startLocation = scanner.currentIndex
             
             /// Check if this is an actual container or just some random #
-            guard let emoji = scanner.scanCharacters(from: CharacterSet.alphanumerics), scanner.scanString(":") != nil else {
+            guard let emoji = scanner.scanCharacters(from: CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "_"))), scanner.scanString(":") != nil else {
                 scanner.currentIndex = startLocation
                 currentNode.addChild(MFMNode(currentNode, plaintext: token))
                 continue
