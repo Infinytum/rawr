@@ -17,8 +17,8 @@ struct NoteFooter: View {
     var body: some View {
         HStack() {
             HStack {
-                Image(systemName: "arrow.uturn.left").fontWeight(.bold)
-                Text(String(self.note.repliesCount ?? 0)).fontWeight(.regular)
+                Image(systemName: "text.bubble").fontWeight(.light).padding(.bottom, -2)
+                Text(String(self.note.repliesCount ?? 0)).font(.system(size: 16, weight: .light))
             }
             Spacer()
             Menu {
@@ -34,23 +34,23 @@ struct NoteFooter: View {
             } label: {
                 HStack {
                     Image(systemName: "arrow.2.squarepath")
-                        .foregroundColor(self.didRenote ? .blue : .primary).fontWeight(.bold)
-                    Text(String(self.note.renoteCount ?? 0)).fontWeight(.regular)
+                        .foregroundColor(self.didRenote ? .blue : .primary).fontWeight(.light)
+                    Text(String(self.note.renoteCount ?? 0)).font(.system(size: 16, weight: .light))
                 }
             }.foregroundStyle(.primary)
             Spacer()
             HStack {
-                Image(systemName: self.note.myReaction != nil ? "star.fill" : "star").fontWeight(.bold)
-                Text(String(self.note.reactionsCount())).fontWeight(.regular)
+                Image(systemName: "star").foregroundColor(self.note.myReaction != nil ? .yellow : .primary).fontWeight(self.note.myReaction != nil ? .bold : .light)
+                Text(String(self.note.reactionsCount())).font(.system(size: 16, weight: .light))
             }.onTapGesture {
                 self.onReact()
             }
             Spacer()
-            Image(systemName: "face.smiling")
-                .fontWeight(.bold)
+            Image(systemName: "hands.and.sparkles")
+                .fontWeight(.light)
             Spacer()
             Image(systemName: "quote.bubble")
-                .fontWeight(.bold)
+                .fontWeight(.light)
         }
     }
     
@@ -85,5 +85,11 @@ struct NoteFooter: View {
 }
 
 #Preview {
-    NoteFooter(note: .preview.renote!).padding(.horizontal)
+    ScrollView {
+        Note(note: .preview)
+        Divider()
+        Note(note: .preview)
+        Divider()
+        Note(note: .preview)
+    }.padding()
 }
