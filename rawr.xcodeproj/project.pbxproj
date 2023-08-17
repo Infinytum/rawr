@@ -158,17 +158,9 @@
 		204DA4142A8A6D0400BB0598 /* Note */ = {
 			isa = PBXGroup;
 			children = (
-				204DA4172A8A6FC700BB0598 /* Components */,
 				204DA4152A8A6D1A00BB0598 /* NoteView.swift */,
 			);
 			path = Note;
-			sourceTree = "<group>";
-		};
-		204DA4172A8A6FC700BB0598 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		204DA41A2A8AB30C00BB0598 /* MFM */ = {
