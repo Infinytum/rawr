@@ -11,20 +11,25 @@ import WrappingHStack
 import SwiftUI
 import SwiftUIFlow
 
+struct IdentifiableView: Identifiable {
+    var id: UUID = UUID()
+    let view: any View
+}
+
 struct RenderedNode {
-    let viewStack: [any View]
+    let viewStack: [IdentifiableView]
     let newStack: Bool
     let endStack: Bool
     let alignment: Alignment
 }
 
-func renderMFM(_ node: MFMNodeProtocol, emojis: [EmojiModel] = []) -> [any View] {
+func renderMFM(_ node: MFMNodeProtocol, emojis: [EmojiModel] = []) -> [IdentifiableView] {
     let renderedChildren = node.children.map { child in
         renderMFMNode(child, emojis: emojis)
     }
     
     var viewStack: [RenderedNode] = []
-    var stack: [any View] = []
+    var stack: [IdentifiableView] = []
     var alignment = Alignment.leading
     for child in renderedChildren {
         for view in child {
@@ -56,11 +61,11 @@ func renderMFM(_ node: MFMNodeProtocol, emojis: [EmojiModel] = []) -> [any View]
     viewStack.append(RenderedNode(viewStack: stack, newStack: false, endStack: false, alignment: alignment))
     
     return viewStack.map { childStack in
-        return WrappingHStack(alignment: childStack.alignment, horizontalSpacing: 0, verticalSpacing: 1) {
-            ForEach(Array(childStack.viewStack.enumerated()), id: \.offset) { _, view in
-                AnyView(view)
+        return IdentifiableView(view: WrappingHStack(alignment: childStack.alignment, horizontalSpacing: 0, verticalSpacing: 1) {
+            ForEach(childStack.viewStack) { view in
+                AnyView(view.view)
             }
-        }
+        })
     }
 }
 
@@ -70,7 +75,7 @@ func renderMFMNode(_ node: MFMNodeProtocol, emojis: [EmojiModel]) -> [RenderedNo
     }
     
     var renderedNodes: [RenderedNode] = []
-    var views: [any View] = []
+    var views: [IdentifiableView] = []
     
     switch node.type {
     case .root:
@@ -84,9 +89,9 @@ func renderMFMNode(_ node: MFMNodeProtocol, emojis: [EmojiModel]) -> [RenderedNo
         for line in lines {
             for split in line.split(separator: " ") {
                 for subSplit in String(split).split(every: 15) {
-                    views.append(Text(subSplit))
+                    views.append(IdentifiableView(view: Text(subSplit)))
                 }
-                views.append(Text(" "))
+                views.append(IdentifiableView(view: Text(" ")))
             }
             if !views.isEmpty && (message.last ?? Character.init(".")) != " " {
                 views.removeLast()
@@ -98,27 +103,27 @@ func renderMFMNode(_ node: MFMNodeProtocol, emojis: [EmojiModel]) -> [RenderedNo
         }
         return renderedNodes
     case .mention:
-        views.append(Text("@" + (node.value ?? "")).foregroundStyle(.orange))
-        views.append(Text(" "))
+        views.append(IdentifiableView(view: Text("@" + (node.value ?? "")).foregroundStyle(.orange)))
+        views.append(IdentifiableView(view: Text(" ")))
         return [RenderedNode(viewStack: views, newStack: false, endStack: false, alignment: .leading)]
     case .hashtag:
-        views.append(Text("#" + (node.value ?? "")).foregroundStyle(.blue))
-        views.append(Text(" "))
+        views.append(IdentifiableView(view: Text("#" + (node.value ?? "")).foregroundStyle(.blue)))
+        views.append(IdentifiableView(view: Text(" ")))
         return [RenderedNode(viewStack: views, newStack: false, endStack: false, alignment: .leading)]
     case .emoji:
-        views.append(Emoji(name: node.value ?? "", emojis: emojis).frame(width: 30, height: 30) )
+        views.append(IdentifiableView(view: Emoji(name: node.value ?? "", emojis: emojis).frame(width: 30, height: 30)))
         return [RenderedNode(viewStack: views, newStack: false, endStack: false, alignment: .leading)]
     case .modifier:
-        views.append(Text("MODIFIERS UNSUPPORTED"))
+        views.append(IdentifiableView(view: Text("MODIFIERS UNSUPPORTED")))
         return [RenderedNode(viewStack: views, newStack: false, endStack: false, alignment: .leading)]
     case .small:
         for split in (node.value ?? "").split(separator: "") {
-            views.append(Text(split).font(.system(size: 14)))
+            views.append(IdentifiableView(view: Text(split).font(.system(size: 14))))
         }
         return [RenderedNode(viewStack: views, newStack: false, endStack: false, alignment: .leading)]
     case .center:
         var viewStack: [RenderedNode] = []
-        var stack: [any View] = []
+        var stack: [IdentifiableView] = []
         
         var newStack = true
         for child in renderedChildrenStacks {
@@ -149,8 +154,8 @@ func renderMFMNode(_ node: MFMNodeProtocol, emojis: [EmojiModel]) -> [RenderedNo
 #Preview {
     VStack {
         Spacer()
-        ForEach(Array(renderMFM(tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered $[tada $[x2 $[sparkle gay]]]</center> #test_2023. Visit:asd :drgn:\nhttps://www.example.com")).enumerated()), id: \.offset) { _, view in
-            AnyView(view)
+        ForEach(renderMFM(tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered $[tada $[x2 $[sparkle gay]]]</center> #test_2023. Visit:asd :drgn:\nhttps://www.example.com"))) { view in
+            AnyView(view.view)
         }
         Spacer()
     }.border(.brown).environmentObject(ViewContext())

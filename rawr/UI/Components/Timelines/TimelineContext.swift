@@ -17,7 +17,7 @@ enum TimelineContextTimeline: String {
 
 struct TimelineItem {
     let note: NoteModel
-    let renderedNote: [any View]
+    let renderedNote: [IdentifiableView]
 }
 
 class TimelineContext: ObservableObject {
