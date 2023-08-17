@@ -23,9 +23,15 @@ struct NoteBodyReactions: View {
             ForEach((self.note.reactions ?? [:]).sorted(by: >), id: \.key) { key, value in
                 HStack {
                     RemoteImage(self.getEmojiUrl(key))
-                        .frame(width: 25, height: 25)
+                        .frame(width: 20, height: 20)
                     Text(String(value))
-                }.padding(5).background(note.isMyReaction(key) ? .blue.opacity(1) : .gray.opacity(0.1)).cornerRadius(5).padding(.trailing, 5)
+                }.padding(5).padding(.trailing, 5)
+                    .background(note.isMyReaction(key) ? .blue.opacity(1) : .clear)
+                    .foregroundStyle(note.isMyReaction(key) ? .white : .primary)
+                    .font(.system(size: 16))
+                    .fontWeight(.medium)
+                    .cornerRadius(5)
+                    .padding(.trailing, 5)
                     .onTapGesture{
                         self.onReaction(key)
                     }
@@ -57,5 +63,11 @@ struct NoteBodyReactions: View {
 }
 
 #Preview {
-    NoteBodyReactions(note: .preview.renote!).environmentObject(ViewContext())
+    ScrollView {
+        Note(note: .preview)
+        Divider()
+        Note(note: .preview)
+        Divider()
+        Note(note: .preview)
+    }.padding()
 }
