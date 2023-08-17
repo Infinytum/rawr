@@ -9,7 +9,6 @@ import Foundation
 import MisskeyKit
 import WrappingHStack
 import SwiftUI
-import SwiftUIFlow
 
 struct IdentifiableView: Identifiable {
     var id: UUID = UUID()
