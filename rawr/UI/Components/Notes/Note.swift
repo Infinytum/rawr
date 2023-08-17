@@ -10,16 +10,17 @@ import MisskeyKit
 
 struct Note: View {
     @ObservedObject var note: NoteModel
+    var renderedNote: [any View]? = nil
     
     var body: some View {
         VStack(alignment: .leading) {
             if self.note.isRenote() {
-                NoteDecorationBoost(note: self.note)
+                NoteDecorationBoost(note: self.note).padding(.bottom, 5)
             }
             NoteHeader(note: self.actualNote())
-            NoteBodyText(text: self.actualNote().text ?? "")
+            NoteBodyText(note: self.actualNote(), renderedNote: self.renderedNote)
             if self.actualNote().hasFiles() {
-                NoteBodyGallery(files: self.actualNote().files!).padding(.bottom, 5)
+                NoteBodyGallery(files: self.actualNote().files!)
             }
             if self.actualNote().reactionsCount() > 0 {
                 NoteBodyReactions(note: self.actualNote())
@@ -36,9 +37,11 @@ struct Note: View {
  
 #Preview {
     ScrollView {
-        Text("Bounding Box Check")
-        VStack {
-            Note(note: .preview).background(.white)
-        }.padding()
-    }.background(.gray)
+        Note(note: .preview).background(.white)
+        Divider()
+        Note(note: .preview).background(.white)
+        Divider()
+        Note(note: .preview).background(.white)
+        Divider()
+    }.padding()
 }

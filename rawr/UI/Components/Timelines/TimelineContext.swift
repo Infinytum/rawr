@@ -7,11 +7,17 @@
 
 import Foundation
 import MisskeyKit
+import SwiftUI
 
 enum TimelineContextTimeline: String {
     case HOME = "home"
     case LOCAL = "local"
     case GLOBAL = "global"
+}
+
+struct TimelineItem {
+    let note: NoteModel
+    let renderedNote: [any View]
 }
 
 class TimelineContext: ObservableObject {
@@ -20,8 +26,9 @@ class TimelineContext: ObservableObject {
     private var timeline: TimelineContextTimeline = TimelineContextTimeline.HOME
     
     @Published var errorReason: String? = nil
-    @Published var items = [NoteModel]()
+    @Published var items = [TimelineItem]()
     @Published var dataIsLoading = false
+    
     
     init(timelineType: TimelineContextTimeline) {
         self.timeline = timelineType
@@ -69,20 +76,20 @@ class TimelineContext: ObservableObject {
         guard let response = response, let message = response as? NoteModel else {
             return
         }
-        self.items.insert(message, at: 0)
+        self.items.insert(noteToTimelineItem(note: message), at: 0)
     }
     
     private func requestItems(untilNoteId: String) {
         dataIsLoading = true
         switch (self.timeline) {
         case .HOME:
-            MisskeyKit.shared.notes.getTimeline(untilId: untilNoteId, completion: self.handleTimelineUpdate)
+            MisskeyKit.shared.notes.getTimeline(limit: 5, untilId: untilNoteId, completion: self.handleTimelineUpdate)
             break;
         case .LOCAL:
-            MisskeyKit.shared.notes.getLocalTimeline(untilId: untilNoteId, completion: self.handleTimelineUpdate)
+            MisskeyKit.shared.notes.getLocalTimeline(limit: 5, untilId: untilNoteId, completion: self.handleTimelineUpdate)
             break;
         case .GLOBAL:
-            MisskeyKit.shared.notes.getGlobalTimeline(untilId: untilNoteId, completion: self.handleTimelineUpdate)
+            MisskeyKit.shared.notes.getGlobalTimeline(limit: 5, untilId: untilNoteId, completion: self.handleTimelineUpdate)
             break;
         }
     }
@@ -96,12 +103,18 @@ class TimelineContext: ObservableObject {
         }
         Task {
             await MainActor.run {
-                items.append(contentsOf: notes)
+                items.append(contentsOf: notes.map({ note in
+                    noteToTimelineItem(note: note)
+                }))
                 itemsLoadedCount = items.count
-                self.lastNoteId = items.last?.id
+                self.lastNoteId = items.last?.note.id
                 self.errorReason = nil
                 dataIsLoading = false
             }
         }
+    }
+    
+    private func noteToTimelineItem(note: NoteModel) -> TimelineItem {
+        return TimelineItem(note: note, renderedNote: renderMFM(tokenize(note.text ?? ""), emojis: note.emojis ?? note.renote?.emojis ?? []))
     }
 }

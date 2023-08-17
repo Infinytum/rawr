@@ -5,41 +5,27 @@
 //  Created by Nila on 05.08.2023.
 //
 
+import MisskeyKit
 import SwiftUI
 
 struct NoteBodyText: View {
-    let text: String
-    
-    @ObservedObject var viewReloader = ViewReloader()
-    @State var renderedText: AnyView?
+    let note: NoteModel
+    var renderedNote: [any View]? = nil
     
     var body: some View {
-        VStack(alignment: .leading) {
-            if self.renderedText == nil {
-                Text(self.text)
-            } else {
-                self.renderedText
+        VStack {
+            ForEach(Array(self.getRenderedNote().enumerated()), id: \.offset) { _, view in
+                AnyView(view)
             }
-        }.padding(.top, 2).onAppear {
-            render()
         }
     }
     
-    private func render() {
-        Task {
-            let rendered = renderMFM(tokenize(self.text))
-            self.renderedText = AnyView(rendered)
-            DispatchQueue.main.async {
-                withAnimation {
-                    self.viewReloader.reloadView()
-                }
-            }
-        }
+    func getRenderedNote() -> [any View] {
+        return self.renderedNote ?? renderMFM(tokenize(self.note.text ?? ""), emojis: self.note.emojis ?? self.note.renote?.emojis ?? [])
     }
 }
 
 #Preview {
-    NoteBodyText(text: "Short Text")
+    NoteBodyText(note: .preview.renote!)
         .previewDisplayName("Short")
-    
 }
