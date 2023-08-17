@@ -19,7 +19,7 @@ struct NoteBodyReactions: View {
     ]
 
     var body: some View {
-        WrappingHStack {
+        WrappingHStack(alignment: .leading) {
             ForEach((self.note.reactions ?? [:]).sorted(by: >), id: \.key) { key, value in
                 HStack {
                     RemoteImage(self.getEmojiUrl(key))

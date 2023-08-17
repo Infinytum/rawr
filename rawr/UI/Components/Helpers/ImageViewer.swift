@@ -92,6 +92,7 @@ public struct ImageViewer: View {
                 containerSize = proxy.size
             }
         }
+        .border(.red)
     }
 
     private var magnificationGesture: some Gesture {

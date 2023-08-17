@@ -10,17 +10,17 @@ import SwiftUI
 
 struct NoteBodyText: View {
     let note: NoteModel
-    var renderedNote: [any View]? = nil
+    var renderedNote: [IdentifiableView]? = nil
     
     var body: some View {
         VStack {
-            ForEach(Array(self.getRenderedNote().enumerated()), id: \.offset) { _, view in
-                AnyView(view)
+            ForEach(self.getRenderedNote()) { view in
+                AnyView(view.view)
             }
         }
     }
     
-    func getRenderedNote() -> [any View] {
+    func getRenderedNote() -> [IdentifiableView] {
         return self.renderedNote ?? renderMFM(tokenize(self.note.text ?? ""), emojis: self.note.emojis ?? self.note.renote?.emojis ?? [])
     }
 }

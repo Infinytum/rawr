@@ -17,7 +17,7 @@ enum TimelineContextTimeline: String {
 
 struct TimelineItem {
     let note: NoteModel
-    let renderedNote: [any View]
+    let renderedNote: [IdentifiableView]
 }
 
 class TimelineContext: ObservableObject {
@@ -115,6 +115,6 @@ class TimelineContext: ObservableObject {
     }
     
     private func noteToTimelineItem(note: NoteModel) -> TimelineItem {
-        return TimelineItem(note: note, renderedNote: renderMFM(tokenize(note.text ?? ""), emojis: note.emojis ?? note.renote?.emojis ?? []))
+        return TimelineItem(note: note, renderedNote: renderMFM(tokenize(note.text ?? note.renote?.text ?? ""), emojis: note.emojis ?? note.renote?.emojis ?? []))
     }
 }

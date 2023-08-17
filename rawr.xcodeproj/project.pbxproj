@@ -58,11 +58,10 @@
 		2068CC412A87C2EB00F8A958 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC3F2A87C2EB00F8A958 /* NoteModel.swift */; };
 		2068CC432A87C30A00F8A958 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC422A87C30A00F8A958 /* MainView.swift */; };
 		2068CC462A87EAFC00F8A958 /* ViewReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC452A87EAFC00F8A958 /* ViewReloader.swift */; };
+		20805F292A8EC0DF0001F2AB /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 20805F282A8EC0DF0001F2AB /* WrappingHStack */; };
 		20AE17AB2A88411A00C9AC07 /* MisskeyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20AE17AA2A88411A00C9AC07 /* MisskeyKit */; };
 		20AE17AE2A88421A00C9AC07 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AE17AD2A88421A00C9AC07 /* ImageViewer.swift */; };
 		20D37D322A88577000BCC1C5 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D37D312A88577000BCC1C5 /* ChatListView.swift */; };
-		20E2AB042A8C357D004DD790 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 20E2AB032A8C357D004DD790 /* WrappingHStack */; };
-		20E2AB072A8C58B8004DD790 /* SwiftUIFlow in Frameworks */ = {isa = PBXBuildFile; productRef = 20E2AB062A8C58B8004DD790 /* SwiftUIFlow */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,11 +125,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2068CC192A87BA1300F8A958 /* KeychainSwift in Frameworks */,
-				20E2AB072A8C58B8004DD790 /* SwiftUIFlow in Frameworks */,
+				20805F292A8EC0DF0001F2AB /* WrappingHStack in Frameworks */,
 				2068CC392A87C2A100F8A958 /* NetworkImage in Frameworks */,
 				2068CBFE2A87B62100F8A958 /* SwiftKit in Frameworks */,
 				2068CC162A87B9B500F8A958 /* MisskeyKit in Frameworks */,
-				20E2AB042A8C357D004DD790 /* WrappingHStack in Frameworks */,
 				20AE17AB2A88411A00C9AC07 /* MisskeyKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,8 +433,7 @@
 				2068CC182A87BA1300F8A958 /* KeychainSwift */,
 				2068CC382A87C2A100F8A958 /* NetworkImage */,
 				20AE17AA2A88411A00C9AC07 /* MisskeyKit */,
-				20E2AB032A8C357D004DD790 /* WrappingHStack */,
-				20E2AB062A8C58B8004DD790 /* SwiftUIFlow */,
+				20805F282A8EC0DF0001F2AB /* WrappingHStack */,
 			);
 			productName = rawr;
 			productReference = 2068CBEA2A87B5BC00F8A958 /* rawr..app */;
@@ -471,8 +468,7 @@
 				2068CC172A87BA1300F8A958 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				2068CC372A87C2A100F8A958 /* XCRemoteSwiftPackageReference "NetworkImage" */,
 				20AE17A92A88411A00C9AC07 /* XCRemoteSwiftPackageReference "MisskeyKit" */,
-				20E2AB022A8C357D004DD790 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
-				20E2AB052A8C58B8004DD790 /* XCRemoteSwiftPackageReference "SwiftUIFlow" */,
+				20805F272A8EC0DF0001F2AB /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 			);
 			productRefGroup = 2068CBEB2A87B5BC00F8A958 /* Products */;
 			projectDirPath = "";
@@ -801,27 +797,19 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		20805F272A8EC0DF0001F2AB /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ksemianov/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
 		20AE17A92A88411A00C9AC07 /* XCRemoteSwiftPackageReference "MisskeyKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nilathedragon/MisskeyKit";
 			requirement = {
 				branch = master;
-				kind = branch;
-			};
-		};
-		20E2AB022A8C357D004DD790 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/dkk/WrappingHStack";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.10;
-			};
-		};
-		20E2AB052A8C58B8004DD790 /* XCRemoteSwiftPackageReference "SwiftUIFlow" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ciaranrobrien/SwiftUIFlow";
-			requirement = {
-				branch = main;
 				kind = branch;
 			};
 		};
@@ -847,20 +835,15 @@
 			package = 2068CC372A87C2A100F8A958 /* XCRemoteSwiftPackageReference "NetworkImage" */;
 			productName = NetworkImage;
 		};
+		20805F282A8EC0DF0001F2AB /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 20805F272A8EC0DF0001F2AB /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
 		20AE17AA2A88411A00C9AC07 /* MisskeyKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 20AE17A92A88411A00C9AC07 /* XCRemoteSwiftPackageReference "MisskeyKit" */;
 			productName = MisskeyKit;
-		};
-		20E2AB032A8C357D004DD790 /* WrappingHStack */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 20E2AB022A8C357D004DD790 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
-			productName = WrappingHStack;
-		};
-		20E2AB062A8C58B8004DD790 /* SwiftUIFlow */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 20E2AB052A8C58B8004DD790 /* XCRemoteSwiftPackageReference "SwiftUIFlow" */;
-			productName = SwiftUIFlow;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

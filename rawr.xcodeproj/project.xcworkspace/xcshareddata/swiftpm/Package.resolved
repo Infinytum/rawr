@@ -64,21 +64,12 @@
       }
     },
     {
-      "identity" : "swiftuiflow",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ciaranrobrien/SwiftUIFlow",
-      "state" : {
-        "branch" : "main",
-        "revision" : "b300d3c0110116f3520066dfb8dcf3006cf593c3"
-      }
-    },
-    {
       "identity" : "wrappinghstack",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/dkk/WrappingHStack",
+      "location" : "https://github.com/ksemianov/WrappingHStack",
       "state" : {
-        "revision" : "f31b8fdc57759c5aa5fc98c70746db5556e73300",
-        "version" : "2.2.10"
+        "revision" : "2638bc5258607e8a32f2e5675d075896c2401678",
+        "version" : "0.1.3"
       }
     },
     {
