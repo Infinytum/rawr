@@ -100,9 +100,12 @@ public struct ImageViewer: View {
             .onChanged { value in
                 let delta = value / lastScale
                 lastScale = value
+                
 
-                if abs(1 - delta) > 0.01 {
-                    scale = min(scale * delta, 5)
+                if delta < 1 || scale < 5 {
+                    scale *= delta
+                    offset.x *= delta
+                    offset.y *= delta
                 }
                 
                 if !disableVSwipe {
