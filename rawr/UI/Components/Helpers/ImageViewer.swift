@@ -78,8 +78,8 @@ public struct ImageViewer: View {
                                 self.scale = 1
                             } else {
                                 self.scale = 3
-                                offset.x = (imageSize.width / 2 - location.x) * 3
-                                offset.y = (imageSize.height / 2 - location.y) * 3
+                                offset.x = (imageSize.width / 2 - location.x) * 3 / 2
+                                offset.y = (imageSize.height / 2 - location.y) * 3 / 2
                                 
                             }
                         }
