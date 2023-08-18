@@ -61,6 +61,9 @@ func renderMFM(_ node: MFMNodeProtocol, emojis: [EmojiModel] = []) -> [Identifia
     
     return viewStack.map { childStack in
         return IdentifiableView(view: WrappingHStack(alignment: childStack.alignment, horizontalSpacing: 0, verticalSpacing: 1) {
+            if childStack.viewStack.isEmpty {
+                Text("")
+            }
             ForEach(childStack.viewStack) { view in
                 AnyView(view.view)
             }
@@ -81,7 +84,7 @@ func renderMFMNode(_ node: MFMNodeProtocol, emojis: [EmojiModel]) -> [RenderedNo
         return []
     case .plaintext:
         let message = node.value ?? ""
-        let lines = message.split(whereSeparator: \.isNewline)
+        let lines = message.components(separatedBy: .newlines)
 
         var beginsWithBreak = message.first?.isNewline ?? false
         var count = 0
@@ -95,6 +98,7 @@ func renderMFMNode(_ node: MFMNodeProtocol, emojis: [EmojiModel]) -> [RenderedNo
             if !views.isEmpty && (message.last ?? Character.init(".")) != " " {
                 views.removeLast()
             }
+            
             renderedNodes.append(RenderedNode(viewStack: views, newStack: beginsWithBreak, endStack: lines.count > 1 && count < lines.count-1, alignment: .leading))
             views = []
             count += 1
@@ -144,6 +148,22 @@ func renderMFMNode(_ node: MFMNodeProtocol, emojis: [EmojiModel]) -> [RenderedNo
         }
         viewStack.append(RenderedNode(viewStack: stack, newStack: newStack, endStack: true, alignment: .center))
         return viewStack
+    case .url:
+        guard let url = node.value, let displayName = renderedChildrenStacks.first else {
+            return []
+        }
+        
+        for node in displayName {
+            for view in node.viewStack {
+                views.append(IdentifiableView(view: view.view.foregroundColor(.blue).onTapGesture {
+                    if let url = URL(string: url) {
+                        UIApplication.shared.open(url)
+                    }
+                }))
+            }
+        }
+        
+        return [RenderedNode(viewStack: views, newStack: false, endStack: false, alignment: .leading)]
     }
 }
 
@@ -154,7 +174,7 @@ func renderMFMNode(_ node: MFMNodeProtocol, emojis: [EmojiModel]) -> [RenderedNo
     VStack {
         Spacer()
         ForEach(renderMFM(tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered $[tada $[x2 $[sparkle gay]]]</center> #test_2023. Visit:asd :drgn:\nhttps://www.example.com"))) { view in
-            AnyView(view.view)
+            AnyView(view.view).border(.gray)
         }
         Spacer()
     }.border(.brown).environmentObject(ViewContext())

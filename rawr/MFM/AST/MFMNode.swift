@@ -66,6 +66,13 @@ class MFMNode: MFMNodeProtocol {
         self.parentNode = parentNode
     }
     
+    init(_ parentNode: MFMNodeProtocol, url: String, displayText: String) {
+        self.value = url
+        self.type = .url
+        self.children = [MFMNode(self, plaintext: displayText)]
+        self.parentNode = parentNode
+    }
+    
     init(_ parentNode: MFMNodeProtocol, type: MFMNodeType, value: String?, children: [MFMNodeProtocol]) {
         self.value = value
         self.type = type

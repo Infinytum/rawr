@@ -39,4 +39,7 @@ enum MFMNodeType: String {
     /// A text container that forces child nodes to be center aligned
     case center = "center"
     
+    /// A text container that has a display text but is also an URL tap target
+    case url = "url"
+    
 }

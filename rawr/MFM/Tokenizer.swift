@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import RegexBuilder
 
 enum TokenType {
     case plainText
@@ -22,7 +23,30 @@ struct Token {
     let value: String
 }
 
-func tokenize(_ input: String) -> MFMNodeProtocol {
+let urlRegex = Regex {
+    Capture {
+        Repeat(0...2) {
+            One(.any)
+        }
+        Capture {
+            .url()
+        }
+    }
+}
+
+func tokenize(_ originalInput: String) -> MFMNodeProtocol {
+    var input = originalInput
+    
+    // MARK: Replace plain URL with Markdown-formatted URLs
+    input.replace(urlRegex) { match in
+        if match.output.0.starts(with: "](") {
+            return match.output.0
+        }
+        var displayText = match.output.0
+        displayText.replace(match.output.2.absoluteString, with: "[\(match.output.2)](\(match.output.2))")
+        return displayText
+    }
+    
     let scanner = Scanner(string: input)
     scanner.charactersToBeSkipped = nil
     
@@ -30,12 +54,12 @@ func tokenize(_ input: String) -> MFMNodeProtocol {
     var currentNode: MFMNodeProtocol = rootNode
 
     while !scanner.isAtEnd {
-        if let text = scanner.scanUpToCharacters(from: CharacterSet(charactersIn: "<$@]#:")) {
+        if let text = scanner.scanUpToCharacters(from: CharacterSet(charactersIn: "<$@]#:[")) {
             currentNode.addChild(MFMNode(currentNode, plaintext: text))
         }
         
         // MARK: Search for <> containers
-        if let token = scanner.scanString("<") {
+        if let token = scanner.probe("<") {
             let startLocation = scanner.currentIndex
             
             /// Check whether this is an actual container tag or just a random <
@@ -72,7 +96,7 @@ func tokenize(_ input: String) -> MFMNodeProtocol {
             }
 
         // MARK: Search for beginning of $[] modifiers
-        } else if let token = scanner.scanString("$[") {
+        } else if let token = scanner.probe("$[") {
             let startLocation = scanner.currentIndex
 
             /// Check if this is an actual container or just some random $[
@@ -89,7 +113,7 @@ func tokenize(_ input: String) -> MFMNodeProtocol {
             continue
 
         // MARK: Search for end of $[] modifiers
-        } else if let token = scanner.scanString("]") {
+        } else if let token = scanner.probe("]") {
             let startLocation = scanner.currentIndex
             
             /// Check if this is an actual container or just some random $[
@@ -103,7 +127,7 @@ func tokenize(_ input: String) -> MFMNodeProtocol {
             continue
 
         // MARK: Search for @Mentions
-        } else if let token = scanner.scanString("@") {
+        } else if let token = scanner.probe("@") {
             let startLocation = scanner.currentIndex
             
             /// Check if this is an actual container or just some random @
@@ -117,7 +141,7 @@ func tokenize(_ input: String) -> MFMNodeProtocol {
             continue
             
         // MARK: Search for #Hashtags
-        } else if let token = scanner.scanString("#") {
+        } else if let token = scanner.probe("#") {
             let startLocation = scanner.currentIndex
             
             /// Check if this is an actual container or just some random #
@@ -135,13 +159,38 @@ func tokenize(_ input: String) -> MFMNodeProtocol {
             let startLocation = scanner.currentIndex
             
             /// Check if this is an actual container or just some random #
-            guard let emoji = scanner.scanCharacters(from: CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "_"))), scanner.scanString(":") != nil else {
+            guard let emoji = scanner.scanCharacters(from: CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "_"))) else {
+                scanner.currentIndex = startLocation
+                currentNode.addChild(MFMNode(currentNode, plaintext: token))
+                continue
+            }
+            
+            guard scanner.scanString(":") != nil else {
                 scanner.currentIndex = startLocation
                 currentNode.addChild(MFMNode(currentNode, plaintext: token))
                 continue
             }
             
             currentNode.addChild(MFMNode(currentNode, emoji: emoji))
+            continue
+        // MARK: Search for Markdown-formatted URLs [Display Text](https://url.to/go#to)
+        } else if let token = scanner.probe("[") {
+            let startLocation = scanner.currentIndex
+            
+            /// Check if this is an actual container or just some random [
+            guard let displayText = scanner.scanUpToCharacters(from: CharacterSet(charactersIn: "]")), scanner.scanString("](") != nil else {
+                scanner.currentIndex = startLocation
+                currentNode.addChild(MFMNode(currentNode, plaintext: token))
+                continue
+            }
+            
+            guard let url = scanner.scanUpToCharacters(from: CharacterSet(charactersIn: ")")), scanner.scanString(")") != nil else {
+                scanner.currentIndex = startLocation
+                currentNode.addChild(MFMNode(currentNode, plaintext: token))
+                continue
+            }
+            
+            currentNode.addChild(MFMNode(currentNode, url: url, displayText: displayText))
             continue
         }
         
@@ -165,7 +214,7 @@ func containerTagToNodeType(tag: String) -> MFMNodeType? {
 
 #Preview {
     ScrollView([.horizontal, .vertical]) {
-        Visualizer(rootNode: tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered $[tada $[x2 $[sparkle gay]]]</center> #test_2023. Visit:asd :drgn: https://www.example.com"))
+        Visualizer(rootNode: tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered $[tada $[x2 $[sparkle gay]]]</center> #test_2023. Visit:asd :drgn:\nhttps://www.example.com")).scaleEffect(0.5)
     }
 }
 
