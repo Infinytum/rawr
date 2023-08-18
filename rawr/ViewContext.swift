@@ -21,7 +21,9 @@ class ViewContext: ObservableObject {
     var currentUser: UserModel? = nil {
         didSet {
             withAnimation {
-                objectWillChange.send(self)
+                DispatchQueue.main.async {
+                    self.objectWillChange.send(self)
+                }
             }
         }
     }
@@ -37,7 +39,9 @@ class ViewContext: ObservableObject {
     var currentInstance: MetaModel? = nil {
         didSet {
             withAnimation {
-                objectWillChange.send(self)
+                DispatchQueue.main.async {
+                    self.objectWillChange.send(self)
+                }
             }
         }
     }

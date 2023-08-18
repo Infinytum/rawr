@@ -44,7 +44,6 @@
 		2068CC162A87B9B500F8A958 /* MisskeyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2068CC152A87B9B500F8A958 /* MisskeyKit */; };
 		2068CC192A87BA1300F8A958 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2068CC182A87BA1300F8A958 /* KeychainSwift */; };
 		2068CC2B2A87C25B00F8A958 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC1D2A87C25B00F8A958 /* Timeline.swift */; };
-		2068CC2C2A87C25B00F8A958 /* TimelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC1E2A87C25B00F8A958 /* TimelineContext.swift */; };
 		2068CC2D2A87C25B00F8A958 /* NoteFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC202A87C25B00F8A958 /* NoteFooter.swift */; };
 		2068CC2E2A87C25B00F8A958 /* NoteBodyReactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC222A87C25B00F8A958 /* NoteBodyReactions.swift */; };
 		2068CC2F2A87C25B00F8A958 /* NoteBodyGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC232A87C25B00F8A958 /* NoteBodyGallery.swift */; };
@@ -58,9 +57,16 @@
 		2068CC412A87C2EB00F8A958 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC3F2A87C2EB00F8A958 /* NoteModel.swift */; };
 		2068CC432A87C30A00F8A958 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC422A87C30A00F8A958 /* MainView.swift */; };
 		2068CC462A87EAFC00F8A958 /* ViewReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC452A87EAFC00F8A958 /* ViewReloader.swift */; };
+		207C33DA2A8FB89000500E33 /* TimelineContextProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C33D92A8FB89000500E33 /* TimelineContextProtocol.swift */; };
+		207C33DC2A8FB8B700500E33 /* TimelineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C33DB2A8FB8B700500E33 /* TimelineItem.swift */; };
+		207C33DF2A8FBD5800500E33 /* MisskeyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 207C33DE2A8FBD5800500E33 /* MisskeyKit */; };
+		207C33E22A8FC38A00500E33 /* MisskeyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 207C33E12A8FC38A00500E33 /* MisskeyKit */; };
+		207C33E42A8FC4A400500E33 /* TimelineContextBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C33E32A8FC4A400500E33 /* TimelineContextBase.swift */; };
+		207C33E62A8FC6AC00500E33 /* HomeTimelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C33E52A8FC6AC00500E33 /* HomeTimelineContext.swift */; };
+		207C33E82A8FD13500500E33 /* LocalTimelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C33E72A8FD13500500E33 /* LocalTimelineContext.swift */; };
+		207C33EA2A8FD18D00500E33 /* GlobalTimelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C33E92A8FD18D00500E33 /* GlobalTimelineContext.swift */; };
 		20805F292A8EC0DF0001F2AB /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 20805F282A8EC0DF0001F2AB /* WrappingHStack */; };
 		2098F91E2A8EF792003CAAE2 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2098F91D2A8EF792003CAAE2 /* Scanner.swift */; };
-		20AE17AB2A88411A00C9AC07 /* MisskeyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20AE17AA2A88411A00C9AC07 /* MisskeyKit */; };
 		20AE17AE2A88421A00C9AC07 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AE17AD2A88421A00C9AC07 /* ImageViewer.swift */; };
 		20D37D322A88577000BCC1C5 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D37D312A88577000BCC1C5 /* ChatListView.swift */; };
 /* End PBXBuildFile section */
@@ -103,7 +109,6 @@
 		2068CC0C2A87B96D00F8A958 /* OnboardingMisskeyAuthModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingMisskeyAuthModal.swift; sourceTree = "<group>"; };
 		2068CC0D2A87B96D00F8A958 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		2068CC1D2A87C25B00F8A958 /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
-		2068CC1E2A87C25B00F8A958 /* TimelineContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineContext.swift; sourceTree = "<group>"; };
 		2068CC202A87C25B00F8A958 /* NoteFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteFooter.swift; sourceTree = "<group>"; };
 		2068CC222A87C25B00F8A958 /* NoteBodyReactions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteBodyReactions.swift; sourceTree = "<group>"; };
 		2068CC232A87C25B00F8A958 /* NoteBodyGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteBodyGallery.swift; sourceTree = "<group>"; };
@@ -116,6 +121,12 @@
 		2068CC3F2A87C2EB00F8A958 /* NoteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
 		2068CC422A87C30A00F8A958 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2068CC452A87EAFC00F8A958 /* ViewReloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewReloader.swift; sourceTree = "<group>"; };
+		207C33D92A8FB89000500E33 /* TimelineContextProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineContextProtocol.swift; sourceTree = "<group>"; };
+		207C33DB2A8FB8B700500E33 /* TimelineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineItem.swift; sourceTree = "<group>"; };
+		207C33E32A8FC4A400500E33 /* TimelineContextBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineContextBase.swift; sourceTree = "<group>"; };
+		207C33E52A8FC6AC00500E33 /* HomeTimelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTimelineContext.swift; sourceTree = "<group>"; };
+		207C33E72A8FD13500500E33 /* LocalTimelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTimelineContext.swift; sourceTree = "<group>"; };
+		207C33E92A8FD18D00500E33 /* GlobalTimelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalTimelineContext.swift; sourceTree = "<group>"; };
 		2098F91D2A8EF792003CAAE2 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		20AE17AD2A88421A00C9AC07 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		20D37D312A88577000BCC1C5 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
@@ -128,10 +139,11 @@
 			files = (
 				2068CC192A87BA1300F8A958 /* KeychainSwift in Frameworks */,
 				20805F292A8EC0DF0001F2AB /* WrappingHStack in Frameworks */,
+				207C33E22A8FC38A00500E33 /* MisskeyKit in Frameworks */,
 				2068CC392A87C2A100F8A958 /* NetworkImage in Frameworks */,
 				2068CBFE2A87B62100F8A958 /* SwiftKit in Frameworks */,
 				2068CC162A87B9B500F8A958 /* MisskeyKit in Frameworks */,
-				20AE17AB2A88411A00C9AC07 /* MisskeyKit in Frameworks */,
+				207C33DF2A8FBD5800500E33 /* MisskeyKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,8 +310,11 @@
 		2068CC1C2A87C25B00F8A958 /* Timelines */ = {
 			isa = PBXGroup;
 			children = (
+				207C33D82A8FB5C400500E33 /* Context */,
+				207C33E92A8FD18D00500E33 /* GlobalTimelineContext.swift */,
+				207C33E52A8FC6AC00500E33 /* HomeTimelineContext.swift */,
+				207C33E72A8FD13500500E33 /* LocalTimelineContext.swift */,
 				2068CC1D2A87C25B00F8A958 /* Timeline.swift */,
-				2068CC1E2A87C25B00F8A958 /* TimelineContext.swift */,
 			);
 			path = Timelines;
 			sourceTree = "<group>";
@@ -382,6 +397,16 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		207C33D82A8FB5C400500E33 /* Context */ = {
+			isa = PBXGroup;
+			children = (
+				207C33E32A8FC4A400500E33 /* TimelineContextBase.swift */,
+				207C33D92A8FB89000500E33 /* TimelineContextProtocol.swift */,
+				207C33DB2A8FB8B700500E33 /* TimelineItem.swift */,
+			);
+			path = Context;
+			sourceTree = "<group>";
+		};
 		20AE17AC2A8841D300C9AC07 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -435,8 +460,9 @@
 				2068CC152A87B9B500F8A958 /* MisskeyKit */,
 				2068CC182A87BA1300F8A958 /* KeychainSwift */,
 				2068CC382A87C2A100F8A958 /* NetworkImage */,
-				20AE17AA2A88411A00C9AC07 /* MisskeyKit */,
 				20805F282A8EC0DF0001F2AB /* WrappingHStack */,
+				207C33DE2A8FBD5800500E33 /* MisskeyKit */,
+				207C33E12A8FC38A00500E33 /* MisskeyKit */,
 			);
 			productName = rawr;
 			productReference = 2068CBEA2A87B5BC00F8A958 /* rawr..app */;
@@ -470,8 +496,8 @@
 				2068CBFC2A87B62100F8A958 /* XCRemoteSwiftPackageReference "SwiftKit" */,
 				2068CC172A87BA1300F8A958 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				2068CC372A87C2A100F8A958 /* XCRemoteSwiftPackageReference "NetworkImage" */,
-				20AE17A92A88411A00C9AC07 /* XCRemoteSwiftPackageReference "MisskeyKit" */,
 				20805F272A8EC0DF0001F2AB /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+				207C33E02A8FC38A00500E33 /* XCRemoteSwiftPackageReference "MisskeyKit" */,
 			);
 			productRefGroup = 2068CBEB2A87B5BC00F8A958 /* Products */;
 			projectDirPath = "";
@@ -501,7 +527,7 @@
 			files = (
 				204DA4092A891EF200BB0598 /* TimelineHeader.swift in Sources */,
 				204DA41F2A8AB98D00BB0598 /* MFMNodeType.swift in Sources */,
-				2068CC2C2A87C25B00F8A958 /* TimelineContext.swift in Sources */,
+				207C33E82A8FD13500500E33 /* LocalTimelineContext.swift in Sources */,
 				204DA3F82A88F6C600BB0598 /* ChatListHeader.swift in Sources */,
 				2068CC362A87C27600F8A958 /* TimelineView.swift in Sources */,
 				204DA4002A8907AB00BB0598 /* ChatContext.swift in Sources */,
@@ -510,6 +536,7 @@
 				204DA3FC2A8900CC00BB0598 /* ChatHeader.swift in Sources */,
 				2068CC032A87B85500F8A958 /* ViewContext.swift in Sources */,
 				204DA3F42A8869D900BB0598 /* MessageHistoryModel.swift in Sources */,
+				207C33DA2A8FB89000500E33 /* TimelineContextProtocol.swift in Sources */,
 				2068CC0E2A87B96D00F8A958 /* OnboardingWelcomeCard.swift in Sources */,
 				204DA4332A8AD4A000BB0598 /* String.swift in Sources */,
 				20D37D322A88577000BCC1C5 /* ChatListView.swift in Sources */,
@@ -526,6 +553,7 @@
 				204DA4272A8AC32D00BB0598 /* Visualizer.swift in Sources */,
 				2068CC102A87B96D00F8A958 /* OnboardingServerCard.swift in Sources */,
 				204288202A8BAE64001DC6F2 /* EmojiModel.swift in Sources */,
+				207C33EA2A8FD18D00500E33 /* GlobalTimelineContext.swift in Sources */,
 				20AE17AE2A88421A00C9AC07 /* ImageViewer.swift in Sources */,
 				204DA40B2A892A6000BB0598 /* MetaModel.swift in Sources */,
 				204DA4162A8A6D1A00BB0598 /* NoteView.swift in Sources */,
@@ -537,6 +565,7 @@
 				204DA4062A89167500BB0598 /* ChatBar.swift in Sources */,
 				204DA3FA2A88FF7500BB0598 /* ChatView.swift in Sources */,
 				2068CC322A87C25B00F8A958 /* NoteDecorationBoost.swift in Sources */,
+				207C33E42A8FC4A400500E33 /* TimelineContextBase.swift in Sources */,
 				2068CC0F2A87B96D00F8A958 /* OnboardingConnectCard.swift in Sources */,
 				2068CC122A87B96D00F8A958 /* OnboardingMisskeyAuthModal.swift in Sources */,
 				2042881E2A8BAD8F001DC6F2 /* Emoji.swift in Sources */,
@@ -545,6 +574,8 @@
 				2068CC432A87C30A00F8A958 /* MainView.swift in Sources */,
 				204DA4232A8ABD4E00BB0598 /* Tokenizer.swift in Sources */,
 				2068CC332A87C25B00F8A958 /* NoteHeader.swift in Sources */,
+				207C33DC2A8FB8B700500E33 /* TimelineItem.swift in Sources */,
+				207C33E62A8FC6AC00500E33 /* HomeTimelineContext.swift in Sources */,
 				2068CC2B2A87C25B00F8A958 /* Timeline.swift in Sources */,
 				2068CC2D2A87C25B00F8A958 /* NoteFooter.swift in Sources */,
 			);
@@ -801,20 +832,20 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		207C33E02A8FC38A00500E33 /* XCRemoteSwiftPackageReference "MisskeyKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nilathedragon/MisskeyKit";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		20805F272A8EC0DF0001F2AB /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ksemianov/WrappingHStack";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.1.3;
-			};
-		};
-		20AE17A92A88411A00C9AC07 /* XCRemoteSwiftPackageReference "MisskeyKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nilathedragon/MisskeyKit";
-			requirement = {
-				branch = master;
-				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -839,15 +870,19 @@
 			package = 2068CC372A87C2A100F8A958 /* XCRemoteSwiftPackageReference "NetworkImage" */;
 			productName = NetworkImage;
 		};
+		207C33DE2A8FBD5800500E33 /* MisskeyKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MisskeyKit;
+		};
+		207C33E12A8FC38A00500E33 /* MisskeyKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 207C33E02A8FC38A00500E33 /* XCRemoteSwiftPackageReference "MisskeyKit" */;
+			productName = MisskeyKit;
+		};
 		20805F282A8EC0DF0001F2AB /* WrappingHStack */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 20805F272A8EC0DF0001F2AB /* XCRemoteSwiftPackageReference "WrappingHStack" */;
 			productName = WrappingHStack;
-		};
-		20AE17AA2A88411A00C9AC07 /* MisskeyKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 20AE17A92A88411A00C9AC07 /* XCRemoteSwiftPackageReference "MisskeyKit" */;
-			productName = MisskeyKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
