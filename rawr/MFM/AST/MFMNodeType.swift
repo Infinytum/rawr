@@ -28,16 +28,19 @@ enum MFMNodeType: String {
     /// A custom emoji (E.g. :drgn:)
     case emoji = "emoji"
     
-    // MARK: Text Containers (Affects rendering of child nodes but have no content value themselves)
+    // MARK: Text Containers (Primarily affects rendering of child nodes)
+    
+    /// A text container that applies a bold text modifier to all children
+    case bold = "bold"
+    
+    /// A text container that forces child nodes to be center aligned
+    case center = "center"
  
     /// A text container for custom misskey modifiers (E.G. $[x2 text])
     case modifier = "modifier"
     
     /// A text container that forces child nodes to be rendered with a smaller font
     case small = "small"
-    
-    /// A text container that forces child nodes to be center aligned
-    case center = "center"
     
     /// A text container that has a display text but is also an URL tap target
     case url = "url"

@@ -60,6 +60,13 @@ class MFMNode: MFMNodeProtocol {
         self.parentNode = parentNode
     }
     
+    init(_ parentNode: MFMNodeProtocol, bold: String) {
+        self.value = nil
+        self.type = .bold
+        self.children = [MFMNode(self, plaintext: bold)]
+        self.parentNode = parentNode
+    }
+    
     init(_ parentNode: MFMNodeProtocol, container: MFMNodeType) {
         self.value = nil
         self.type = container

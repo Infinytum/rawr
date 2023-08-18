@@ -95,10 +95,6 @@ func renderMFMNode(_ node: MFMNodeProtocol, emojis: [EmojiModel]) -> [RenderedNo
                 }
                 views.append(IdentifiableView(view: Text(" ")))
             }
-            if !views.isEmpty && (message.last ?? Character.init(".")) != " " {
-                views.removeLast()
-            }
-            
             renderedNodes.append(RenderedNode(viewStack: views, newStack: beginsWithBreak, endStack: lines.count > 1 && count < lines.count-1, alignment: .leading))
             views = []
             count += 1
@@ -164,6 +160,18 @@ func renderMFMNode(_ node: MFMNodeProtocol, emojis: [EmojiModel]) -> [RenderedNo
         }
         
         return [RenderedNode(viewStack: views, newStack: false, endStack: false, alignment: .leading)]
+    case .bold:
+        guard let boldText = renderedChildrenStacks.first else {
+            return []
+        }
+        
+        for node in boldText {
+            for view in node.viewStack {
+                views.append(IdentifiableView(view: view.view.fontWeight(.bold)))
+            }
+        }
+        
+        return [RenderedNode(viewStack: views, newStack: false, endStack: false, alignment: .leading)]
     }
 }
 
@@ -173,7 +181,7 @@ func renderMFMNode(_ node: MFMNodeProtocol, emojis: [EmojiModel]) -> [RenderedNo
 #Preview {
     VStack {
         Spacer()
-        ForEach(renderMFM(tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered $[tada $[x2 $[sparkle gay]]]</center> #test_2023. Visit:asd :drgn:\nhttps://www.example.com"))) { view in
+        ForEach(renderMFM(tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered **test** $[tada $[x2 $[sparkle gay]]]</center> **test** #test_2023. Visit:asd :drgn:\nhttps://www.example.com"))) { view in
             AnyView(view.view).border(.gray)
         }
         Spacer()

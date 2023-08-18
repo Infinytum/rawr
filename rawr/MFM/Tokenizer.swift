@@ -54,7 +54,7 @@ func tokenize(_ originalInput: String) -> MFMNodeProtocol {
     var currentNode: MFMNodeProtocol = rootNode
 
     while !scanner.isAtEnd {
-        if let text = scanner.scanUpToCharacters(from: CharacterSet(charactersIn: "<$@]#:[")) {
+        if let text = scanner.scanUpToCharacters(from: CharacterSet(charactersIn: "<$@]#:[*")) {
             currentNode.addChild(MFMNode(currentNode, plaintext: text))
         }
         
@@ -192,9 +192,23 @@ func tokenize(_ originalInput: String) -> MFMNodeProtocol {
             
             currentNode.addChild(MFMNode(currentNode, url: url, displayText: displayText))
             continue
+        // MARK: Search for Markdown-formatted **bold text**
+        } else if let token = scanner.probe("**") {
+            let startLocation = scanner.currentIndex
+            /// Check if this is an actual container or just some random **
+            guard let boldText = scanner.scanUpToCharacters(from: CharacterSet(charactersIn: "*")), scanner.scanString("**") != nil else {
+                scanner.currentIndex = startLocation
+                currentNode.addChild(MFMNode(currentNode, plaintext: token))
+                continue
+            }
+            
+            currentNode.addChild(MFMNode(currentNode, bold: boldText))
+            continue
         }
         
         if let text = scanner.scanCharacters(from: CharacterSet(charactersIn: "$")) {
+            currentNode.addChild(MFMNode(currentNode, plaintext: text))
+        } else if let text = scanner.scanCharacters(from: CharacterSet(charactersIn: "*")) {
             currentNode.addChild(MFMNode(currentNode, plaintext: text))
         }
     }
@@ -214,7 +228,7 @@ func containerTagToNodeType(tag: String) -> MFMNodeType? {
 
 #Preview {
     ScrollView([.horizontal, .vertical]) {
-        Visualizer(rootNode: tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered $[tada $[x2 $[sparkle gay]]]</center> #test_2023. Visit:asd :drgn:\nhttps://www.example.com")).scaleEffect(0.5)
+        Visualizer(rootNode: tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered $[tada $[x2 $[sparkle gay]]]</center> **test** #test_2023. Visit:asd :drgn:\nhttps://www.example.com")).scaleEffect(0.5)
     }
 }
 
