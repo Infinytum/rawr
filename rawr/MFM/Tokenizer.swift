@@ -195,15 +195,27 @@ func tokenize(_ originalInput: String) -> MFMNodeProtocol {
         // MARK: Search for Markdown-formatted **bold text**
         } else if let token = scanner.probe("**") {
             let startLocation = scanner.currentIndex
-            /// Check if this is an actual container or just some random **
-            guard let boldText = scanner.scanUpToCharacters(from: CharacterSet(charactersIn: "*")), scanner.scanString("**") != nil else {
-                scanner.currentIndex = startLocation
-                currentNode.addChild(MFMNode(currentNode, plaintext: token))
+            
+            // Check if we are closing an existing bold modifier container
+            guard currentNode.type != .bold else {
+                currentNode = currentNode.parentNode ?? rootNode
                 continue
             }
             
-            currentNode.addChild(MFMNode(currentNode, bold: boldText))
+            /// Modifier found, new container node needed!
+            let newNode = MFMNode(currentNode, container: .bold)
+            currentNode.addChild(newNode)
+            currentNode = newNode
             continue
+            
+//            /// Check if this is an actual container or just some random **
+//            guard let boldText = scanner.scanUpToCharacters(from: CharacterSet(charactersIn: "*")), scanner.scanString("**") != nil else {
+//                scanner.currentIndex = startLocation
+//                currentNode.addChild(MFMNode(currentNode, plaintext: token))
+//                continue
+//            }
+            
+//            currentNode.addChild(MFMNode(currentNode, bold: boldText))
         }
         
         if let text = scanner.scanCharacters(from: CharacterSet(charactersIn: "$")) {

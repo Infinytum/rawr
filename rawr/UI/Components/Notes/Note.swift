@@ -10,7 +10,7 @@ import MisskeyKit
 
 struct Note: View {
     @ObservedObject var note: NoteModel
-    var renderedNote: [IdentifiableView]? = nil
+    var renderedNote: MFMRender? = nil
     
     var body: some View {
         VStack(alignment: .leading) {
