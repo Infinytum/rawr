@@ -86,6 +86,10 @@ func tokenize(_ originalInput: String) -> MFMNodeProtocol {
                 let newNode = MFMNode(currentNode, container: .center)
                 currentNode.addChild(newNode)
                 currentNode = newNode
+            case .italic:
+                let newNode = MFMNode(currentNode, container: .italic)
+                currentNode.addChild(newNode)
+                currentNode = newNode
             case .small:
                 let newNode = MFMNode(currentNode, container: .small)
                 currentNode.addChild(newNode)
@@ -231,6 +235,8 @@ func containerTagToNodeType(tag: String) -> MFMNodeType? {
     switch (tag.lowercased()) {
     case "center":
         return .center
+    case "i":
+        return .italic
     case "small":
         return .small
     default:

@@ -109,10 +109,13 @@ func renderMFMNode(_ node: MFMNodeProtocol, emojis: [EmojiModel], rendererContex
     case .modifier:
         return selectModifierFunction(node.value ?? "")(renderedChildrenStacks)
     case .small:
-        for split in (node.value ?? "").split(separator: "") {
-            views.append(IdentifiableView(view: Text(split).font(.system(size: 14))))
+        return mergeMFMChildStacksWithViewSideEffect(renderedChildrenStacks) { view in
+            IdentifiableView(view: view.view.font(.system(size: 14)))
         }
-        return [RenderedNode(viewStack: views, newStack: false, endStack: false, alignment: .leading)]
+    case .italic:
+        return mergeMFMChildStacksWithViewSideEffect(renderedChildrenStacks) { view in
+            IdentifiableView(view: view.view.italic())
+        }
     case .center:
         var viewStack: [RenderedNode] = []
         var stack: [IdentifiableView] = []
@@ -166,7 +169,7 @@ func renderMFMNode(_ node: MFMNodeProtocol, emojis: [EmojiModel], rendererContex
 #Preview {
     VStack {
         Spacer()
-        ForEach(renderMFM(tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered **test** $[tada $[x2 $[sparkle gay]]]</center> **test** #test_2023. Visit:asd :drgn:\nhttps://www.example.com\n $[x4 $[bg.color=000000 $[fg.color=00ff00 ***hacker voice* ** I'm in]]]")).renderedNote) { view in
+        ForEach(renderMFM(tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered **test** $[tada $[x2 $[sparkle gay]]]</center> **test** #test_2023. Visit:asd :drgn:\nhttps://www.example.com\n $[x4 $[bg.color=000000 $[fg.color=00ff00 ***hacker voice* ** <i>I'm in</i>]]]")).renderedNote) { view in
             AnyView(view.view).border(.gray)
         }
         Spacer()

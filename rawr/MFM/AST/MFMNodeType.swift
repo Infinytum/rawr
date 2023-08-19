@@ -35,6 +35,9 @@ enum MFMNodeType: String {
     
     /// A text container that forces child nodes to be center aligned
     case center = "center"
+    
+    /// A text container that applies an italic text modifier to all children
+    case italic = "italic"
  
     /// A text container for custom misskey modifiers (E.G. $[x2 text])
     case modifier = "modifier"
