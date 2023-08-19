@@ -26,6 +26,10 @@ public func mfmRenderModifier(_ mfmModifier: MFMModifier?, value: String?) -> MF
         return modifierWrapper(value: value, inner: applyFontColour)
     case .backgroundColour:
         return modifierWrapper(value: value, inner: applyBackgroundColor)
+    case .scaleX:
+        return modifierWrapper(value: value, inner: applyScaleX)
+    case .scaleY:
+        return modifierWrapper(value: value, inner: applyScaleY)
     }
 }
 
@@ -84,6 +88,30 @@ fileprivate func applyBackgroundColor(_ renderedChildren: MFMRenderResult, value
             } else {
                 view.background(color!)
             }
+        }
+    })
+}
+
+/// $[scale.x=1.3 Scaled Text]
+fileprivate func applyScaleX(_ renderedChildren: MFMRenderResult, value: String?) -> MFMRenderNodeStack {
+    guard let scale = try? Float(value ?? "", format: .number) else {
+        return mfmMergeRenderResult(renderedChildren)
+    }
+    return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
+        MFMRenderView {
+            view.scaleEffect(x: CGFloat(scale), y: 1, anchor: .center)
+        }
+    })
+}
+
+/// $[scale.y=1.3 Scaled Text]
+fileprivate func applyScaleY(_ renderedChildren: MFMRenderResult, value: String?) -> MFMRenderNodeStack {
+    guard let scale = try? Float(value ?? "", format: .number) else {
+        return mfmMergeRenderResult(renderedChildren)
+    }
+    return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
+        MFMRenderView {
+            view.scaleEffect(x: 1, y: CGFloat(scale), anchor: .center)
         }
     })
 }

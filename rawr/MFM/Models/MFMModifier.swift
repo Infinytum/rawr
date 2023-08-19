@@ -13,6 +13,9 @@ public enum MFMModifier: String {
     case biggest = "x4"
     case fontColour = "fg.color"
     case backgroundColour = "bg.color"
+    
+    case scaleX = "scale.x"
+    case scaleY = "scale.y"
 }
 
 // Parse a MFM modifier string (fg.color=000000) into a MFMModifier and optional value

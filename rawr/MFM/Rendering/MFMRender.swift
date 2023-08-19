@@ -64,6 +64,7 @@ fileprivate func mfmRenderNode(_ node: MFMNodeProtocol, context: MFMRenderContex
             return []
         }
         return mfmRenderNodePlaintext(plaintext)
+    // TODO: OnTap Handlers for Mentions once Profiles are ready
     case .mention:
         /// If there is no value, this is not worth rendering.
         guard let username = node.value else {
@@ -229,7 +230,7 @@ fileprivate func mfmRenderNodePlaintext(_ plaintext: String) -> MFMRenderNodeSta
 #Preview {
     VStack {
         Spacer()
-        ForEach(mfmRender(tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered **test** $[tada $[x2 $[sparkle gay]]]</center> **test** #test_2023. Visit:asd :drgn:\nhttps://www.example.com\n$[x4 $[bg.color=000000 $[fg.color=00ff00 ***hacker voice* **<i>I'm in</i>]]]")).renderedNote) { view in
+        ForEach(mfmRender(tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered **test** $[tada $[x2 $[sparkle gay]]]</center> **test** #test_2023. Visit:asd :drgn:\nhttps://www.example.com\n$[x4 $[bg.color=000000 $[fg.color=00ff00 ***hacker voice* **<i>I'm in</i>]]]\n$[scale.y=2 🍮]")).renderedNote) { view in
             AnyView(view.view).border(.gray)
         }
         Spacer()
