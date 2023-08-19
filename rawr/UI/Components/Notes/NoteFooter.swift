@@ -118,7 +118,7 @@ struct NoteFooter: View {
                 emojiList[category] = tempArray
             }
         }
-
+        
         MisskeyKit.shared.emojis.getDefault {emojis in
             guard let emojis = emojis else {
                 return
@@ -135,18 +135,6 @@ struct NoteFooter: View {
                     .init(name: ":\(emoji.name!):", emojiChar: Text(emoji.char!))
                 )
                 emojiList[category?.rawValue ?? "uncategorized"] = tempArray
-            }
-        }
-        
-        MisskeyKit.shared.auth.getAccessToken {data,_ in
-            if data == nil {
-              print("no data")
-            } else if data!.me == nil {
-                print("no me")
-            } else if data!.me!.user == nil {
-                print("no user")
-            } else {
-                print(data!.me!.user!.emojis ?? [])
             }
         }
     }
