@@ -6,8 +6,12 @@
 //
 
 import Foundation
+import CryptoKit
 
 public extension String {
+    func sha256() -> String {
+        return SHA256.hash(data: Data(self.utf8)).description
+    }
     /// Splits a string into groups of `every` n characters, grouping from left-to-right by default. If `backwards` is true, right-to-left.
     func split(every: Int, backwards: Bool = false) -> [String] {
         var result = [String]()

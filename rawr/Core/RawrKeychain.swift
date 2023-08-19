@@ -11,6 +11,8 @@ import KeychainSwift
 internal enum KeychainKeys: String {
     case apiKey = "apiKey"
     case instanceHostname = "instanceHostname"
+    case instanceClientId = "instanceClientId"
+    case instanceClientSecret = "instanceClientSecret"
 }
 
 class RawrKeychain {
@@ -22,14 +24,19 @@ class RawrKeychain {
     
     var apiKey: String? {
         get {
-            return self.keychain.get(KeychainKeys.apiKey.rawValue)
+            return apiKeyForInstance(self.instanceHostname)
         }
         set {
-            guard let newValue = newValue else {
-                self.keychain.delete(KeychainKeys.apiKey.rawValue)
-                return
-            }
-            self.keychain.set(newValue, forKey: KeychainKeys.apiKey.rawValue, withAccess: .accessibleAfterFirstUnlock)
+            setApiKeyForInstance(self.instanceHostname, apiKey: newValue)
+        }
+    }
+    
+    var instanceCredentials: InstanceCredentials? {
+        get {
+            return credentialsForInstance(self.instanceHostname)
+        }
+        set {
+            setCredentialsForInstance(self.instanceHostname, credentials: newValue)
         }
     }
     
@@ -44,5 +51,40 @@ class RawrKeychain {
     
     var loggedIn: Bool {
         return self.apiKey != nil
+    }
+    
+    /// Instance-specific helper
+    
+    public func apiKeyForInstance(_ instance: String) -> String? {
+        return self.keychain.get("\(KeychainKeys.apiKey.rawValue).\(instance.sha256())")
+    }
+    
+    public func credentialsForInstance(_ instance: String) -> InstanceCredentials? {
+        guard let clientSecret = self.keychain.get("\(KeychainKeys.instanceClientSecret.rawValue).\(instance.sha256())"), let clientId = self.keychain.get("\(KeychainKeys.instanceClientId.rawValue).\(instance.sha256())") else {
+            return nil
+        }
+        
+        return InstanceCredentials(
+            clientId: clientId,
+            clientSecret: clientSecret
+        )
+    }
+    
+    public func setApiKeyForInstance(_ instance: String, apiKey: String?) {
+        guard let apiKey = apiKey else {
+            self.keychain.delete("\(KeychainKeys.apiKey.rawValue).\(instance.sha256())")
+            return
+        }
+        self.keychain.set(apiKey, forKey: "\(KeychainKeys.apiKey.rawValue).\(instance.sha256())", withAccess: .accessibleAfterFirstUnlock)
+    }
+    
+    public func setCredentialsForInstance(_ instance: String, credentials: InstanceCredentials?) {
+        guard let credentials = credentials else {
+            self.keychain.delete("\(KeychainKeys.instanceClientId.rawValue).\(instance.sha256())")
+            self.keychain.delete("\(KeychainKeys.instanceClientSecret.rawValue).\(instance.sha256())")
+            return
+        }
+        self.keychain.set(credentials.clientId, forKey: "\(KeychainKeys.instanceClientId.rawValue).\(instance.sha256())", withAccess: .accessibleAfterFirstUnlock)
+        self.keychain.set(credentials.clientSecret, forKey: "\(KeychainKeys.instanceClientSecret.rawValue).\(instance.sha256())", withAccess: .accessibleAfterFirstUnlock)
     }
 }

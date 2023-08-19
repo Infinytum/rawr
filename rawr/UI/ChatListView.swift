@@ -58,6 +58,7 @@ struct ChatListView: View {
             guard let histories = histories else {
                 print("Chat History error")
                 print(error ?? "No Error")
+                self.histories = []
                 return
             }
             self.histories = histories
@@ -67,4 +68,5 @@ struct ChatListView: View {
 
 #Preview {
     ChatListView(histories: [.preview, .preview, .preview])
+        .environmentObject(ViewContext())
 }

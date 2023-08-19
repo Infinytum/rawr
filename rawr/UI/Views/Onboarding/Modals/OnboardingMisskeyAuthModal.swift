@@ -23,7 +23,7 @@ struct OnboardingMisskeyAuthModal: UIViewControllerRepresentable {
         
         // Construct auth session
         // TODO: App Secret should be dynamic, but this is fine for development.
-        MisskeyKit.shared.auth.startSession(appSecret: "YBzbr8X2bwzki0LqgEneuYfouvPpvbXz") { auth, error in
+        MisskeyKit.shared.auth.startSession(appSecret: RawrKeychain().instanceCredentials?.clientSecret ?? "") { auth, error in
             guard let auth = auth, let token = auth.token, error == nil else {
                 action(false)
                 return

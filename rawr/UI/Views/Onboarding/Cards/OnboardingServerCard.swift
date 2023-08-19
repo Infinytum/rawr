@@ -32,9 +32,7 @@ struct OnboardingServerCard: View {
                 }.padding(.leading, 5)
             }.onTapGesture {
                 self.instanceHostname = "derg.social"
-                MisskeyKit.shared.changeInstance(instance: self.instanceHostname)
-                RawrKeychain().instanceHostname = self.instanceHostname
-                onContinue()
+                onServerSet(self.instanceHostname)
             }
             Spacer()
             Button("Other Instance") {
@@ -42,15 +40,39 @@ struct OnboardingServerCard: View {
             }.alert("Other Instance", isPresented: $presentAlert, actions: {
                 TextField("E.g. derg.social", text: $instanceHostname)
                 Button("Set", action: {
-                    MisskeyKit.shared.changeInstance(instance: self.instanceHostname)
-                    RawrKeychain().instanceHostname = self.instanceHostname
-                    onContinue()
+                    onServerSet(self.instanceHostname)
                 })
                 Button("Cancel", role: .cancel, action: {})
             }, message: {
                 Text("Please enter the hostname of your instance")
             }).padding(.top, 10).padding(.bottom, 30)
         }.frame(maxWidth: 500)
+    }
+    
+    private func onServerSet(_ instance: String) {
+        MisskeyKit.shared.changeInstance(instance: instance)
+        RawrKeychain().instanceHostname = instance
+        
+        if RawrKeychain().instanceCredentials == nil {
+            print("Creating new app on target instance")
+            MisskeyKit.shared.app.create(
+                name: "rawr.",
+                description: "rawr. is the first native iOS app for Firefish.",
+                permission: ["read", "write", "follows", "push"],
+                callbackUrl: "https://derg.social/rawr.redirect"
+            ) { app, errors in
+                guard let clientId = app?.id, let clientSecret = app?.secret else {
+                    print("Error while registering app \(errors!)")
+                    return
+                }
+                
+                RawrKeychain().instanceCredentials = InstanceCredentials(clientId: clientId, clientSecret: clientSecret)
+                self.onContinue()
+            }
+        } else {
+            print("Re-using existing instance app credentials")
+            self.onContinue()
+        }
     }
 }
 
