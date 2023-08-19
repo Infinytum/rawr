@@ -11,8 +11,8 @@ import KeychainSwift
 internal enum KeychainKeys: String {
     case apiKey = "apiKey"
     case instanceHostname = "instanceHostname"
-    case instanceClientId = "instanceClientId"
-    case instanceClientSecret = "instanceClientSecret"
+    case instanceClientId = "clientId"
+    case instanceClientSecret = "clientSecret"
 }
 
 class RawrKeychain {

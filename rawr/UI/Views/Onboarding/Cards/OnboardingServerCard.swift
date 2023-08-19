@@ -54,13 +54,12 @@ struct OnboardingServerCard: View {
     private func onServerSet(_ instance: String) {
         MisskeyKit.shared.changeInstance(instance: instance)
         RawrKeychain().instanceHostname = instance
-        
         if RawrKeychain().instanceCredentials == nil {
             print("OnboardingServerCard: Creating new app on target instance")
             MisskeyKit.shared.app.create(
                 name: "rawr.",
                 description: "rawr. is the first native iOS app for Firefish.",
-                permission: ["read", "write", "follows", "push"],
+                permission: MisskeyPermission.allPermissions,
                 callbackUrl: "https://derg.social/rawr.redirect"
             ) { app, error in
                 guard let clientId = app?.id, let clientSecret = app?.secret else {
