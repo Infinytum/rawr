@@ -231,7 +231,7 @@ func tokenize(_ originalInput: String) -> MFMNodeProtocol {
     return rootNode
 }
 
-func containerTagToNodeType(tag: String) -> MFMNodeType? {
+fileprivate func containerTagToNodeType(tag: String) -> MFMNodeType? {
     switch (tag.lowercased()) {
     case "center":
         return .center

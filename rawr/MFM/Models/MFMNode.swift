@@ -7,15 +7,6 @@
 
 import Foundation
 
-protocol MFMNodeProtocol {
-    var type: MFMNodeType { get }
-    var value: String? { get }
-    var children: [MFMNodeProtocol] { get set }
-    var parentNode: MFMNodeProtocol? { get }
-    
-    func addChild(_ child: MFMNodeProtocol)
-}
-
 class MFMNode: MFMNodeProtocol {
     let type: MFMNodeType
     var children: [MFMNodeProtocol] = []

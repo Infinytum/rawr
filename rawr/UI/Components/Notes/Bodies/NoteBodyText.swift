@@ -41,18 +41,18 @@ struct NoteBodyText: View {
         }
     }
     
-    func getRenderedNote() -> [IdentifiableView] {
+    func getRenderedNote() -> MFMRenderViewStack {
         if self.renderedNote != nil {
             return self.renderedNote!.renderedNote
         }
         
-        let result = renderMFM(tokenize(self.note.text ?? ""), emojis: self.note.emojis ?? self.note.renote?.emojis ?? [])
+        let result = mfmRender(tokenize(self.note.text ?? ""), emojis: self.note.emojis ?? self.note.renote?.emojis ?? [])
         self.registerContextHandlers(result.context)
         self.renderedNote = renderedNote
         return result.renderedNote
     }
     
-    func registerContextHandlers(_ context: RendererContext) {
+    func registerContextHandlers(_ context: MFMRenderContext) {
         context.onHashtagTap { hashtag in
             self.presentedHashtag = hashtag
             self.viewRefresher.reloadView()
