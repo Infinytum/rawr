@@ -58,8 +58,8 @@ struct NoteView: View {
     private func loadNote() {
         MisskeyKit.shared.notes.showNote(noteId: self.noteId) { note, error in
             guard let note = note else {
-                print("Error fetching note")
-                print(error ?? "No Error")
+                self.context.applicationError = ApplicationError(title: "Fetching note failed", message: error.explain())
+                print("NoteView Error: API returned error while fetching note: \(error!)")
                 return
             }
             self.note = note
@@ -70,8 +70,8 @@ struct NoteView: View {
         guard let note = self.note else { return }
         MisskeyKit.shared.notes.getChildren(noteId: note.isRenote() ? note.renote!.id! : self.noteId ) { replies, error in
             guard let replies = replies else {
-                print("Error fetching note replies")
-                print(error ?? "No Error")
+                self.context.applicationError = ApplicationError(title: "Fetching note replies failed", message: error.explain())
+                print("NoteView Error: API returned error while fetching note replies: \(error!)")
                 return
             }
             self.replies = replies
@@ -83,7 +83,7 @@ struct NoteView: View {
     VStack {
         
     }.sheet(isPresented: .constant(true)) {
-        NoteView(noteId: "9idb4z14g6fn6185").environmentObject(ViewContext())
+        NoteView(noteId: "9iklw7fsr7cofp5k").environmentObject(ViewContext())
     }
 }
 

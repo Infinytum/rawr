@@ -49,7 +49,7 @@ func modifierWrapper(value: String?, inner: @escaping ModifierCallalbleWithValue
 }
 
 func applyUnsupportedModifier(_ renderedChildren: [[RenderedNode]]) -> [RenderedNode] {
-    print("Rendering unspported modifier as plain text")
+    print("Modifiers: Rendering unspported modifier as plain text")
     return mergeMFMChildStacksWithViewSideEffect(renderedChildren) { view in
         view
     }

@@ -63,7 +63,7 @@ func tokenize(_ originalInput: String) -> MFMNodeProtocol {
             let startLocation = scanner.currentIndex
             
             /// Check whether this is an actual container tag or just a random <
-            guard let tag = scanner.scanUpToCharacters(from: CharacterSet(charactersIn: ">")), scanner.scanString(">") != nil else {
+            guard let tag = scanner.scanUpToCharacters(from: CharacterSet(charactersIn: " >")), scanner.scanString(">") != nil else {
                 scanner.currentIndex = startLocation
                 currentNode.addChild(MFMNode(currentNode, plaintext: token))
                 continue
@@ -73,7 +73,7 @@ func tokenize(_ originalInput: String) -> MFMNodeProtocol {
             guard tag.range(of: "^/", options: .regularExpression) == nil else {
                 guard let expectedNodeType = containerTagToNodeType(tag: String(tag.dropFirst())) else { continue }
                 if currentNode.type != expectedNodeType {
-                    print("Found unknown closing container tag \(tag.dropFirst()), skipping")
+                    print("Tokenizer: Found unknown closing container tag \(tag.dropFirst()), skipping")
                     continue
                 }
                 currentNode = currentNode.parentNode ?? rootNode
@@ -91,7 +91,7 @@ func tokenize(_ originalInput: String) -> MFMNodeProtocol {
                 currentNode.addChild(newNode)
                 currentNode = newNode
             default:
-                print("Found unknown container \(tag), skipping")
+                print("Tokenizer: Found unknown container \(tag), skipping")
                 continue
             }
 

@@ -72,8 +72,8 @@ struct NoteFooter: View {
     private func onBoost(_ visisbility: NoteModel.NoteVisibility) {
         MisskeyKit.shared.notes.renote(renoteId: self.note.id!, visibility: visisbility) { renote, error in
             guard let _ = renote else {
-                print("Error while renoting/boosting")
-                print(error ?? "No Error")
+                self.context.applicationError = ApplicationError(title: "Renote failed", message: error.explain())
+                print("NoteFooter Error: API returned an error while creating renote: \(error!)")
                 return
             }
             withAnimation {

@@ -10,6 +10,8 @@ import SwiftUI
 
 struct ChatBar: View {
     
+    @EnvironmentObject var context: ViewContext
+    
     @ObservedObject var chatContext: ChatContext
     @State var messageText: String = ""
     @State var sendInProgress: Bool = false
@@ -54,8 +56,8 @@ struct ChatBar: View {
             self.sendInProgress = false
             guard let _ = message else {
                 self.messageText = messageText
-                print("Error sending chat message")
-                print(error ?? "")
+                self.context.applicationError = ApplicationError(title: "Chat Message failed", message: error.explain())
+                print("ChatBar Error: API returned error while sending message: \(error!)")
                 return
             }
         }

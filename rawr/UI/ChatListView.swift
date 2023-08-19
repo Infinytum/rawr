@@ -10,6 +10,7 @@ import MisskeyKit
 
 struct ChatListView: View {
     
+    @EnvironmentObject var context: ViewContext
     @ObservedObject var viewReloader: ViewReloader = ViewReloader()
     
     @State var histories: [MessageHistoryModel]? = nil
@@ -56,8 +57,8 @@ struct ChatListView: View {
     private func loadChatHistory() {
         MisskeyKit.shared.messaging.getHistory { histories, error in
             guard let histories = histories else {
-                print("Chat History error")
-                print(error ?? "No Error")
+                self.context.applicationError = ApplicationError(title: "Fetching Chats failed", message: error.explain())
+                print("ChatListView Error: API returned error while fetching chats: \(error!)")
                 self.histories = []
                 return
             }

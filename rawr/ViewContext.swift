@@ -60,6 +60,18 @@ class ViewContext: ObservableObject {
         }
     }
     
+    // MARK: Global Error Handler
+    var applicationError: ApplicationError? {
+        didSet {
+            withAnimation {
+                DispatchQueue.main.async {
+                    self.objectWillChange.send(self)
+                }
+            }
+        }
+    }
+    
+    
     /// Check whether the current application state considers the user logged in
     var loggedIn: Bool = false {
         didSet {
@@ -96,4 +108,9 @@ class ViewContext: ObservableObject {
             }
         }
     }
+}
+
+struct ApplicationError {
+    let title: String
+    let message: String
 }

@@ -42,13 +42,15 @@ struct OnboardingMisskeyAuthModal: UIViewControllerRepresentable {
                 _ = try await webloginViewController.result()
                 MisskeyKit.shared.auth.getAccessToken { auth, error in
                     guard let _ = auth else {
-                        print(error ?? "Error was nil")
+                        self.context.applicationError = ApplicationError(title: "Fetching Access Token failed", message: error.explain())
+                        print("OnboardingMisskeyAuthModel Error: Fetching AccessToken failed: \(error!)")
                         action(false)
                         return
                     }
                     
                     guard let apiKey = MisskeyKit.shared.auth.getAPIKey() else {
-                        print("API Key was nil")
+                        self.context.applicationError = ApplicationError(title: "Fetching API Token failed", message: error.explain())
+                        print("OnboardingMisskeyAuthModel Error: API Token was nil: \(error!)")
                         action(false)
                         return
                     }

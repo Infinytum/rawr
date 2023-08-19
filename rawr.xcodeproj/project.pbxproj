@@ -12,6 +12,7 @@
 		201A50F02A90341400956489 /* Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A50EF2A90341400956489 /* Merge.swift */; };
 		201A50F22A90397300956489 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A50F12A90397300956489 /* Color.swift */; };
 		201A50F52A90DF5B00956489 /* InstanceCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A50F42A90DF5B00956489 /* InstanceCredentials.swift */; };
+		201A50F72A911ECF00956489 /* MisskeyKitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A50F62A911ECF00956489 /* MisskeyKitError.swift */; };
 		2042881E2A8BAD8F001DC6F2 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042881D2A8BAD8F001DC6F2 /* Emoji.swift */; };
 		204288202A8BAE64001DC6F2 /* EmojiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042881F2A8BAE64001DC6F2 /* EmojiModel.swift */; };
 		204DA3F42A8869D900BB0598 /* MessageHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA3F32A8869D900BB0598 /* MessageHistoryModel.swift */; };
@@ -82,6 +83,7 @@
 		201A50EF2A90341400956489 /* Merge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merge.swift; sourceTree = "<group>"; };
 		201A50F12A90397300956489 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		201A50F42A90DF5B00956489 /* InstanceCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceCredentials.swift; sourceTree = "<group>"; };
+		201A50F62A911ECF00956489 /* MisskeyKitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisskeyKitError.swift; sourceTree = "<group>"; };
 		2042881D2A8BAD8F001DC6F2 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		2042881F2A8BAE64001DC6F2 /* EmojiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiModel.swift; sourceTree = "<group>"; };
 		204DA3F32A8869D900BB0598 /* MessageHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHistoryModel.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 				204DA4032A890E5E00BB0598 /* MessageModel.swift */,
 				204DA40A2A892A6000BB0598 /* MetaModel.swift */,
 				2042881F2A8BAE64001DC6F2 /* EmojiModel.swift */,
+				201A50F62A911ECF00956489 /* MisskeyKitError.swift */,
 			);
 			path = MisskeyKit;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				2068CC112A87B96D00F8A958 /* OnboardingMisskeyAuthModalController.swift in Sources */,
 				204DA3FC2A8900CC00BB0598 /* ChatHeader.swift in Sources */,
 				2068CC032A87B85500F8A958 /* ViewContext.swift in Sources */,
+				201A50F72A911ECF00956489 /* MisskeyKitError.swift in Sources */,
 				204DA3F42A8869D900BB0598 /* MessageHistoryModel.swift in Sources */,
 				201A50F22A90397300956489 /* Color.swift in Sources */,
 				201A50EB2A901F5000956489 /* HashtagTimelineContext.swift in Sources */,

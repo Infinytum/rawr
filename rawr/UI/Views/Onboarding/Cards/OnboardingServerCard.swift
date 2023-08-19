@@ -11,6 +11,8 @@ import MisskeyKit
 
 struct OnboardingServerCard: View {
     
+    @EnvironmentObject var context: ViewContext
+    
     @State private var instanceHostname = ""
     @State private var presentAlert = false
     
@@ -54,15 +56,16 @@ struct OnboardingServerCard: View {
         RawrKeychain().instanceHostname = instance
         
         if RawrKeychain().instanceCredentials == nil {
-            print("Creating new app on target instance")
+            print("OnboardingServerCard: Creating new app on target instance")
             MisskeyKit.shared.app.create(
                 name: "rawr.",
                 description: "rawr. is the first native iOS app for Firefish.",
                 permission: ["read", "write", "follows", "push"],
                 callbackUrl: "https://derg.social/rawr.redirect"
-            ) { app, errors in
+            ) { app, error in
                 guard let clientId = app?.id, let clientSecret = app?.secret else {
-                    print("Error while registering app \(errors!)")
+                    self.context.applicationError = ApplicationError(title: "Fetching API Token failed", message: error.explain())
+                    print("OnboardingServerCard Error: API returned error while registering app: \(error!)")
                     return
                 }
                 
@@ -70,7 +73,7 @@ struct OnboardingServerCard: View {
                 self.onContinue()
             }
         } else {
-            print("Re-using existing instance app credentials")
+            print("OnboardingServerCard: Re-using existing instance app credentials")
             self.onContinue()
         }
     }
@@ -79,5 +82,5 @@ struct OnboardingServerCard: View {
 #Preview {
     WelcomeTemplate(appName: "rawr.") {
         OnboardingServerCard(){}
-    }
+    }.environmentObject(ViewContext())
 }
