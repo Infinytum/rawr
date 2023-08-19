@@ -38,9 +38,7 @@ struct EmojiSection: View {
             }
         } header: {
             Button {
-                withAnimation {
-                    isDeployed.toggle()
-                }
+                isDeployed.toggle()
             } label:{
                 HStack {
                     Text(categoryName.capitalized)
