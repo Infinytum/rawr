@@ -11,6 +11,7 @@ public enum MFMModifier: String {
     case big = "x2"
     case bigger = "x3"
     case biggest = "x4"
+    case blur = "blur"
     case fontColour = "fg.color"
     case backgroundColour = "bg.color"
     

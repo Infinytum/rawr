@@ -19,6 +19,7 @@
 		201A51032A91447300956489 /* MFMRenderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A51022A91447300956489 /* MFMRenderContext.swift */; };
 		201A51052A9144C600956489 /* MFMRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A51042A9144C600956489 /* MFMRender.swift */; };
 		201A51072A91744500956489 /* MisskeyPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A51062A91744500956489 /* MisskeyPermission.swift */; };
+		201A510A2A91816700956489 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A51092A91816700956489 /* BlurView.swift */; };
 		2042881E2A8BAD8F001DC6F2 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042881D2A8BAD8F001DC6F2 /* Emoji.swift */; };
 		204288202A8BAE64001DC6F2 /* EmojiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042881F2A8BAE64001DC6F2 /* EmojiModel.swift */; };
 		204DA3F42A8869D900BB0598 /* MessageHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA3F32A8869D900BB0598 /* MessageHistoryModel.swift */; };
@@ -95,6 +96,7 @@
 		201A51022A91447300956489 /* MFMRenderContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFMRenderContext.swift; sourceTree = "<group>"; };
 		201A51042A9144C600956489 /* MFMRender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFMRender.swift; sourceTree = "<group>"; };
 		201A51062A91744500956489 /* MisskeyPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisskeyPermission.swift; sourceTree = "<group>"; };
+		201A51092A91816700956489 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		2042881D2A8BAD8F001DC6F2 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		2042881F2A8BAE64001DC6F2 /* EmojiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiModel.swift; sourceTree = "<group>"; };
 		204DA3F32A8869D900BB0598 /* MessageHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHistoryModel.swift; sourceTree = "<group>"; };
@@ -193,6 +195,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		201A51082A91815300956489 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				201A51092A91816700956489 /* BlurView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		204DA4072A891EE400BB0598 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +233,7 @@
 		204DA41A2A8AB30C00BB0598 /* MFM */ = {
 			isa = PBXGroup;
 			children = (
+				201A51082A91815300956489 /* Components */,
 				201A50EC2A902F8800956489 /* Rendering */,
 				204DA41B2A8AB8F500BB0598 /* Models */,
 				204DA4222A8ABD4E00BB0598 /* Tokenizer.swift */,
@@ -574,6 +585,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				201A510A2A91816700956489 /* BlurView.swift in Sources */,
 				201A51072A91744500956489 /* MisskeyPermission.swift in Sources */,
 				204DA4092A891EF200BB0598 /* TimelineHeader.swift in Sources */,
 				204DA41F2A8AB98D00BB0598 /* MFMNodeType.swift in Sources */,

@@ -30,6 +30,8 @@ public func mfmRenderModifier(_ mfmModifier: MFMModifier?, value: String?) -> MF
         return modifierWrapper(value: value, inner: applyScaleX)
     case .scaleY:
         return modifierWrapper(value: value, inner: applyScaleY)
+    case .blur:
+        return modifierWrapper(value: value, inner: applyBlur)
     }
 }
 
@@ -112,6 +114,18 @@ fileprivate func applyScaleY(_ renderedChildren: MFMRenderResult, value: String?
     return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
         MFMRenderView {
             view.scaleEffect(x: 1, y: CGFloat(scale), anchor: .center)
+        }
+    })
+}
+
+/// $[blur Blurred Text]
+fileprivate func applyBlur(_ renderedChildren: MFMRenderResult, value: String?) -> MFMRenderNodeStack {
+    let blurContext = BlurViewContext()
+    return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
+        MFMRenderView {
+            BlurView {
+                view
+            }.environmentObject(blurContext)
         }
     })
 }
