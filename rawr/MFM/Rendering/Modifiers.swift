@@ -13,6 +13,7 @@ enum MFMModifier: String {
     case bigger = "x3"
     case biggest = "x4"
     case fontColour = "fg.color"
+    case backgroundColour = "bg.color"
 }
 
 typealias ModifierCallalble = (_ renderedChildren: [[RenderedNode]]) -> [RenderedNode]
@@ -36,6 +37,8 @@ func selectModifierFunction(_ modifierText: String) -> (_ renderedChildren: [[Re
         return applyBiggestModifier
     case .fontColour:
         return modifierWrapper(value: value, inner: applyFontColour)
+    case .backgroundColour:
+        return modifierWrapper(value: value, inner: applyBackgroundColor)
     }
 }
 
@@ -46,7 +49,10 @@ func modifierWrapper(value: String?, inner: @escaping ModifierCallalbleWithValue
 }
 
 func applyUnsupportedModifier(_ renderedChildren: [[RenderedNode]]) -> [RenderedNode] {
-    return [RenderedNode(viewStack: [IdentifiableView(view: Text("MODIFIER UNSUPPORTED"))], newStack: false, endStack: false, alignment: .leading)]
+    print("Rendering unspported modifier as plain text")
+    return mergeMFMChildStacksWithViewSideEffect(renderedChildren) { view in
+        view
+    }
 }
 
 func applyBigModifier(_ renderedChildren: [[RenderedNode]]) -> [RenderedNode] {
@@ -72,6 +78,14 @@ func applyFontColour(_ renderedChildren: [[RenderedNode]], value: String?) -> [R
     let color = value != nil ? Color(hex: value!) : Color.primary
     return mergeMFMChildStacksWithViewSideEffect(renderedChildren) { view in
         IdentifiableView(view: view.view.foregroundColor(color))
+    }
+}
+
+
+func applyBackgroundColor(_ renderedChildren: [[RenderedNode]], value: String?) -> [RenderedNode] {
+    let color = value != nil ? Color(hex: value!) : nil
+    return mergeMFMChildStacksWithViewSideEffect(renderedChildren) { view in
+        IdentifiableView(view: color != nil ? view.view.background(color) : view.view)
     }
 }
 

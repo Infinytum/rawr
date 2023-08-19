@@ -174,7 +174,7 @@ func renderMFMNode(_ node: MFMNodeProtocol, emojis: [EmojiModel], rendererContex
 #Preview {
     VStack {
         Spacer()
-        ForEach(renderMFM(tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered **test** $[tada $[x2 $[sparkle gay]]]</center> **test** #test_2023. Visit:asd :drgn:\nhttps://www.example.com")).renderedNote) { view in
+        ForEach(renderMFM(tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered **test** $[tada $[x2 $[sparkle gay]]]</center> **test** #test_2023. Visit:asd :drgn:\nhttps://www.example.com\n $[x4 $[bg.color=000000 $[fg.color=00ff00 *hacker voice* I'm in]]]")).renderedNote) { view in
             AnyView(view.view).border(.gray)
         }
         Spacer()
