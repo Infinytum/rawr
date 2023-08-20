@@ -9,31 +9,15 @@ import SwiftUI
 import MisskeyKit
 import WrappingHStack
 
-struct emoji {
-    var name: String
-    var image: RemoteImage?
-    var emojiChar: Text?
-}
 
 struct NoteFooter: View {
-    @EnvironmentObject var context: ViewContext
 
     @ObservedObject var note: NoteModel
+    
+    @EnvironmentObject var context: ViewContext
     @State var didRenote: Bool = false
     @State var emojiPickerShown = false
-    @State private var emojiList: [String: [emoji]] = [:]
-    @State private var favouriteEmojis: [emoji] = []
-    
-    private var emojiCategoriesArray: [String]{
-        var initial = Array(emojiList.keys).sorted(by:<)
-        if initial.count == 0 {
-            return []
-        }
-        initial.removeLast()
-        initial.insert("uncategorized", at: 0)
-        return initial
-    }
-    
+          
     var body: some View {
         HStack() {
             Button {} label: {
@@ -79,23 +63,10 @@ struct NoteFooter: View {
                 }
             }
             .sheet(isPresented: $emojiPickerShown) {
-                List {
-                    ForEach(emojiCategoriesArray, id: \.self) {category in
-                        EmojiSection(emojiContent: emojiList[category]!, categoryName: category.replacingOccurrences(of: "_", with: " ")) {name in
-                            if emojiList[category]?.first(where: {$0.name == name})?.name == nil {
-                                print(category)
-                            }
-                            
-                            onReact(emojiList[category]!.first{$0.name == name}!.name)
-                        }
-                    }
-                }
-                .onAppear {
-                    fillEmojiList()
-                }
-                .listSectionSeparator(.hidden)
-                .listRowSeparator(.hidden)
-                .listRowSpacing(.zero)
+                EmojiPicker { emoji in
+                    self.onReact(":\(emoji):")
+                    emojiPickerShown = false
+                }.padding().presentationDetents([.fraction(0.45)])
             }
             Spacer()
             Button {} label: {
@@ -105,53 +76,19 @@ struct NoteFooter: View {
         }
         .foregroundStyle(.primary)
     }
-    
-    private func fillEmojiList() {
-        emojiList = [:]
-        if context != nil {
-            for emoji in context.currentInstance?.emojis ?? [] {
-                let category = emoji.category ?? "uncategorized"
-                var tempArray = emojiList[category] ?? []
-                tempArray.append(
-                    .init(name: ":\(emoji.name!):", image: RemoteImage(emoji.url))
-                )
-                emojiList[category] = tempArray
-            }
-        }
-        
-        MisskeyKit.shared.emojis.getDefault {emojis in
-            guard let emojis = emojis else {
-                return
-            }
-            emojis.forEach {emoji in
-                let category = emoji.category
-                var tempArray = emojiList[category?.rawValue ?? "uncategorized"] ?? []
-                
-                guard emoji.char != nil else {
-                    return
-                }
-                
-                tempArray.append(
-                    .init(name: ":\(emoji.name!):", emojiChar: Text(emoji.char!))
-                )
-                emojiList[category?.rawValue ?? "uncategorized"] = tempArray
-            }
-        }
-    }
-    
+
     private func onReact(_ r: String? = nil) {
         let reaction: String = r ?? context.currentInstance?.defaultReaction ?? ":star:"
         Task {
             do {
                 if note.isMyReaction(reaction) ||
                     (r == nil && note.myReaction != nil) {
-                    print("unreacting.")
+                    print("NoteFooter: Removing reaction from note")
                     try await note.unreact()
                 } else {
-                    print("is not my reaction, reacting with \(reaction)")
+                    print("NoteFooter: Setting reaction to post: \(reaction)")
                     try await note.react(reaction)
                 }
-                emojiPickerShown = false
             } catch let err {
                 print(err.localizedDescription)
             }
@@ -180,5 +117,5 @@ struct NoteFooter: View {
         Note(note: .preview)
         Divider()
         Note(note: .preview)
-    }.padding()
+    }.environmentObject(ViewContext()).padding()
 }

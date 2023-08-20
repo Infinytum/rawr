@@ -8,6 +8,15 @@
 import Foundation
 import MisskeyKit
 
+extension EmojiModel: Identifiable {}
+extension DefaultEmojiModel: Identifiable {
+    public var id: String {
+        get {
+            return self.name!
+        }
+    }
+}
+
 public extension [EmojiModel] {
     func urlForEmoji(_ name: String) -> String? {
         let foundEmoji = self.first { emoji in
