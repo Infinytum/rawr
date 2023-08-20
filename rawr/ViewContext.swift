@@ -76,7 +76,9 @@ class ViewContext: ObservableObject {
     var loggedIn: Bool = false {
         didSet {
             withAnimation {
-                objectWillChange.send(self)
+                DispatchQueue.main.async {
+                    self.objectWillChange.send(self)
+                }
             }
         }
     }
@@ -84,7 +86,9 @@ class ViewContext: ObservableObject {
     /// Trigger a re-draw of all the active views that are listening to this application context object
     func refreshViews() {
         withAnimation {
-            objectWillChange.send(self)
+            DispatchQueue.main.async {
+                self.objectWillChange.send(self)
+            }
         }
     }
     
