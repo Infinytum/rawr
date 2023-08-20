@@ -15,7 +15,7 @@ struct MainView: View {
                  Image(systemName: "house")
                  Text("Timeline")
                }
-            Text("Notifications")
+            NotificationView()
               .tabItem {
                  Image(systemName: "bell")
                  Text("Notifications")
@@ -25,15 +25,10 @@ struct MainView: View {
                  Image(systemName: "message")
                  Text("Chats")
                }
-            Text("Settings")
-              .tabItem {
-                 Image(systemName: "gear")
-                 Text("Settings")
-               }
         }
     }
 }
 
 #Preview {
-    MainView()
+    MainView().environmentObject(ViewContext())
 }

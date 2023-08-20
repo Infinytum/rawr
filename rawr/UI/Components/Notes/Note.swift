@@ -18,7 +18,7 @@ struct Note: View {
                 NoteDecorationBoost(note: self.note).padding(.bottom, 5)
             }
             NoteHeader(note: self.actualNote())
-            NoteBodyText(note: self.actualNote(), renderedNote: self.renderedNote)
+            NoteBodyText(note: self.actualNote(), renderedNote: self.renderedNote).padding(.top, 1)
             if self.actualNote().hasFiles() {
                 NoteBodyGallery(files: self.actualNote().files!)
             }
