@@ -81,6 +81,7 @@
 		2098F91E2A8EF792003CAAE2 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2098F91D2A8EF792003CAAE2 /* Scanner.swift */; };
 		20AE17AE2A88421A00C9AC07 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AE17AD2A88421A00C9AC07 /* ImageViewer.swift */; };
 		20D37D322A88577000BCC1C5 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D37D312A88577000BCC1C5 /* ChatListView.swift */; };
+		3F9B50312A8FCE0A00EA7924 /* EmojiSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9B50302A8FCE0A00EA7924 /* EmojiSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,6 +155,7 @@
 		2098F91D2A8EF792003CAAE2 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		20AE17AD2A88421A00C9AC07 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		20D37D312A88577000BCC1C5 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		3F9B50302A8FCE0A00EA7924 /* EmojiSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,6 +382,7 @@
 		2068CC1F2A87C25B00F8A958 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				3F9B502F2A8FCE0A00EA7924 /* Components */,
 				2068CC212A87C25B00F8A958 /* Bodies */,
 				2068CC262A87C25B00F8A958 /* Decorations */,
 				2068CC252A87C25B00F8A958 /* Note.swift */,
@@ -497,6 +500,14 @@
 				204DA4012A890DEC00BB0598 /* ChatMessage.swift */,
 			);
 			name = Components;
+			sourceTree = "<group>";
+		};
+		3F9B502F2A8FCE0A00EA7924 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3F9B50302A8FCE0A00EA7924 /* EmojiSection.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -633,6 +644,7 @@
 				2068CC312A87C25B00F8A958 /* Note.swift in Sources */,
 				2098F91E2A8EF792003CAAE2 /* Scanner.swift in Sources */,
 				204DA4062A89167500BB0598 /* ChatBar.swift in Sources */,
+				3F9B50312A8FCE0A00EA7924 /* EmojiSection.swift in Sources */,
 				204DA3FA2A88FF7500BB0598 /* ChatView.swift in Sources */,
 				2068CC322A87C25B00F8A958 /* NoteDecorationBoost.swift in Sources */,
 				207C33E42A8FC4A400500E33 /* TimelineContextBase.swift in Sources */,
