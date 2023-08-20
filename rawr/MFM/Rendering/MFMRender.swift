@@ -211,7 +211,7 @@ fileprivate func mfmRenderNodePlaintext(_ plaintext: String) -> MFMRenderNodeSta
             
             /// Re-apply spaces by rendering individual space text bits.
             /// TODO: Improve this by merging them with the last wordlet
-            if wordIdx < words.count - 1 {
+            if wordIdx < words.count - 1 || (word == "" && words.count == 1 && line.count > 0) {
                 viewStack.append(MFMRenderView {
                     Text(" ")
                 })
@@ -230,7 +230,7 @@ fileprivate func mfmRenderNodePlaintext(_ plaintext: String) -> MFMRenderNodeSta
 #Preview {
     VStack {
         Spacer()
-        ForEach(mfmRender(tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered **test** $[tada $[x2 $[sparkle gay]]]</center> **test** #test_2023. Visit:asd :drgn:\nhttps://www.example.com\n$[x4 $[bg.color=000000 $[fg.color=00ff00 ***hacker voice* **<i>I'm in</i>]]]\n$[scale.y=2 🍮]\n$[blur This is a spoiler #yiff]")).renderedNote) { view in
+        ForEach(mfmRender(tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered **test** $[tada $[x2 $[sparkle gay]]]</center>**test** #test_2023. Visit:asd :drgn:\nhttps://www.example.com\n$[x4 $[bg.color=000000 $[fg.color=00ff00 ***hacker voice* **<i>I'm in</i>]]]\n$[scale.y=2 🍮]\n$[blur This is a spoiler #yiff]")).renderedNote) { view in
             AnyView(view.view).border(.gray)
         }
         Spacer()

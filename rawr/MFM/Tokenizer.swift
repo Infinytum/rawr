@@ -149,7 +149,7 @@ func tokenize(_ originalInput: String) -> MFMNodeProtocol {
             let startLocation = scanner.currentIndex
             
             /// Check if this is an actual container or just some random #
-            guard let hashtag = scanner.scanCharacters(from: CharacterSet.alphanumerics) else {
+            guard let hashtag = scanner.scanCharacters(from: CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "_-"))) else {
                 scanner.currentIndex = startLocation
                 currentNode.addChild(MFMNode(currentNode, plaintext: token))
                 continue
