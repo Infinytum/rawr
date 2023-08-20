@@ -205,6 +205,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		201A510C2A92603E00956489 /* Emojis */ = {
+			isa = PBXGroup;
+			children = (
+				2042881D2A8BAD8F001DC6F2 /* Emoji.swift */,
+			);
+			path = Emojis;
+			sourceTree = "<group>";
+		};
 		204DA4072A891EE400BB0598 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,7 +365,7 @@
 		2068CC1B2A87C25B00F8A958 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				20AE17AC2A8841D300C9AC07 /* Helpers */,
+				201A510C2A92603E00956489 /* Emojis */,
 				2068CC1F2A87C25B00F8A958 /* Notes */,
 				2068CC292A87C25B00F8A958 /* Profile */,
 				2068CC1C2A87C25B00F8A958 /* Timelines */,
@@ -453,9 +461,9 @@
 		2068CC442A87EADE00F8A958 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				2068CC452A87EAFC00F8A958 /* ViewReloader.swift */,
+				20AE17AD2A88421A00C9AC07 /* ImageViewer.swift */,
 				204DA3FD2A8901BE00BB0598 /* RemoteImage.swift */,
-				2042881D2A8BAD8F001DC6F2 /* Emoji.swift */,
+				2068CC452A87EAFC00F8A958 /* ViewReloader.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -468,14 +476,6 @@
 				207C33DB2A8FB8B700500E33 /* TimelineItem.swift */,
 			);
 			path = Context;
-			sourceTree = "<group>";
-		};
-		20AE17AC2A8841D300C9AC07 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				20AE17AD2A88421A00C9AC07 /* ImageViewer.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		20D37D2F2A88575300BCC1C5 /* Chat */ = {

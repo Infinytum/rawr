@@ -137,8 +137,8 @@ fileprivate func mfmRenderNode(_ node: MFMNodeProtocol, context: MFMRenderContex
         return mfmMergeRenderResult(renderNodeStack) { node, isLastNode in
             let newNode = MFMRenderNode(
                 viewStack: node.viewStack,
-                newStack: newStack,
-                endStack: isLastNode,
+                newStack: newStack || node.newStack,
+                endStack: isLastNode || node.endStack,
                 alignment: .center
             )
             newStack = false
@@ -218,7 +218,7 @@ fileprivate func mfmRenderNodePlaintext(_ plaintext: String) -> MFMRenderNodeSta
             }
         }
         
-        /// Line rendering completed, commit viewStack into a rendered node
+        /// Line rendering completed, commit viewStack into a rendered
         nodeStack.append(MFMRenderNode(viewStack: viewStack, newStack: lineIdx == lines.startIndex && beginsWithBreak, endStack: lines.count > 1 && lineIdx < lines.count - 1, alignment: .leading))
     }
     
@@ -227,10 +227,31 @@ fileprivate func mfmRenderNodePlaintext(_ plaintext: String) -> MFMRenderNodeSta
 
 // Hello @user and @user@instance.local!\nThis is a <center>centered $[tada $[x2 $[sparkle gay]]]</center> #test_2023. Visit:asd :drgn:\n https://www.example.com
 // Hello @user how are you doing this is a very long text I hope it will wrap.\nYay it did. Great so far! Nice walk-in rack :drgn: <center> This text should be centered</center> And this shouldn't
+fileprivate let testNote = """
+**Welcome to rawr.**
+This is a test post for <i>rawr.</i>, an iOS-native app for Firefish!
+
+
+<center>This is the first iOS app made specifically for Firefish
+<small>Misskey and Mastodon apps do not count :)</small>
+</center>
+
+**Why did we do this?** :drgn_up:
+Firefish is seeing more and more adoption, but the lack of proper mobile apps is hurting the process as people are disappointed with the lack of functionality in Misskey apps and the lack of stability and completeness in Mastodon apps.
+
+$[blur And because it was fun]
+$[x2 :drgn_laser_end::drgn_laser_mid::drgn_laser_mid::drgn_laser_mid::drgn_laser_start::drgn_yell:]
+Primarily developed by @nila@derg.social and @drafolin@derg.social to improve the user experience of derg.social, we are happy to announce that this app works with any Firefish instance!
+
+#firefish #app #development #developer #announcement #fediverse
+"""
+
+fileprivate let testNoteOld = "Hello @user and @user@instance.local!\nThis is a <center>centered **test** $[tada $[x2 $[sparkle gay]]]</center>**test** #test_2023. Visit:asd :drgn:\nhttps://www.example.com\n$[x4 $[bg.color=000000 $[fg.color=00ff00 ***hacker voice* **<i>I'm in</i>]]]\n$[scale.y=2 🍮]\n$[blur This is a spoiler]"
+
 #Preview {
     VStack {
         Spacer()
-        ForEach(mfmRender(tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered **test** $[tada $[x2 $[sparkle gay]]]</center>**test** #test_2023. Visit:asd :drgn:\nhttps://www.example.com\n$[x4 $[bg.color=000000 $[fg.color=00ff00 ***hacker voice* **<i>I'm in</i>]]]\n$[scale.y=2 🍮]\n$[blur This is a spoiler #yiff]")).renderedNote) { view in
+        ForEach(mfmRender(tokenize(testNote)).renderedNote) { view in
             AnyView(view.view).border(.gray)
         }
         Spacer()
