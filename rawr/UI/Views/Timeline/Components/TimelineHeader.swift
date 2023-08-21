@@ -18,8 +18,7 @@ struct TimelineHeader: View {
                 ProfileSwitcher()
                     .frame(width: 40, height: 40)
                 Spacer()
-                Image(systemName: "antenna.radiowaves.left.and.right")
-                    .font(.system(size: 20))
+                AntennaMenu()
             }
             VStack {
                 Menu {
@@ -62,4 +61,5 @@ struct TimelineHeader: View {
 
 #Preview {
     TimelineHeader(selectedTab: .constant(0))
+        .environmentObject(ViewContext())
 }
