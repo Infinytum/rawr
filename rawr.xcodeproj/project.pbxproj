@@ -90,6 +90,7 @@
 		20B7E14D2A936127003E3CE4 /* AntennaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B7E14C2A936127003E3CE4 /* AntennaModel.swift */; };
 		20B7E14F2A93630F003E3CE4 /* AntennaTimelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B7E14E2A93630F003E3CE4 /* AntennaTimelineContext.swift */; };
 		20B7E1522A93656A003E3CE4 /* MisskeyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20B7E1512A93656A003E3CE4 /* MisskeyKit */; };
+		20B7E1542A936916003E3CE4 /* NotificationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B7E1532A936916003E3CE4 /* NotificationContext.swift */; };
 		20D37D322A88577000BCC1C5 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D37D312A88577000BCC1C5 /* ChatListView.swift */; };
 /* End PBXBuildFile section */
 
@@ -171,6 +172,7 @@
 		20B7E14A2A935FB3003E3CE4 /* AntennaMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntennaMenu.swift; sourceTree = "<group>"; };
 		20B7E14C2A936127003E3CE4 /* AntennaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntennaModel.swift; sourceTree = "<group>"; };
 		20B7E14E2A93630F003E3CE4 /* AntennaTimelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntennaTimelineContext.swift; sourceTree = "<group>"; };
+		20B7E1532A936916003E3CE4 /* NotificationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationContext.swift; sourceTree = "<group>"; };
 		20D37D312A88577000BCC1C5 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -506,6 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				209391042A92A2DA006FDA19 /* Components */,
+				20B7E1532A936916003E3CE4 /* NotificationContext.swift */,
 				209391022A92A2B0006FDA19 /* NotificationView.swift */,
 			);
 			path = Notifications;
@@ -683,6 +686,7 @@
 				2068CBF02A87B5BC00F8A958 /* ContentView.swift in Sources */,
 				201A50F92A91384500956489 /* MFMRenderModifier.swift in Sources */,
 				204DA4022A890DEC00BB0598 /* ChatMessage.swift in Sources */,
+				20B7E1542A936916003E3CE4 /* NotificationContext.swift in Sources */,
 				2068CC2E2A87C25B00F8A958 /* NoteBodyReactions.swift in Sources */,
 				204DA4272A8AC32D00BB0598 /* Visualizer.swift in Sources */,
 				2068CC102A87B96D00F8A958 /* OnboardingServerCard.swift in Sources */,
