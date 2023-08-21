@@ -22,7 +22,7 @@ struct UserView: View {
             return []
         }
         
-        let result = mfmRender(tokenize(self.user!.name ?? ""), emojis: self.user!.emojis ?? [])
+        let result = mfmRender(tokenize(user.name ?? ""), emojis: user.emojis ?? [])
         return result.renderedNote
     }
 
