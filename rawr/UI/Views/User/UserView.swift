@@ -99,6 +99,7 @@ struct UserView: View {
                 let username = userComponents[0]
                 MisskeyKit.shared.users.showUser(username: username) {user,err in
                     guard err == nil else {
+                        error = err
                         return
                     }
                     self.user = user
@@ -106,6 +107,7 @@ struct UserView: View {
             } else if userComponents.count == 2 {
                 MisskeyKit.shared.users.showUser(username:  userComponents[0], host: userComponents[1]) {user,err in
                     guard err == nil else {
+                        error = err
                         return
                     }
                     
@@ -113,6 +115,7 @@ struct UserView: View {
                 }
                 
             } else {
+                print("Invalid username \(userName)")
                 return
             }
         }
