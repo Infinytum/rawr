@@ -21,10 +21,10 @@ extension Array where Element: Equatable {
 
 struct NoteBodyGallery: View {
     @State private var isImagePresented = false
-    private var presentedImage: Image? {
-        images[presentedImageIndex!]!
+    private var presentedImage: Image {
+        images[presentedImageIndex!]
     }
-    @State private var images: [Int: Image?] = [:]
+    @State private var images: [Image] = []
     @State private var presentedImageIndex: Int? = nil
     
     @State private var lastTranslation: CGSize = .zero
@@ -78,7 +78,7 @@ struct NoteBodyGallery: View {
                                         .clipped()
                                 }
                                 .onAppear {
-                                    images[index] = image
+                                    images.append(image)
                                 }
                                 .blur(radius: file.isSensitive ?? false && !nsfwDismissed.contains(file.id!) ? 15 : 0)
                                 .overlay {
@@ -125,33 +125,44 @@ struct NoteBodyGallery: View {
         }
         .fullScreenCover(isPresented: self.$isImagePresented) {
             ZStack {
-                if images[presentedImageIndex!-1] != nil {
-                    ImageViewer(
-                        image: images[presentedImageIndex!-1]!!,
-                        vSwipeOwned: false,
-                        hSwipeOwned: false
-                    )
-                    .offset(x:offset.x - UIScreen.main.bounds.width, y:0)
-                }
-                ImageViewer(
-                    image: self.presentedImage!,
-                    vSwipeOwned: $vSwipeChildOwned,
-                    hSwipeOwned: $hSwipeChildOwned
-                )
-                .offset(x:offset.x, y:offset.y)
-                .onTapGesture {
-                    withAnimation {
-                        menusOffset = menusOffset == 60 ? 0 : 60
-                    }
-                }
-                if images[presentedImageIndex!+1] != nil {
+                GeometryReader {viewerContainserSize in
+                    if presentedImageIndex!-1 > 0 {
                         ImageViewer(
-                            image: images[presentedImageIndex!+1]!!,
+                            image: images[presentedImageIndex!-1],
+                            vSwipeOwned: false,
+                            hSwipeOwned: false
+                        )
+                        .offset(x:offset.x - UIScreen.main.bounds.width, y:0)
+                    }
+                    ImageViewer(
+                        image: self.presentedImage,
+                        vSwipeOwned: $vSwipeChildOwned,
+                        hSwipeOwned: $hSwipeChildOwned
+                    )
+                    .offset(x:offset.x, y:offset.y)
+                    .onTapGesture {loc in
+                        if loc.x < viewerContainserSize.size.width &&
+                            loc.x > viewerContainserSize.size.width - 30 &&
+                            images.count - 1 > presentedImageIndex! + 1 {
+                            presentedImageIndex! += 1
+                        } else if loc.x < 30 &&
+                                    loc.x > 0 {
+                            presentedImageIndex! -= 1
+                        } else {
+                            withAnimation {
+                                menusOffset = menusOffset == 60 ? 0 : 60
+                            }
+                        }
+                    }
+                    if images.count - 1 >= presentedImageIndex! + 1 {
+                        ImageViewer(
+                            image: images[presentedImageIndex!+1],
                             vSwipeOwned: false,
                             hSwipeOwned: false
                         )
                         .offset(x: offset.x + UIScreen.main.bounds.width, y:0)
                     }
+                }
             }
                 .simultaneousGesture(dragToDismiss)
                 .simultaneousGesture(dragToChangeImage)
@@ -177,7 +188,7 @@ struct NoteBodyGallery: View {
                                 Menu() {
                                     Button() {
                                         UIImageWriteToSavedPhotosAlbum(
-                                            ImageRenderer(content: presentedImage!).uiImage!, nil, nil, nil)
+                                            ImageRenderer(content: presentedImage).uiImage!, nil, nil, nil)
                                     } label: {
                                         Image(systemName: "square.and.arrow.down")
                                         Text("Save image")
