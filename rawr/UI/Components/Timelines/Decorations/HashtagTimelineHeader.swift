@@ -12,13 +12,15 @@ struct HashtagTimelineHeader: View {
     @State var presentedHashtag: String
     
     var body: some View {
-            VStack {
-                Text(self.context.currentInstanceName).font(.system(size: 20, weight: .semibold)).foregroundColor(.primary)
-                Text("#\(self.presentedHashtag)").foregroundColor(.primary.opacity(0.7))
-                    .font(.system(size: 16))
-                    .padding(.top, -12)
+        HStack(alignment: .center) {
+                Image(systemName: "number")
+                .font(.system(size: 24, weight: .semibold))
+                .foregroundColor(.primary.opacity(0.7))
+
+                Text(self.presentedHashtag)
             }
-            .font(.system(size: 20, weight: .thin)).padding(.top, 10)
+            .font(.system(size: 20))
+            .padding(.top, 10)
     }
 }
 
