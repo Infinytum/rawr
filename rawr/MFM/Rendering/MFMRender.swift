@@ -64,7 +64,6 @@ fileprivate func mfmRenderNode(_ node: MFMNodeProtocol, context: MFMRenderContex
             return []
         }
         return mfmRenderNodePlaintext(plaintext)
-    // TODO: OnTap Handlers for Mentions once Profiles are ready
     case .mention:
         /// If there is no value, this is not worth rendering.
         guard let username = node.value else {
@@ -77,6 +76,9 @@ fileprivate func mfmRenderNode(_ node: MFMNodeProtocol, context: MFMRenderContex
                     MFMRenderView {
                         Text("@" + username)
                             .foregroundStyle(.orange)
+                            .onTapGesture {
+                                context.tapMention("@" + username)
+                            }
                     }
                 ],
                 newStack: false,

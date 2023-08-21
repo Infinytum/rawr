@@ -19,6 +19,9 @@ struct NoteBodyText: View {
     @State var presentHashtagSheet = false
     @State var presentedHashtag = ""
     
+    @State var presentUserSheet = false
+    @State var presentedUser = ""
+    
     var body: some View {
         VStack {
             ForEach(self.getRenderedNote()) { view in
@@ -33,7 +36,9 @@ struct NoteBodyText: View {
             }
             .font(.system(size: 20, weight: .thin)).padding(.top, 10)
             Timeline(timelineContext: HashtagTimelineContext(self.presentedHashtag))
-        }).onAppear {
+        }).sheet(isPresented: $presentUserSheet) {
+            UserView(userName: presentedUser)
+        }.onAppear {
             guard let renderedNote = self.renderedNote else {
                 return
             }
@@ -56,6 +61,12 @@ struct NoteBodyText: View {
             self.presentedHashtag = hashtag
             self.viewRefresher.reloadView()
             self.presentHashtagSheet = true
+        }
+        
+        context.onMentionTap { username in
+            self.presentedUser = username
+            self.viewRefresher.reloadView()
+            self.presentUserSheet = true
         }
     }
 }
