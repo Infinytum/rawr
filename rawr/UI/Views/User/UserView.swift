@@ -17,6 +17,16 @@ struct UserView: View {
     @State private var isErrored: Bool = false
     @State private var selectedScope: UserTimelineContext.timelineScope = .notes
     
+    var renderedNameNodes: MFMRenderViewStack {
+        guard let user = self.user else {
+            return []
+        }
+        
+        let result = mfmRender(tokenize(self.user!.name ?? ""), emojis: self.user!.emojis ?? [])
+        return result.renderedNote
+    }
+
+    
     var body: some View {
         VStack {
             if user != nil {
@@ -26,8 +36,9 @@ struct UserView: View {
                             RemoteImage(user!.avatarUrl)
                                 .frame(width: 50, height: 50)
                                 .clipped()
-                            Text(user!.name ?? "<unavailable>")
-                                .foregroundStyle(.white)
+                            ForEach(renderedNameNodes) {view in
+                                view
+                            }
                         }
                         .padding()
                         .background {
