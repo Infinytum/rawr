@@ -48,7 +48,6 @@ struct NoteBodyText: View {
         
         let result = mfmRender(tokenize(self.note.text ?? ""), emojis: self.note.emojis ?? self.note.renote?.emojis ?? [])
         self.registerContextHandlers(result.context)
-        self.renderedNote = renderedNote
         return result.renderedNote
     }
     
