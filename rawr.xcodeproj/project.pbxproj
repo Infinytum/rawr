@@ -92,6 +92,8 @@
 		20B7E1522A93656A003E3CE4 /* MisskeyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20B7E1512A93656A003E3CE4 /* MisskeyKit */; };
 		20B7E1542A936916003E3CE4 /* NotificationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B7E1532A936916003E3CE4 /* NotificationContext.swift */; };
 		20D37D322A88577000BCC1C5 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D37D312A88577000BCC1C5 /* ChatListView.swift */; };
+		3F8E62D92A93CA220093A1D4 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8E62D72A93CA220093A1D4 /* UserView.swift */; };
+		3F8E62DA2A93CA220093A1D4 /* UserTimelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8E62D82A93CA220093A1D4 /* UserTimelineContext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -174,6 +176,8 @@
 		20B7E14E2A93630F003E3CE4 /* AntennaTimelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntennaTimelineContext.swift; sourceTree = "<group>"; };
 		20B7E1532A936916003E3CE4 /* NotificationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationContext.swift; sourceTree = "<group>"; };
 		20D37D312A88577000BCC1C5 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		3F8E62D72A93CA220093A1D4 /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		3F8E62D82A93CA220093A1D4 /* UserTimelineContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTimelineContext.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +249,7 @@
 		204DA4132A8A6CCD00BB0598 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3F8E62D62A93CA220093A1D4 /* User */,
 				20D37D2F2A88575300BCC1C5 /* Chat */,
 				204DA4142A8A6D0400BB0598 /* Note */,
 				209391012A92A29F006FDA19 /* Notifications */,
@@ -562,6 +567,15 @@
 			name = Components;
 			sourceTree = "<group>";
 		};
+		3F8E62D62A93CA220093A1D4 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				3F8E62D72A93CA220093A1D4 /* UserView.swift */,
+				3F8E62D82A93CA220093A1D4 /* UserTimelineContext.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -702,6 +716,7 @@
 				20B7E14B2A935FB3003E3CE4 /* AntennaMenu.swift in Sources */,
 				209391032A92A2B1006FDA19 /* NotificationView.swift in Sources */,
 				2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */,
+				3F8E62D92A93CA220093A1D4 /* UserView.swift in Sources */,
 				2068CC312A87C25B00F8A958 /* Note.swift in Sources */,
 				2098F91E2A8EF792003CAAE2 /* Scanner.swift in Sources */,
 				204DA4062A89167500BB0598 /* ChatBar.swift in Sources */,
@@ -724,6 +739,7 @@
 				2068CC2B2A87C25B00F8A958 /* Timeline.swift in Sources */,
 				2068CC2D2A87C25B00F8A958 /* NoteFooter.swift in Sources */,
 				201A50FB2A9138EA00956489 /* MFMModifier.swift in Sources */,
+				3F8E62DA2A93CA220093A1D4 /* UserTimelineContext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

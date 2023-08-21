@@ -14,20 +14,32 @@ struct NoteHeader: View {
     
     @EnvironmentObject var context: ViewContext
     @ObservedObject var note: NoteModel
-
+    @State private var displayUserSheet = false
+    
     var body: some View {
         HStack {
-            NetworkImage(url: URL(string: self.note.user?.avatarUrl ?? "")) { image in
-                image.resizable().aspectRatio(contentMode: .fill)
-            } placeholder: {
-                Rectangle()
-                    .foregroundColor(.gray.opacity(0.5))
-            }.frame(width: 50, height: 50).cornerRadius(11)
-            VStack(alignment: .leading) {
-                Text(self.note.user?.name ?? "<no name>")
-                    .lineLimit(1)
-                Text("@" + (self.note.user?.username ?? "<nousername>")).foregroundStyle(.gray)
-                    .lineLimit(1)
+            HStack{
+                NetworkImage(url: URL(string: self.note.user?.avatarUrl ?? "")) { image in
+                    image.resizable().aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    Rectangle()
+                        .foregroundColor(.gray.opacity(0.5))
+                }.frame(width: 50, height: 50).cornerRadius(11)
+                VStack(alignment: .leading) {
+                    Text(self.note.user?.name ?? "<no name>")
+                        .lineLimit(1)
+                    Text("@" + (self.note.user?.username ?? "<nousername>")).foregroundStyle(.gray)
+                        .lineLimit(1)
+                }
+            }
+            .onTapGesture {
+                displayUserSheet.toggle()
+            }
+            .sheet(isPresented: $displayUserSheet) {
+                let username = "@\(self.note.user?.username ?? "")"
+                let instance = self.note.user?.host
+                let handle = instance == nil ? username : "\(username)@\(instance!)"
+                UserView(userName: handle)
             }
             Spacer()
             VStack(alignment: .trailing) {

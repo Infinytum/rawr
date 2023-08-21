@@ -12,6 +12,8 @@ struct ProfileSwitcher: View {
     
     @EnvironmentObject var context: ViewContext
     
+    @State private var displayOwnProfile = false
+    
     var body: some View {
         Menu {
 //            Section("Available Accounts") {
@@ -22,6 +24,12 @@ struct ProfileSwitcher: View {
 //            } label: {
 //                Label("Add Account", systemImage: "person.badge.plus")
 //            }
+            Button {
+                displayOwnProfile = true
+            } label: {
+                Label("Your profile", systemImage: "person")
+            }
+            
             Button(role: .destructive) {
                 RawrKeychain().apiKey = nil
                 self.context.refreshContext()
@@ -31,6 +39,10 @@ struct ProfileSwitcher: View {
         } label: {
             RemoteImage(self.context.currentUser?.avatarUrl).cornerRadius(11)
         }
+        .sheet(isPresented: $displayOwnProfile) {
+            UserView(userName: "@\(context.currentUser!.username!)")
+        }
+        
     }
 }
 
