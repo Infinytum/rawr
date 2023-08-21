@@ -126,7 +126,7 @@ struct NoteBodyGallery: View {
         .fullScreenCover(isPresented: self.$isImagePresented) {
             ZStack {
                 GeometryReader {viewerContainserSize in
-                    if presentedImageIndex!-1 > 0 {
+                    if presentedImageIndex!-1 >= 0 {
                         ImageViewer(
                             image: images[presentedImageIndex!-1],
                             vSwipeOwned: false,
