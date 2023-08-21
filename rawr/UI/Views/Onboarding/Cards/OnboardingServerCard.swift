@@ -34,15 +34,17 @@ struct OnboardingServerCard: View {
                 }.padding(.leading, 5)
             }.onTapGesture {
                 self.instanceHostname = "derg.social"
-                onServerSet(self.instanceHostname)
+                onServerSet(self.instanceHostname.lowercased())
             }
             Spacer()
             Button("Other Instance") {
                 presentAlert = true
             }.alert("Other Instance", isPresented: $presentAlert, actions: {
                 TextField("E.g. derg.social", text: $instanceHostname)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
                 Button("Set", action: {
-                    onServerSet(self.instanceHostname)
+                    onServerSet(self.instanceHostname.lowercased())
                 })
                 Button("Cancel", role: .cancel, action: {})
             }, message: {
