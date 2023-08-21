@@ -58,16 +58,6 @@ struct NoteBodyGallery: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0)
                                 .aspectRatio(1, contentMode: .fit)
-                                .background(alignment: .center){
-                                    image
-                                        .resizable()
-                                        .blur(radius: 15)
-                                        .aspectRatio(contentMode: .fill)
-                                        .clipped()
-                                }
-                                .onAppear {
-                                    images[index] = image
-                                }
                                 .onTapGesture {
                                     if file.isSensitive ?? false && !nsfwDismissed.contains(file.id!) {
                                         withAnimation{
@@ -78,6 +68,17 @@ struct NoteBodyGallery: View {
                                         self.isImagePresented = true
                                         self.presentedImageIndex = index
                                     }
+                                }
+                                .clipped()
+                                .background(alignment: .center){
+                                    image
+                                        .resizable()
+                                        .blur(radius: 15)
+                                        .aspectRatio(contentMode: .fill)
+                                        .clipped()
+                                }
+                                .onAppear {
+                                    images[index] = image
                                 }
                                 .blur(radius: file.isSensitive ?? false && !nsfwDismissed.contains(file.id!) ? 15 : 0)
                                 .overlay {

@@ -22,6 +22,12 @@ struct ProfileSwitcher: View {
 //            } label: {
 //                Label("Add Account", systemImage: "person.badge.plus")
 //            }
+            Button {
+                
+            } label: {
+                Label("Your profile", systemImage: "person")
+            }
+            
             Button(role: .destructive) {
                 RawrKeychain().apiKey = nil
                 self.context.refreshContext()
