@@ -28,13 +28,7 @@ struct NoteBodyText: View {
                 AnyView(view.view)
             }
         }.sheet(isPresented: $presentHashtagSheet, content: {
-            VStack {
-                Text(self.context.currentInstanceName).font(.system(size: 20, weight: .semibold)).foregroundColor(.primary)
-                Text("#\(self.presentedHashtag)").foregroundColor(.primary.opacity(0.7))
-                    .font(.system(size: 16))
-                    .padding(.top, -12)
-            }
-            .font(.system(size: 20, weight: .thin)).padding(.top, 10)
+            HashtagTimelineHeader(presentedHashtag: self.presentedHashtag)
             Timeline(timelineContext: HashtagTimelineContext(self.presentedHashtag))
         }).sheet(isPresented: $presentUserSheet) {
             UserView(userName: presentedUser)

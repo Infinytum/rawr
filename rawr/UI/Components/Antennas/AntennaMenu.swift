@@ -37,13 +37,7 @@ struct AntennaMenu: View {
                 .font(.system(size: 20))
         }.onAppear(perform: self.onAppear)
         .sheet(isPresented: $presentAntennaSheet, content: {
-            VStack {
-                Text(self.context.currentInstanceName).font(.system(size: 20, weight: .semibold)).foregroundColor(.primary)
-                Text("\(self.presentedAntenna!.name ?? "Unnamed Antenna")").foregroundColor(.primary.opacity(0.7))
-                    .font(.system(size: 16))
-                    .padding(.top, -12)
-            }
-            .font(.system(size: 20, weight: .thin)).padding(.top, 10)
+            AntennaTimelineHeader()
             Timeline(timelineContext: AntennaTimelineContext(self.presentedAntenna!.id!))
         })
     }
