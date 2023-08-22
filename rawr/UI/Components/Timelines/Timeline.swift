@@ -47,14 +47,12 @@ struct Timeline: View {
                 }
             } else {
                 VStack {
-                    Spacer()
                     Text("Couldn't fetch Timeline")
                         .font(.system(size: 20, weight: .regular))
                     Text(self.timeline.fetchError!)
                         .font(.system(size: 15, weight: .medium))
                         .foregroundColor(.primary.opacity(0.7))
                         .multilineTextAlignment(.center)
-                    Spacer()
                 }
             }
         }

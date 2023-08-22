@@ -231,6 +231,42 @@ func tokenize(_ originalInput: String) -> MFMNodeProtocol {
     return rootNode
 }
 
+func tokenizeEmojisOnly(_ input: String) -> MFMNodeProtocol {
+    let scanner = Scanner(string: input)
+    scanner.charactersToBeSkipped = nil
+    
+    let rootNode = MFMNode()
+    var currentNode: MFMNodeProtocol = rootNode
+    
+    while !scanner.isAtEnd {
+        if let text = scanner.scanUpToCharacters(from: CharacterSet(charactersIn: ":")) {
+            currentNode.addChild(MFMNode(currentNode, plaintext: text))
+        }
+        
+        if let token = scanner.scanString(":") {
+            let startLocation = scanner.currentIndex
+            
+            /// Check if this is an actual container or just some random #
+            guard let emoji = scanner.scanCharacters(from: CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "_"))) else {
+                scanner.currentIndex = startLocation
+                currentNode.addChild(MFMNode(currentNode, plaintext: token))
+                continue
+            }
+            
+            guard scanner.scanString(":") != nil else {
+                scanner.currentIndex = startLocation
+                currentNode.addChild(MFMNode(currentNode, plaintext: token))
+                continue
+            }
+            
+            currentNode.addChild(MFMNode(currentNode, emoji: emoji))
+            continue
+        }
+    }
+    
+    return currentNode
+}
+
 fileprivate func containerTagToNodeType(tag: String) -> MFMNodeType? {
     switch (tag.lowercased()) {
     case "center":

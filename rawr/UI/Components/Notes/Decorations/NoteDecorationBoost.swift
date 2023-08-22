@@ -10,6 +10,10 @@ import MisskeyKit
 
 struct NoteDecorationBoost: View {
     @ObservedObject var note: NoteModel
+    @ObservedObject var viewRefresher = ViewReloader()
+    
+    @State var presentUserSheet = false
+    @State var presentedUser = ""
 
     var body: some View {
         HStack {
@@ -26,6 +30,12 @@ struct NoteDecorationBoost: View {
             Text(self.note.relativeCreatedAtTime())
                 .foregroundColor(.primary.opacity(0.7))
                 .font(.system(size: 15))
+        }.sheet(isPresented: $presentUserSheet) {
+            UserView(userName: presentedUser)
+        }.onTapGesture {
+            self.presentedUser = "\(self.note.user?.username ?? "")@\(self.note.user?.host ?? "")"
+            self.viewRefresher.reloadView()
+            self.presentUserSheet = true
         }
     }
 }

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2001722B2A93FD280079268B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2001722A2A93FD280079268B /* User.swift */; };
+		2001722E2A93FDB10079268B /* UserHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2001722D2A93FDB10079268B /* UserHeader.swift */; };
+		200172302A93FE950079268B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2001722F2A93FE950079268B /* UserModel.swift */; };
+		200172322A9424CB0079268B /* MFMBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200172312A9424CB0079268B /* MFMBody.swift */; };
 		201A50EB2A901F5000956489 /* HashtagTimelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A50EA2A901F5000956489 /* HashtagTimelineContext.swift */; };
 		201A50F22A90397300956489 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A50F12A90397300956489 /* Color.swift */; };
 		201A50F52A90DF5B00956489 /* InstanceCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A50F42A90DF5B00956489 /* InstanceCredentials.swift */; };
@@ -97,6 +101,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2001722A2A93FD280079268B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		2001722D2A93FDB10079268B /* UserHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeader.swift; sourceTree = "<group>"; };
+		2001722F2A93FE950079268B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		200172312A9424CB0079268B /* MFMBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFMBody.swift; sourceTree = "<group>"; };
 		201A50EA2A901F5000956489 /* HashtagTimelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagTimelineContext.swift; sourceTree = "<group>"; };
 		201A50F12A90397300956489 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		201A50F42A90DF5B00956489 /* InstanceCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceCredentials.swift; sourceTree = "<group>"; };
@@ -200,6 +208,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		200172292A93FCF70079268B /* User */ = {
+			isa = PBXGroup;
+			children = (
+				2001722C2A93FDA10079268B /* Components */,
+				2001722A2A93FD280079268B /* User.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		2001722C2A93FDA10079268B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2001722D2A93FDB10079268B /* UserHeader.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		201A50EC2A902F8800956489 /* Rendering */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,6 +423,7 @@
 				209391072A92A35F006FDA19 /* Notifications */,
 				2068CC292A87C25B00F8A958 /* Profile */,
 				2068CC1C2A87C25B00F8A958 /* Timelines */,
+				200172292A93FCF70079268B /* User */,
 				2068CC442A87EADE00F8A958 /* Utilities */,
 			);
 			path = Components;
@@ -475,6 +501,7 @@
 				201A50F62A911ECF00956489 /* MisskeyKitError.swift */,
 				2093910A2A92A5ED006FDA19 /* NotificationModel.swift */,
 				20B7E14C2A936127003E3CE4 /* AntennaModel.swift */,
+				2001722F2A93FE950079268B /* UserModel.swift */,
 			);
 			path = MisskeyKit;
 			sourceTree = "<group>";
@@ -495,6 +522,7 @@
 				20AE17AD2A88421A00C9AC07 /* ImageViewer.swift */,
 				204DA3FD2A8901BE00BB0598 /* RemoteImage.swift */,
 				2068CC452A87EAFC00F8A958 /* ViewReloader.swift */,
+				200172312A9424CB0079268B /* MFMBody.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -670,6 +698,7 @@
 				204DA4092A891EF200BB0598 /* TimelineHeader.swift in Sources */,
 				204DA41F2A8AB98D00BB0598 /* MFMNodeType.swift in Sources */,
 				201A51052A9144C600956489 /* MFMRender.swift in Sources */,
+				200172322A9424CB0079268B /* MFMBody.swift in Sources */,
 				207C33E82A8FD13500500E33 /* LocalTimelineContext.swift in Sources */,
 				201A50FF2A913E1F00956489 /* MFMRenderNode.swift in Sources */,
 				204DA3F82A88F6C600BB0598 /* ChatListHeader.swift in Sources */,
@@ -681,6 +710,7 @@
 				2068CC032A87B85500F8A958 /* ViewContext.swift in Sources */,
 				201A51032A91447300956489 /* MFMRenderContext.swift in Sources */,
 				201A50F72A911ECF00956489 /* MisskeyKitError.swift in Sources */,
+				2001722E2A93FDB10079268B /* UserHeader.swift in Sources */,
 				204DA3F42A8869D900BB0598 /* MessageHistoryModel.swift in Sources */,
 				201A50F22A90397300956489 /* Color.swift in Sources */,
 				201A50EB2A901F5000956489 /* HashtagTimelineContext.swift in Sources */,
@@ -704,6 +734,7 @@
 				2068CC2E2A87C25B00F8A958 /* NoteBodyReactions.swift in Sources */,
 				204DA4272A8AC32D00BB0598 /* Visualizer.swift in Sources */,
 				2068CC102A87B96D00F8A958 /* OnboardingServerCard.swift in Sources */,
+				200172302A93FE950079268B /* UserModel.swift in Sources */,
 				204288202A8BAE64001DC6F2 /* EmojiModel.swift in Sources */,
 				207C33EA2A8FD18D00500E33 /* GlobalTimelineContext.swift in Sources */,
 				20AE17AE2A88421A00C9AC07 /* ImageViewer.swift in Sources */,
@@ -740,6 +771,7 @@
 				2068CC2D2A87C25B00F8A958 /* NoteFooter.swift in Sources */,
 				201A50FB2A9138EA00956489 /* MFMModifier.swift in Sources */,
 				3F8E62DA2A93CA220093A1D4 /* UserTimelineContext.swift in Sources */,
+				2001722B2A93FD280079268B /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

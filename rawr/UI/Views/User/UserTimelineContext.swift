@@ -31,7 +31,6 @@ class UserTimelineContext: TimelineContextBase, TimelineContextProtocol {
     }
     
     func fetchInitialItems() {
-        print(scope)
         MisskeyKit.shared.notes.getUserNotes(includeReplies: scope == .withReplies, userId: userID, withFiles: scope == .onlyFiles, completion: self.handleItems)
         _ = MisskeyKit.shared.streaming.connect(apiKey: RawrKeychain().apiKey ?? "", channels: [.globalTimeline]) { response, _, _, _ in
             guard let note = response as? NoteModel else {

@@ -33,7 +33,7 @@ struct Notification: View {
                     HStack {
                         Text(self.title())
                             .font(.system(size: 18))
-                            .lineLimit(1, reservesSpace: true)
+                            .lineLimit(2, reservesSpace: false)
                         Spacer()
                         Text(self.notification.createdAt?.toDate()?.relative() ?? "Unknown")
                             .font(.system(size: 16))
@@ -123,7 +123,7 @@ struct Notification: View {
         case .quote:
             return "quote.bubble"
         case .reaction:
-            return "hands.and.sparkles"
+            return "hands.sparkles"
         case .pollVote, .pollEnded:
             return "music.mic"
         case .receiveFollowRequest:

@@ -11,118 +11,47 @@ import MisskeyKit
 struct UserView: View {
     @EnvironmentObject var context: ViewContext
     
-    @State var userName: String
-    @State private var user: UserModel?
-    @State private var error: MisskeyKitError?
-    @State private var isErrored: Bool = false
-    @State private var selectedScope: UserTimelineContext.timelineScope = .notes
+    let userName: String
     
-    var renderedNameNodes: MFMRenderViewStack {
-        guard let user = self.user else {
-            return []
-        }
-        
-        let result = mfmRender(tokenize(user.name ?? ""), emojis: user.emojis ?? [])
-        return result.renderedNote
-    }
-
+    @State private var user: UserModel?
     
     var body: some View {
         VStack {
             if user != nil {
-                VStack {
-                    HStack(alignment: .center) {
-                        HStack{
-                            RemoteImage(user!.avatarUrl)
-                                .frame(width: 50, height: 50)
-                                .clipped()
-                            ForEach(renderedNameNodes) {view in
-                                view
-                            }
-                        }
-                        .padding()
-                        .background {
-                            LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.7), .black.opacity(0.7), .clear]), startPoint: .top, endPoint: .bottom)
-                                .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .leading, endPoint: .trailing))
-                        }
-                        Spacer()
-                    }
-                    .background {
-                        RemoteImage(user!.bannerUrl)
-                            .aspectRatio(1, contentMode: .fill)
-                    }
-                    .frame(maxHeight: 100)
-                    .clipped()
-                    HStack {
-                        Spacer()
-                        VStack {
-                            Text(String(user!.notesCount!))
-                                .bold()
-                            Text("Notes")
-                        }
-                        Spacer()
-                        VStack {
-                            Text(String(user!.followersCount!))
-                                .bold()
-                            Text("Followers")
-                        }
-                        Spacer()
-                        VStack {
-                            Text(String(user!.followingCount!))
-                                .bold()
-                            Text("Following")
-                        }
-                        Spacer()
-                    }
-                }
-                Picker("Scope", selection: $selectedScope) {
-                    ForEach(UserTimelineContext.timelineScope.allCases) {scope in
-                        Text(scope.rawValue.capitalized)
-                    }
-                }
-                    .pickerStyle(.segmented)
-                    .padding()
-                Timeline(timelineContext: UserTimelineContext(user!.id, selectedScope))
-            } else if !isErrored {
-                Text("Loading...")
+                User(user: self.user!)
             } else {
-                Image(systemName: "triangle.exclamationmark")
+                Spacer()
+                ProgressView()
+                Spacer()
             }
-        }
-        .alert(error?.localizedDescription ?? "no error", isPresented: $isErrored) {
-        }
-        .onAppear{
-            // MARK: User initialisation
-            var userComponents = userName.components(separatedBy: "@")
+        }.onAppear(perform: self.onAppear)
+    }
+    
+    private func onAppear() {
+        var userComponents = self.userName.components(separatedBy: "@")
+        if (userComponents.first ?? "") == "" {
             userComponents.removeFirst()
-            if userComponents.count == 1 {
-                let username = userComponents[0]
-                MisskeyKit.shared.users.showUser(username: username) {user,err in
-                    guard err == nil else {
-                        error = err
-                        return
-                    }
-                    self.user = user
-                }
-            } else if userComponents.count == 2 {
-                MisskeyKit.shared.users.showUser(username:  userComponents[0], host: userComponents[1]) {user,err in
-                    guard err == nil else {
-                        error = err
-                        return
-                    }
-                    
-                    self.user = user
-                }
-                
-            } else {
-                print("Invalid username \(userName)")
-                return
-            }
         }
         
+        guard let username = userComponents.first else {
+            self.context.applicationError = ApplicationError(title: "Unable to display User", message: "Unable to determine username to display")
+            print("UserView: Unable to determine username to display")
+            return
+        }
+        
+        let instance = userComponents.count > 1 ? userComponents[1] : ""
+        MisskeyKit.shared.users.showUser(username: username, host: instance) { user, error in
+            guard let user = user else {
+                self.context.applicationError = ApplicationError(title: "Fetching user failed", message: error.explain())
+                print("UserView: Error while fetching user from API: \(error!)")
+                return
+            }
+            self.user = user
+        }
     }
 }
 
 #Preview {
-    UserView(userName: "dråfølin")
+    UserView(userName: "@nila")
+        .environmentObject(ViewContext())
 }

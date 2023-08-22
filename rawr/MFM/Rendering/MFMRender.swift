@@ -15,12 +15,12 @@ public struct MFMRender {
     let renderedNote: MFMRenderViewStack
 }
 
-func mfmRender(_ rootNode: MFMNodeProtocol, emojis: [EmojiModel] = []) -> MFMRender {
+func mfmRender(_ rootNode: MFMNodeProtocol, emojis: [EmojiModel] = [], plaintextWordlets: Int = 15) -> MFMRender {
     /// Create Render Context and render all children of the root view
     let renderContext: MFMRenderContext = MFMRenderContext()
     let renderNodeStack: MFMRenderNodeStack = mfmMergeRenderResult(
         rootNode.children.map({ childNode in
-            mfmRenderNode(childNode, context: renderContext, emojis: emojis)
+            mfmRenderNode(childNode, context: renderContext, emojis: emojis, plaintextWordlets: plaintextWordlets)
         })
     )
     
@@ -46,10 +46,10 @@ func mfmRender(_ rootNode: MFMNodeProtocol, emojis: [EmojiModel] = []) -> MFMRen
     )
 }
 
-fileprivate func mfmRenderNode(_ node: MFMNodeProtocol, context: MFMRenderContext, emojis: [EmojiModel] = []) -> MFMRenderNodeStack {
+fileprivate func mfmRenderNode(_ node: MFMNodeProtocol, context: MFMRenderContext, emojis: [EmojiModel] = [], plaintextWordlets: Int = 15) -> MFMRenderNodeStack {
     /// Pre-render the children of the node (if it has any)
     let renderNodeStack: MFMRenderResult = node.children.map({ childNode in
-            mfmRenderNode(childNode, context: context, emojis: emojis)
+        mfmRenderNode(childNode, context: context, emojis: emojis, plaintextWordlets: plaintextWordlets)
         })
     
     switch node.type {
@@ -63,7 +63,7 @@ fileprivate func mfmRenderNode(_ node: MFMNodeProtocol, context: MFMRenderContex
         guard let plaintext = node.value else {
             return []
         }
-        return mfmRenderNodePlaintext(plaintext)
+        return mfmRenderNodePlaintext(plaintext, plaintextWordlets: plaintextWordlets)
     case .mention:
         /// If there is no value, this is not worth rendering.
         guard let username = node.value else {
@@ -188,7 +188,7 @@ fileprivate func mfmRenderNode(_ node: MFMNodeProtocol, context: MFMRenderContex
     }
 }
 
-fileprivate func mfmRenderNodePlaintext(_ plaintext: String) -> MFMRenderNodeStack {
+fileprivate func mfmRenderNodePlaintext(_ plaintext: String, plaintextWordlets: Int = 15) -> MFMRenderNodeStack {
     /// Prepare rendering arrays
     var nodeStack: MFMRenderNodeStack = []
     var viewStack: MFMRenderViewStack = []
@@ -205,7 +205,7 @@ fileprivate func mfmRenderNodePlaintext(_ plaintext: String) -> MFMRenderNodeSta
         for (wordIdx, word) in words.enumerated() {
             
             /// Break up words longer than 15 characters to ensure long words can be rendered correctly with wrapping
-            for wordlet in word.split(every: 15) {
+            for wordlet in word.split(every: plaintextWordlets) {
                 viewStack.append(MFMRenderView {
                     Text(wordlet)
                 })
