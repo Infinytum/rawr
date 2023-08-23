@@ -96,6 +96,8 @@
 		20B7E1522A93656A003E3CE4 /* MisskeyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20B7E1512A93656A003E3CE4 /* MisskeyKit */; };
 		20B7E1542A936916003E3CE4 /* NotificationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B7E1532A936916003E3CE4 /* NotificationContext.swift */; };
 		20D37D322A88577000BCC1C5 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D37D312A88577000BCC1C5 /* ChatListView.swift */; };
+		3F0F011B2A940606006A48A5 /* AntennaTimelineHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0F011A2A940606006A48A5 /* AntennaTimelineHeader.swift */; };
+		3F0F011F2A940868006A48A5 /* HashtagTimelineHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0F011E2A940868006A48A5 /* HashtagTimelineHeader.swift */; };
 		3F8E62D92A93CA220093A1D4 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8E62D72A93CA220093A1D4 /* UserView.swift */; };
 		3F8E62DA2A93CA220093A1D4 /* UserTimelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8E62D82A93CA220093A1D4 /* UserTimelineContext.swift */; };
 /* End PBXBuildFile section */
@@ -184,6 +186,8 @@
 		20B7E14E2A93630F003E3CE4 /* AntennaTimelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntennaTimelineContext.swift; sourceTree = "<group>"; };
 		20B7E1532A936916003E3CE4 /* NotificationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationContext.swift; sourceTree = "<group>"; };
 		20D37D312A88577000BCC1C5 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		3F0F011A2A940606006A48A5 /* AntennaTimelineHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntennaTimelineHeader.swift; sourceTree = "<group>"; };
+		3F0F011E2A940868006A48A5 /* HashtagTimelineHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagTimelineHeader.swift; sourceTree = "<group>"; };
 		3F8E62D72A93CA220093A1D4 /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		3F8E62D82A93CA220093A1D4 /* UserTimelineContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTimelineContext.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -432,6 +436,7 @@
 		2068CC1C2A87C25B00F8A958 /* Timelines */ = {
 			isa = PBXGroup;
 			children = (
+				3F0F01192A9405DA006A48A5 /* Decorations */,
 				207C33D82A8FB5C400500E33 /* Context */,
 				20B7E14E2A93630F003E3CE4 /* AntennaTimelineContext.swift */,
 				207C33E92A8FD18D00500E33 /* GlobalTimelineContext.swift */,
@@ -595,6 +600,15 @@
 			name = Components;
 			sourceTree = "<group>";
 		};
+		3F0F01192A9405DA006A48A5 /* Decorations */ = {
+			isa = PBXGroup;
+			children = (
+				3F0F011A2A940606006A48A5 /* AntennaTimelineHeader.swift */,
+				3F0F011E2A940868006A48A5 /* HashtagTimelineHeader.swift */,
+			);
+			path = Decorations;
+			sourceTree = "<group>";
+		};
 		3F8E62D62A93CA220093A1D4 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -722,6 +736,7 @@
 				2068CC132A87B96D00F8A958 /* OnboardingView.swift in Sources */,
 				2068CC412A87C2EB00F8A958 /* NoteModel.swift in Sources */,
 				209391092A92A3C9006FDA19 /* Notification.swift in Sources */,
+				3F0F011F2A940868006A48A5 /* HashtagTimelineHeader.swift in Sources */,
 				2068CC342A87C25B00F8A958 /* ProfileSwitcher.swift in Sources */,
 				2093910B2A92A5ED006FDA19 /* NotificationModel.swift in Sources */,
 				2068CC302A87C25B00F8A958 /* NoteBodyText.swift in Sources */,
@@ -742,6 +757,7 @@
 				201A510E2A92609C00956489 /* EmojiPicker.swift in Sources */,
 				201A50F52A90DF5B00956489 /* InstanceCredentials.swift in Sources */,
 				204DA4162A8A6D1A00BB0598 /* NoteView.swift in Sources */,
+				3F0F011B2A940606006A48A5 /* AntennaTimelineHeader.swift in Sources */,
 				2068CC012A87B80300F8A958 /* RawrKeychain.swift in Sources */,
 				2068CC462A87EAFC00F8A958 /* ViewReloader.swift in Sources */,
 				20B7E14B2A935FB3003E3CE4 /* AntennaMenu.swift in Sources */,
