@@ -97,7 +97,6 @@
 		20B7E1542A936916003E3CE4 /* NotificationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B7E1532A936916003E3CE4 /* NotificationContext.swift */; };
 		20D37D322A88577000BCC1C5 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D37D312A88577000BCC1C5 /* ChatListView.swift */; };
 		3F0F011B2A940606006A48A5 /* AntennaTimelineHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0F011A2A940606006A48A5 /* AntennaTimelineHeader.swift */; };
-		3F0F011D2A9406E8006A48A5 /* UserTimelineHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0F011C2A9406E8006A48A5 /* UserTimelineHeader.swift */; };
 		3F0F011F2A940868006A48A5 /* HashtagTimelineHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0F011E2A940868006A48A5 /* HashtagTimelineHeader.swift */; };
 		3F8E62D92A93CA220093A1D4 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8E62D72A93CA220093A1D4 /* UserView.swift */; };
 		3F8E62DA2A93CA220093A1D4 /* UserTimelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8E62D82A93CA220093A1D4 /* UserTimelineContext.swift */; };
@@ -188,7 +187,6 @@
 		20B7E1532A936916003E3CE4 /* NotificationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationContext.swift; sourceTree = "<group>"; };
 		20D37D312A88577000BCC1C5 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		3F0F011A2A940606006A48A5 /* AntennaTimelineHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntennaTimelineHeader.swift; sourceTree = "<group>"; };
-		3F0F011C2A9406E8006A48A5 /* UserTimelineHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTimelineHeader.swift; sourceTree = "<group>"; };
 		3F0F011E2A940868006A48A5 /* HashtagTimelineHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagTimelineHeader.swift; sourceTree = "<group>"; };
 		3F8E62D72A93CA220093A1D4 /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		3F8E62D82A93CA220093A1D4 /* UserTimelineContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTimelineContext.swift; sourceTree = "<group>"; };
@@ -606,7 +604,6 @@
 			isa = PBXGroup;
 			children = (
 				3F0F011A2A940606006A48A5 /* AntennaTimelineHeader.swift */,
-				3F0F011C2A9406E8006A48A5 /* UserTimelineHeader.swift */,
 				3F0F011E2A940868006A48A5 /* HashtagTimelineHeader.swift */,
 			);
 			path = Decorations;
@@ -779,7 +776,6 @@
 				20B7E14D2A936127003E3CE4 /* AntennaModel.swift in Sources */,
 				204DA3FE2A8901BE00BB0598 /* RemoteImage.swift in Sources */,
 				204DA4042A890E5E00BB0598 /* MessageModel.swift in Sources */,
-				3F0F011D2A9406E8006A48A5 /* UserTimelineHeader.swift in Sources */,
 				2068CC432A87C30A00F8A958 /* MainView.swift in Sources */,
 				204DA4232A8ABD4E00BB0598 /* Tokenizer.swift in Sources */,
 				2068CC332A87C25B00F8A958 /* NoteHeader.swift in Sources */,
