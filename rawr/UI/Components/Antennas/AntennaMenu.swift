@@ -37,8 +37,7 @@ struct AntennaMenu: View {
                 .font(.system(size: 20))
         }.onAppear(perform: self.onAppear)
         .sheet(isPresented: $presentAntennaSheet, content: {
-            AntennaTimelineHeader(presentedAntennaName: self.presentedAntenna!.name ?? "Unnamed Antenna")
-            Timeline(timelineContext: AntennaTimelineContext(self.presentedAntenna!.id!))
+            AntennaTimelineView(antenna: self.presentedAntenna!)
         })
     }
     

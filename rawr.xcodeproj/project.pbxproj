@@ -82,6 +82,7 @@
 		207C33E82A8FD13500500E33 /* LocalTimelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C33E72A8FD13500500E33 /* LocalTimelineContext.swift */; };
 		207C33EA2A8FD18D00500E33 /* GlobalTimelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C33E92A8FD18D00500E33 /* GlobalTimelineContext.swift */; };
 		20805F292A8EC0DF0001F2AB /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 20805F282A8EC0DF0001F2AB /* WrappingHStack */; };
+		208E24E62A97679A0058BB52 /* AntennaTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208E24E52A97679A0058BB52 /* AntennaTimelineView.swift */; };
 		209391032A92A2B1006FDA19 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209391022A92A2B0006FDA19 /* NotificationView.swift */; };
 		209391062A92A2EB006FDA19 /* NotificationHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209391052A92A2EB006FDA19 /* NotificationHeader.swift */; };
 		209391092A92A3C9006FDA19 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209391082A92A3C9006FDA19 /* Notification.swift */; };
@@ -175,6 +176,7 @@
 		207C33E52A8FC6AC00500E33 /* HomeTimelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTimelineContext.swift; sourceTree = "<group>"; };
 		207C33E72A8FD13500500E33 /* LocalTimelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTimelineContext.swift; sourceTree = "<group>"; };
 		207C33E92A8FD18D00500E33 /* GlobalTimelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalTimelineContext.swift; sourceTree = "<group>"; };
+		208E24E52A97679A0058BB52 /* AntennaTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntennaTimelineView.swift; sourceTree = "<group>"; };
 		209391022A92A2B0006FDA19 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		209391052A92A2EB006FDA19 /* NotificationHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHeader.swift; sourceTree = "<group>"; };
 		209391082A92A3C9006FDA19 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 		204DA4072A891EE400BB0598 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				3F0F011A2A940606006A48A5 /* AntennaTimelineHeader.swift */,
 				204DA4082A891EF200BB0598 /* TimelineHeader.swift */,
 			);
 			path = Components;
@@ -413,6 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				204DA4072A891EE400BB0598 /* Components */,
+				208E24E52A97679A0058BB52 /* AntennaTimelineView.swift */,
 				2068CC352A87C27600F8A958 /* TimelineView.swift */,
 			);
 			path = Timeline;
@@ -603,7 +607,6 @@
 		3F0F01192A9405DA006A48A5 /* Decorations */ = {
 			isa = PBXGroup;
 			children = (
-				3F0F011A2A940606006A48A5 /* AntennaTimelineHeader.swift */,
 				3F0F011E2A940868006A48A5 /* HashtagTimelineHeader.swift */,
 			);
 			path = Decorations;
@@ -781,6 +784,7 @@
 				2068CC332A87C25B00F8A958 /* NoteHeader.swift in Sources */,
 				207C33DC2A8FB8B700500E33 /* TimelineItem.swift in Sources */,
 				207C33E62A8FC6AC00500E33 /* HomeTimelineContext.swift in Sources */,
+				208E24E62A97679A0058BB52 /* AntennaTimelineView.swift in Sources */,
 				209391062A92A2EB006FDA19 /* NotificationHeader.swift in Sources */,
 				201A50FD2A91390B00956489 /* MFMNodeProtocol.swift in Sources */,
 				2068CC2B2A87C25B00F8A958 /* Timeline.swift in Sources */,
