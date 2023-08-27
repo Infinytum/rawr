@@ -6,13 +6,32 @@
 //
 
 import SwiftUI
+import SwiftKit
 
 struct HashtagTimelineView: View {
+    
+    let hashtag: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack(alignment: .top) {
+            VStack {
+                Spacer()
+                Timeline(timelineContext: HashtagTimelineContext(self.hashtag))
+                    .padding(.top, 60)
+                Spacer()
+            }
+            HashtagTimelineHeader(hashtag: self.hashtag).background(.thinMaterial)
+        }
     }
 }
 
 #Preview {
-    HashtagTimelineView()
+    VStack {
+        HStack {
+            Spacer()
+        }
+        Spacer()
+    }.popover(isPresented: .constant(true)) {
+        HashtagTimelineView(hashtag: "dragons")
+    }.environmentObject(ViewContext()).background(.red)
 }

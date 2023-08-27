@@ -13,10 +13,15 @@ struct AntennaTimelineView: View {
     let antenna: AntennaModel
     
     var body: some View {
-        AntennaTimelineHeader(presentedAntennaName: self.antenna.name!)
-        Spacer()
-        Timeline(timelineContext: AntennaTimelineContext(self.antenna.id!))
-        Spacer()
+        ZStack(alignment: .top) {
+            VStack {
+                Spacer()
+                Timeline(timelineContext: AntennaTimelineContext(self.antenna.id!))
+                    .padding(.top, 60)
+                Spacer()
+            }
+            AntennaTimelineHeader(presentedAntennaName: self.antenna.name!)
+        }
     }
 }
 
