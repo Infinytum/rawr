@@ -25,6 +25,9 @@ struct Note: View {
             if self.actualNote().reactionsCount() > 0 {
                 NoteBodyReactions(note: self.actualNote())
             }
+            if self.actualNote().poll != nil {
+                NoteBodyPoll(note: self.actualNote())
+            }
             Divider()
             NoteFooter(note: self.actualNote()).padding(.horizontal, 5).padding(.top, 5)
         }.padding(.vertical, 5)
