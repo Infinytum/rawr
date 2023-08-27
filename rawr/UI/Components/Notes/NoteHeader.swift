@@ -13,6 +13,7 @@ import SwiftKit
 struct NoteHeader: View {
     
     @EnvironmentObject var context: ViewContext
+    @ObservedObject var viewReloader: ViewReloader = ViewReloader()
     @ObservedObject var note: NoteModel
     @State private var displayUserSheet = false
     
@@ -33,13 +34,12 @@ struct NoteHeader: View {
                 }
             }
             .onTapGesture {
-                displayUserSheet.toggle()
+                displayUserSheet = true
+                self.viewReloader.reloadView()
+                print("TAP USER HEADER")
             }
             .sheet(isPresented: $displayUserSheet) {
-                let username = "@\(self.note.user?.username ?? "")"
-                let instance = self.note.user?.host
-                let handle = instance == nil ? username : "\(username)@\(instance!)"
-                UserView(userName: handle)
+                UserView(userName: "\(self.note.user!.username!)@\(self.note.user!.host!)")
             }
             Spacer()
             VStack(alignment: .trailing) {

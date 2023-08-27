@@ -38,11 +38,13 @@ struct MFMBody: View {
             self.presentedHashtag = hashtag
             self.viewRefresher.reloadView()
             self.presentHashtagSheet = true
+            self.presentUserSheet = false
         }
         
         self.render.context.onMentionTap { username in
             self.presentedUser = username
             self.viewRefresher.reloadView()
+            self.presentHashtagSheet = false
             self.presentUserSheet = true
         }
     }
