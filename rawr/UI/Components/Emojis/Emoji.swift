@@ -16,6 +16,7 @@ struct Emoji: View {
     var emojis: [EmojiModel] = []
     
     @State var emojiUrl: String? = nil
+    @State var presentEmojiPopover: Bool = false
     
     var body: some View {
         if self.emojiUrl == nil {
@@ -29,6 +30,14 @@ struct Emoji: View {
                 }
         } else {
             RemoteImage(self.emojiUrl)
+                .popover(isPresented: $presentEmojiPopover, content: {
+                    RemoteImage(self.emojiUrl)
+                        .frame(width: 100, height: 100)
+                        .padding()
+                        .presentationCompactAdaptation(.popover)
+                }).onTapGesture {
+                    self.presentEmojiPopover = true
+                }
         }
     }
     
@@ -39,7 +48,7 @@ struct Emoji: View {
 
 #Preview {
     VStack {
-        Emoji(name: "drgn").environmentObject(ViewContext())
-            .frame(width: 100, height: 100)
+        Emoji(name: "drgn", emojis: [.init(id: "drn", aliases: nil, name: "drgn", url: "https://cdn.derg.social/calckey/5e7735f5-5539-4993-be95-240147ca7476.png", uri: nil, category: "drgn")]).environmentObject(ViewContext())
+            .frame(width: 30, height: 30)
     }
 }
