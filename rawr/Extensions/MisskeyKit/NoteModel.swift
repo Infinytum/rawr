@@ -248,6 +248,24 @@ extension NoteModel: ObservableObject {
         }
     }
     
+    /// Vote for a choice in a single-choice poll
+    func vote(_ index: Int) async throws {
+        guard let _ = self.poll?.votedForChoices else {
+            return try await withCheckedThrowingContinuation { continuation in
+                MisskeyKit.shared.notes.vote(noteId: self.id!, choice: index) { _, error in
+                    guard let error = error else {
+                        self.poll!.choices![index]?.isVoted = true
+                        self.objectWillChange.send()
+                        continuation.resume()
+                        return
+                    }
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+        return
+    }
+    
     func reactionsCount() -> Int {
         guard let reactions = self.reactions else {
             return 0
@@ -280,5 +298,53 @@ extension NoteModel: ObservableObject {
         }
         
         return createdAtDate.relative()
+    }
+}
+// MARK: - Poll
+extension Poll {
+    static var preview: Poll {
+        var poll: Poll = .init()
+        let choicesJSON = """
+[
+    {
+        "text": "Dergs are cute.",
+        "votes": 100,
+        "isVoted": false
+    },
+    {
+        "text": "Dergs aren't cute.",
+        "votes": 0,
+        "isVoted": false
+    },
+    {
+        "text": "Dergs are the cutest things ever and i wanna cuddle with them.",
+        "votes": 1234123,
+        "isVoted": false
+    }
+]
+"""
+        let choicesData = choicesJSON.data(using: .utf8)
+        let choices: [Choice?] = try! JSONDecoder().decode(Array<Choice>.self, from: choicesData!)
+        poll.choices = choices
+        poll.multiple = false
+        
+        return poll
+    }
+    
+    var votedForChoices: [Int]? {
+        let votedChoices = Array(self.choices!.enumerated())
+            .filter({$0.1?.isVoted ?? false})
+        
+        guard votedChoices.count >= 1 else {
+            return nil
+        }
+        
+        return votedChoices.map({$0.offset})
+    }
+    
+    var totalVotes: Int {
+        self.choices!.map({$0?.votes}).reduce(0) {total, value in
+            total + (value ?? 0)
+        }
     }
 }
