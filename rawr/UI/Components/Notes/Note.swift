@@ -19,14 +19,14 @@ struct Note: View {
             }
             NoteHeader(note: self.actualNote())
             NoteBodyText(note: self.actualNote(), renderedNote: self.renderedNote).padding(.top, 1)
+            if self.actualNote().poll != nil {
+                NoteBodyPoll(note: self.actualNote())
+            }
             if self.actualNote().hasFiles() {
                 NoteBodyGallery(files: self.actualNote().files!)
             }
             if self.actualNote().reactionsCount() > 0 {
                 NoteBodyReactions(note: self.actualNote())
-            }
-            if self.actualNote().poll != nil {
-                NoteBodyPoll(note: self.actualNote())
             }
             Divider()
             NoteFooter(note: self.actualNote()).padding(.horizontal, 5).padding(.top, 5)
