@@ -45,6 +45,9 @@
 		204DA4272A8AC32D00BB0598 /* Visualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4262A8AC32D00BB0598 /* Visualizer.swift */; };
 		204DA42F2A8ACC2100BB0598 /* MFMNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA42E2A8ACC2100BB0598 /* MFMNode.swift */; };
 		204DA4332A8AD4A000BB0598 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4322A8AD4A000BB0598 /* String.swift */; };
+		2060795C2A9BDB1A00FC7D00 /* NoteEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2060795B2A9BDB1A00FC7D00 /* NoteEditorView.swift */; };
+		2060795F2A9BDDDA00FC7D00 /* NoteEditorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2060795E2A9BDDDA00FC7D00 /* NoteEditorHeader.swift */; };
+		206079612A9BE99200FC7D00 /* NewNoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206079602A9BE99200FC7D00 /* NewNoteButton.swift */; };
 		2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBED2A87B5BC00F8A958 /* rawrApp.swift */; };
 		2068CBF02A87B5BC00F8A958 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBEF2A87B5BC00F8A958 /* ContentView.swift */; };
 		2068CBF22A87B5BF00F8A958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2068CBF12A87B5BF00F8A958 /* Assets.xcassets */; };
@@ -146,6 +149,9 @@
 		204DA4262A8AC32D00BB0598 /* Visualizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visualizer.swift; sourceTree = "<group>"; };
 		204DA42E2A8ACC2100BB0598 /* MFMNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFMNode.swift; sourceTree = "<group>"; };
 		204DA4322A8AD4A000BB0598 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		2060795B2A9BDB1A00FC7D00 /* NoteEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorView.swift; sourceTree = "<group>"; };
+		2060795E2A9BDDDA00FC7D00 /* NoteEditorHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorHeader.swift; sourceTree = "<group>"; };
+		206079602A9BE99200FC7D00 /* NewNoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteButton.swift; sourceTree = "<group>"; };
 		2068CBEA2A87B5BC00F8A958 /* rawr..app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rawr..app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2068CBED2A87B5BC00F8A958 /* rawrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rawrApp.swift; sourceTree = "<group>"; };
 		2068CBEF2A87B5BC00F8A958 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -301,7 +307,9 @@
 		204DA4142A8A6D0400BB0598 /* Note */ = {
 			isa = PBXGroup;
 			children = (
+				2060795D2A9BDDB900FC7D00 /* Components */,
 				204DA4152A8A6D1A00BB0598 /* NoteView.swift */,
+				2060795B2A9BDB1A00FC7D00 /* NoteEditorView.swift */,
 			);
 			path = Note;
 			sourceTree = "<group>";
@@ -327,6 +335,14 @@
 				201A50FA2A9138EA00956489 /* MFMModifier.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2060795D2A9BDDB900FC7D00 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2060795E2A9BDDDA00FC7D00 /* NoteEditorHeader.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		2068CBE12A87B5BC00F8A958 = {
@@ -469,6 +485,7 @@
 				2068CC252A87C25B00F8A958 /* Note.swift */,
 				2068CC282A87C25B00F8A958 /* NoteHeader.swift */,
 				2068CC202A87C25B00F8A958 /* NoteFooter.swift */,
+				206079602A9BE99200FC7D00 /* NewNoteButton.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -756,6 +773,7 @@
 				204DA42F2A8ACC2100BB0598 /* MFMNode.swift in Sources */,
 				204DA3F62A886FB100BB0598 /* ChatListEntry.swift in Sources */,
 				2068CBF02A87B5BC00F8A958 /* ContentView.swift in Sources */,
+				2060795C2A9BDB1A00FC7D00 /* NoteEditorView.swift in Sources */,
 				201A50F92A91384500956489 /* MFMRenderModifier.swift in Sources */,
 				204DA4022A890DEC00BB0598 /* ChatMessage.swift in Sources */,
 				20B7E1542A936916003E3CE4 /* NotificationContext.swift in Sources */,
@@ -768,6 +786,7 @@
 				207C33EA2A8FD18D00500E33 /* GlobalTimelineContext.swift in Sources */,
 				20AE17AE2A88421A00C9AC07 /* ImageViewer.swift in Sources */,
 				204DA40B2A892A6000BB0598 /* MetaModel.swift in Sources */,
+				206079612A9BE99200FC7D00 /* NewNoteButton.swift in Sources */,
 				201A510E2A92609C00956489 /* EmojiPicker.swift in Sources */,
 				201A50F52A90DF5B00956489 /* InstanceCredentials.swift in Sources */,
 				204DA4162A8A6D1A00BB0598 /* NoteView.swift in Sources */,
@@ -783,6 +802,7 @@
 				2098F91E2A8EF792003CAAE2 /* Scanner.swift in Sources */,
 				204DA4062A89167500BB0598 /* ChatBar.swift in Sources */,
 				204DA3FA2A88FF7500BB0598 /* ChatView.swift in Sources */,
+				2060795F2A9BDDDA00FC7D00 /* NoteEditorHeader.swift in Sources */,
 				2068CC322A87C25B00F8A958 /* NoteDecorationBoost.swift in Sources */,
 				207C33E42A8FC4A400500E33 /* TimelineContextBase.swift in Sources */,
 				2068CC0F2A87B96D00F8A958 /* OnboardingConnectCard.swift in Sources */,

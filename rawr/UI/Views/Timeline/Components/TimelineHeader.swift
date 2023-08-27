@@ -18,6 +18,7 @@ struct TimelineHeader: View {
                 ProfileSwitcher()
                     .frame(width: 40, height: 40)
                 Spacer()
+                NewNoteButton().padding(.trailing, 5)
                 AntennaMenu()
             }
             VStack {

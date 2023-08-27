@@ -197,9 +197,7 @@ func tokenize(_ originalInput: String) -> MFMNodeProtocol {
             currentNode.addChild(MFMNode(currentNode, url: url, displayText: displayText))
             continue
         // MARK: Search for Markdown-formatted **bold text**
-        } else if let token = scanner.probe("**") {
-            let startLocation = scanner.currentIndex
-            
+        } else if let _ = scanner.probe("**") {
             // Check if we are closing an existing bold modifier container
             guard currentNode.type != .bold else {
                 currentNode = currentNode.parentNode ?? rootNode
@@ -236,7 +234,7 @@ func tokenizeEmojisOnly(_ input: String) -> MFMNodeProtocol {
     scanner.charactersToBeSkipped = nil
     
     let rootNode = MFMNode()
-    var currentNode: MFMNodeProtocol = rootNode
+    let currentNode: MFMNodeProtocol = rootNode
     
     while !scanner.isAtEnd {
         if let text = scanner.scanUpToCharacters(from: CharacterSet(charactersIn: ":")) {
