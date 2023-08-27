@@ -24,7 +24,7 @@ struct NoteEditorView: View {
                             .font(.body)
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.never)
-                            .lineLimit(5...)
+                            .lineLimit(10...)
                         if previewShown {
                             Divider()
                             NoteHeader(note: .init(user: self.context.currentUser)).padding(.top, 5)

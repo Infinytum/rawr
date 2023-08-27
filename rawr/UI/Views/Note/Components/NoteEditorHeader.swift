@@ -11,6 +11,7 @@ struct NoteEditorHeader: View {
     
     @EnvironmentObject var context: ViewContext
     
+    @State private var selectedTimeline = 0
     @Binding var previewEnabled: Bool
     
     var body: some View {
@@ -31,15 +32,10 @@ struct NoteEditorHeader: View {
                 Button {
                     self.previewEnabled.toggle()
                 } label: {
-                    Text("Send")
+                    Text("Post")
                 }
             }
-            VStack {
-                Text(self.context.currentInstanceName).font(.system(size: 20, weight: .semibold)).foregroundColor(.primary)
-                Text("New Note").foregroundColor(.primary.opacity(0.7))
-                    .font(.system(size: 16))
-                    .padding(.top, -12)
-            }
+            TimelineSelector(selectedTab: self.$selectedTimeline)
         }.padding(.horizontal).padding(.vertical, 5).background(.thinMaterial)
     }
 }
