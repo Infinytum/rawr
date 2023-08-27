@@ -36,7 +36,6 @@ struct NoteHeader: View {
             .onTapGesture {
                 displayUserSheet = true
                 self.viewReloader.reloadView()
-                print("TAP USER HEADER")
             }
             .sheet(isPresented: $displayUserSheet) {
                 UserView(userName: "\(self.note.user!.username!)@\(self.note.user!.host!)")
