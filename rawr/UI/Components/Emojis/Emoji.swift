@@ -25,9 +25,11 @@ struct Emoji: View {
                 .foregroundColor(.clear)
                 .onAppear {
                     Task {
-                        self.emojiUrl = self.urlForEmoji(self.name)
+                        self.emojiUrl = self.urlForEmoji(self.name) ?? ""
                     }
                 }
+        } else if self.emojiUrl == "" {
+            Text(self.viewContext.defaultEmojis.charForEmoji(self.name) ?? "")
         } else {
             RemoteImage(self.emojiUrl)
                 .popover(isPresented: $presentEmojiPopover, content: {

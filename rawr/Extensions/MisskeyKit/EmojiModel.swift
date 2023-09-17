@@ -28,3 +28,15 @@ public extension [EmojiModel] {
         return url
     }
 }
+
+public extension [DefaultEmojiModel] {
+    func charForEmoji(_ name: String) -> String? {
+        let foundEmoji = self.first { emoji in
+            ":" + (emoji.name ?? "") + ":" == name || (emoji.name ?? "") == name
+        }
+        guard let char = foundEmoji?.char else {
+            return nil
+        }
+        return char
+    }
+}

@@ -34,7 +34,7 @@ class ViewContext: ObservableObject {
         }
     }
     
-    // MARK: Instance Informatin
+    // MARK: Instance Information
     
     var currentInstance: MetaModel? = nil {
         didSet {
@@ -49,6 +49,17 @@ class ViewContext: ObservableObject {
     var currentInstanceName: String  {
         get {
             self.currentInstance?.name ?? "rawr."
+        }
+    }
+    
+    // MARK: Default Emojis
+    var defaultEmojis: [DefaultEmojiModel] = [] {
+        didSet {
+            withAnimation {
+                DispatchQueue.main.async {
+                    self.objectWillChange.send(self)
+                }
+            }
         }
     }
     
@@ -109,6 +120,12 @@ class ViewContext: ObservableObject {
                     return
                 }
                 self.currentInstance = meta
+            }
+            MisskeyKit.shared.emojis.getDefault { emojis in
+                guard let emojis = emojis else {
+                    return
+                }
+                self.defaultEmojis = emojis
             }
         }
     }

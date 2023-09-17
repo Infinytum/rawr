@@ -11,8 +11,13 @@ struct NoteEditorView: View {
     
     @EnvironmentObject var context: ViewContext
     
+    @State var contentWarning: String = ""
+    @State var contentWarningShown: Bool = false
+    
     @State var noteBody: String = ""
-    @State var previewShown: Bool = false
+    
+    @State var emojiPickerShown: Bool = false
+    @State var previewShown: Bool = true
     @State var contentHeight: CGFloat = 0
     
     var body: some View {
@@ -20,6 +25,14 @@ struct NoteEditorView: View {
             ScrollView {
                 VStack() {
                     VStack(alignment: .leading) {
+                        if contentWarningShown {
+                            TextField("Content Warning goes here...", text: $contentWarning, axis: .vertical)
+                                .font(.body)
+                                .autocorrectionDisabled()
+                                .textInputAutocapitalization(.never)
+                                .lineLimit(1...)
+                            Divider()
+                        }
                         TextField("Your note goes here...", text: $noteBody, axis: .vertical)
                             .font(.body)
                             .autocorrectionDisabled()
@@ -33,21 +46,75 @@ struct NoteEditorView: View {
                         }
                         Divider()
                         HStack {
-                            Image(systemName: "tray.and.arrow.up.fill")
-                                .padding(.all, 5)
-                            Image(systemName: "music.mic")
-                                .padding(.all, 5)
-                            Image(systemName: "eye.slash")
-                                .padding(.all, 5)
-                            Image(systemName: "at")
-                                .padding(.all, 5)
-                            Image(systemName: "number")
-                                .padding(.all, 5)
-                            Image(systemName: "face.smiling")
-                                .padding(.all, 5)
+                            VStack {
+                                Image(systemName: "paperclip")
+                                    .fontWeight(.light)
+                                    .frame(height: 15)
+                                Text("Attach")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.primary.opacity(0.8))
+                                    .padding(.top, 0.1)
+                            }.padding(.all, 5)
                             Spacer()
-                            Image(systemName: "questionmark")
-                                .padding(.all, 5)
+                            VStack {
+                                Image(systemName: "checklist")
+                                    .fontWeight(.light)
+                                    .frame(height: 15)
+                                Text("Poll")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.primary.opacity(0.8))
+                                    .padding(.top, 0.1)
+                            }.padding(.all, 5)
+                            Spacer()
+                            Button {
+                                contentWarningShown.toggle()
+                            } label: {
+                                VStack {
+                                    Image(systemName: "exclamationmark.triangle")
+                                        .fontWeight(.light)
+                                        .frame(height: 15)
+                                        .foregroundColor(self.contentWarningShown ? .red : .primary)
+                                    Text("CW")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(.primary.opacity(0.8))
+                                        .padding(.top, 0.1)
+                                }.transaction { transaction in
+                                    transaction.animation = nil
+                                }
+                            }.padding(.all, 5)
+                            Spacer()
+                            Button {
+                                emojiPickerShown = true
+                            } label: {
+                                VStack {
+                                    Image(systemName: "hands.sparkles")
+                                        .fontWeight(.light)
+                                        .frame(height: 15)
+                                        .foregroundColor(.primary)
+                                    Text("Emojis")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(.primary.opacity(0.8))
+                                        .padding(.top, 0.1)
+                                }.transaction { transaction in
+                                    transaction.animation = nil
+                                }
+                            }.padding(.all, 5)
+                            .popover(isPresented: self.$emojiPickerShown, content: {
+                                EmojiPicker { name in
+                                    self.noteBody += ":\(name): "
+                                    self.emojiPickerShown = false
+                                }.presentationCompactAdaptation(.popover).padding()
+                            })
+                            Spacer()
+                            VStack {
+                                Image(systemName: "questionmark")
+                                    .fontWeight(.light)
+                                    .frame(height: 15)
+                                Text("Help")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.primary.opacity(0.8))
+                                    .padding(.top, 0.1)
+                            }.padding(.all, 5)
                         }
                     } .padding(.horizontal).padding(.top, 5)
                 }
