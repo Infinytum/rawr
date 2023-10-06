@@ -17,6 +17,7 @@ class GlobalTimelineContext: TimelineContextBase, TimelineContextProtocol {
     
     func fetchInitialItems() {
         MisskeyKit.shared.notes.getGlobalTimeline(completion: self.handleItems)
+        MisskeyKit.shared.streaming.disconnect()
         _ = MisskeyKit.shared.streaming.connect(apiKey: RawrKeychain().apiKey ?? "", channels: [.globalTimeline]) { response, _, _, _ in
             self.handleStreamItem(response)
         }

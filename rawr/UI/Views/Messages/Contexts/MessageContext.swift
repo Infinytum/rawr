@@ -1,14 +1,14 @@
 //
-//  ChatContext.swift
-//  rawr
+//  MessageContext.swift
+//  rawr.
 //
-//  Created by Nila on 13.08.2023.
+//  Created by Nila on 06.10.2023.
 //
 
 import Foundation
 import MisskeyKit
 
-class ChatContext: ObservableObject {
+class MessageContext: ObservableObject {
     private var itemsLoadedCount = 0
     private var oldestMessageId: String?
     public var remoteUserId: String = ""

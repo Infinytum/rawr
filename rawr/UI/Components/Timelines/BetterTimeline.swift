@@ -1,15 +1,15 @@
 //
-//  Timeline.swift
-//  Derg Social
+//  BetterTimeline.swift
+//  rawr.
 //
-//  Created by Nila on 06.08.2023.
+//  Created by Nila on 18.09.2023.
 //
 
 import SwiftUI
-import MisskeyKit
 
-struct Timeline: View {
+import UIKit
 
+struct BetterTimeline: View {
     @ObservedObject var timeline: TimelineContextBase
     @ObservedObject var viewReloader = ViewReloader()
     
@@ -24,26 +24,35 @@ struct Timeline: View {
     var body: some View {
         Group {
             if self.timeline.fetchError == nil {
-                ScrollView {
-                    LazyVStack() {
-                        ForEach(self.timeline.items, id: \.note.id) { item in
-                            Note(note: item.note, renderedNote: item.renderedNote)
-                                .listRowSeparator(.hidden)
+                SingleAxisGeometryReader { width in
+                    ScrollView {
+                        LazyVStack() {
+                            ForEach(self.timeline.items, id: \.note.id) { item in
+                                Note(note: item.note, renderedNote: item.renderedNote)
                                 .onAppear { self.timeline.fetchItemsIfNeeded(item) }
                                 .onTapGesture {
                                     self.noteId = item.note.id!
                                     self.viewReloader.reloadView()
                                     self.noteDetailShown = true
                                 }
-                            Divider().listRowSeparator(.hidden)
-                        }
+                                .padding(.vertical)
+                                .fluentBackground()
+                                .cornerRadius(20)
+                                .padding(.horizontal, 10)
+                                .frame(width: width)
+                            }
 
-                        if self.timeline.fetchingItems {
-                          ProgressView()
+                            if self.timeline.fetchingItems {
+                              ProgressView()
+                            }
                         }
-                    }.padding()
-                }.sheet(isPresented: self.$noteDetailShown) {
-                    NoteView(noteId: self.noteId)
+                    }
+                    .refreshable {
+                        self.timeline.initialize()
+                    }
+                    .sheet(isPresented: self.$noteDetailShown) {
+                        NoteView(noteId: self.noteId)
+                    }
                 }
             } else {
                 VStack {
@@ -60,6 +69,6 @@ struct Timeline: View {
 }
 
 #Preview {
-    Timeline(timelineContext: HomeTimelineContext())
+    BetterTimeline(timelineContext: HomeTimelineContext())
         .environmentObject(ViewContext())
 }

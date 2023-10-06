@@ -22,7 +22,7 @@ struct NoteFooter: View {
         HStack() {
             Button {} label: {
                 HStack {
-                    Image(systemName: "text.bubble").fontWeight(.light).padding(.bottom, -2)
+                    Image(systemName: "bubble.left").fontWeight(.light).padding(.bottom, -2)
                     Text(String(self.note.repliesCount ?? 0)).font(.system(size: 16, weight: .light))
                 }
             }

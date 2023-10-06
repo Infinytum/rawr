@@ -1,18 +1,18 @@
 //
-//  ChatBar.swift
-//  rawr
+//  MessageBar.swift
+//  rawr.
 //
-//  Created by Nila on 13.08.2023.
+//  Created by Nila on 06.10.2023.
 //
 
 import MisskeyKit
 import SwiftUI
 
-struct ChatBar: View {
+struct MessageBar: View {
     
     @EnvironmentObject var context: ViewContext
     
-    @ObservedObject var chatContext: ChatContext
+    @ObservedObject var messageContext: MessageContext
     @State var messageText: String = ""
     @State var sendInProgress: Bool = false
     
@@ -52,12 +52,12 @@ struct ChatBar: View {
         self.sendInProgress = true
         let messageText = self.messageText
         self.messageText = ""
-        MisskeyKit.shared.messaging.create(userId: self.chatContext.remoteUserId, text: messageText) { message, error in
+        MisskeyKit.shared.messaging.create(userId: self.messageContext.remoteUserId, text: messageText) { message, error in
             self.sendInProgress = false
             guard let _ = message else {
                 self.messageText = messageText
                 self.context.applicationError = ApplicationError(title: "Chat Message failed", message: error.explain())
-                print("ChatBar Error: API returned error while sending message: \(error!)")
+                print("MessageBar Error: API returned error while sending message: \(error!)")
                 return
             }
         }
@@ -65,5 +65,5 @@ struct ChatBar: View {
 }
 
 #Preview {
-    ChatBar(chatContext: ChatContext())
+    MessageBar(messageContext: MessageContext())
 }

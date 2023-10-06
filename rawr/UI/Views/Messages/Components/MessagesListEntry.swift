@@ -1,15 +1,14 @@
 //
-//  ChatListEntry.swift
-//  rawr
+//  MessagesListEntry.swift
+//  rawr.
 //
-//  Created by Nila on 13.08.2023.
+//  Created by Nila on 06.10.2023.
 //
 
 import MisskeyKit
-import NetworkImage
 import SwiftUI
 
-struct ChatListEntry: View {
+struct MessagesListEntry: View {
     
     @EnvironmentObject var context: ViewContext
     
@@ -33,7 +32,7 @@ struct ChatListEntry: View {
                             .foregroundStyle(.primary.opacity(0.8))
                     }
                     (self.getMessagePrefix() + self.getMessageText()).lineLimit(2, reservesSpace: true)
-
+                    
                 }.padding(.leading, 5)
             }
         }
@@ -52,5 +51,6 @@ struct ChatListEntry: View {
 }
 
 #Preview {
-    ChatListEntry(history: .preview).environmentObject(ViewContext())
+    MessagesListEntry(history: .preview)
+        .environmentObject(ViewContext())
 }

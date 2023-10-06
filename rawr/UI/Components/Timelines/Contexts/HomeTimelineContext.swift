@@ -17,6 +17,7 @@ class HomeTimelineContext: TimelineContextBase, TimelineContextProtocol {
     
     func fetchInitialItems() {
         MisskeyKit.shared.notes.getTimeline(completion: self.handleItems)
+        MisskeyKit.shared.streaming.disconnect()
         _ = MisskeyKit.shared.streaming.connect(apiKey: RawrKeychain().apiKey ?? "", channels: [.homeTimeline]) { response, _, _, _ in
             self.handleStreamItem(response)
         }

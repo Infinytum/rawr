@@ -6,6 +6,7 @@
 //
 
 import MisskeyKit
+import SwiftKit
 import SwiftUI
 import Combine
 
@@ -60,6 +61,15 @@ class ViewContext: ObservableObject {
                     self.objectWillChange.send(self)
                 }
             }
+        }
+    }
+    
+    // MARK: Application Customization
+    
+    var themeBackground: some View {
+        get {
+            //FluentBackground.Rainbow
+            Color.background
         }
     }
     

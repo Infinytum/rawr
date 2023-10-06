@@ -20,11 +20,6 @@ struct MainView: View {
                  Image(systemName: "bell")
                  Text("Notifications")
                }
-            ChatListView()
-              .tabItem {
-                 Image(systemName: "message")
-                 Text("Chats")
-               }
         }
     }
 }
