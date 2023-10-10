@@ -19,37 +19,34 @@ struct BetterNoteBodyGallery: View {
     @State var agrumeIndex: Int = 0
     
     var body: some View {
-        if false {
-        } else {
-            SingleAxisGeometryReader { width in
-                ForEach(Array(self.files.chunked(into: 2).enumerated()), id: \.offset) { (cIndex, chunk) in
-                    Grid(horizontalSpacing: 10) {
-                        GridRow {
-                            ForEach(Array(chunk.enumerated()), id: \.offset) { (index, file) in
-                                RemoteImage(file?.thumbnailUrl)
-                                    .frame(width: self.width(parentWidth: width, chunk: chunk), height: self.height())
-                                    .contentShape(Rectangle())
-                                    .highPriorityGesture(TapGesture().onEnded({ _ in
-                                        withAnimation {
-                                            self.agrumeIndex = (cIndex * 2) + index
-                                            self.showAgrume = true
-                                            self.viewReloader.reloadView()
-                                        }
-                                    }))
-                            }
+        SingleAxisGeometryReader { width in
+            ForEach(Array(self.files.chunked(into: 2).enumerated()), id: \.offset) { (cIndex, chunk) in
+                Grid(horizontalSpacing: 10) {
+                    GridRow {
+                        ForEach(Array(chunk.enumerated()), id: \.offset) { (index, file) in
+                            RemoteImage(file?.thumbnailUrl)
+                                .frame(width: self.width(parentWidth: width, chunk: chunk), height: self.height())
+                                .contentShape(Rectangle())
+                                .highPriorityGesture(TapGesture().onEnded({ _ in
+                                    withAnimation {
+                                        self.agrumeIndex = (cIndex * 2) + index
+                                        self.showAgrume = true
+                                        self.viewReloader.reloadView()
+                                    }
+                                }))
                         }
-                        .frame(width: self.width(parentWidth: width, chunk: chunk), height: self.height())
-                        .cornerRadius(11)
                     }
-                    .id(width)
-                    .frame(maxWidth: .infinity)
+                    .frame(width: self.width(parentWidth: width, chunk: chunk), height: self.height())
+                    .cornerRadius(11)
                 }
-            }.fullScreenCover(isPresented: self.$showAgrume, content: {
-                WrapperAgrumeView(urls: self.urls(), startIndex: self.agrumeIndex, isPresenting: self.$showAgrume)
-                    .clearBackground()
-                    .ignoresSafeArea()
-            })
-        }
+                .id(width)
+                .frame(maxWidth: .infinity)
+            }
+        }.fullScreenCover(isPresented: self.$showAgrume, content: {
+            WrapperAgrumeView(urls: self.urls(), startIndex: self.agrumeIndex, isPresenting: self.$showAgrume)
+                .clearBackground()
+                .ignoresSafeArea()
+        })
     }
     
     private func height() -> CGFloat {
