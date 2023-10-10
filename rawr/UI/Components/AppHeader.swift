@@ -42,28 +42,26 @@ struct AppHeader<Content: View>: View {
                 content
             }.padding(.leading, 5)
             Spacer()
-            Image(systemName: "bell")
-                .font(.system(size: 23))
-                .frame(width: 50, height: 50)
-                .overlay(alignment: .topTrailing) {
-                    Rectangle()
-                        .frame(width: 15, height: 15)
-                        .foregroundColor(.red)
-                        .cornerRadius(.infinity)
-                        .offset(CGSize(width: -2.0, height: 2.0))
-                }
-                .padding(.trailing, 5)
+//            Image(systemName: "bell")
+//                .font(.system(size: 23))
+//                .frame(width: 50, height: 50)
+//                .overlay(alignment: .topTrailing) {
+//                    Rectangle()
+//                        .frame(width: 15, height: 15)
+//                        .foregroundColor(.red)
+//                        .cornerRadius(.infinity)
+//                        .offset(CGSize(width: -2.0, height: 2.0))
+//                }
+//                .padding(.trailing, 5)
             ProfileSwitcher()
                 .frame(width: 50, height: 50)
                 .clipped()
                 .cornerRadius(.infinity)
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 15)
         .padding(.top)
         .padding(.bottom, 10)
-        .onAppear(perform: {
-            print(self.dismiss)
-        })
+        .fluentBackground(.regular, fullscreen: false)
     }
 }
 
@@ -85,7 +83,6 @@ struct AppHeader<Content: View>: View {
             .environmentObject(ViewContext())
         }
         .background(.background)
-        .cornerRadius(25)
         Spacer()
-    }.padding().background(.primary)
+    }.background(.primary)
 }

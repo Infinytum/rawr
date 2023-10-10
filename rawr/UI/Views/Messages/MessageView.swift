@@ -55,6 +55,7 @@ struct MessageView: View {
             .flippedUpsideDown()
             MessageBar(messageContext: self.messageContext)
         }
+        .background(context.themeBackground)
         .onAppear {
             self.messageContext.requestInitialSetOfItems(remoteUserId: self.history.remoteUserId(currentUserId: context.currentUserId) ?? "")
         }

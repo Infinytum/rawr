@@ -9,9 +9,26 @@ import SwiftUI
 
 struct BetterTimelineView: View {
     @State private var selectedTab = 0
+    @State private var scrollOffset: Int = 0
     
     var body: some View {
         VStack {
+            Spacer()
+            Group {
+                if selectedTab == 0 {
+                    BetterTimeline(timelineContext: HomeTimelineContext(), scrollViewPadding: 60) 
+                }
+                if selectedTab == 1 {
+                    BetterTimeline(timelineContext: LocalTimelineContext(), scrollViewPadding: 60)
+                }
+                if selectedTab == 2 {
+                    BetterTimeline(timelineContext: GlobalTimelineContext(), scrollViewPadding: 60)
+                }
+            }
+            .shadow(color: .black.opacity(0.15), radius: 10)
+            Spacer()
+        }
+        .overlay(alignment: .top) {
             AppHeader {
                 HStack {
                     Menu {
@@ -47,20 +64,6 @@ struct BetterTimelineView: View {
                     }
                 }
             }
-            Spacer()
-            Group {
-                if selectedTab == 0 {
-                    BetterTimeline(timelineContext: HomeTimelineContext())
-                }
-                if selectedTab == 1 {
-                    BetterTimeline(timelineContext: LocalTimelineContext())
-                }
-                if selectedTab == 2 {
-                    BetterTimeline(timelineContext: GlobalTimelineContext())
-                }
-            }
-            .shadow(color: .black.opacity(0.15), radius: 10)
-            Spacer()
         }
     }
 }

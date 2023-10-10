@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import SwiftKit
 import UIKit
 
 struct BetterTimeline: View {
@@ -16,17 +16,25 @@ struct BetterTimeline: View {
     @State var noteId: String = ""
     @State var noteDetailShown: Bool = false
     
+    let scrollViewPadding: Int
+    
     init(timelineContext: TimelineContextBase) {
+        self.init(timelineContext: timelineContext, scrollViewPadding: 100)
+    }
+    
+    init(timelineContext: TimelineContextBase, scrollViewPadding: Int) {
+        self.scrollViewPadding = scrollViewPadding
         self.timeline = timelineContext
         timelineContext.initialize()
     }
+    
     
     var body: some View {
         Group {
             if self.timeline.fetchError == nil {
                 SingleAxisGeometryReader { width in
                     ScrollView {
-                        LazyVStack() {
+                        LazyVStack(spacing: 0) {
                             ForEach(self.timeline.items, id: \.note.id) { item in
                                 Note(note: item.note, renderedNote: item.renderedNote)
                                 .onAppear { self.timeline.fetchItemsIfNeeded(item) }
@@ -37,16 +45,34 @@ struct BetterTimeline: View {
                                 }
                                 .padding(.vertical)
                                 .fluentBackground()
-                                .cornerRadius(20)
-                                .padding(.horizontal, 10)
                                 .frame(width: width)
-                            }
-
-                            if self.timeline.fetchingItems {
-                              ProgressView()
+                                .overlay(alignment: .bottom) {
+                                    Rectangle()
+                                        .foregroundStyle(.gray.opacity(0.3))
+                                        .frame(height: 0.5)
+                                }
                             }
                         }
                     }
+                    .safeAreaInset(edge: .top, content: {
+                        Rectangle()
+                            .foregroundColor(Color.clear)
+                            .frame(height: CGFloat(self.scrollViewPadding))
+                    })
+                    .safeAreaInset(edge: .bottom, spacing: 0, content: {
+                        if self.timeline.fetchingItems {
+                            if self.timeline.items.count <= 0 {
+                                ProgressView().fluentBackground()
+                            } else {
+                                ProgressView()
+                                    .fluentBackground()
+                                    .frame(maxWidth: 40, maxHeight: 40)
+                                    .clipped()
+                                    .cornerRadius(.infinity)
+                                    .shadow(radius: 10)
+                            }
+                        }
+                    })
                     .refreshable {
                         self.timeline.initialize()
                     }
@@ -56,6 +82,9 @@ struct BetterTimeline: View {
                 }
             } else {
                 VStack {
+                    Rectangle()
+                        .foregroundColor(Color.clear)
+                        .frame(height: CGFloat(self.scrollViewPadding))
                     Text("Couldn't fetch Timeline")
                         .font(.system(size: 20, weight: .regular))
                     Text(self.timeline.fetchError!)

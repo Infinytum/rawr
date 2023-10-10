@@ -68,8 +68,9 @@ class ViewContext: ObservableObject {
     
     var themeBackground: some View {
         get {
-            //FluentBackground.Rainbow
+//            FluentBackground.Rainbow
             Color.background
+//            FluentBackground.Aurora
         }
     }
     

@@ -36,11 +36,11 @@ struct BetterMainView: View {
                 Spacer()
             }
         }
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
         .overlay(alignment: .bottom, content: {
             MainViewFooter(selectedTab: self.$selectedTab)
                 .fluentBackground(.thin, fullscreen: false)
         })
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
         .ignoresSafeArea(.keyboard)
     }
 }

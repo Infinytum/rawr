@@ -20,32 +20,30 @@ struct MessagesView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
+            ScrollView {
                 VStack {
-                    AppHeader {
-                        Text("Messages")
-                    }
-                    ScrollView {
-                        LazyVStack() {
-                            ForEach(self.messagesContext.items, id: \.id) { item in
-                                NavigationLink(destination: MessageView(history: item).navigationBarBackButtonHidden(true)) {
-                                    MessagesListEntry(history: item)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                                .padding(.horizontal)
-                                Divider()
+                    LazyVStack() {
+                        ForEach(self.messagesContext.items, id: \.id) { item in
+                            NavigationLink(destination: MessageView(history: item).navigationBarBackButtonHidden(true)) {
+                                MessagesListEntry(history: item)
                             }
-                        }.padding(.top)
-                    }
-                    .fluentBackground()
-                    .cornerRadius(20)
-                    .padding(.horizontal, 10)
-                    Spacer()
+                            .buttonStyle(PlainButtonStyle())
+                            .padding(.horizontal)
+                            .padding(.vertical, 5)
+                            Divider()
+                                .foregroundStyle(.gray.opacity(0.3))
+                                .frame(height: 0.5)
+                        }
+                    }.padding(.top)
+                }.fluentBackground()
+            }
+            .safeAreaInset(edge: .top, spacing: 0, content: {
+                AppHeader {
+                    Text("Messages")
                 }
-                .refreshable {
-                    self.messagesContext.initialize()
-                }
-                .background(context.themeBackground.ignoresSafeArea())
+            })
+            .refreshable {
+                self.messagesContext.initialize()
             }
         }
     }
