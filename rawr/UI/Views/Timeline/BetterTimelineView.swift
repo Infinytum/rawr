@@ -59,7 +59,7 @@ struct BetterTimelineView: View {
                                     .font(.system(size: 12, weight: .regular, design: .rounded))
                                     .foregroundColor(.primary)
                                     .padding(.leading, -3)
-                            }.padding(.top, -12)
+                            }.padding(.top, -11)
                         }
                     }
                 }

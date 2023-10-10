@@ -14,7 +14,7 @@ fileprivate struct FlippedUpsideDown: ViewModifier {
         .rotationEffect(.degrees(180))
         .scaleEffect(x: -1, y: 1, anchor: .center)
     }
- }
+}
 
 fileprivate extension View {
     func flippedUpsideDown() -> some View {
