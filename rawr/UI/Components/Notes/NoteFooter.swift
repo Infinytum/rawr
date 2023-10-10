@@ -15,6 +15,8 @@ struct NoteFooter: View {
     @ObservedObject var note: NoteModel
     
     @EnvironmentObject var context: ViewContext
+    @ObservedObject var viewReloader = ViewReloader()
+    
     @State var didRenote: Bool = false
     @State var emojiPickerShown = false
           
@@ -55,6 +57,7 @@ struct NoteFooter: View {
             Spacer()
             Button {
                 emojiPickerShown = true
+                self.viewReloader.reloadView()
             } label: {
                 HStack {
                     Image(systemName: "hands.sparkles")

@@ -50,6 +50,7 @@
 		2060795F2A9BDDDA00FC7D00 /* NoteEditorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2060795E2A9BDDDA00FC7D00 /* NoteEditorHeader.swift */; };
 		206079612A9BE99200FC7D00 /* NewNoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206079602A9BE99200FC7D00 /* NewNoteButton.swift */; };
 		206079642A9C05D300FC7D00 /* TimelineSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206079632A9C05D300FC7D00 /* TimelineSelector.swift */; };
+		2067831C2AD5EC0200099902 /* Agrume in Frameworks */ = {isa = PBXBuildFile; productRef = 2067831B2AD5EC0200099902 /* Agrume */; };
 		2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBED2A87B5BC00F8A958 /* rawrApp.swift */; };
 		2068CBF02A87B5BC00F8A958 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBEF2A87B5BC00F8A958 /* ContentView.swift */; };
 		2068CBF22A87B5BF00F8A958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2068CBF12A87B5BF00F8A958 /* Assets.xcassets */; };
@@ -234,6 +235,7 @@
 				2093910E2A92CE7D006FDA19 /* MisskeyKit in Frameworks */,
 				2068CC392A87C2A100F8A958 /* NetworkImage in Frameworks */,
 				2068CBFE2A87B62100F8A958 /* SwiftKit in Frameworks */,
+				2067831C2AD5EC0200099902 /* Agrume in Frameworks */,
 				2068CC162A87B9B500F8A958 /* MisskeyKit in Frameworks */,
 				207C33DF2A8FBD5800500E33 /* MisskeyKit in Frameworks */,
 				20B7E1482A935CEA003E3CE4 /* MisskeyKit in Frameworks */,
@@ -731,6 +733,7 @@
 				2093910D2A92CE7D006FDA19 /* MisskeyKit */,
 				20B7E1472A935CEA003E3CE4 /* MisskeyKit */,
 				20B7E1512A93656A003E3CE4 /* MisskeyKit */,
+				2067831B2AD5EC0200099902 /* Agrume */,
 			);
 			productName = rawr;
 			productReference = 2068CBEA2A87B5BC00F8A958 /* rawr..app */;
@@ -766,6 +769,7 @@
 				2068CC372A87C2A100F8A958 /* XCRemoteSwiftPackageReference "NetworkImage" */,
 				20805F272A8EC0DF0001F2AB /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 				20B7E1502A93656A003E3CE4 /* XCRemoteSwiftPackageReference "MisskeyKit" */,
+				2067831A2AD5EC0200099902 /* XCRemoteSwiftPackageReference "Agrume" */,
 			);
 			productRefGroup = 2068CBEB2A87B5BC00F8A958 /* Products */;
 			projectDirPath = "";
@@ -1121,6 +1125,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2067831A2AD5EC0200099902 /* XCRemoteSwiftPackageReference "Agrume" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JanGorman/Agrume";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.6;
+			};
+		};
 		2068CBFC2A87B62100F8A958 /* XCRemoteSwiftPackageReference "SwiftKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Infinytum/SwiftKit";
@@ -1164,6 +1176,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2067831B2AD5EC0200099902 /* Agrume */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2067831A2AD5EC0200099902 /* XCRemoteSwiftPackageReference "Agrume" */;
+			productName = Agrume;
+		};
 		2068CBFD2A87B62100F8A958 /* SwiftKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2068CBFC2A87B62100F8A958 /* XCRemoteSwiftPackageReference "SwiftKit" */;

@@ -19,7 +19,7 @@ struct BetterTimeline: View {
     let scrollViewPadding: Int
     
     init(timelineContext: TimelineContextBase) {
-        self.init(timelineContext: timelineContext, scrollViewPadding: 100)
+        self.init(timelineContext: timelineContext, scrollViewPadding: 0)
     }
     
     init(timelineContext: TimelineContextBase, scrollViewPadding: Int) {
@@ -30,30 +30,31 @@ struct BetterTimeline: View {
     
     
     var body: some View {
-        Group {
+        NavigationStack {
             if self.timeline.fetchError == nil {
                 SingleAxisGeometryReader { width in
                     ScrollView {
                         LazyVStack(spacing: 0) {
                             ForEach(self.timeline.items, id: \.note.id) { item in
                                 Note(note: item.note, renderedNote: item.renderedNote)
-                                .onAppear { self.timeline.fetchItemsIfNeeded(item) }
-                                .onTapGesture {
-                                    self.noteId = item.note.id!
-                                    self.viewReloader.reloadView()
-                                    self.noteDetailShown = true
-                                }
-                                .padding(.vertical)
-                                .fluentBackground()
-                                .frame(width: width)
-                                .overlay(alignment: .bottom) {
-                                    Rectangle()
-                                        .foregroundStyle(.gray.opacity(0.3))
-                                        .frame(height: 0.5)
-                                }
+                                    .onAppear { self.timeline.fetchItemsIfNeeded(item) }
+                                    .padding(.vertical)
+                                    .fluentBackground()
+                                    .frame(width: width)
+                                    .overlay(alignment: .bottom) {
+                                        Rectangle()
+                                            .foregroundStyle(.gray.opacity(0.3))
+                                            .frame(height: 0.5)
+                                    }
+                                    .contentShape(Rectangle())
+                                    .gesture(TapGesture().onEnded({ _ in
+                                        self.noteId = item.note.id!
+                                        self.viewReloader.reloadView()
+                                        self.noteDetailShown = true
+                                    }))
                             }
                         }
-                    }
+                    }.onTapGesture {}
                     .safeAreaInset(edge: .top, content: {
                         Rectangle()
                             .foregroundColor(Color.clear)
