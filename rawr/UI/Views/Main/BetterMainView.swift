@@ -17,31 +17,29 @@ struct BetterMainView: View {
     @State var selectedTab: MainViewTab = .home
     
     var body: some View {
-        VStack {
-            switch self.selectedTab {
-            case .home:
-                BetterTimelineView()
-                    .background(context.themeBackground.ignoresSafeArea())
-            case .chats:
-                MessagesView()
-                    .padding(.bottom, 54)
-                    .background(context.themeBackground.ignoresSafeArea())
-            case .settings, .explore:
-                Spacer()
-                Image(.gremlin)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                Text("✨ Coming Soon ✨")
-                    .font(.system(size: 25, weight: .bold, design: .rounded))
-                Spacer()
-            }
-        }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .overlay(alignment: .bottom, content: {
-            MainViewFooter(selectedTab: self.$selectedTab)
-                .fluentBackground(.thin, fullscreen: false)
-        })
-        .ignoresSafeArea(.keyboard)
+        NavigationStack {
+            VStack {
+                switch self.selectedTab {
+                case .home:
+                    BetterTimelineView()
+                case .chats:
+                    MessagesView()
+                case .settings, .explore:
+                    Spacer()
+                    Image(.gremlin)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    Text("✨ Coming Soon ✨")
+                        .font(.system(size: 25, weight: .bold, design: .rounded))
+                    Spacer()
+                }
+            }.safeAreaInset(edge: .bottom, spacing: 0, content: {
+                MainViewFooter(selectedTab: self.$selectedTab)
+                    .fluentBackground(.thin, fullscreen: false)
+            })
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+            .ignoresSafeArea(.keyboard)
+        }.background(context.themeBackground.ignoresSafeArea())
     }
 }
 

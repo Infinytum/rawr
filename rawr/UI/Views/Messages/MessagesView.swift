@@ -19,32 +19,30 @@ struct MessagesView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack {
-                    LazyVStack() {
-                        ForEach(self.messagesContext.items, id: \.id) { item in
-                            NavigationLink(destination: MessageView(history: item).navigationBarBackButtonHidden(true)) {
-                                MessagesListEntry(history: item)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                            .padding(.horizontal)
-                            .padding(.vertical, 5)
-                            Divider()
-                                .foregroundStyle(.gray.opacity(0.3))
-                                .frame(height: 0.5)
+        ScrollView {
+            VStack {
+                LazyVStack() {
+                    ForEach(self.messagesContext.items, id: \.id) { item in
+                        NavigationLink(destination: MessageView(history: item).navigationBarBackButtonHidden(true)) {
+                            MessagesListEntry(history: item)
                         }
-                    }.padding(.top)
-                }.fluentBackground()
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.horizontal)
+                        .padding(.vertical, 5)
+                        Divider()
+                            .foregroundStyle(.gray.opacity(0.3))
+                            .frame(height: 0.5)
+                    }
+                }.padding(.top)
+            }.fluentBackground()
+        }
+        .safeAreaInset(edge: .top, spacing: 0, content: {
+            AppHeader {
+                Text("Messages")
             }
-            .safeAreaInset(edge: .top, spacing: 0, content: {
-                AppHeader {
-                    Text("Messages")
-                }
-            })
-            .refreshable {
-                self.messagesContext.initialize()
-            }
+        })
+        .refreshable {
+            self.messagesContext.initialize()
         }
     }
 }

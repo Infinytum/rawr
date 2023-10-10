@@ -16,27 +16,23 @@ struct BetterTimeline: View {
     @State var noteId: String = ""
     @State var noteDetailShown: Bool = false
     
-    let scrollViewPadding: Int
-    
     init(timelineContext: TimelineContextBase) {
-        self.init(timelineContext: timelineContext, scrollViewPadding: 0)
-    }
-    
-    init(timelineContext: TimelineContextBase, scrollViewPadding: Int) {
-        self.scrollViewPadding = scrollViewPadding
         self.timeline = timelineContext
         timelineContext.initialize()
     }
     
-    
     var body: some View {
-        NavigationStack {
+        Group {
             if self.timeline.fetchError == nil {
                 SingleAxisGeometryReader { width in
                     ScrollView {
                         LazyVStack(spacing: 0) {
                             ForEach(self.timeline.items, id: \.note.id) { item in
-                                Note(note: item.note, renderedNote: item.renderedNote)
+                                NavigationLink(destination: NoteView(noteId: item.note.id!).navigationBarBackButtonHidden(true)) {
+                                    Note(note: item.note, renderedNote: item.renderedNote)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                
                                     .onAppear { self.timeline.fetchItemsIfNeeded(item) }
                                     .padding(.vertical)
                                     .fluentBackground()
@@ -47,19 +43,9 @@ struct BetterTimeline: View {
                                             .frame(height: 0.5)
                                     }
                                     .contentShape(Rectangle())
-                                    .gesture(TapGesture().onEnded({ _ in
-                                        self.noteId = item.note.id!
-                                        self.viewReloader.reloadView()
-                                        self.noteDetailShown = true
-                                    }))
                             }
                         }
                     }.onTapGesture {}
-                    .safeAreaInset(edge: .top, content: {
-                        Rectangle()
-                            .foregroundColor(Color.clear)
-                            .frame(height: CGFloat(self.scrollViewPadding))
-                    })
                     .safeAreaInset(edge: .bottom, spacing: 0, content: {
                         if self.timeline.fetchingItems {
                             if self.timeline.items.count <= 0 {
@@ -83,9 +69,6 @@ struct BetterTimeline: View {
                 }
             } else {
                 VStack {
-                    Rectangle()
-                        .foregroundColor(Color.clear)
-                        .frame(height: CGFloat(self.scrollViewPadding))
                     Text("Couldn't fetch Timeline")
                         .font(.system(size: 20, weight: .regular))
                     Text(self.timeline.fetchError!)

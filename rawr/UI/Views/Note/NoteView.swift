@@ -16,41 +16,52 @@ struct NoteView: View {
     @State var note: NoteModel? = nil
     @State var replies: [NoteModel]? = nil
     
-    @State var subNoteId: String? = nil
-    @State var subNoteShown: Bool = false
-    
     let noteId: String
     
     var body: some View {
-        if self.note == nil {
-            VStack {
-                Spacer()
-                ProgressView()
-                Spacer()
-            }.onAppear(perform: self.loadNote)
-        } else {
-            ScrollView {
-                Note(note: self.note!)
-                    .onAppear(perform: self.loadReplies)
-                if self.replies == nil {
-                    ProgressView()
-                } else {
-                    Divider()
-                    Text("\(self.replies?.count ?? 0) Replies").padding(.top, 1).foregroundColor(.primary.opacity(0.7))
-                    Divider()
-                    ForEach(self.replies!, id: \.id) { reply in
-                        Note(note: reply)
-                            .onTapGesture {
-                                self.subNoteId = reply.id
-                                self.viewReloader.reloadView()
-                                self.subNoteShown = true
-                            }
-                        Divider()
-                    }
+        VStack {
+            if self.note == nil {
+                VStack {
                     Spacer()
+                    ProgressView()
+                    Spacer()
+                }.fluentBackground()
+            } else {
+                ScrollView {
+                    VStack(spacing: 0) {
+                        Note(note: self.note!)
+                            .padding(.vertical)
+                            .fluentBackground()
+                            .onAppear(perform: self.loadReplies)
+                        if self.replies != nil && self.replies!.count > 0 {
+                            VStack {
+                                Text("\(self.replies?.count ?? 0) Replies")
+                                    .padding(.vertical).foregroundColor(.primary.opacity(0.7))
+                            }.background()
+                            
+                            ForEach(self.replies!, id: \.id) { reply in
+                                NavigationLink(destination: NoteView(noteId: reply.id!).navigationBarBackButtonHidden(true)) {
+                                    Note(note: reply)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                    .padding(.vertical)
+                                    .overlay(alignment: .bottom) {
+                                        Rectangle()
+                                            .foregroundStyle(.gray.opacity(0.3))
+                                            .frame(height: 0.5)
+                                    }
+                                    .fluentBackground()
+                            }
+                        }
+                    }
                 }
-            }.padding().sheet(isPresented: self.$subNoteShown) {
-                NoteView(noteId: self.subNoteId!)
+                .background(context.themeBackground.ignoresSafeArea())
+            }
+        }
+        .onAppear(perform: self.loadNote)
+        .safeAreaInset(edge: .top, spacing: 0) {
+            AppHeader(isNavLink: true) {
+                Text("Note")
             }
         }
     }
@@ -74,16 +85,21 @@ struct NoteView: View {
                 print("NoteView Error: API returned error while fetching note replies: \(error!)")
                 return
             }
-            self.replies = replies
+            self.replies = replies.filter({ model in
+                return model.replyId == self.noteId || model.replyId == self.note?.renoteId
+            })
         }
     }
 }
 
 #Preview {
-    VStack {
-        
-    }.sheet(isPresented: .constant(true)) {
-        NoteView(noteId: "9iklw7fsr7cofp5k").environmentObject(ViewContext())
+    NavigationStack {
+        VStack {
+            NoteView(noteId: "9iklw7fsr7cofp5k").environmentObject(ViewContext())
+        }.safeAreaInset(edge: .bottom) {
+            MainViewFooter(selectedTab: .constant(.home))
+                .fluentBackground(.thin, fullscreen: false)
+        }
     }
 }
 
