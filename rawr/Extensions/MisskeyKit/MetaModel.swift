@@ -25,4 +25,11 @@ public extension MetaModel {
         return foundEmoji.url ?? nil
     }
     
+    func getIconUrl() -> String? {
+        let iconUrl = self.iconUrl ?? ""
+        if iconUrl == "" {
+            return (self.uri ?? "") + "/favicon.ico"
+        }
+        return iconUrl
+    }
 }

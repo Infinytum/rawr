@@ -30,8 +30,7 @@ struct AppHeader<Content: View>: View {
                         .cornerRadius(.infinity)
                 }
             } else {
-                Image(.dergSocialIcon)
-                    .resizable()
+                RemoteImage(context.currentInstance?.getIconUrl())
                     .frame(width: 50, height: 50)
                     .clipped()
                     .cornerRadius(.infinity)
