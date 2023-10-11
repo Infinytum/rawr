@@ -41,7 +41,7 @@ struct MainViewFooter: View {
                         Rectangle()
                             .frame(width: 65, height: 45)
                             .foregroundColor(.clear)
-                            .fluentBackground()
+                            .fluentBackground(.ultraThin)
                             .cornerRadius(.infinity)
                     )
                     .foregroundColor(.primary)
@@ -95,6 +95,6 @@ struct MainViewFooter: View {
         Spacer()
         Text("The Amazing Content")
         Spacer()
-        MainViewFooter(selectedTab: .constant(.home))
+        MainViewFooter(selectedTab: .constant(.home)).fluentBackground(.regular, fullscreen: false)
     }
 }
