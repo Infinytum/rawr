@@ -33,7 +33,7 @@ struct AppHeader<Content: View>: View {
                 RemoteImage(context.currentInstance?.getIconUrl())
                     .frame(width: 50, height: 50)
                     .clipped()
-                    .cornerRadius(.infinity)
+                    .cornerRadius(11)
             }
             VStack(alignment: .leading) {
                 Text(context.currentInstanceName)

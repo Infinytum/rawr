@@ -16,22 +16,27 @@ struct MessagesListEntry: View {
     
     var body: some View {
         VStack {
-            HStack {
+            HStack(alignment: .center) {
                 RemoteImage(self.history.avatarUrl(currentUserId: context.currentUserId))
                     .aspectRatio(1, contentMode: .fill)
-                    .frame(width: 60, height: 60)
+                    .frame(width: 50, height: 50)
                     .cornerRadius(11)
                     .shadow(radius: 2)
                 VStack(alignment: .leading) {
                     HStack {
-                        Text(self.history.chatName(currentUserId: context.currentUserId) ?? "<No Name>").fontWeight(.bold)
+                        Text(self.history.chatName(currentUserId: context.currentUserId) ?? "<No Name>")
+                            .font(.system(size: 18))
+                            .fontWeight(.bold)
                             .lineLimit(1, reservesSpace: true)
                         Spacer()
                         Text(self.history.createdAt?.toDate()?.relative() ?? "Unknown")
                             .font(.system(size: 14))
                             .foregroundStyle(.primary.opacity(0.8))
                     }
-                    (self.getMessagePrefix() + self.getMessageText()).lineLimit(2, reservesSpace: true)
+                    .frame(height: 17)
+                    (self.getMessagePrefix() + self.getMessageText())
+                        .font(.system(size: 18))
+                        .lineLimit(1, reservesSpace: true)
                     
                 }.padding(.leading, 5)
             }
@@ -46,7 +51,7 @@ struct MessagesListEntry: View {
     }
     
     private func getMessageText() -> Text {
-        return Text(self.history.text() ?? "<empty message>").font(.system(size: 16)).foregroundColor(.primary.opacity(0.7))
+        return Text(self.history.text() ?? "<empty message>").font(.system(size: 18)).foregroundColor(.primary.opacity(0.7))
     }
 }
 

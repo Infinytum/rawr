@@ -26,38 +26,40 @@ struct BetterTimeline: View {
             if self.timeline.fetchError == nil {
                 SingleAxisGeometryReader { width in
                     ScrollView {
-                        LazyVStack(spacing: 0) {
-                            ForEach(self.timeline.items, id: \.note.id) { item in
-                                NavigationLink(destination: NoteView(noteId: item.note.id!).navigationBarBackButtonHidden(true)) {
-                                    Note(note: item.note, renderedNote: item.renderedNote)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                                
-                                    .onAppear { self.timeline.fetchItemsIfNeeded(item) }
-                                    .padding(.vertical)
-                                    .fluentBackground()
-                                    .frame(width: width)
-                                    .overlay(alignment: .bottom) {
-                                        Rectangle()
-                                            .foregroundStyle(.gray.opacity(0.3))
-                                            .frame(height: 0.5)
+                        if self.timeline.fetchingItems && self.timeline.items.count <= 0 {
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(height: 100)
+                        } else {
+                            LazyVStack(spacing: 0) {
+                                ForEach(self.timeline.items, id: \.note.id) { item in
+                                    NavigationLink(destination: NoteView(noteId: item.note.id!).navigationBarBackButtonHidden(true)) {
+                                        Note(note: item.note, renderedNote: item.renderedNote)
                                     }
-                                    .contentShape(Rectangle())
+                                    .buttonStyle(PlainButtonStyle())
+                                    
+                                        .onAppear { self.timeline.fetchItemsIfNeeded(item) }
+                                        .padding(.vertical)
+                                        .fluentBackground()
+                                        .frame(width: width)
+                                        .overlay(alignment: .bottom) {
+                                            Rectangle()
+                                                .foregroundStyle(.gray.opacity(0.3))
+                                                .frame(height: 0.5)
+                                        }
+                                        .contentShape(Rectangle())
+                                }
                             }
                         }
                     }.onTapGesture {}
                     .safeAreaInset(edge: .bottom, spacing: 0, content: {
-                        if self.timeline.fetchingItems {
-                            if self.timeline.items.count <= 0 {
-                                ProgressView().fluentBackground()
-                            } else {
-                                ProgressView()
-                                    .fluentBackground()
-                                    .frame(maxWidth: 40, maxHeight: 40)
-                                    .clipped()
-                                    .cornerRadius(.infinity)
-                                    .shadow(radius: 10)
-                            }
+                        if self.timeline.fetchingItems && self.timeline.items.count > 0 {
+                            ProgressView()
+                                .fluentBackground()
+                                .frame(maxWidth: 40, maxHeight: 40)
+                                .clipped()
+                                .cornerRadius(.infinity)
+                                .shadow(radius: 10)
                         }
                     })
                     .refreshable {
