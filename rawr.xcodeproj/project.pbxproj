@@ -51,6 +51,7 @@
 		206079612A9BE99200FC7D00 /* NewNoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206079602A9BE99200FC7D00 /* NewNoteButton.swift */; };
 		206079642A9C05D300FC7D00 /* TimelineSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206079632A9C05D300FC7D00 /* TimelineSelector.swift */; };
 		2067831C2AD5EC0200099902 /* Agrume in Frameworks */ = {isa = PBXBuildFile; productRef = 2067831B2AD5EC0200099902 /* Agrume */; };
+		2067831E2AD730B100099902 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067831D2AD730B100099902 /* UIKit.swift */; };
 		2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBED2A87B5BC00F8A958 /* rawrApp.swift */; };
 		2068CBF02A87B5BC00F8A958 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBEF2A87B5BC00F8A958 /* ContentView.swift */; };
 		2068CBF22A87B5BF00F8A958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2068CBF12A87B5BF00F8A958 /* Assets.xcassets */; };
@@ -164,6 +165,7 @@
 		2060795E2A9BDDDA00FC7D00 /* NoteEditorHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorHeader.swift; sourceTree = "<group>"; };
 		206079602A9BE99200FC7D00 /* NewNoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteButton.swift; sourceTree = "<group>"; };
 		206079632A9C05D300FC7D00 /* TimelineSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSelector.swift; sourceTree = "<group>"; };
+		2067831D2AD730B100099902 /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		2068CBEA2A87B5BC00F8A958 /* rawr..app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rawr..app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2068CBED2A87B5BC00F8A958 /* rawrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rawrApp.swift; sourceTree = "<group>"; };
 		2068CBEF2A87B5BC00F8A958 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -584,6 +586,7 @@
 				2098F91D2A8EF792003CAAE2 /* Scanner.swift */,
 				204DA4322A8AD4A000BB0598 /* String.swift */,
 				20B59F392AB8EAF7002B3039 /* View.swift */,
+				2067831D2AD730B100099902 /* UIKit.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -846,6 +849,7 @@
 				2068CC2E2A87C25B00F8A958 /* NoteBodyReactions.swift in Sources */,
 				204DA4272A8AC32D00BB0598 /* Visualizer.swift in Sources */,
 				3FBFED2B2A9511F100D53608 /* NoteBodyPoll.swift in Sources */,
+				2067831E2AD730B100099902 /* UIKit.swift in Sources */,
 				2026DCC92AB7943800A4B68E /* BetterMainView.swift in Sources */,
 				206079642A9C05D300FC7D00 /* TimelineSelector.swift in Sources */,
 				2068CC102A87B96D00F8A958 /* OnboardingServerCard.swift in Sources */,
