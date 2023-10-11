@@ -22,7 +22,7 @@ struct NoteBodyReactions: View {
         WrappingHStack(alignment: .leading) {
             ForEach((self.note.reactions ?? [:]).sorted(by: >), id: \.key) { key, value in
                 HStack {
-                    RemoteImage(self.getEmojiUrl(key))
+                    Emoji(name: key, emojis: note.emojis ?? [])
                         .frame(width: 20, height: 20)
                     Text(String(value))
                 }.padding(5).padding(.trailing, 5)
@@ -63,11 +63,5 @@ struct NoteBodyReactions: View {
 }
 
 #Preview {
-    ScrollView {
-        Note(note: .preview)
-        Divider()
-        Note(note: .preview)
-        Divider()
-        Note(note: .preview)
-    }.padding()
+    Note(note: .preview)
 }

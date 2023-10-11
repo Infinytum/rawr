@@ -29,7 +29,7 @@ struct Emoji: View {
                     }
                 }
         } else if self.emojiUrl == "" {
-            Text(self.viewContext.defaultEmojis.charForEmoji(self.name) ?? "")
+            Text(self.viewContext.defaultEmojis.charForEmoji(self.name) ?? self.name)
         } else {
             RemoteImage(self.emojiUrl)
                 .popover(isPresented: $presentEmojiPopover, content: {
