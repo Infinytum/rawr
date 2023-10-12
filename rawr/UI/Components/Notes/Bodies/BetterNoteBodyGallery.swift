@@ -24,10 +24,10 @@ struct BetterNoteBodyGallery: View {
                 Grid(horizontalSpacing: 10) {
                     GridRow {
                         ForEach(Array(chunk.enumerated()), id: \.offset) { (index, file) in
-                            RemoteImage(file?.thumbnailUrl)
+                            RemoteImage(file?.thumbnailUrl, isBlurred: file?.isSensitive ?? false)
                                 .frame(width: self.width(parentWidth: width, chunk: chunk), height: self.height())
                                 .contentShape(Rectangle())
-                                .highPriorityGesture(TapGesture().onEnded({ _ in
+                                .gesture(TapGesture().onEnded({ _ in
                                     withAnimation {
                                         self.agrumeIndex = (cIndex * 2) + index
                                         self.showAgrume = true
