@@ -52,6 +52,7 @@
 		206079642A9C05D300FC7D00 /* TimelineSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206079632A9C05D300FC7D00 /* TimelineSelector.swift */; };
 		2067831C2AD5EC0200099902 /* Agrume in Frameworks */ = {isa = PBXBuildFile; productRef = 2067831B2AD5EC0200099902 /* Agrume */; };
 		2067831E2AD730B100099902 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067831D2AD730B100099902 /* UIKit.swift */; };
+		206783202AD825D000099902 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067831F2AD825D000099902 /* Environment.swift */; };
 		2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBED2A87B5BC00F8A958 /* rawrApp.swift */; };
 		2068CBF02A87B5BC00F8A958 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CBEF2A87B5BC00F8A958 /* ContentView.swift */; };
 		2068CBF22A87B5BF00F8A958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2068CBF12A87B5BF00F8A958 /* Assets.xcassets */; };
@@ -166,6 +167,7 @@
 		206079602A9BE99200FC7D00 /* NewNoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteButton.swift; sourceTree = "<group>"; };
 		206079632A9C05D300FC7D00 /* TimelineSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSelector.swift; sourceTree = "<group>"; };
 		2067831D2AD730B100099902 /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
+		2067831F2AD825D000099902 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		2068CBEA2A87B5BC00F8A958 /* rawr..app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rawr..app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2068CBED2A87B5BC00F8A958 /* rawrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rawrApp.swift; sourceTree = "<group>"; };
 		2068CBEF2A87B5BC00F8A958 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -587,6 +589,7 @@
 				204DA4322A8AD4A000BB0598 /* String.swift */,
 				20B59F392AB8EAF7002B3039 /* View.swift */,
 				2067831D2AD730B100099902 /* UIKit.swift */,
+				2067831F2AD825D000099902 /* Environment.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -869,6 +872,7 @@
 				209391032A92A2B1006FDA19 /* NotificationView.swift in Sources */,
 				2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */,
 				3F8E62D92A93CA220093A1D4 /* UserView.swift in Sources */,
+				206783202AD825D000099902 /* Environment.swift in Sources */,
 				209D67BD2AD0469700E30ACD /* MessagesView.swift in Sources */,
 				208E24E82A9770D60058BB52 /* HashtagTimelineView.swift in Sources */,
 				2068CC312A87C25B00F8A958 /* Note.swift in Sources */,

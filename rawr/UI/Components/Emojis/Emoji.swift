@@ -8,9 +8,19 @@
 import MisskeyKit
 import SwiftUI
 
+fileprivate extension View {
+    func applyEmojiRenderSize(size: CGSize?) -> AnyView {
+        if size == nil {
+            return AnyView(self)
+        }
+        return AnyView(self.frame(width: size!.width, height: size!.height))
+    }
+}
+
 struct Emoji: View {
 
     @EnvironmentObject var viewContext: ViewContext
+    @Environment(\.emojiRenderSize) var emojiRenderSize
     
     let name: String
     var emojis: [EmojiModel] = []
@@ -39,7 +49,8 @@ struct Emoji: View {
                         .presentationCompactAdaptation(.popover)
                 }).onTapGesture {
                     self.presentEmojiPopover = true
-                }
+                }.applyEmojiRenderSize(size: self.emojiRenderSize)
+                
         }
     }
     

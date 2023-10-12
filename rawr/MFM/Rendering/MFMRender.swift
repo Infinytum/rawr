@@ -119,7 +119,6 @@ fileprivate func mfmRenderNode(_ node: MFMNodeProtocol, context: MFMRenderContex
                 viewStack: [
                     MFMRenderView {
                         Emoji(name: emojiName, emojis: emojis)
-                            .frame(width: 30, height: 30)
                     }
                 ],
                 newStack: false,
@@ -242,7 +241,10 @@ This is a test post for <i>rawr.</i>, an iOS-native app for Firefish!
 Firefish is seeing more and more adoption, but the lack of proper mobile apps is hurting the process as people are disappointed with the lack of functionality in Misskey apps and the lack of stability and completeness in Mastodon apps.
 
 $[blur And because it was fun]
-$[x2 :drgn_laser_end::drgn_laser_mid::drgn_laser_mid::drgn_laser_mid::drgn_laser_start::drgn_yell:]
+$[x2 Big :drgn: asd]
+$[x2 :drgn_confused:]
+$[x3 Bigger :drgn: ad]
+$[x4 Biggest :drgn: asd]
 Primarily developed by @nila@derg.social and @drafolin@derg.social to improve the user experience of derg.social, we are happy to announce that this app works with any Firefish instance!
 
 #firefish #app #development #developer #announcement #fediverse
@@ -254,7 +256,7 @@ fileprivate let testNoteOld = "Hello @user and @user@instance.local!\nThis is a 
     VStack {
         Spacer()
         ForEach(mfmRender(tokenize(testNote)).renderedNote) { view in
-            AnyView(view.view).border(.gray)
+            AnyView(view.view)
         }
         Spacer()
     }.border(.brown).environmentObject(ViewContext())

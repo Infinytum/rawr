@@ -47,7 +47,7 @@ fileprivate func applyUnsupportedModifier(_ renderedChildren: MFMRenderResult) -
 fileprivate func applyBigModifier(_ renderedChildren: MFMRenderResult) -> MFMRenderNodeStack {
     return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
         MFMRenderView {
-            view.font(.system(size: 20))
+            view.font(.system(size: 20)).environment(\.emojiRenderSize, CGSize(width: 50, height: 50))
         }
     })
 }
@@ -56,7 +56,7 @@ fileprivate func applyBigModifier(_ renderedChildren: MFMRenderResult) -> MFMRen
 fileprivate func applyBiggerModifier(_ renderedChildren: MFMRenderResult) -> MFMRenderNodeStack {
     return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
         MFMRenderView {
-            view.font(.system(size: 24))
+            view.font(.system(size: 24)).environment(\.emojiRenderSize, CGSize(width: 60, height: 60))
         }
     })
 }
@@ -65,7 +65,7 @@ fileprivate func applyBiggerModifier(_ renderedChildren: MFMRenderResult) -> MFM
 fileprivate func applyBiggestModifier(_ renderedChildren: MFMRenderResult) -> MFMRenderNodeStack {
     return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
         MFMRenderView {
-            view.font(.system(size: 28))
+            view.font(.system(size: 28)).environment(\.emojiRenderSize, CGSize(width: 70, height: 70))
         }
     })
 }
