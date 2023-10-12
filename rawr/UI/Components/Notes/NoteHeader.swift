@@ -71,4 +71,5 @@ struct NoteHeader: View {
 
 #Preview {
     NoteHeader(note: .preview.renote!)
+        .environmentObject(ViewContext())
 }

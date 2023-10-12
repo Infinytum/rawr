@@ -15,6 +15,9 @@ class MessagesContext: ObservableObject {
     /// Set to true while the MessagesContext is fetching new items from the server
     @Published var fetchingItems = false
     
+    /// Set to true when data has been loaded for the first time, subsequent initialize calls will not change this value
+    @Published var firstLoadCompleted = false
+    
     /// A list of all currently available message items that have passed pre-rendering
     @Published var items = [MessageHistoryModel]()
     
@@ -66,6 +69,7 @@ class MessagesContext: ObservableObject {
         Task {
             await MainActor.run {
                 items.append(contentsOf: messages)
+                self.firstLoadCompleted = true
                 self.fetchError = nil
                 self.fetchingItems = false
             }
