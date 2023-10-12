@@ -72,6 +72,7 @@ class TimelineContextBase: ObservableObject {
     internal func handleItems(notes: [NoteModel]?, error: MisskeyKitError?) {
         guard let notes = notes else {
             self.fetchError = "\(error!)"
+            self.fetchingItems = false
             print("TimelineContextBase Error: Delegate returned error while fetching items: \(error!)")
             return
         }

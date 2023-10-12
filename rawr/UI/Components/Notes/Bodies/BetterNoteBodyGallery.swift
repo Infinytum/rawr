@@ -83,11 +83,13 @@ struct WrapperAgrumeView: UIViewControllerRepresentable {
   }
 
   public func makeUIViewController(context: UIViewControllerRepresentableContext<WrapperAgrumeView>) -> UIViewController {
-      let agrume = Agrume(urls: self.urls, startIndex: self.startIndex, background: .blurred(.regular))
-    agrume.view.backgroundColor = .clear
-    agrume.addSubviews()
-    agrume.addOverlayView()
-    agrume.didDismiss = {
+      let agrume = Agrume(urls: self.urls, startIndex: self.startIndex, background: .blurred(.regular), enableLiveText: false)
+      let helper = makeHelper()
+      agrume.view.backgroundColor = .clear
+      agrume.addSubviews()
+      agrume.addOverlayView()
+      agrume.onLongPress = helper.makeSaveToLibraryLongPressGesture
+      agrume.didDismiss = {
           withAnimation {
             binding = false
           }
@@ -98,6 +100,19 @@ struct WrapperAgrumeView: UIViewControllerRepresentable {
   public func updateUIViewController(_ uiViewController: UIViewController,
                                      context: UIViewControllerRepresentableContext<WrapperAgrumeView>) {
   }
+    
+    private func makeHelper() -> AgrumePhotoLibraryHelper {
+      let saveButtonTitle = NSLocalizedString("Save Photo", comment: "Save Photo")
+      let cancelButtonTitle = NSLocalizedString("Cancel", comment: "Cancel")
+      let helper = AgrumePhotoLibraryHelper(saveButtonTitle: saveButtonTitle, cancelButtonTitle: cancelButtonTitle) { error in
+        guard error == nil else {
+          print("Could not save your photo")
+          return
+        }
+        print("Photo has been saved to your library")
+      }
+      return helper
+    }
 }
 
 #Preview {

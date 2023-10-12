@@ -19,7 +19,7 @@ struct Notification: View {
     var body: some View {
         VStack {
             HStack() {
-                RemoteImage(notification.user?.avatarUrl ?? self.context.currentInstance?.iconUrl)
+                RemoteImage(notification.user?.avatarUrl ?? self.context.currentInstance?.getIconUrl())
                     .frame(width: 55, height: 55)
                     .cornerRadius(11)
                     .overlay(alignment: .bottomTrailing) {

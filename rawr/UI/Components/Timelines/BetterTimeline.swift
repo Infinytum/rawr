@@ -84,6 +84,12 @@ struct BetterTimeline: View {
                         .font(.system(size: 15, weight: .medium))
                         .foregroundColor(.primary.opacity(0.7))
                         .multilineTextAlignment(.center)
+                    
+                    Button("Retry") {
+                        DispatchQueue.main.async {
+                            self.timeline.initialize()
+                        }
+                    }.padding(.top)
                     Spacer()
                 }
             }

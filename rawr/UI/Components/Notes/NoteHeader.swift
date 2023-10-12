@@ -65,7 +65,7 @@ struct NoteHeader: View {
     }
     
     private func instanceUrl() -> String? {
-        self.note.user?.instance?.iconUrl ?? self.context.currentInstance?.iconUrl
+        self.note.user?.instance?.iconUrl ?? self.context.currentInstance?.getIconUrl()
     }
 }
 
