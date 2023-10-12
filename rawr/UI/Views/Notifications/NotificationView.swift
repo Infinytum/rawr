@@ -17,53 +17,62 @@ struct NotificationView: View {
     @State var noteDetailShown: Bool = false
     
     var body: some View {
-        ZStack(alignment: .top) {
-            VStack {
-                if self.context.fetchError == nil {
-                    
-                } else {
-                    Spacer()
-                    Text("Couldn't fetch Notifications")
-                        .font(.system(size: 20, weight: .regular))
-                    Text(self.context.fetchError!)
-                        .font(.system(size: 15, weight: .medium))
-                        .foregroundColor(.primary.opacity(0.7))
-                        .multilineTextAlignment(.center)
-                    Spacer()
-                }
-                if self.context.items.isEmpty && !self.context.fetchingItems {
-                    Spacer()
-                    Text("Nothing to see here")
-                    Spacer()
-                } else {
-                    ScrollView {
-                        LazyVStack {
-                            ForEach(self.context.items) { notification in
-                                Notification(notification: notification)
-                                    .onAppear(perform: {
-                                        self.context.fetchItemsIfNeeded(notification)
-                                    })
-                                    .onTapGesture {
-                                        if notification.note != nil {
-                                            self.noteId = notification.note!.id!
-                                            self.viewReloader.reloadView()
-                                            self.noteDetailShown = true
-                                        }
-                                    }.padding(.horizontal, 1)
-                                Divider().padding(.vertical, 5)
-                            }
-                            if self.context.fetchingItems {
+        VStack {
+            if self.context.fetchError == nil {
+                if self.context.firstLoadCompleted {
+                    if self.context.items.isEmpty && !self.context.fetchingItems {
+                        Spacer()
+                        Text("Nothing to see here")
+                        Spacer()
+                    } else {
+                        ScrollView {
+                            LazyVStack {
+                                ForEach(self.context.items) { notification in
+                                    Notification(notification: notification)
+                                        .padding(.horizontal)
+                                        .onAppear(perform: {
+                                            self.context.fetchItemsIfNeeded(notification)
+                                        })
+                                    Divider().padding(.vertical, 5)
+                                }
+                            }.padding(.top, 10).fluentBackground()
+                        }
+                        .safeAreaInset(edge: .bottom, spacing: 0, content: {
+                            if self.context.fetchingItems && self.context.items.count > 0 {
                                 ProgressView()
+                                    .fluentBackground()
+                                    .frame(maxWidth: 40, maxHeight: 40)
+                                    .clipped()
+                                    .cornerRadius(.infinity)
+                                    .shadow(radius: 10)
                             }
-                        }.padding(.horizontal).padding(.top, 10)
+                        })
+                        .refreshable {
+                            self.context.initialize()
+                        }
                     }
+                } else {
+                    Spacer()
+                    ProgressView()
+                    Spacer()
                 }
-            }.padding(.top, 55)
-            .sheet(isPresented: self.$noteDetailShown) {
-                NoteView(noteId: self.noteId)
+            } else {
+                Spacer()
+                Text("Couldn't fetch Notifications")
+                    .font(.system(size: 20, weight: .regular))
+                Text(self.context.fetchError!)
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundColor(.primary.opacity(0.7))
+                    .multilineTextAlignment(.center)
+                Spacer()
             }
-            NotificationHeader()
-        }.onAppear(perform: self.context.initialize)
+        }
+        .safeAreaInset(edge: .top, spacing: 0) {
+            AppHeader {
+                Text("Notifications")
+            }
+        }
+        .onAppear(perform: self.context.initialize)
     }
 }
 

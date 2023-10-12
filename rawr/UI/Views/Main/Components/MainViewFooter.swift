@@ -11,7 +11,7 @@ enum MainViewTab {
     case home
     case chats
     case explore
-    case settings
+    case notifications
 }
 
 struct MainViewFooter: View {
@@ -55,16 +55,16 @@ struct MainViewFooter: View {
                 self.showNewNote.toggle()
             }
             Spacer()
+            self.highlightable(tab: MainViewTab.notifications) {
+                VStack {
+                    Image(systemName: "bell")
+                        .font(.system(size: 24))
+                }
+            }
+            Spacer()
             self.highlightable(tab: MainViewTab.explore) {
                 VStack {
                     Image(systemName: "number")
-                        .font(.system(size: 24))
-                }
-            }.disabled(true).opacity(0.5)
-            Spacer()
-            self.highlightable(tab: MainViewTab.settings) {
-                VStack {
-                    Image(systemName: "gear")
                         .font(.system(size: 24))
                 }
             }.disabled(true).opacity(0.5)

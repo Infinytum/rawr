@@ -12,7 +12,7 @@ struct NoteDecorationBoost: View {
     @ObservedObject var note: NoteModel
 
     var body: some View {
-        NavigationLink(value: TappedMention(username: "\(self.note.user!.username!)@\(self.note.user!.host!)")) {
+        NavigationLink(value: TappedMention(username: "@\(self.note.user!.username!)@\(self.note.user!.host ?? RawrKeychain().instanceHostname)")) {
             HStack {
                 Image(systemName: "arrow.2.squarepath")
                     .padding(.leading, 12)

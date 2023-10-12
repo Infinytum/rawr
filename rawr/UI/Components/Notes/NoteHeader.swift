@@ -20,7 +20,7 @@ struct NoteHeader: View {
     var body: some View {
         HStack {
             HStack{
-                NavigationLink(value: TappedMention(username: "\(self.note.user!.username!)@\(self.note.user!.host!)")) {
+                NavigationLink(value: TappedMention(username: "@\(self.note.user!.username!)@\(self.note.user!.host ?? RawrKeychain().instanceHostname)")) {
                     RemoteImage(self.note.user?.avatarUrl)
                         .frame(width: 50, height: 50)
                         .cornerRadius(11)

@@ -15,6 +15,9 @@ class NotificationContext: ObservableObject {
     /// Set to true while the NotificationContext is fetching new items from the server
     @Published var fetchingItems = false
     
+    /// Set to true when data has been loaded for the first time, subsequent initialize calls will not change this value
+    @Published var firstLoadCompleted = false
+    
     /// A list of all currently available timeline items that have passed pre-rendering
     @Published var items = [NotificationModel]()
     
@@ -64,6 +67,7 @@ class NotificationContext: ObservableObject {
         Task {
             await MainActor.run {
                 items.append(contentsOf: notifications)
+                self.firstLoadCompleted = true
                 self.fetchError = nil
                 self.fetchingItems = false
             }

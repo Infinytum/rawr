@@ -47,7 +47,8 @@ struct Notification: View {
                             .lineLimit(2)
                             .overlay(alignment: .trailing) {
                                 if self.notification.reaction != nil {
-                                    Emoji(name: self.notification.reaction!).frame(width: 25, height: 25)
+                                    Emoji(name: self.notification.reaction!)
+                                        .environment(\.emojiRenderSize, CGSize(width: 25, height: 25))
                                         .offset(x: 25)
                                 }
                             }
@@ -58,8 +59,12 @@ struct Notification: View {
             if self.notification.note != nil {
                 VStack {
                     VStack {
-                        Note(note: self.notification.note!)
-                    }.padding(.horizontal).padding(.vertical, 10)
+                        NavigationLink(destination: NoteView(noteId: self.notification.note!.id!)) {
+                            Note(note: self.notification.note!)
+                                .navigationBarBackButtonHidden(true)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }.padding(.vertical, 10)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                         .padding(.top, 5)
                 }

@@ -24,7 +24,9 @@ struct BetterMainView: View {
                     BetterTimelineView()
                 case .chats:
                     MessagesView()
-                case .settings, .explore:
+                case .notifications:
+                    NotificationView()
+                case .explore:
                     Spacer()
                     Image(.gremlin)
                         .resizable()
