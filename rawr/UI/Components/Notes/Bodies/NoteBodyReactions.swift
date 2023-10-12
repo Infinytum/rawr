@@ -23,7 +23,7 @@ struct NoteBodyReactions: View {
             ForEach((self.note.reactions ?? [:]).sorted(by: >), id: \.key) { key, value in
                 HStack {
                     Emoji(name: key, emojis: note.emojis ?? [])
-                        .frame(width: 20, height: 20)
+                        .environment(\.emojiRenderSize, CGSize(width: 20, height: 20))
                     Text(String(value))
                 }.padding(5).padding(.trailing, 5)
                     .background(note.isMyReaction(key) ? .blue.opacity(1) : .clear)
@@ -32,9 +32,9 @@ struct NoteBodyReactions: View {
                     .fontWeight(.medium)
                     .cornerRadius(5)
                     .padding(.trailing, 5)
-                    .onTapGesture{
+                    .highPriorityGesture(TapGesture().onEnded({ _ in
                         self.onReaction(key)
-                    }
+                    }))
             }
         }
     }

@@ -5,134 +5,97 @@
 //  Created by Nila on 27.08.2023.
 //
 
+import MisskeyKit
 import SwiftUI
 
 struct NoteEditorView: View {
     
     @EnvironmentObject var context: ViewContext
+    @Environment(\.dismiss) private var dismiss
     
     @State var contentWarning: String = ""
     @State var contentWarningShown: Bool = false
     
     @State var noteBody: String = ""
+    @State var visibility: NoteModel.NoteVisibility = .public
     
-    @State var emojiPickerShown: Bool = false
+    @State var sending: Bool = false
     @State var previewShown: Bool = true
+    @State var localOnly: Bool = false
     @State var contentHeight: CGFloat = 0
     
     var body: some View {
-        ZStack(alignment: .top) {
-            ScrollView {
-                VStack() {
-                    VStack(alignment: .leading) {
-                        if contentWarningShown {
-                            TextField("Content Warning goes here...", text: $contentWarning, axis: .vertical)
-                                .font(.body)
-                                .autocorrectionDisabled()
-                                .textInputAutocapitalization(.never)
-                                .lineLimit(1...)
-                            Divider()
-                        }
-                        TextField("Your note goes here...", text: $noteBody, axis: .vertical)
-                            .font(.body)
-                            .autocorrectionDisabled()
-                            .textInputAutocapitalization(.never)
-                            .lineLimit(10...)
-                        if previewShown {
-                            Divider()
-                            NoteHeader(note: .init(user: self.context.currentUser)).padding(.top, 5)
-                            MFMBody(render: mfmRender(tokenize(self.noteBody)))
-                                .padding(.top, 5)
-                        }
-                        Divider()
-                        HStack {
-                            VStack {
-                                Image(systemName: "paperclip")
-                                    .fontWeight(.light)
-                                    .frame(height: 15)
-                                Text("Attach")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.primary.opacity(0.8))
-                                    .padding(.top, 0.1)
-                            }.padding(.all, 5)
-                            Spacer()
-                            VStack {
-                                Image(systemName: "checklist")
-                                    .fontWeight(.light)
-                                    .frame(height: 15)
-                                Text("Poll")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.primary.opacity(0.8))
-                                    .padding(.top, 0.1)
-                            }.padding(.all, 5)
-                            Spacer()
-                            Button {
-                                contentWarningShown.toggle()
-                            } label: {
-                                VStack {
-                                    Image(systemName: "exclamationmark.triangle")
-                                        .fontWeight(.light)
-                                        .frame(height: 15)
-                                        .foregroundColor(self.contentWarningShown ? .red : .primary)
-                                    Text("CW")
-                                        .font(.system(size: 12))
-                                        .foregroundColor(.primary.opacity(0.8))
-                                        .padding(.top, 0.1)
-                                }.transaction { transaction in
-                                    transaction.animation = nil
+        ScrollViewReader { proxy in
+                if self.sending {
+                    ProgressView()
+                } else {
+                    ScrollView {
+                        VStack() {
+                            VStack(alignment: .leading) {
+                                if previewShown {
+                                    NoteHeader(note: .init(user: self.context.currentUser)).padding(.top, 5)
+                                    MFMBody(render: mfmRender(tokenize(self.noteBody)))
+                                        .padding(.top, 5)
+                                    Divider()
                                 }
-                            }.padding(.all, 5)
-                            Spacer()
-                            Button {
-                                emojiPickerShown = true
-                            } label: {
-                                VStack {
-                                    Image(systemName: "hands.sparkles")
-                                        .fontWeight(.light)
-                                        .frame(height: 15)
-                                        .foregroundColor(.primary)
-                                    Text("Emojis")
-                                        .font(.system(size: 12))
-                                        .foregroundColor(.primary.opacity(0.8))
-                                        .padding(.top, 0.1)
-                                }.transaction { transaction in
-                                    transaction.animation = nil
+                                if contentWarningShown {
+                                    TextField("Content Warning goes here...", text: $contentWarning, axis: .vertical)
+                                        .font(.body)
+                                        .autocorrectionDisabled()
+                                        .textInputAutocapitalization(.never)
+                                        .lineLimit(1...)
+                                    Divider()
                                 }
-                            }.padding(.all, 5)
-                            .popover(isPresented: self.$emojiPickerShown, content: {
-                                EmojiPicker { name in
-                                    self.noteBody += ":\(name): "
-                                    self.emojiPickerShown = false
-                                }.presentationCompactAdaptation(.popover).padding()
-                            })
-                            Spacer()
-                            VStack {
-                                Image(systemName: "questionmark")
-                                    .fontWeight(.light)
-                                    .frame(height: 15)
-                                Text("Help")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.primary.opacity(0.8))
-                                    .padding(.top, 0.1)
-                            }.padding(.all, 5)
+                                TextField("Your note goes here...", text: $noteBody, axis: .vertical)
+                                    .font(.body)
+                                    .autocorrectionDisabled()
+                                    .textInputAutocapitalization(.never)
+                                    .lineLimit(10...)
+                                    .id(1)
+                                
+                            } .padding(.horizontal).padding(.top, 5)
                         }
-                    } .padding(.horizontal).padding(.top, 5)
-                }
-                .padding(.top, 60)
-                .background(
-                    GeometryReader { geometry in
-                        Color.clear.preference(key: HeightPreferenceKey.self, value: geometry.size.height)
+                        .background(
+                            GeometryReader { geometry in
+                                Color.clear.preference(key: HeightPreferenceKey.self, value: geometry.size.height)
+                            }
+                        )
+                        .onPreferenceChange(HeightPreferenceKey.self) { height in
+                            if let height {
+                                self.contentHeight = height
+                            }
+                        }
+                        .ignoresSafeArea()
                     }
-                )
-                .onPreferenceChange(HeightPreferenceKey.self) { height in
-                    if let height {
-                        self.contentHeight = height
+                    .safeAreaInset(edge: .top, content: {
+                        NoteEditorHeader(previewEnabled: $previewShown, localOnly: $localOnly) {
+                            self.sending = true
+                            MisskeyKit.shared.notes.createNote(visibility: self.visibility, text: self.noteBody, cw: self.getContentWarning(), localOnly: self.localOnly) { _, error in
+                                if error == nil {
+                                    self.dismiss()
+                                    return
+                                }
+                                sending = false
+                                context.applicationError = ApplicationError(title: "Post failed", message: error.explain())
+                            }
+                        }
+                    })
+                    .safeAreaInset(edge: .bottom, content: {
+                        NoteEditorFooter(contentWarningShown: self.$contentWarningShown, noteBody: self.$noteBody, visibility: self.$visibility)
+                    })
+                    .onChange(of: self.noteBody) { _ in
+                        proxy.scrollTo(1, anchor: .bottom)
                     }
-                }
-                .ignoresSafeArea()
             }
-            NoteEditorHeader(previewEnabled: $previewShown)
-        }.presentationDetents([.height(self.contentHeight)])
+        }
+        .presentationDetents([.fraction(self.sending ? 0.3 : 1)])
+    }
+    
+    private func getContentWarning() -> String {
+        if !self.contentWarningShown {
+            return ""
+        }
+        return self.contentWarning
     }
 }
 

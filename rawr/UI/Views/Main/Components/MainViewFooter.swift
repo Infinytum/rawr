@@ -17,6 +17,7 @@ enum MainViewTab {
 struct MainViewFooter: View {
     
     @Binding var selectedTab: MainViewTab
+    @State var showNewNote: Bool = false
     
     var body: some View {
         HStack {
@@ -45,21 +46,28 @@ struct MainViewFooter: View {
                             .cornerRadius(.infinity)
                     )
                     .foregroundColor(.primary)
-            }.shadow(color: .black.opacity(0.15), radius: 10)
+            }
+            .shadow(color: .black.opacity(0.15), radius: 10)
+            .sheet(isPresented: self.$showNewNote, content: {
+                NoteEditorView()
+            })
+            .onTapGesture {
+                self.showNewNote.toggle()
+            }
             Spacer()
             self.highlightable(tab: MainViewTab.explore) {
                 VStack {
                     Image(systemName: "number")
                         .font(.system(size: 24))
                 }
-            }
+            }.disabled(true).opacity(0.5)
             Spacer()
             self.highlightable(tab: MainViewTab.settings) {
                 VStack {
                     Image(systemName: "gear")
                         .font(.system(size: 24))
                 }
-            }
+            }.disabled(true).opacity(0.5)
         }
         .padding(.top, 15)
         .padding(.bottom, 10)
@@ -96,5 +104,5 @@ struct MainViewFooter: View {
         Text("The Amazing Content")
         Spacer()
         MainViewFooter(selectedTab: .constant(.home)).fluentBackground(.regular, fullscreen: false)
-    }
+    }.environmentObject(ViewContext())
 }
