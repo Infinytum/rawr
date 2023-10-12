@@ -12,6 +12,8 @@ struct Note: View {
     @ObservedObject var note: NoteModel
     var renderedNote: MFMRender? = nil
     
+    @State private var cwOverride = false
+    
     var body: some View {
         VStack(alignment: .leading) {
             if self.note.isRenote() {
@@ -21,18 +23,35 @@ struct Note: View {
             }
             NoteHeader(note: self.actualNote())
                 .padding(.horizontal)
-            if self.actualNote().text != nil && self.actualNote().text != "" {
-                NoteBodyText(note: self.actualNote(), renderedNote: self.renderedNote)
-                    .padding(.horizontal)
-                    .padding(.top, 5)
+            VStack {
+                if self.actualNote().text != nil && self.actualNote().text != "" {
+                    NoteBodyText(note: self.actualNote(), renderedNote: self.renderedNote)
+                        .padding(.horizontal)
+                        .padding(.top, 5)
+                }
+                if self.actualNote().poll != nil {
+                    NoteBodyPoll(note: self.actualNote())
+                        .padding(.horizontal)
+                }
+                if self.actualNote().hasFiles() {
+                    BetterNoteBodyGallery(files: self.actualNote().files ?? [])
+                        .padding(.horizontal)
+                }
             }
-            if self.actualNote().poll != nil {
-                NoteBodyPoll(note: self.actualNote())
-                    .padding(.horizontal)
-            }
-            if self.actualNote().hasFiles() {
-                BetterNoteBodyGallery(files: self.actualNote().files ?? [])
-                    .padding(.horizontal)
+            .overlay(alignment: .center) {
+                if self.note.hasCW() && !self.cwOverride {
+                    VStack {
+                        Text(self.actualNote().cw ?? "Very bad, NSFW")
+                            .foregroundStyle(.red)
+                            .fontWeight(.bold)
+                            .padding(.horizontal).padding(.top, 5)
+                            .shadow(radius: 10)
+                    }
+                    .fluentBackground()
+                    .onTapGesture {
+                        self.cwOverride = true
+                    }
+                }
             }
             if self.actualNote().reactionsCount() > 0 {
                 NoteBodyReactions(note: self.actualNote())

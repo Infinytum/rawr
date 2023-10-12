@@ -280,6 +280,10 @@ extension NoteModel: ObservableObject {
     
     // MARK: Random Helper Functions
     
+    func hasCW() -> Bool {
+        return isRenote() ? self.renote?.cw != nil : self.cw != nil
+    }
+    
     func hasFiles() -> Bool {
         return isRenote() ? self.renote?.files != nil : self.files != nil
     }
