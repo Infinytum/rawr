@@ -74,11 +74,10 @@ fileprivate func mfmRenderNode(_ node: MFMNodeProtocol, context: MFMRenderContex
             MFMRenderNode(
                 viewStack: [
                     MFMRenderView {
-                        Text("@" + username)
-                            .foregroundStyle(.orange)
-                            .onTapGesture {
-                                context.tapMention("@" + username)
-                            }
+                        NavigationLink(value: TappedMention(username: "@" + username)) {
+                            Text("@" + username)
+                                .foregroundStyle(.orange)
+                        }
                     }
                 ],
                 newStack: false,
@@ -96,11 +95,10 @@ fileprivate func mfmRenderNode(_ node: MFMNodeProtocol, context: MFMRenderContex
             MFMRenderNode(
                 viewStack: [
                     MFMRenderView {
-                        Text("#" + hashtag)
-                            .foregroundStyle(.blue)
-                            .onTapGesture {
-                                context.tapHashtag(hashtag)
-                            }
+                        NavigationLink(value: TappedHashtag(hashtag: hashtag)) {
+                            Text("#" + hashtag)
+                                .foregroundStyle(.blue)
+                        }
                     }
                 ],
                 newStack: false,

@@ -39,7 +39,16 @@ struct BetterMainView: View {
             })
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
             .ignoresSafeArea(.keyboard)
-        }.background(context.themeBackground.ignoresSafeArea())
+            .navigationDestination(for: TappedHashtag.self, destination: { hashtag in
+                HashtagTimelineView(hashtag: hashtag.hashtag)
+                    .navigationBarBackButtonHidden(true)
+            })
+            .navigationDestination(for: TappedMention.self, destination: { mention in
+                UserView(userName: mention.username)
+                    .navigationBarBackButtonHidden(true)
+            })
+        }
+        .background(context.themeBackground.ignoresSafeArea())
     }
 }
 

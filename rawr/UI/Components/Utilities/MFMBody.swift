@@ -14,38 +14,11 @@ struct MFMBody: View {
     @EnvironmentObject var context: ViewContext
     @ObservedObject var viewRefresher = ViewReloader()
     
-    @State var presentHashtagSheet = false
-    @State var presentedHashtag = ""
-    
-    @State var presentUserSheet = false
-    @State var presentedUser = ""
-    
     var body: some View {
         VStack {
             ForEach(self.render.renderedNote) { view in
                 AnyView(view.view)
             }
-        }.sheet(isPresented: $presentUserSheet) {
-            UserView(userName: presentedUser)
-        }.sheet(isPresented: $presentHashtagSheet, content: {
-            HashtagTimelineView(hashtag: self.presentedHashtag)
-                .ignoresSafeArea(.all, edges: .bottom)
-        }).onAppear(perform: self.onAppear)
-    }
-    
-    private func onAppear() {
-        self.render.context.onHashtagTap { hashtag in
-            self.presentedHashtag = hashtag
-            self.viewRefresher.reloadView()
-            self.presentHashtagSheet = true
-            self.presentUserSheet = false
-        }
-        
-        self.render.context.onMentionTap { username in
-            self.presentedUser = username
-            self.viewRefresher.reloadView()
-            self.presentHashtagSheet = false
-            self.presentUserSheet = true
         }
     }
 }

@@ -69,17 +69,17 @@ struct UserHeader: View {
             }.padding(.bottom, self.collapsed ? -7 : 35)
             if !self.collapsed {
                 ScrollView() {
-                    MFMBody(render: self.getRenderedDescription())
-                        .padding(.top, 10)
-                        .padding(.horizontal, 20)
-                        .background(
-                            GeometryReader { geo -> Color in
-                                DispatchQueue.main.async {
-                                    scrollViewContentSize = geo.size
-                                }
-                                return Color.clear
-                            }
-                        )
+//                    MFMBody(render: self.getRenderedDescription())
+//                        .padding(.top, 10)
+//                        .padding(.horizontal, 20)
+//                        .background(
+//                            GeometryReader { geo -> Color in
+//                                DispatchQueue.main.async {
+//                                    scrollViewContentSize = geo.size
+//                                }
+//                                return Color.clear
+//                            }
+//                        )
                 }.frame(
                     maxHeight: scrollViewContentSize.height
                 )
@@ -132,7 +132,7 @@ struct UserHeader: View {
     VStack {
     }.sheet(isPresented: .constant(true)) {
         VStack {
-            User(user: .preview)
+            UserHeader(user: .preview, collapsed: .constant(false))
             Spacer()
         }
     }.presentationDragIndicator(.visible)

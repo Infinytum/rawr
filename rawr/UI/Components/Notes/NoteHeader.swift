@@ -20,18 +20,17 @@ struct NoteHeader: View {
     var body: some View {
         HStack {
             HStack{
-                NetworkImage(url: URL(string: self.note.user?.avatarUrl ?? "")) { image in
-                    image.resizable().aspectRatio(contentMode: .fill)
-                } placeholder: {
-                    Rectangle()
-                        .foregroundColor(.gray.opacity(0.5))
-                }.frame(width: 50, height: 50).cornerRadius(11)
-                VStack(alignment: .leading) {
-                    Text(self.note.user?.name ?? "<no name>")
-                        .lineLimit(1)
-                    Text("@" + (self.note.user?.username ?? "<nousername>")).foregroundStyle(.gray)
-                        .lineLimit(1)
-                }
+                NavigationLink(value: TappedMention(username: "\(self.note.user!.username!)@\(self.note.user!.host!)")) {
+                    RemoteImage(self.note.user?.avatarUrl)
+                        .frame(width: 50, height: 50)
+                        .cornerRadius(11)
+                    VStack(alignment: .leading) {
+                        Text(self.note.user?.name ?? "<no name>")
+                            .lineLimit(1)
+                        Text("@" + (self.note.user?.username ?? "<nousername>")).foregroundStyle(.gray)
+                            .lineLimit(1)
+                    }
+                }.buttonStyle(PlainButtonStyle())
             }
             .onTapGesture {
                 displayUserSheet = true

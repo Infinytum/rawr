@@ -13,25 +13,19 @@ struct HashtagTimelineView: View {
     let hashtag: String
     
     var body: some View {
-        ZStack(alignment: .top) {
-            VStack {
-                Spacer()
-                Timeline(timelineContext: HashtagTimelineContext(self.hashtag))
-                    .padding(.top, 60)
-                Spacer()
-            }
-            HashtagTimelineHeader(hashtag: self.hashtag).background(.thinMaterial)
+        VStack {
+            BetterTimeline(timelineContext: HashtagTimelineContext(self.hashtag))
         }
+        .fluentBackground()
+        .safeAreaInset(edge: .top, spacing: 0) {
+            AppHeader(isNavLink: true) {
+                Text("#" + self.hashtag)
+            }
+        }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
-    VStack {
-        HStack {
-            Spacer()
-        }
-        Spacer()
-    }.popover(isPresented: .constant(true)) {
-        HashtagTimelineView(hashtag: "dragons")
-    }.environmentObject(ViewContext()).background(.red)
+    HashtagTimelineView(hashtag: "dragons").environmentObject(ViewContext())
 }
