@@ -11,10 +11,6 @@ import SwiftUI
 struct NotificationView: View {
     
     @ObservedObject var context: NotificationContext = NotificationContext()
-    @ObservedObject var viewReloader = ViewReloader()
-    
-    @State var noteId: String = ""
-    @State var noteDetailShown: Bool = false
     
     var body: some View {
         VStack {
