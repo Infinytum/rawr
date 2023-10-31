@@ -25,9 +25,9 @@ struct NoteHeader: View {
                         .frame(width: 50, height: 50)
                         .cornerRadius(11)
                     VStack(alignment: .leading) {
-                        Text(self.note.user?.name ?? "<no name>")
+                        Text(self.note.user.displayName())
                             .lineLimit(1)
-                        Text("@" + (self.note.user?.username ?? "<nousername>")).foregroundStyle(.gray)
+                        Text("@" + (self.note.user.userName())).foregroundStyle(.gray)
                             .lineLimit(1)
                     }
                 }.buttonStyle(PlainButtonStyle())

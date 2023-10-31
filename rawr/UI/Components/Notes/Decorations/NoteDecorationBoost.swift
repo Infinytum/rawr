@@ -19,7 +19,7 @@ struct NoteDecorationBoost: View {
                 Group {
                     Text("Boosted by ")
                         .foregroundColor(.primary.opacity(0.7)) +
-                    Text(self.note.user?.name ?? "<no name>")
+                    Text(self.note.user.displayName())
                         .foregroundColor(.blue)
                 }.font(.system(size: 15))
                     .padding(.leading, 12)

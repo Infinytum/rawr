@@ -79,9 +79,9 @@ public extension MessageHistoryModel {
     
     func chatName(currentUserId: String) -> String? {
         if self.userId == currentUserId {
-            return self.recipient?.name ?? self.recipient?.username
+            return self.recipient.displayName()
         }
-        return self.user?.name ?? self.user?.username
+        return self.user.displayName()
     }
     
     func isOwnMessage(currentUserId: String) -> Bool {

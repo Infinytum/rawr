@@ -250,4 +250,24 @@ extension UserModel {
         return try! JSONDecoder().decode(UserModel.self, from: jsonData)
     }
     
+    public func displayName() -> String {
+        self.name ?? self.username ?? "<no name>"
+    }
+    
+    public func userName() -> String {
+        self.username ?? "<no username>"
+    }
+    
+}
+
+extension UserModel? {
+    
+    public func displayName() -> String {
+        self?.displayName() ?? "<nil user>"
+    }
+    
+    public func userName() -> String {
+        self?.userName() ?? "<nil user>"
+    }
+    
 }

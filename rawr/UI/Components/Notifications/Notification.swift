@@ -176,7 +176,7 @@ struct Notification: View {
         }
         switch type {
         case .follow, .mention, .reply, .renote, .quote, .reaction, .receiveFollowRequest, .followRequestAccepted, .pollVote:
-            return self.notification.user?.name ?? self.notification.user?.username ?? "An unknown user"
+            return self.notification.user?.displayName() ?? "An unknown user"
         case .pollEnded:
             return "Poll Results"
         case .achievementEarned:

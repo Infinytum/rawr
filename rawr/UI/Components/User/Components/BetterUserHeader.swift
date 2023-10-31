@@ -63,7 +63,7 @@ struct BetterUserHeader: View {
                 .shadow(radius: 5)
 
             VStack(alignment: .leading) {
-                Text(self.user.name ?? "")
+                Text(self.user.displayName())
                     .font(.system(size: 19, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                     .lineLimit(1, reservesSpace: true)
