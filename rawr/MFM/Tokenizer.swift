@@ -25,8 +25,8 @@ struct Token {
 
 let urlRegex = Regex {
     Capture {
-        Repeat(0...2) {
-            One(.any)
+        Optionally {
+            "]("
         }
         Capture {
             .url()
@@ -280,7 +280,7 @@ fileprivate func containerTagToNodeType(tag: String) -> MFMNodeType? {
 
 #Preview {
     ScrollView([.horizontal, .vertical]) {
-        Visualizer(rootNode: tokenize("Hello @user and @user@instance.local!\nThis is a <center>centered $[tada $[x2 $[sparkle gay]]]</center> **test** #test_2023. Visit:asd :drgn:\nhttps://www.example.com")).scaleEffect(0.5)
+        Visualizer(rootNode: tokenize("https://derg.social\nSource 1: [test](https://derg.social/)\nSource 2")).scaleEffect(0.5)
     }
 }
 
