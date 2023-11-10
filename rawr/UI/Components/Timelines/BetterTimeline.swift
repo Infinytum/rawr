@@ -34,21 +34,20 @@ struct BetterTimeline: View {
                             } else {
                                 LazyVStack(spacing: 0) {
                                     ForEach(self.timeline.items, id: \.note.id) { item in
-                                        NavigationLink(destination: NoteView(noteId: item.note.id!).navigationBarBackButtonHidden(true)) {
+                                        NavigationLink(value: NoteLink(id: item.note.id!), label: {
                                             Note(note: item.note, renderedNote: item.renderedNote)
-                                        }
+                                        })
                                         .buttonStyle(PlainButtonStyle())
-                                        
-                                            .onAppear { self.timeline.fetchItemsIfNeeded(item) }
-                                            .padding(.vertical)
-                                            .fluentBackground()
-                                            .frame(width: width)
-                                            .overlay(alignment: .bottom) {
-                                                Rectangle()
-                                                    .foregroundStyle(.gray.opacity(0.3))
-                                                    .frame(height: 0.5)
-                                            }
-                                            .contentShape(Rectangle())
+                                        .onAppear { self.timeline.fetchItemsIfNeeded(item) }
+                                        .padding(.vertical)
+                                        .fluentBackground()
+                                        .frame(width: width)
+                                        .overlay(alignment: .bottom) {
+                                            Rectangle()
+                                                .foregroundStyle(.gray.opacity(0.3))
+                                                .frame(height: 0.5)
+                                        }
+                                        .contentShape(Rectangle())
                                     }
                                 }
                             }

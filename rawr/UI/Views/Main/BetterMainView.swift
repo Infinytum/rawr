@@ -49,6 +49,10 @@ struct BetterMainView: View {
                 UserView(userName: mention.username)
                     .navigationBarBackButtonHidden(true)
             })
+            .navigationDestination(for: NoteLink.self, destination: { note in
+                NoteView(noteId: note.id)
+                    .navigationBarBackButtonHidden(true)
+            })
         }
         .background(context.themeBackground.ignoresSafeArea())
     }
