@@ -13,9 +13,7 @@ import SwiftKit
 struct NoteHeader: View {
     
     @EnvironmentObject var context: ViewContext
-    @ObservedObject var viewReloader: ViewReloader = ViewReloader()
     @ObservedObject var note: NoteModel
-    @State private var displayUserSheet = false
     
     var body: some View {
         HStack {
@@ -31,13 +29,6 @@ struct NoteHeader: View {
                             .lineLimit(1)
                     }
                 }.buttonStyle(PlainButtonStyle())
-            }
-            .onTapGesture {
-                displayUserSheet = true
-                self.viewReloader.reloadView()
-            }
-            .sheet(isPresented: $displayUserSheet) {
-                UserView(userName: "\(self.note.user!.username!)@\(self.note.user!.host!)")
             }
             Spacer()
             VStack(alignment: .trailing) {
