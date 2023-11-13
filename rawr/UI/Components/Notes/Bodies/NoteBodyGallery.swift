@@ -5,7 +5,6 @@
 //  Created by Nila on 18.09.2023.
 //
 
-import Agrume
 import NetworkImage
 import MisskeyKit
 import SwiftUI
