@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "agrume",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/JanGorman/Agrume",
-      "state" : {
-        "revision" : "3527d8dc0d8303be12a7194f287881e8bf689a6b",
-        "version" : "5.8.6"
-      }
-    },
-    {
       "identity" : "combine-schedulers",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/combine-schedulers",
@@ -33,7 +24,7 @@
       "location" : "https://github.com/nilathedragon/MisskeyKit",
       "state" : {
         "branch" : "master",
-        "revision" : "a6fac08aee3890370fcc79b92fd7bdca1cf0a471"
+        "revision" : "a3d5bfbf590e55d97f50b842426b5a55a09ffc27"
       }
     },
     {
@@ -70,15 +61,6 @@
       "state" : {
         "branch" : "main",
         "revision" : "f7cda53b19b5ec76fd436b6586be78d8b8eab326"
-      }
-    },
-    {
-      "identity" : "swiftygif",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/kirualex/SwiftyGif",
-      "state" : {
-        "revision" : "d6d26061d6553a493781ad3df4a8e275c43fc373",
-        "version" : "5.4.4"
       }
     },
     {

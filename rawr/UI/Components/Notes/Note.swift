@@ -34,7 +34,7 @@ struct Note: View {
                         .padding(.horizontal)
                 }
                 if self.actualNote().hasFiles() {
-                    BetterNoteBodyGallery(files: self.actualNote().files ?? [])
+                    NoteBodyGallery(files: self.actualNote().files ?? [])
                         .padding(.horizontal)
                 }
             }
