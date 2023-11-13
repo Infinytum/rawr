@@ -24,7 +24,7 @@ struct NoteBodyGallery: View {
                 Grid(horizontalSpacing: 10) {
                     GridRow {
                         ForEach(Array(chunk.enumerated()), id: \.offset) { (index, file) in
-                            RemoteImage(file?.thumbnailUrl, isBlurred: file?.isSensitive ?? false)
+                            MediaPreviewer(file: file!)
                                 .frame(width: self.width(parentWidth: width, chunk: chunk), height: self.height())
                                 .contentShape(Rectangle())
                                 .gesture(TapGesture().onEnded({ _ in

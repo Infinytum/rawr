@@ -90,6 +90,7 @@
 		20805F292A8EC0DF0001F2AB /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 20805F282A8EC0DF0001F2AB /* WrappingHStack */; };
 		208E24E62A97679A0058BB52 /* AntennaTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208E24E52A97679A0058BB52 /* AntennaTimelineView.swift */; };
 		208E24E82A9770D60058BB52 /* HashtagTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208E24E72A9770D60058BB52 /* HashtagTimelineView.swift */; };
+		2092973F2B0242F600B13E36 /* MediaPreviewerVideoRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2092973E2B0242F600B13E36 /* MediaPreviewerVideoRenderer.swift */; };
 		209391032A92A2B1006FDA19 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209391022A92A2B0006FDA19 /* NotificationView.swift */; };
 		209391062A92A2EB006FDA19 /* NotificationHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209391052A92A2EB006FDA19 /* NotificationHeader.swift */; };
 		209391092A92A3C9006FDA19 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209391082A92A3C9006FDA19 /* Notification.swift */; };
@@ -113,6 +114,9 @@
 		20B7E1542A936916003E3CE4 /* NotificationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B7E1532A936916003E3CE4 /* NotificationContext.swift */; };
 		20CB0FE22B013B5100E43682 /* MediaViewImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CB0FE12B013B5100E43682 /* MediaViewImageRenderer.swift */; };
 		20CB0FE42B0142BD00E43682 /* MediaViewVideoRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CB0FE32B0142BD00E43682 /* MediaViewVideoRenderer.swift */; };
+		20D7916E2B023DAE00B7FEB8 /* MediaPreviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D7916D2B023DAE00B7FEB8 /* MediaPreviewer.swift */; };
+		20D791712B023E6000B7FEB8 /* MediaPreviewerImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D791702B023E6000B7FEB8 /* MediaPreviewerImageRenderer.swift */; };
+		20D791732B0240E900B7FEB8 /* MediaPreviewerDefaultRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D791722B0240E900B7FEB8 /* MediaPreviewerDefaultRenderer.swift */; };
 		20EB64BA2AFEE09900A9EC81 /* NoteLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB64B92AFEE09900A9EC81 /* NoteLink.swift */; };
 		20EB64BE2B00357100A9EC81 /* MediaViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB64BD2B00357100A9EC81 /* MediaViewer.swift */; };
 		20EB64C12B01050900A9EC81 /* MediaViewerHeaderOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB64C02B01050900A9EC81 /* MediaViewerHeaderOverlay.swift */; };
@@ -207,6 +211,7 @@
 		207C33E92A8FD18D00500E33 /* GlobalTimelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalTimelineContext.swift; sourceTree = "<group>"; };
 		208E24E52A97679A0058BB52 /* AntennaTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntennaTimelineView.swift; sourceTree = "<group>"; };
 		208E24E72A9770D60058BB52 /* HashtagTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagTimelineView.swift; sourceTree = "<group>"; };
+		2092973E2B0242F600B13E36 /* MediaPreviewerVideoRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewerVideoRenderer.swift; sourceTree = "<group>"; };
 		209391022A92A2B0006FDA19 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		209391052A92A2EB006FDA19 /* NotificationHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHeader.swift; sourceTree = "<group>"; };
 		209391082A92A3C9006FDA19 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -227,6 +232,9 @@
 		20B7E1532A936916003E3CE4 /* NotificationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationContext.swift; sourceTree = "<group>"; };
 		20CB0FE12B013B5100E43682 /* MediaViewImageRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewImageRenderer.swift; sourceTree = "<group>"; };
 		20CB0FE32B0142BD00E43682 /* MediaViewVideoRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewVideoRenderer.swift; sourceTree = "<group>"; };
+		20D7916D2B023DAE00B7FEB8 /* MediaPreviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewer.swift; sourceTree = "<group>"; };
+		20D791702B023E6000B7FEB8 /* MediaPreviewerImageRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewerImageRenderer.swift; sourceTree = "<group>"; };
+		20D791722B0240E900B7FEB8 /* MediaPreviewerDefaultRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewerDefaultRenderer.swift; sourceTree = "<group>"; };
 		20EB64B92AFEE09900A9EC81 /* NoteLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLink.swift; sourceTree = "<group>"; };
 		20EB64BD2B00357100A9EC81 /* MediaViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewer.swift; sourceTree = "<group>"; };
 		20EB64C02B01050900A9EC81 /* MediaViewerHeaderOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewerHeaderOverlay.swift; sourceTree = "<group>"; };
@@ -709,6 +717,25 @@
 			path = Antennas;
 			sourceTree = "<group>";
 		};
+		20D7916C2B023D9900B7FEB8 /* MediaPreviewer */ = {
+			isa = PBXGroup;
+			children = (
+				20D7916F2B023E1B00B7FEB8 /* Renderers */,
+				20D7916D2B023DAE00B7FEB8 /* MediaPreviewer.swift */,
+			);
+			path = MediaPreviewer;
+			sourceTree = "<group>";
+		};
+		20D7916F2B023E1B00B7FEB8 /* Renderers */ = {
+			isa = PBXGroup;
+			children = (
+				20D791702B023E6000B7FEB8 /* MediaPreviewerImageRenderer.swift */,
+				20D791722B0240E900B7FEB8 /* MediaPreviewerDefaultRenderer.swift */,
+				2092973E2B0242F600B13E36 /* MediaPreviewerVideoRenderer.swift */,
+			);
+			path = Renderers;
+			sourceTree = "<group>";
+		};
 		20EB64B72AFEE08100A9EC81 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -728,6 +755,7 @@
 		20EB64BB2B0030AB00A9EC81 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				20D7916C2B023D9900B7FEB8 /* MediaPreviewer */,
 				20EB64BC2B0030B400A9EC81 /* MediaViewer */,
 			);
 			path = Modules;
@@ -871,6 +899,7 @@
 				20CB0FE42B0142BD00E43682 /* MediaViewVideoRenderer.swift in Sources */,
 				205F1A992AB87D2B003A352A /* Array.swift in Sources */,
 				204DA4092A891EF200BB0598 /* TimelineHeader.swift in Sources */,
+				20D7916E2B023DAE00B7FEB8 /* MediaPreviewer.swift in Sources */,
 				209D67C92AD072C100E30ACD /* MessageBar.swift in Sources */,
 				204DA41F2A8AB98D00BB0598 /* MFMNodeType.swift in Sources */,
 				201A51052A9144C600956489 /* MFMRender.swift in Sources */,
@@ -885,10 +914,12 @@
 				205F1A972AB87C12003A352A /* NoteBodyGallery.swift in Sources */,
 				3F0E91CD2A9BF8220092ABF4 /* PollSelection.swift in Sources */,
 				2068CC032A87B85500F8A958 /* ViewContext.swift in Sources */,
+				20D791732B0240E900B7FEB8 /* MediaPreviewerDefaultRenderer.swift in Sources */,
 				201A51032A91447300956489 /* MFMRenderContext.swift in Sources */,
 				201A50F72A911ECF00956489 /* MisskeyKitError.swift in Sources */,
 				2001722E2A93FDB10079268B /* UserHeader.swift in Sources */,
 				204DA3F42A8869D900BB0598 /* MessageHistoryModel.swift in Sources */,
+				20D791712B023E6000B7FEB8 /* MediaPreviewerImageRenderer.swift in Sources */,
 				201A50F22A90397300956489 /* Color.swift in Sources */,
 				201A50EB2A901F5000956489 /* HashtagTimelineContext.swift in Sources */,
 				207C33DA2A8FB89000500E33 /* TimelineContextProtocol.swift in Sources */,
@@ -897,6 +928,7 @@
 				20F723F22AD832C2003E063B /* NoteEditorFooter.swift in Sources */,
 				201A51012A913F9A00956489 /* MFMRenderMerger.swift in Sources */,
 				205F1A952AB876FE003A352A /* SingleAxisGeometryReader.swift in Sources */,
+				2092973F2B0242F600B13E36 /* MediaPreviewerVideoRenderer.swift in Sources */,
 				2068CC132A87B96D00F8A958 /* OnboardingView.swift in Sources */,
 				2068CC412A87C2EB00F8A958 /* NoteModel.swift in Sources */,
 				209391092A92A3C9006FDA19 /* Notification.swift in Sources */,
