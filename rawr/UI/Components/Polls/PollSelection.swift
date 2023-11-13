@@ -15,9 +15,7 @@ struct PollSelection: View {
     
     var body: some View {
         Button {
-            if !(note.poll?.multiple ?? false) {
-                voteAction()
-            }
+            voteAction()
         } label: {
             Text(choice.text ?? "")
                 .multilineTextAlignment(.leading)
@@ -42,11 +40,11 @@ struct PollSelection: View {
                 }
             }
         }
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .clipShape(RoundedRectangle(cornerRadius: 5))
     }
 }
 
 #Preview {
-    let choice: Choice = NoteModel.preview.poll!.choices![0]!
-    return PollSelection(choice: choice, note: NoteModel.preview, voteAction: {})
+    let choice: Choice = Poll.preview.choices![0]!
+    return PollSelection(choice: choice, note: NoteModel.preview, voteAction: {}).environmentObject(ViewContext())
 }

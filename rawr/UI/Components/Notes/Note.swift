@@ -29,12 +29,12 @@ struct Note: View {
                         .padding(.horizontal)
                         .padding(.top, 5)
                 }
-                if self.actualNote().poll != nil {
-                    NoteBodyPoll(note: self.actualNote())
-                        .padding(.horizontal)
-                }
                 if self.actualNote().hasFiles() {
                     NoteBodyGallery(files: self.actualNote().files ?? [])
+                        .padding(.horizontal)
+                }
+                if self.actualNote().poll != nil {
+                    NoteBodyPoll(note: self.actualNote())
                         .padding(.horizontal)
                 }
             }
