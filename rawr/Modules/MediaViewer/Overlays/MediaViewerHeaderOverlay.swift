@@ -29,7 +29,7 @@ struct MediaViewerHeaderOverlay: View {
                         .fontWeight(.bold)
                     Text("Back")
                         .padding(.leading, -5)
-                }.foregroundStyle(.white)
+                }.foregroundStyle(.foreground)
                 
                 Spacer()
                 
@@ -38,7 +38,7 @@ struct MediaViewerHeaderOverlay: View {
                 } label: {
                     Image(systemName: "ellipsis.circle")
                         .font(.system(size: 18))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.foreground)
                 }
             }.padding(.trailing, 5)
             HStack {

@@ -17,8 +17,10 @@ struct MediaViewerFooterOverlay: View {
         VStack {
             ScrollView {
                 HStack {
+                    Spacer()
                     Text(self.comment)
-                        .font(.system(size: 14))
+                        .font(.system(size: 15))
+                        .multilineTextAlignment(.center)
                     Spacer()
                 }
                 .overlay(

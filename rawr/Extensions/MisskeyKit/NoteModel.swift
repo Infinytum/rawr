@@ -143,7 +143,7 @@ extension NoteModel: ObservableObject {
             "width": 800,
             "height": 1200
           },
-          "url": "https://cdn.derg.social/calckey/b00ca429-2ee8-498f-a66b-155122ba67f6.png",
+          "url": "https://user-images.githubusercontent.com/80097964/278994464-ade75394-fed9-4656-a8f4-93cd21254dd3.jpeg",
           "thumbnailUrl": "https://cdn.derg.social/calckey/thumbnail-48705fca-5a0a-44dc-be3d-be43366582aa.webp",
           "comment": "an angry dragon atop a castle roaring",
           "folderId": null,
@@ -155,7 +155,7 @@ extension NoteModel: ObservableObject {
             "id": "9ifz9j3fu2soea7f",
             "createdAt": "2023-08-15T14:43:02.763Z",
             "name": "017NJ7SAYQ882BD9NADSF6SNN6.jpg",
-            "type": "image/jpeg",
+            "type": "video/mp4",
             "md5": "bba124e474dec667d1cb9f5cfcb3434a",
             "size": 2910659,
             "isSensitive": true,
@@ -163,8 +163,24 @@ extension NoteModel: ObservableObject {
                 "width": 3072,
                 "height": 4080
             },
-            "url": "https://cdn.derg.social/calckey/ecda84c2-1340-4969-977b-078c55b0baad.jpg",
+            "url": "https://is-a.wyvern.rip/files/56a4d0c1-adfb-4faa-9616-b9cd3dc5bc6a",
             "thumbnailUrl": "https://cdn.derg.social/calckey/thumbnail-9172b1e5-1111-4b3f-aeb5-b163a862a24e.webp",
+        },
+        {
+            "id": "9ifz9j3fu2soea7d",
+            "createdAt": "2023-08-15T14:43:02.763Z",
+            "name": "017NJ7SAYQ882BD9NADSF6SNN6.jpg",
+            "type": "image/gif",
+            "md5": "bba124e474dec667d1cb9f5cfcb3434a",
+            "size": 2910659,
+            "isSensitive": false,
+            "properties": {
+                "width": 3072,
+                "height": 4080
+            },
+            "url": "https://media.tenor.com/cdzCl9477-UAAAAd/fish-i-am-just-a-fish.gif",
+            "thumbnailUrl": "https://media.tenor.com/cdzCl9477-UAAAAd/fish-i-am-just-a-fish.gif",
+            "comment": "Just a fish. It's fine!"
         }
       ],
       "replyId": null,

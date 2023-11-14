@@ -34,7 +34,7 @@ struct MediaPreviewerImageRenderer: View {
 #Preview {
     VStack {
         Spacer()
-            MediaPreviewerImageRenderer(thumbnailUrl: nil, sensitive: true)
+        MediaPreviewerImageRenderer(thumbnailUrl: nil, sensitive: true)
         Spacer()
     }
 }

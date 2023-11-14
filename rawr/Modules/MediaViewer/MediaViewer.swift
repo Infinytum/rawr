@@ -31,7 +31,7 @@ struct MediaViewer: View {
         .offset(y: offset.height)
         .animation(.interactiveSpring(), value: offset)
         .gesture(
-            DragGesture()
+            DragGesture(minimumDistance: 20)
                 .onChanged { gesture in
                     if gesture.translation.width < 50 {
                         offset = gesture.translation
@@ -44,7 +44,6 @@ struct MediaViewer: View {
                     offset = .zero
                 }
         )
-        .fluentBackground(.ultraThin)
         .safeAreaInset(edge: .top, spacing: 0) {
             if self.showOverlays {
                 MediaViewerHeaderOverlay(count: self.fileList().count, file: self.fileList()[self.index], index: self.$index)
@@ -53,7 +52,7 @@ struct MediaViewer: View {
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
             if self.showOverlays {
-                MediaViewerFooterOverlay(comment: self.fileList()[self.index].comment ?? "")
+                MediaViewerFooterOverlay(comment: self.fileList()[self.index].comment ?? "No Alt-Text available.")
                     .transition(.opacity)
             }
         }
@@ -68,6 +67,13 @@ struct MediaViewer: View {
     }
     
     func chooseRenderer(file: File) -> AnyView {
+        if file.type!.starts(with: "image/gif") {
+            return AnyView(MediaViewGifRenderer(url: file.url!).onTapGesture {
+                withAnimation {
+                    self.showOverlays.toggle()
+                }
+            })
+        }
         if file.type!.starts(with: "image/") {
             return AnyView(MediaViewImageRenderer(url: file.url!).onTapGesture {
                 withAnimation {
@@ -101,9 +107,4 @@ struct MediaViewer: View {
         transaction.animation = .linear(duration: 1)
       })
     .environmentObject(ViewContext())
-}
-
-// Convenience operator overload
-func + (lhs: CGSize, rhs: CGSize) -> CGSize {
-    return CGSize(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
 }
