@@ -441,7 +441,6 @@
 			children = (
 				2068CBFF2A87B7DB00F8A958 /* Core */,
 				2068CC3D2A87C2EB00F8A958 /* Extensions */,
-				204DA41A2A8AB30C00BB0598 /* MFM */,
 				20EB64B72AFEE08100A9EC81 /* Models */,
 				20EB64BB2B0030AB00A9EC81 /* Modules */,
 				2068CC042A87B90B00F8A958 /* UI */,
@@ -772,9 +771,10 @@
 		20EB64BB2B0030AB00A9EC81 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				2061CD2C2B03B37E001C790D /* ZoomableView */,
 				20D7916C2B023D9900B7FEB8 /* MediaPreviewer */,
 				20EB64BC2B0030B400A9EC81 /* MediaViewer */,
+				204DA41A2A8AB30C00BB0598 /* MFM */,
+				2061CD2C2B03B37E001C790D /* ZoomableView */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
