@@ -16,4 +16,14 @@ public extension Scanner {
         }
         return token
     }
+    
+    func continues(with: String) -> Bool {
+        let startLocation = self.currentIndex
+        guard self.scanString(with) != nil else {
+            self.currentIndex = startLocation
+            return false
+        }
+        self.currentIndex = startLocation
+        return true
+    }
 }

@@ -11,6 +11,15 @@
 		2001722E2A93FDB10079268B /* UserHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2001722D2A93FDB10079268B /* UserHeader.swift */; };
 		200172302A93FE950079268B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2001722F2A93FE950079268B /* UserModel.swift */; };
 		200172322A9424CB0079268B /* MFMBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200172312A9424CB0079268B /* MFMBody.swift */; };
+		2009C63A2B05284100A2C6C9 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2009C6392B05284100A2C6C9 /* Tokenizer.swift */; };
+		2009C63C2B0531D400A2C6C9 /* TokenizerMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2009C63B2B0531D400A2C6C9 /* TokenizerMention.swift */; };
+		2009C63E2B05375000A2C6C9 /* TokenizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2009C63D2B05375000A2C6C9 /* TokenizerTests.swift */; };
+		2009C6402B0983FC00A2C6C9 /* TokenizerLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2009C63F2B0983FC00A2C6C9 /* TokenizerLink.swift */; };
+		2009C6422B0985C400A2C6C9 /* TokenizerHashtag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2009C6412B0985C400A2C6C9 /* TokenizerHashtag.swift */; };
+		2009C6442B0986C300A2C6C9 /* TokenizerBold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2009C6432B0986C300A2C6C9 /* TokenizerBold.swift */; };
+		2009C6462B0987C100A2C6C9 /* TokenizerHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2009C6452B0987C100A2C6C9 /* TokenizerHTML.swift */; };
+		2009C6482B098CFC00A2C6C9 /* TokenizerMFMModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2009C6472B098CFC00A2C6C9 /* TokenizerMFMModifier.swift */; };
+		2009C64A2B098DF500A2C6C9 /* TokenizerEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2009C6492B098DF500A2C6C9 /* TokenizerEmoji.swift */; };
 		201A50EB2A901F5000956489 /* HashtagTimelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A50EA2A901F5000956489 /* HashtagTimelineContext.swift */; };
 		201A50F22A90397300956489 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A50F12A90397300956489 /* Color.swift */; };
 		201A50F52A90DF5B00956489 /* InstanceCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A50F42A90DF5B00956489 /* InstanceCredentials.swift */; };
@@ -37,7 +46,6 @@
 		204DA40B2A892A6000BB0598 /* MetaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA40A2A892A6000BB0598 /* MetaModel.swift */; };
 		204DA4162A8A6D1A00BB0598 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4152A8A6D1A00BB0598 /* NoteView.swift */; };
 		204DA41F2A8AB98D00BB0598 /* MFMNodeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA41E2A8AB98D00BB0598 /* MFMNodeType.swift */; };
-		204DA4232A8ABD4E00BB0598 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4222A8ABD4E00BB0598 /* Tokenizer.swift */; };
 		204DA4272A8AC32D00BB0598 /* Visualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4262A8AC32D00BB0598 /* Visualizer.swift */; };
 		204DA42F2A8ACC2100BB0598 /* MFMNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA42E2A8ACC2100BB0598 /* MFMNode.swift */; };
 		204DA4332A8AD4A000BB0598 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204DA4322A8AD4A000BB0598 /* String.swift */; };
@@ -139,6 +147,15 @@
 		2001722D2A93FDB10079268B /* UserHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeader.swift; sourceTree = "<group>"; };
 		2001722F2A93FE950079268B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		200172312A9424CB0079268B /* MFMBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFMBody.swift; sourceTree = "<group>"; };
+		2009C6392B05284100A2C6C9 /* Tokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
+		2009C63B2B0531D400A2C6C9 /* TokenizerMention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizerMention.swift; sourceTree = "<group>"; };
+		2009C63D2B05375000A2C6C9 /* TokenizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizerTests.swift; sourceTree = "<group>"; };
+		2009C63F2B0983FC00A2C6C9 /* TokenizerLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizerLink.swift; sourceTree = "<group>"; };
+		2009C6412B0985C400A2C6C9 /* TokenizerHashtag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizerHashtag.swift; sourceTree = "<group>"; };
+		2009C6432B0986C300A2C6C9 /* TokenizerBold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizerBold.swift; sourceTree = "<group>"; };
+		2009C6452B0987C100A2C6C9 /* TokenizerHTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizerHTML.swift; sourceTree = "<group>"; };
+		2009C6472B098CFC00A2C6C9 /* TokenizerMFMModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizerMFMModifier.swift; sourceTree = "<group>"; };
+		2009C6492B098DF500A2C6C9 /* TokenizerEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizerEmoji.swift; sourceTree = "<group>"; };
 		201A50EA2A901F5000956489 /* HashtagTimelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagTimelineContext.swift; sourceTree = "<group>"; };
 		201A50F12A90397300956489 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		201A50F42A90DF5B00956489 /* InstanceCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceCredentials.swift; sourceTree = "<group>"; };
@@ -166,7 +183,6 @@
 		204DA4152A8A6D1A00BB0598 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		204DA4192A8A978700BB0598 /* rawr--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "rawr--Info.plist"; sourceTree = "<group>"; };
 		204DA41E2A8AB98D00BB0598 /* MFMNodeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFMNodeType.swift; sourceTree = "<group>"; };
-		204DA4222A8ABD4E00BB0598 /* Tokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
 		204DA4262A8AC32D00BB0598 /* Visualizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visualizer.swift; sourceTree = "<group>"; };
 		204DA42E2A8ACC2100BB0598 /* MFMNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFMNode.swift; sourceTree = "<group>"; };
 		204DA4322A8AD4A000BB0598 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -294,6 +310,22 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		2009C6382B05256B00A2C6C9 /* Tokenizer */ = {
+			isa = PBXGroup;
+			children = (
+				2009C6392B05284100A2C6C9 /* Tokenizer.swift */,
+				2009C6432B0986C300A2C6C9 /* TokenizerBold.swift */,
+				2009C6492B098DF500A2C6C9 /* TokenizerEmoji.swift */,
+				2009C6412B0985C400A2C6C9 /* TokenizerHashtag.swift */,
+				2009C6452B0987C100A2C6C9 /* TokenizerHTML.swift */,
+				2009C63F2B0983FC00A2C6C9 /* TokenizerLink.swift */,
+				2009C63B2B0531D400A2C6C9 /* TokenizerMention.swift */,
+				2009C6472B098CFC00A2C6C9 /* TokenizerMFMModifier.swift */,
+				2009C63D2B05375000A2C6C9 /* TokenizerTests.swift */,
+			);
+			path = Tokenizer;
+			sourceTree = "<group>";
+		};
 		201A50EC2A902F8800956489 /* Rendering */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,6 +350,7 @@
 		201A51082A91815300956489 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				204DA4262A8AC32D00BB0598 /* Visualizer.swift */,
 				201A51092A91816700956489 /* BlurView.swift */,
 			);
 			path = Components;
@@ -370,10 +403,9 @@
 			isa = PBXGroup;
 			children = (
 				201A51082A91815300956489 /* Components */,
-				201A50EC2A902F8800956489 /* Rendering */,
 				204DA41B2A8AB8F500BB0598 /* Models */,
-				204DA4222A8ABD4E00BB0598 /* Tokenizer.swift */,
-				204DA4262A8AC32D00BB0598 /* Visualizer.swift */,
+				201A50EC2A902F8800956489 /* Rendering */,
+				2009C6382B05256B00A2C6C9 /* Tokenizer */,
 			);
 			path = MFM;
 			sourceTree = "<group>";
@@ -915,6 +947,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				20B7E14F2A93630F003E3CE4 /* AntennaTimelineContext.swift in Sources */,
+				2009C6482B098CFC00A2C6C9 /* TokenizerMFMModifier.swift in Sources */,
+				2009C63A2B05284100A2C6C9 /* Tokenizer.swift in Sources */,
 				201A510A2A91816700956489 /* BlurView.swift in Sources */,
 				201A51072A91744500956489 /* MisskeyPermission.swift in Sources */,
 				20CB0FE42B0142BD00E43682 /* MediaViewVideoRenderer.swift in Sources */,
@@ -936,6 +970,7 @@
 				3F0E91CD2A9BF8220092ABF4 /* PollSelection.swift in Sources */,
 				2068CC032A87B85500F8A958 /* ViewContext.swift in Sources */,
 				20D791732B0240E900B7FEB8 /* MediaPreviewerDefaultRenderer.swift in Sources */,
+				2009C63E2B05375000A2C6C9 /* TokenizerTests.swift in Sources */,
 				201A51032A91447300956489 /* MFMRenderContext.swift in Sources */,
 				201A50F72A911ECF00956489 /* MisskeyKitError.swift in Sources */,
 				2001722E2A93FDB10079268B /* UserHeader.swift in Sources */,
@@ -944,6 +979,7 @@
 				201A50F22A90397300956489 /* Color.swift in Sources */,
 				201A50EB2A901F5000956489 /* HashtagTimelineContext.swift in Sources */,
 				207C33DA2A8FB89000500E33 /* TimelineContextProtocol.swift in Sources */,
+				2009C6402B0983FC00A2C6C9 /* TokenizerLink.swift in Sources */,
 				2068CC0E2A87B96D00F8A958 /* OnboardingWelcomeCard.swift in Sources */,
 				204DA4332A8AD4A000BB0598 /* String.swift in Sources */,
 				20F723F22AD832C2003E063B /* NoteEditorFooter.swift in Sources */,
@@ -952,6 +988,8 @@
 				205F1A952AB876FE003A352A /* SingleAxisGeometryReader.swift in Sources */,
 				2092973F2B0242F600B13E36 /* MediaPreviewerVideoRenderer.swift in Sources */,
 				2068CC132A87B96D00F8A958 /* OnboardingView.swift in Sources */,
+				2009C63C2B0531D400A2C6C9 /* TokenizerMention.swift in Sources */,
+				2009C6422B0985C400A2C6C9 /* TokenizerHashtag.swift in Sources */,
 				2068CC412A87C2EB00F8A958 /* NoteModel.swift in Sources */,
 				209391092A92A3C9006FDA19 /* Notification.swift in Sources */,
 				3F0F011F2A940868006A48A5 /* HashtagTimelineHeader.swift in Sources */,
@@ -963,6 +1001,7 @@
 				209D67C52AD06BCD00E30ACD /* MessageView.swift in Sources */,
 				2060795C2A9BDB1A00FC7D00 /* NoteEditorView.swift in Sources */,
 				201A50F92A91384500956489 /* MFMRenderModifier.swift in Sources */,
+				2009C6462B0987C100A2C6C9 /* TokenizerHTML.swift in Sources */,
 				204DA4022A890DEC00BB0598 /* ChatMessage.swift in Sources */,
 				20B7E1542A936916003E3CE4 /* NotificationContext.swift in Sources */,
 				209D67C72AD0726D00E30ACD /* MessageContext.swift in Sources */,
@@ -994,6 +1033,8 @@
 				3F8E62D92A93CA220093A1D4 /* UserView.swift in Sources */,
 				206783202AD825D000099902 /* Environment.swift in Sources */,
 				209D67BD2AD0469700E30ACD /* MessagesView.swift in Sources */,
+				2009C6442B0986C300A2C6C9 /* TokenizerBold.swift in Sources */,
+				2009C64A2B098DF500A2C6C9 /* TokenizerEmoji.swift in Sources */,
 				20CB0FE22B013B5100E43682 /* MediaViewImageRenderer.swift in Sources */,
 				208E24E82A9770D60058BB52 /* HashtagTimelineView.swift in Sources */,
 				209F518B2AD886F100D2D597 /* BetterUserHeader.swift in Sources */,
@@ -1013,7 +1054,6 @@
 				204DA4042A890E5E00BB0598 /* MessageModel.swift in Sources */,
 				2068CC432A87C30A00F8A958 /* MainView.swift in Sources */,
 				20B59F402AB8EBF6002B3039 /* MainViewFooter.swift in Sources */,
-				204DA4232A8ABD4E00BB0598 /* Tokenizer.swift in Sources */,
 				2068CC332A87C25B00F8A958 /* NoteHeader.swift in Sources */,
 				207C33DC2A8FB8B700500E33 /* TimelineItem.swift in Sources */,
 				207C33E62A8FC6AC00500E33 /* HomeTimelineContext.swift in Sources */,
@@ -1085,7 +1125,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1141,7 +1181,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -1175,7 +1215,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
@@ -1217,7 +1257,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;

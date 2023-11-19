@@ -77,7 +77,7 @@ class MFMNode: MFMNodeProtocol {
             return
         }
         
-        if childBefore.type == child.type {
+        if childBefore.type == child.type && child.type == .plaintext {
             var combinedChildren: [MFMNodeProtocol] = []
             combinedChildren.append(contentsOf: childBefore.children)
             combinedChildren.append(contentsOf: child.children)

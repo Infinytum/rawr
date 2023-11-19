@@ -34,7 +34,7 @@ struct NoteEditorView: View {
                             VStack(alignment: .leading) {
                                 if previewShown {
                                     NoteHeader(note: .init(user: self.context.currentUser)).padding(.top, 5)
-                                    MFMBody(render: mfmRender(tokenize(self.noteBody)))
+                                    MFMBody(render: mfmRender(Tokenizer.note.tokenize(self.noteBody)))
                                         .padding(.top, 5)
                                     Divider()
                                 }

@@ -23,9 +23,14 @@ struct NoteHeader: View {
                         .frame(width: 50, height: 50)
                         .cornerRadius(11)
                     VStack(alignment: .leading) {
-                        Text(self.note.user.displayName())
-                            .lineLimit(1)
+//                        Text(self.note.user.displayName())
+//                            .lineLimit(1)
+                        MFMBody(render: self.note.user.renderedDisplayName())
+                            .environment(\.emojiRenderSize, CGSize(width: 20, height: 20))
+                            .frame(maxHeight: 20, alignment: .top)
+                            .clipped()
                         Text("@" + (self.note.user.userName())).foregroundStyle(.gray)
+                            .frame(maxHeight: 15)
                             .lineLimit(1)
                     }
                 }.buttonStyle(PlainButtonStyle())

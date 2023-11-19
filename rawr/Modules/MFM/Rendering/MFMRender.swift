@@ -253,7 +253,7 @@ fileprivate let testNoteOld = "Hello @user and @user@instance.local!\nThis is a 
 #Preview {
     VStack {
         Spacer()
-        ForEach(mfmRender(tokenize(testNote)).renderedNote) { view in
+        ForEach(mfmRender(Tokenizer.note.tokenize(testNote)).renderedNote) { view in
             AnyView(view.view)
         }
         Spacer()

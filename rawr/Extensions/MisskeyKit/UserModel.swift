@@ -254,6 +254,11 @@ extension UserModel {
         self.name ?? self.username ?? "<no name>"
     }
     
+    public func renderedDisplayName() -> MFMRender {
+        let rootNode = Tokenizer.username.tokenize(self.displayName())
+        return mfmRender(rootNode, emojis: self.emojis ?? [])
+    }
+    
     public func userName() -> String {
         self.username ?? "<no username>"
     }
@@ -264,6 +269,11 @@ extension UserModel? {
     
     public func displayName() -> String {
         self?.displayName() ?? "<nil user>"
+    }
+    
+    public func renderedDisplayName() -> MFMRender {
+        let rootNode = Tokenizer.username.tokenize(self.displayName())
+        return mfmRender(rootNode, emojis: self?.emojis ?? [])
     }
     
     public func userName() -> String {

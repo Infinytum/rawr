@@ -17,12 +17,12 @@ struct NoteDecorationBoost: View {
                 Image(systemName: "arrow.2.squarepath")
                     .padding(.leading, 12)
                 Group {
-                    Text("Boosted by ")
-                        .foregroundColor(.primary.opacity(0.7)) +
-                    Text(self.note.user.displayName())
-                        .foregroundColor(.blue)
-                }.font(.system(size: 15))
-                    .padding(.leading, 12)
+                    MFMBody(render: self.note.user.renderedDisplayName())
+                        .environment(\.emojiRenderSize, CGSize(width: 15, height: 15))
+                }
+                .foregroundColor(.blue)
+                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .padding(.leading, 12)
                 Spacer()
                 Text(self.note.relativeCreatedAtTime())
                     .foregroundColor(.primary.opacity(0.7))

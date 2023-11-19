@@ -84,7 +84,7 @@ struct BetterUserHeader: View {
     }
     
     private func getRenderedDescription() -> MFMRender {
-        return mfmRender(tokenize(self.user.description ?? ""), emojis: self.user.emojis ?? [])
+        return mfmRender(Tokenizer.note.tokenize(self.user.description ?? ""), emojis: self.user.emojis ?? [])
     }
 }
 

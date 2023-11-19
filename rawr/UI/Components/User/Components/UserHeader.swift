@@ -110,11 +110,11 @@ struct UserHeader: View {
     }
     
     private func getRenderedDescription() -> MFMRender {
-        return mfmRender(tokenize(self.user.description ?? ""), emojis: self.user.emojis ?? [])
+        return mfmRender(Tokenizer.note.tokenize(self.user.description ?? ""), emojis: self.user.emojis ?? [])
     }
     
     private func getRenderedUsername() -> MFMRender {
-        return mfmRender(tokenizeEmojisOnly(self.user.name ?? ""), emojis: self.user.emojis ?? [], plaintextWordlets: 2)
+        return mfmRender(Tokenizer.note.tokenize(self.user.name ?? ""), emojis: self.user.emojis ?? [], plaintextWordlets: 2)
     }
 }
 

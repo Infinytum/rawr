@@ -1,0 +1,32 @@
+//
+//  TokenizerHashtag.swift
+//  rawr.
+//
+//  Created by Nila on 19.11.2023.
+//
+
+import Foundation
+
+extension Tokenizer {
+    
+    static var hashtagModule: TokenizerModule = TokenizerModule { text in
+        text
+    } probe: { session in
+        session.scanner.probe("#")
+    } tokenize: { session, token in
+        /// Record current position as checkpoint
+        session.checkpoint()
+        
+        /// Check if this is an actual container or just some random #
+        guard let hashtag = session.scanner.scanCharacters(from: CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "_-"))) else {
+            session.restore()
+            session.currentNode.addChild(MFMNode(session.currentNode, plaintext: token))
+            return true
+        }
+        
+        /// We found something that looks like a hashtag
+        session.currentNode.addChild(MFMNode(session.currentNode, hashtag: hashtag))
+        return true
+    }
+    
+}

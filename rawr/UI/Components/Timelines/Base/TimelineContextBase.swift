@@ -101,6 +101,6 @@ class TimelineContextBase: ObservableObject {
     
     /// Pre-render a note and convert it to a TimelineItem
     private func renderNote(_ note: NoteModel) -> TimelineItem {
-        return TimelineItem(note: note, renderedNote: mfmRender(tokenize(note.text ?? note.renote?.text ?? ""), emojis: note.emojis ?? note.renote?.emojis ?? []))
+        return TimelineItem(note: note, renderedNote: mfmRender(Tokenizer.note.tokenize(note.text ?? note.renote?.text ?? ""), emojis: note.emojis ?? note.renote?.emojis ?? []))
     }
 }

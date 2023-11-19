@@ -18,7 +18,7 @@ struct Visualizer: View {
             if self.rootNode.value != nil {
                 Text(self.rootNode.value!)
             }
-            ForEach(self.rootNode.children, id: \.value) { child in
+            ForEach(Array(self.rootNode.children.enumerated()), id: \.0) { (index, child) in
                 Visualizer(rootNode: child)
             }
         }.padding().border(.black)

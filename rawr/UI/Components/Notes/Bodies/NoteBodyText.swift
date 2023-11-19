@@ -20,7 +20,7 @@ struct NoteBodyText: View {
     }
     
     func renderNote() -> MFMRender {
-        return mfmRender(tokenize(self.note.text ?? ""), emojis: self.note.emojis ?? self.note.renote?.emojis ?? [])
+        return mfmRender(Tokenizer.note.tokenize(self.note.text ?? ""), emojis: self.note.emojis ?? self.note.renote?.emojis ?? [])
     }
 }
 
@@ -29,3 +29,4 @@ struct NoteBodyText: View {
         .previewDisplayName("Short")
         .environmentObject(ViewContext())
 }
+
