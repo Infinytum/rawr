@@ -273,7 +273,7 @@ extension UserModel? {
     
     public func renderedDisplayName() -> MFMRender {
         let rootNode = Tokenizer.username.tokenize(self.displayName())
-        return mfmRender(rootNode, emojis: self?.emojis ?? [])
+        return mfmRender(rootNode, emojis: self?.emojis ?? [], plaintextWordlets: 4)
     }
     
     public func userName() -> String {
