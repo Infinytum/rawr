@@ -31,9 +31,12 @@ struct Notification: View {
                     }
                 VStack(alignment: .leading) {
                     HStack {
-                        Text(self.title())
+                        self.titleBody
+                            .environment(\.emojiRenderSize, CGSize(width: 18, height: 18))
                             .font(.system(size: 18))
-                            .lineLimit(2, reservesSpace: false)
+                            .frame(maxHeight: 21, alignment: .top)
+                            .clipped()
+                            .lineLimit(1, reservesSpace: false)
                         Spacer()
                         Text(self.notification.createdAt?.toDate()?.relative() ?? "Unknown")
                             .font(.system(size: 16))
@@ -170,17 +173,16 @@ struct Notification: View {
         }
     }
     
-    private func title() -> String {
-        guard let type = self.notification.type else {
-            return "Unknown Notification"
-        }
-        switch type {
+    var titleBody: some View {
+        switch self.notification.type {
+        case nil:
+            return AnyView(Text("Unknown Notification"))
         case .follow, .mention, .reply, .renote, .quote, .reaction, .receiveFollowRequest, .followRequestAccepted, .pollVote:
-            return self.notification.user?.displayName() ?? "An unknown user"
+            return AnyView(MFMBody(render: self.notification.user.renderedDisplayName()))
         case .pollEnded:
-            return "Poll Results"
+            return AnyView(Text("Poll Results"))
         case .achievementEarned:
-            return "Achievement earned!"
+            return AnyView(Text("Achievement earned!"))
         }
     }
 }
