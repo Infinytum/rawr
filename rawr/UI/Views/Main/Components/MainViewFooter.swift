@@ -77,6 +77,9 @@ struct MainViewFooter: View {
     @ViewBuilder
     private func highlightable(tab: MainViewTab, content: () -> some View) -> some View {
         Button(action: {
+            if self.selectedTab == tab {
+                NotificationCenter.default.post(name: Foundation.Notification.Name.scrollToTopNotification, object: tab)
+            }
             self.selectedTab = tab
         }, label: {
             if tab == self.selectedTab {

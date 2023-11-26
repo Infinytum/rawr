@@ -5,6 +5,7 @@
 //  Created by Nila on 18.09.2023.
 //
 
+import Foundation
 import SwiftUI
 import SwiftKit
 import UIKit
@@ -27,28 +28,36 @@ struct BetterTimeline: View {
                 if self.timeline.firstLoadCompleted {
                     SingleAxisGeometryReader { width in
                         ScrollView {
-                            if self.timeline.fetchingItems && self.timeline.items.count <= 0 {
-                                Rectangle()
-                                    .foregroundColor(.clear)
-                                    .frame(height: 100)
-                            } else {
-                                LazyVStack(spacing: 0) {
-                                    ForEach(self.timeline.items, id: \.note.id) { item in
-                                        NavigationLink(value: NoteLink(id: item.note.id!), label: {
-                                            Note(note: item.note, renderedNote: item.renderedNote)
-                                        })
-                                        .buttonStyle(PlainButtonStyle())
-                                        .onAppear { self.timeline.fetchItemsIfNeeded(item) }
-                                        .padding(.vertical)
-                                        .fluentBackground()
-                                        .frame(width: width)
-                                        .overlay(alignment: .bottom) {
-                                            Rectangle()
-                                                .foregroundStyle(.gray.opacity(0.3))
-                                                .frame(height: 0.5)
+                            ScrollViewReader { proxy in
+                                if self.timeline.fetchingItems && self.timeline.items.count <= 0 {
+                                    Rectangle()
+                                        .foregroundColor(.clear)
+                                        .frame(height: 100)
+                                } else {
+                                    LazyVStack(spacing: 0) {
+                                        ForEach(self.timeline.items, id: \.note.id) { item in
+                                            NavigationLink(value: NoteLink(id: item.note.id!), label: {
+                                                Note(note: item.note, renderedNote: item.renderedNote)
+                                            })
+                                            .buttonStyle(PlainButtonStyle())
+                                            .onAppear { self.timeline.fetchItemsIfNeeded(item) }
+                                            .padding(.vertical)
+                                            .fluentBackground()
+                                            .frame(width: width)
+                                            .overlay(alignment: .bottom) {
+                                                Rectangle()
+                                                    .foregroundStyle(.gray.opacity(0.3))
+                                                    .frame(height: 0.5)
+                                            }
+                                            .contentShape(Rectangle())
                                         }
-                                        .contentShape(Rectangle())
                                     }
+                                    .scrollTargetLayout()
+                                    .onReceive(NotificationCenter.default.publisher(for: Foundation.Notification.Name.scrollToTopNotification).debounce(for: .milliseconds(200), scheduler: RunLoop.main), perform: { _ in
+                                        withAnimation {
+                                            proxy.scrollTo(self.timeline.items.first?.note.id)
+                                        }
+                                    })
                                 }
                             }
                         }.onTapGesture {}
