@@ -19,65 +19,119 @@ struct NoteFooter: View {
     
     @State var didRenote: Bool = false
     @State var emojiPickerShown = false
+    
+    private static let minButtonHeight = CGFloat(25)
+    private static let minButtonWidth = CGFloat(40)
           
     var body: some View {
         HStack() {
-            Button {} label: {
                 HStack {
                     Image(systemName: "bubble.left").fontWeight(.light).padding(.bottom, -2)
                     Text(String(self.note.repliesCount ?? 0)).font(.system(size: 16, weight: .light))
                 }
-            }
-            Spacer()
-            Menu {
-                Button("Boost to everyone") {
-                    self.onBoost(.public)
+                .frame(minWidth: NoteFooter.minButtonWidth,minHeight: NoteFooter.minButtonHeight)
+                .contentShape(Rectangle())
+                
+                Spacer()
+                
+                Menu {
+                    Button("Boost to everyone") {
+                        self.onBoost(.public)
+                    }
+                    Button("Boost to home timeline") {
+                        self.onBoost(.home)
+                    }
+                    Button("Boost to your followers") {
+                        self.onBoost(.followers)
+                    }
+                } label: {
+                    HStack {
+                        Image(systemName: "arrow.2.squarepath")
+                            .foregroundColor(self.didRenote ? .blue : .primary).fontWeight(.light)
+                        Text(String(self.note.renoteCount ?? 0)).font(.system(size: 16, weight: .light))
+                    }.foregroundStyle(.primary)
                 }
-                Button("Boost to home timeline") {
-                    self.onBoost(.home)
-                }
-                Button("Boost to your followers") {
-                    self.onBoost(.followers)
-                }
-            } label: {
-                HStack {
-                    Image(systemName: "arrow.2.squarepath")
-                        .foregroundColor(self.didRenote ? .blue : .primary).fontWeight(.light)
-                    Text(String(self.note.renoteCount ?? 0)).font(.system(size: 16, weight: .light))
-                }
-            }.foregroundStyle(.primary)
-            Spacer()
-            Button {
-                self.onReact()
-            } label: {
+                .frame(minWidth: NoteFooter.minButtonWidth,minHeight: NoteFooter.minButtonHeight)
+                .contentShape(Rectangle())
+                
+                Spacer()
+                
+                Button {
+                    self.onReact()
+                } label: {
                     Image(systemName: self.note.myReaction != nil ? "minus" : "star")
                         .foregroundColor(.primary)
                         .fontWeight(self.note.myReaction != nil ? .bold : .light)
-            }
-            Spacer()
-            Button {
-                emojiPickerShown = true
-                self.viewReloader.reloadView()
-            } label: {
-                HStack {
-                    Image(systemName: "hands.sparkles")
-                        .fontWeight(.light)
-                    Text(String(self.note.reactionsCount())).font(.system(size: 16, weight: .light))
                 }
-            }
-            .sheet(isPresented: $emojiPickerShown) {
-                EmojiPicker { emoji in
-                    self.onReact(":\(emoji):")
-                    emojiPickerShown = false
-                }.padding().presentationDetents([.fraction(0.45)])
-            }
-            Spacer()
-            Button {} label: {
-                Image(systemName: "quote.bubble")
-                    .fontWeight(.light)
-            }
+                .frame(minWidth: NoteFooter.minButtonWidth,minHeight: NoteFooter.minButtonHeight)
+                .contentShape(Rectangle())
+                
+                Spacer()
+                
+                Button {
+                    emojiPickerShown = true
+                    self.viewReloader.reloadView()
+                } label: {
+                    HStack {
+                        Image(systemName: "hands.sparkles")
+                            .fontWeight(.light)
+                        Text(String(self.note.reactionsCount())).font(.system(size: 16, weight: .light))
+                    }
+                }
+                .sheet(isPresented: $emojiPickerShown) {
+                    EmojiPicker { emoji in
+                        self.onReact(":\(emoji):")
+                        emojiPickerShown = false
+                    }.padding().presentationDetents([.fraction(0.45)])
+                }
+                .frame(minWidth: NoteFooter.minButtonWidth,minHeight: NoteFooter.minButtonHeight)
+                .contentShape(Rectangle())
+                
+                Spacer()
+                
+                Menu {
+//                    Button(action: {}) {
+//                        Label("Add to Bookmarks", systemImage: "bookmark")
+//                    }
+//                    Button(action: {}) {
+//                        Label("Add to Clip", systemImage: "paperclip")
+//                    }
+//                    Button(action: {}) {
+//                        Label("Mute Thread", systemImage: "speaker.slash")
+//                    }
+//                    Button(action: {}) {
+//                        Label("Watch", systemImage: "eye")
+//                    }
+                    Divider()
+                    Button(action: self.onCopyLink, label: {
+                        Label("Copy Link", systemImage: "link")
+                    })
+                    ShareLink(item: self.note.absoluteUrl())
+//                    Button(action: {}) {
+//                        Label("Open Original Page", systemImage: "point.3.connected.trianglepath.dotted")
+//                    }
+                } label: {
+                    Image(systemName: "ellipsis")
+                        .fontWeight(.light)
+                        .frame(minWidth: NoteFooter.minButtonWidth,minHeight: NoteFooter.minButtonHeight)
+                        .contentShape(Rectangle())
+                }
         }
         .foregroundStyle(.primary)
+    }
+    
+    private func onBoost(_ visisbility: NoteModel.NoteVisibility) {
+        MisskeyKit.shared.notes.renote(renoteId: self.note.id!, visibility: visisbility) { renote, error in
+            guard let _ = renote else {
+                self.context.applicationError = ApplicationError(title: "Renote failed", message: error.explain())
+                print("NoteFooter Error: API returned an error while creating renote: \(error!)")
+                return
+            }
+            withAnimation {
+                self.note.renoteCount = (self.note.renoteCount ?? 0) + 1
+                self.didRenote = true
+            }
+        }
     }
 
     private func onReact(_ r: String? = nil) {
@@ -98,19 +152,10 @@ struct NoteFooter: View {
         }
     }
     
-    private func onBoost(_ visisbility: NoteModel.NoteVisibility) {
-        MisskeyKit.shared.notes.renote(renoteId: self.note.id!, visibility: visisbility) { renote, error in
-            guard let _ = renote else {
-                self.context.applicationError = ApplicationError(title: "Renote failed", message: error.explain())
-                print("NoteFooter Error: API returned an error while creating renote: \(error!)")
-                return
-            }
-            withAnimation {
-                self.note.renoteCount = (self.note.renoteCount ?? 0) + 1
-                self.didRenote = true
-            }
-        }
+    private func onCopyLink() {
+        UIPasteboard.general.url = self.note.absoluteUrl()
     }
+    
 }
 
 #Preview {

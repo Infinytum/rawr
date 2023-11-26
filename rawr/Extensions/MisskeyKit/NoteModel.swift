@@ -319,6 +319,15 @@ extension NoteModel: ObservableObject {
         
         return createdAtDate.relative()
     }
+    
+    func absoluteUrl() -> URL {
+        if self.url != nil {
+            return URL(string: self.url!)!
+        } else {
+            // Notes from the local instance do not contain their URL.
+            return URL(string: "https://\(RawrKeychain().instanceHostname)/notes/\(self.id!)")!
+        }
+    }
 }
 // MARK: - Poll
 extension Poll {
