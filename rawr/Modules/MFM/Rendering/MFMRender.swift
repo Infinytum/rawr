@@ -156,7 +156,7 @@ fileprivate func mfmRenderNode(_ node: MFMNodeProtocol, context: MFMRenderContex
             return mfmMergeRenderResult(renderNodeStack)
         }
         
-        let (modifier, value) = parseMFMModifier(modifierName)
+        let (modifier, value) = parseMFMModifier2(modifierName)
         return mfmRenderModifier(modifier, value: value)(renderNodeStack)
     case .small:
         return mfmMergeRenderResult(renderNodeStack, viewSideEffect:  { view in

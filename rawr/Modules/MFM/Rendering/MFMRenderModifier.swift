@@ -10,7 +10,7 @@ import SwiftUI
 
 public typealias MFMRenderModifierCallalble = (_ renderedChildren: MFMRenderResult) -> MFMRenderNodeStack
 
-public func mfmRenderModifier(_ mfmModifier: MFMModifier?, value: String?) -> MFMRenderModifierCallalble {
+public func mfmRenderModifier(_ mfmModifier: MFMModifier?, value: MFMValues) -> MFMRenderModifierCallalble {
     guard let mfmModifier = mfmModifier else {
         return applyUnsupportedModifier
     }
@@ -22,16 +22,22 @@ public func mfmRenderModifier(_ mfmModifier: MFMModifier?, value: String?) -> MF
         return applyBiggerModifier
     case .biggest:
         return applyBiggestModifier
+    case .blur:
+        return applyBlur
     case .fontColour:
         return modifierWrapper(value: value, inner: applyFontColour)
     case .backgroundColour:
         return modifierWrapper(value: value, inner: applyBackgroundColor)
-    case .scaleX:
-        return modifierWrapper(value: value, inner: applyScaleX)
-    case .scaleY:
-        return modifierWrapper(value: value, inner: applyScaleY)
-    case .blur:
-        return modifierWrapper(value: value, inner: applyBlur)
+    case .scale:
+        return modifierWrapper(value: value, inner: applyScale)
+    case .rotate:
+        return modifierWrapper(value: value, inner: applyRotate)
+    case .position:
+        return modifierWrapper(value: value, inner: applyPosition)
+    case .spin:
+        return modifierWrapper(value: value, inner: applySpin)
+    case .jump:
+        return modifierWrapper(value: value, inner: applyJump)
     }
 }
 
@@ -70,9 +76,21 @@ fileprivate func applyBiggestModifier(_ renderedChildren: MFMRenderResult) -> MF
     })
 }
 
+/// $[blur Blurred Text]
+fileprivate func applyBlur(_ renderedChildren: MFMRenderResult) -> MFMRenderNodeStack {
+    let blurContext = BlurViewContext()
+    return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
+        MFMRenderView {
+            BlurView {
+                view
+            }.environmentObject(blurContext)
+        }
+    })
+}
+
 /// $[fg.color=ff0000 Red Text]
-fileprivate func applyFontColour(_ renderedChildren: MFMRenderResult, value: String?) -> MFMRenderNodeStack {
-    let color = value != nil ? Color(hex: value!) : Color.primary
+fileprivate func applyFontColour(_ renderedChildren: MFMRenderResult, values: MFMValues) -> MFMRenderNodeStack {
+    let color = values.isSet("color") ? Color(hex: values.get("color")!) : Color.primary
     return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
         MFMRenderView {
             view.foregroundColor(color)
@@ -81,8 +99,8 @@ fileprivate func applyFontColour(_ renderedChildren: MFMRenderResult, value: Str
 }
 
 /// $[bg.color=ff0000 Red Background]
-fileprivate func applyBackgroundColor(_ renderedChildren: MFMRenderResult, value: String?) -> MFMRenderNodeStack {
-    let color = value != nil ? Color(hex: value!) : nil
+fileprivate func applyBackgroundColor(_ renderedChildren: MFMRenderResult, values: MFMValues) -> MFMRenderNodeStack {
+    let color = values.isSet("color") ? Color(hex: values.get("color")!) : nil
     return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
         MFMRenderView {
             if color == nil {
@@ -94,38 +112,114 @@ fileprivate func applyBackgroundColor(_ renderedChildren: MFMRenderResult, value
     })
 }
 
-/// $[scale.x=1.3 Scaled Text]
-fileprivate func applyScaleX(_ renderedChildren: MFMRenderResult, value: String?) -> MFMRenderNodeStack {
-    guard let scale = try? Float(value ?? "", format: .number) else {
-        return mfmMergeRenderResult(renderedChildren)
-    }
+/// $[scale.x=1.3 Scaled Text], $[scale.y=1.3 Scaled Text]
+fileprivate func applyScale(_ renderedChildren: MFMRenderResult, values: MFMValues) -> MFMRenderNodeStack {
+    let x = (try? Float(values.get("x") ?? "", format: .number)) ?? 1.0
+    let y = (try? Float(values.get("y") ?? "", format: .number)) ?? 1.0
     return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
         MFMRenderView {
-            view.scaleEffect(x: CGFloat(scale), y: 1, anchor: .center)
+            view.scaleEffect(x: CGFloat(x), y: CGFloat(y), anchor: .center)
         }
     })
 }
 
-/// $[scale.y=1.3 Scaled Text]
-fileprivate func applyScaleY(_ renderedChildren: MFMRenderResult, value: String?) -> MFMRenderNodeStack {
-    guard let scale = try? Float(value ?? "", format: .number) else {
-        return mfmMergeRenderResult(renderedChildren)
-    }
+/// $[rotate.deg=45 Hello, world!], $[rotate Hello, world!], $[rotate.x,deg=45 Hello, world!], $[rotate.x Hello, world!]
+fileprivate func applyRotate(_ renderedChildren: MFMRenderResult, values: MFMValues) -> MFMRenderNodeStack {
+    let isX = values.isSet("x")
+    let deg = (try? Double(values.get("deg") ?? "90", format: .number)) ?? 90.0
+    
     return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
         MFMRenderView {
-            view.scaleEffect(x: 1, y: CGFloat(scale), anchor: .center)
+            if isX {
+                view.rotation3DEffect(
+                    .init(degrees: deg), axis: (x: 1.0, y: .zero, z: .zero)
+                )
+            } else {
+                view.rotationEffect(.degrees(deg), anchor: .center)
+            }
         }
     })
 }
 
-/// $[blur Blurred Text]
-fileprivate func applyBlur(_ renderedChildren: MFMRenderResult, value: String?) -> MFMRenderNodeStack {
-    let blurContext = BlurViewContext()
+/// $[rotate.deg=45 Hello, world!], $[rotate Hello, world!]
+fileprivate func applyRotateY(_ renderedChildren: MFMRenderResult, value: String?) -> MFMRenderNodeStack {
+    guard let deg = try? Double(value ?? "90", format: .number) else {
+        return mfmMergeRenderResult(renderedChildren)
+    }
     return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
         MFMRenderView {
-            BlurView {
+            view.rotationEffect(.degrees(deg), anchor: .center)
+        }
+    })
+}
+
+/// $[rotate.x,deg=45 Hello, world!], $[rotate.x Hello, world!]
+fileprivate func applyRotateX(_ renderedChildren: MFMRenderResult, value: String?) -> MFMRenderNodeStack {
+    guard let deg = try? Double(value ?? "90", format: .number) else {
+        return mfmMergeRenderResult(renderedChildren)
+    }
+    return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
+        MFMRenderView {
+            view.rotation3DEffect(
+                .init(degrees: deg), axis: (x: 1.0, y: .zero, z: .zero)
+            )
+        }
+    })
+}
+
+/// $[position.x Offset Text], $[position.y Offset Text], $[position.y,x Offset Text]
+fileprivate func applyPosition(_ renderedChildren: MFMRenderResult, values: MFMValues) -> MFMRenderNodeStack {
+    let x = (try? Float(values.get("x") ?? "", format: .number)) ?? 0.0
+    let y = (try? Float(values.get("y") ?? "", format: .number)) ?? 0.0
+    return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
+        MFMRenderView {
+            view
+                .offset(x: CGFloat(x * 18), y: CGFloat(y * 18))
+        }
+    })
+}
+
+/// $[spin Spin Text]
+fileprivate func applySpin(_ renderedChildren: MFMRenderResult, values: MFMValues) -> MFMRenderNodeStack {
+    let alternate = values.isSet("alternate")
+    let isX = values.isSet("x")
+    let isY = values.isSet("y")
+    let reverse = values.isSet("left")
+    let loops = (try? Int(values.get("loop") ?? "0", format: .number)) ?? 0
+    let delay = (try? Double((values.get("delay") ?? "0s").replacingOccurrences(of: "s", with: ""), format: .number)) ?? 0
+    
+    let speedSeconds = (try? Int((values.get("speed") ?? "2s").replacingOccurrences(of: "s", with: ""), format: .number)) ?? 2
+    let speed = 1.0 / Double(speedSeconds)
+    
+    var animation = MFMAnimation.spin
+    if isX {
+        animation = .spinX
+    } else if isY {
+        animation = .spinY
+    }
+    
+    return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
+        MFMRenderView {
+            MFMAnimationView(animation: animation, autoreverse: alternate, delay: delay, loop: loops, speed: speed, reverse: reverse) {
                 view
-            }.environmentObject(blurContext)
+            }
+        }
+    })
+}
+
+/// $[jump Jump Text]
+fileprivate func applyJump(_ renderedChildren: MFMRenderResult, values: MFMValues) -> MFMRenderNodeStack {
+    let loops = (try? Int(values.get("loop") ?? "0", format: .number)) ?? 0
+    let delay = (try? Double((values.get("delay") ?? "0s").replacingOccurrences(of: "s", with: ""), format: .number)) ?? 0
+    
+    let speedSeconds = (try? Int((values.get("speed") ?? "1s").replacingOccurrences(of: "s", with: ""), format: .number)) ?? 1
+    let speed = 1.0 / Double(speedSeconds) * 4
+    
+    return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
+        MFMRenderView {
+            MFMAnimationView(animation: .jump, autoreverse: true, delay: delay, loop: loops, speed: speed, reverse: false) {
+                view
+            }
         }
     })
 }
@@ -133,10 +227,10 @@ fileprivate func applyBlur(_ renderedChildren: MFMRenderResult, value: String?) 
 // MARK: Internal Helpers
 
 /// Internal modifier signature
-fileprivate typealias ModifierCallalbleWithValue = (_ renderedChildren: MFMRenderResult, _ value: String?) -> MFMRenderNodeStack
+fileprivate typealias ModifierCallalbleWithValue = (_ renderedChildren: MFMRenderResult, _ value: MFMValues) -> MFMRenderNodeStack
 
 /// Convert the internal modifier callback into a regular MFMRenderModifierCallalble
-fileprivate func modifierWrapper(value: String?, inner: @escaping ModifierCallalbleWithValue) -> MFMRenderModifierCallalble {
+fileprivate func modifierWrapper(value: MFMValues, inner: @escaping ModifierCallalbleWithValue) -> MFMRenderModifierCallalble {
     return { renderedChildren in
         inner(renderedChildren, value)
     }

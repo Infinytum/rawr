@@ -93,6 +93,9 @@
 		2068CC432A87C30A00F8A958 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC422A87C30A00F8A958 /* MainView.swift */; };
 		2068CC462A87EAFC00F8A958 /* ViewReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068CC452A87EAFC00F8A958 /* ViewReloader.swift */; };
 		207C1E8F2B126FF700F49AAF /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C1E8E2B126FF700F49AAF /* NotificationName.swift */; };
+		207C1E912B13DEE500F49AAF /* RenderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C1E902B13DEE500F49AAF /* RenderingTests.swift */; };
+		207C1E932B1401BD00F49AAF /* MFMAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C1E922B1401BD00F49AAF /* MFMAnimationView.swift */; };
+		207C1E952B1414A400F49AAF /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C1E942B1414A400F49AAF /* Task.swift */; };
 		207C33DA2A8FB89000500E33 /* TimelineContextProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C33D92A8FB89000500E33 /* TimelineContextProtocol.swift */; };
 		207C33DC2A8FB8B700500E33 /* TimelineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C33DB2A8FB8B700500E33 /* TimelineItem.swift */; };
 		207C33DF2A8FBD5800500E33 /* MisskeyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 207C33DE2A8FBD5800500E33 /* MisskeyKit */; };
@@ -228,6 +231,9 @@
 		2068CC422A87C30A00F8A958 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2068CC452A87EAFC00F8A958 /* ViewReloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewReloader.swift; sourceTree = "<group>"; };
 		207C1E8E2B126FF700F49AAF /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		207C1E902B13DEE500F49AAF /* RenderingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingTests.swift; sourceTree = "<group>"; };
+		207C1E922B1401BD00F49AAF /* MFMAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFMAnimationView.swift; sourceTree = "<group>"; };
+		207C1E942B1414A400F49AAF /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		207C33D92A8FB89000500E33 /* TimelineContextProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineContextProtocol.swift; sourceTree = "<group>"; };
 		207C33DB2A8FB8B700500E33 /* TimelineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineItem.swift; sourceTree = "<group>"; };
 		207C33E32A8FC4A400500E33 /* TimelineContextBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineContextBase.swift; sourceTree = "<group>"; };
@@ -336,6 +342,7 @@
 				201A50FE2A913E1F00956489 /* MFMRenderNode.swift */,
 				201A51002A913F9A00956489 /* MFMRenderMerger.swift */,
 				201A50F82A91384500956489 /* MFMRenderModifier.swift */,
+				207C1E902B13DEE500F49AAF /* RenderingTests.swift */,
 			);
 			path = Rendering;
 			sourceTree = "<group>";
@@ -354,6 +361,7 @@
 			children = (
 				204DA4262A8AC32D00BB0598 /* Visualizer.swift */,
 				201A51092A91816700956489 /* BlurView.swift */,
+				207C1E922B1401BD00F49AAF /* MFMAnimationView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -661,6 +669,7 @@
 				2067831D2AD730B100099902 /* UIKit.swift */,
 				2067831F2AD825D000099902 /* Environment.swift */,
 				207C1E8E2B126FF700F49AAF /* NotificationName.swift */,
+				207C1E942B1414A400F49AAF /* Task.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -995,6 +1004,7 @@
 				2009C63C2B0531D400A2C6C9 /* TokenizerMention.swift in Sources */,
 				2009C6422B0985C400A2C6C9 /* TokenizerHashtag.swift in Sources */,
 				2068CC412A87C2EB00F8A958 /* NoteModel.swift in Sources */,
+				207C1E912B13DEE500F49AAF /* RenderingTests.swift in Sources */,
 				209391092A92A3C9006FDA19 /* Notification.swift in Sources */,
 				3F0F011F2A940868006A48A5 /* HashtagTimelineHeader.swift in Sources */,
 				2068CC342A87C25B00F8A958 /* ProfileSwitcher.swift in Sources */,
@@ -1035,6 +1045,7 @@
 				20EB64BA2AFEE09900A9EC81 /* NoteLink.swift in Sources */,
 				2068CBEE2A87B5BC00F8A958 /* rawrApp.swift in Sources */,
 				3F8E62D92A93CA220093A1D4 /* UserView.swift in Sources */,
+				207C1E952B1414A400F49AAF /* Task.swift in Sources */,
 				206783202AD825D000099902 /* Environment.swift in Sources */,
 				209D67BD2AD0469700E30ACD /* MessagesView.swift in Sources */,
 				2009C6442B0986C300A2C6C9 /* TokenizerBold.swift in Sources */,
@@ -1044,6 +1055,7 @@
 				209F518B2AD886F100D2D597 /* BetterUserHeader.swift in Sources */,
 				2068CC312A87C25B00F8A958 /* Note.swift in Sources */,
 				2098F91E2A8EF792003CAAE2 /* Scanner.swift in Sources */,
+				207C1E932B1401BD00F49AAF /* MFMAnimationView.swift in Sources */,
 				209D67C32AD047A300E30ACD /* MessagesContext.swift in Sources */,
 				2026DCCB2AB7B02500A4B68E /* AppHeader.swift in Sources */,
 				2060795F2A9BDDDA00FC7D00 /* NoteEditorHeader.swift in Sources */,
