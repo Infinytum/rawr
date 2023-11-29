@@ -14,6 +14,8 @@ enum MFMAnimation {
     case spinY
     
     case jump
+    
+    case shake
 }
 
 struct MFMAnimationView<Content: View>: View {
@@ -29,11 +31,14 @@ struct MFMAnimationView<Content: View>: View {
     
     @State private var spinState = 0.0
     @State private var jumpState = 0.0
+    @State private var shakeState = -5.0
     
     var body: some View {
         switch self.animation {
         case .spin:
-            view
+            VStack {
+                view
+            }
                 .rotationEffect(.degrees(spinState), anchor: .center)
                 .onAppear {
                     _ = Task.delayed(self.delay) {
@@ -43,7 +48,9 @@ struct MFMAnimationView<Content: View>: View {
                     }
                 }
         case .spinX:
-            view
+            VStack {
+                view
+            }
                 .rotation3DEffect(
                     .degrees(spinState),
                                           axis: (x: 1.0, y: 0.0, z: 0.0)
@@ -56,7 +63,9 @@ struct MFMAnimationView<Content: View>: View {
                     }
                 }
         case .spinY:
-            view
+            VStack {
+                view
+            }
                 .rotation3DEffect(
                     .degrees(spinState),
                                           axis: (x: 0.0, y: 1.0, z: 0.0)
@@ -69,7 +78,9 @@ struct MFMAnimationView<Content: View>: View {
                     }
                 }
         case .jump:
-            view
+            VStack {
+                view
+            }
                 .offset(y: -self.jumpState)
                 .onAppear {
                     _ = Task.delayed(self.delay) {
@@ -78,6 +89,18 @@ struct MFMAnimationView<Content: View>: View {
                         }
                     }
                 }
+        case .shake:
+            VStack {
+                view
+            }
+            .offset(x: self.shakeState)
+            .onAppear {
+                _ = Task.delayed(self.delay) {
+                    withAnimation(self.defaultAnimation(.easeInOut(duration: 1))) {
+                        shakeState = 5
+                    }
+                }
+            }
         }
     }
     
@@ -98,7 +121,7 @@ struct MFMAnimationView<Content: View>: View {
 }
 
 #Preview {
-    MFMAnimationView(animation: .jump, autoreverse: true, speed: 4.0) {
-        Text("Animated Text")
+    MFMAnimationView(animation: .shake, autoreverse: true, speed: 4.0) {
+        Text("Text")
     }
 }

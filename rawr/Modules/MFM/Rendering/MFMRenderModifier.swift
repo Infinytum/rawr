@@ -34,10 +34,14 @@ public func mfmRenderModifier(_ mfmModifier: MFMModifier?, value: MFMValues) -> 
         return modifierWrapper(value: value, inner: applyRotate)
     case .position:
         return modifierWrapper(value: value, inner: applyPosition)
+    case .flip:
+        return modifierWrapper(value: value, inner: applyFlip)
     case .spin:
         return modifierWrapper(value: value, inner: applySpin)
     case .jump:
         return modifierWrapper(value: value, inner: applyJump)
+    case .shake:
+        return modifierWrapper(value: value, inner: applyShake)
     }
 }
 
@@ -126,6 +130,7 @@ fileprivate func applyScale(_ renderedChildren: MFMRenderResult, values: MFMValu
 /// $[rotate.deg=45 Hello, world!], $[rotate Hello, world!], $[rotate.x,deg=45 Hello, world!], $[rotate.x Hello, world!]
 fileprivate func applyRotate(_ renderedChildren: MFMRenderResult, values: MFMValues) -> MFMRenderNodeStack {
     let isX = values.isSet("x")
+    let isY = values.isSet("y")
     let deg = (try? Double(values.get("deg") ?? "90", format: .number)) ?? 90.0
     
     return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
@@ -134,35 +139,13 @@ fileprivate func applyRotate(_ renderedChildren: MFMRenderResult, values: MFMVal
                 view.rotation3DEffect(
                     .init(degrees: deg), axis: (x: 1.0, y: .zero, z: .zero)
                 )
+            } else if isY {
+                view.rotation3DEffect(
+                    .init(degrees: deg), axis: (x: .zero, y: 1.0, z: .zero)
+                )
             } else {
                 view.rotationEffect(.degrees(deg), anchor: .center)
             }
-        }
-    })
-}
-
-/// $[rotate.deg=45 Hello, world!], $[rotate Hello, world!]
-fileprivate func applyRotateY(_ renderedChildren: MFMRenderResult, value: String?) -> MFMRenderNodeStack {
-    guard let deg = try? Double(value ?? "90", format: .number) else {
-        return mfmMergeRenderResult(renderedChildren)
-    }
-    return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
-        MFMRenderView {
-            view.rotationEffect(.degrees(deg), anchor: .center)
-        }
-    })
-}
-
-/// $[rotate.x,deg=45 Hello, world!], $[rotate.x Hello, world!]
-fileprivate func applyRotateX(_ renderedChildren: MFMRenderResult, value: String?) -> MFMRenderNodeStack {
-    guard let deg = try? Double(value ?? "90", format: .number) else {
-        return mfmMergeRenderResult(renderedChildren)
-    }
-    return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
-        MFMRenderView {
-            view.rotation3DEffect(
-                .init(degrees: deg), axis: (x: 1.0, y: .zero, z: .zero)
-            )
         }
     })
 }
@@ -174,7 +157,19 @@ fileprivate func applyPosition(_ renderedChildren: MFMRenderResult, values: MFMV
     return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
         MFMRenderView {
             view
-                .offset(x: CGFloat(x * 18), y: CGFloat(y * 18))
+                .offset(x: CGFloat(x * 18.5), y: CGFloat(y * 18.5))
+        }
+    })
+}
+
+
+fileprivate func applyFlip(_ renderedChildren: MFMRenderResult, values: MFMValues) -> MFMRenderNodeStack {
+    let isH = values.isSet("h")
+    let isV = values.isSet("v")
+    return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
+        MFMRenderView {
+            view
+                .transformEffect(CGAffineTransform(scaleX: isH ? -1 : 1, y: isV ? -1 : 1))
         }
     })
 }
@@ -218,6 +213,23 @@ fileprivate func applyJump(_ renderedChildren: MFMRenderResult, values: MFMValue
     return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
         MFMRenderView {
             MFMAnimationView(animation: .jump, autoreverse: true, delay: delay, loop: loops, speed: speed, reverse: false) {
+                view
+            }
+        }
+    })
+}
+
+/// $[shake Shake Text]
+fileprivate func applyShake(_ renderedChildren: MFMRenderResult, values: MFMValues) -> MFMRenderNodeStack {
+    let loops = (try? Int(values.get("loop") ?? "0", format: .number)) ?? 0
+    let delay = (try? Double((values.get("delay") ?? "0s").replacingOccurrences(of: "s", with: ""), format: .number)) ?? 0
+    
+    let speedSeconds = (try? Int((values.get("speed") ?? "1s").replacingOccurrences(of: "s", with: ""), format: .number)) ?? 1
+    let speed = 1.0 / Double(speedSeconds) * 4
+    
+    return mfmMergeRenderResult(renderedChildren, viewSideEffect:  { view in
+        MFMRenderView {
+            MFMAnimationView(animation: .shake, autoreverse: true, delay: delay, loop: loops, speed: speed, reverse: false) {
                 view
             }
         }

@@ -21,8 +21,11 @@ public enum MFMModifier: String {
     
     case position = "position"
     
+    case flip = "flip"
+    
     case spin = "spin"
     case jump = "jump"
+    case shake = "shake"
 }
 
 public typealias MFMValues = Dictionary<String, String?>
