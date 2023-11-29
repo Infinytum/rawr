@@ -18,7 +18,7 @@ extension Tokenizer {
         session.checkpoint()
         
         /// Check if this is an actual container or just some random @
-        guard let username = session.scanner.scanCharacters(from: CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "@.-"))) else {
+        guard let username = session.scanner.scanCharacters(from: CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "@.-_"))) else {
             session.restore()
             session.currentNode.addChild(MFMNode(session.currentNode, plaintext: token))
             return true
