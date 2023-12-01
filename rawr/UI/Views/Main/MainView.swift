@@ -10,7 +10,7 @@ import NetworkImage
 import SwiftKit
 import SwiftUI
 
-struct BetterMainView: View {
+struct MainView: View {
     
     @EnvironmentObject var context: ViewContext
     
@@ -59,6 +59,6 @@ struct BetterMainView: View {
 }
 
 #Preview {
-    BetterMainView()
+    MainView()
         .environmentObject(ViewContext())
 }
