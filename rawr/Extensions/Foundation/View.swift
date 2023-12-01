@@ -43,6 +43,10 @@ extension View {
     func readingScrollView(from coordinateSpace: String, into binding: Binding<CGPoint>) -> some View {
         modifier(ScrollViewOffsetModifier(coordinateSpace: coordinateSpace, offset: binding))
     }
+    
+    func fullWidth() -> some View {
+        self.frame(minWidth: 0, idealWidth: .infinity, maxWidth: .infinity)
+    }
 }
 
 

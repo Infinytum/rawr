@@ -1,28 +1,70 @@
 //
-//  TimelineView.swift
-//  Derg Social
+//  BetterTimelineView.swift
+//  rawr.
 //
-//  Created by Nila on 05.08.2023.
+//  Created by Nila on 18.09.2023.
 //
 
 import SwiftUI
 
 struct TimelineView: View {
-
     @State private var selectedTab = 0
     
     var body: some View {
-        ZStack(alignment: .top) {
+        VStack {
             if selectedTab == 0 {
-                Timeline(timelineContext: HomeTimelineContext())
+                BetterTimeline(timelineContext: HomeTimelineContext())
             }
             if selectedTab == 1 {
-                Timeline(timelineContext: LocalTimelineContext())
+                BetterTimeline(timelineContext: LocalTimelineContext())
             }
             if selectedTab == 2 {
-                Timeline(timelineContext: GlobalTimelineContext())
+                BetterTimeline(timelineContext: GlobalTimelineContext())
             }
         }
+        .safeAreaInset(edge: .top, spacing: 0, content: {
+            BetterAppHeader {
+                AppHeaderSimpleBody {
+                    HStack {
+                        Menu {
+                            Button("Home") {
+                                selectedTab = 0
+                            }
+                            Button("Local") {
+                                selectedTab = 1
+                            }
+                            Button("Global") {
+                                selectedTab = 2
+                            }
+                        } label: {
+                            VStack {
+                                HStack {
+                                    Group {
+                                        if (selectedTab == 0) {
+                                            Text("Home")
+                                        }
+                                        if (selectedTab == 1) {
+                                            Text("Local")
+                                        }
+                                        if (selectedTab == 2) {
+                                            Text("Global")
+                                        }
+                                    }.foregroundColor(.primary)
+                                    Image(systemName: "chevron.up.chevron.down")
+                                        .font(.system(size: 12, weight: .regular, design: .rounded))
+                                        .foregroundColor(.primary)
+                                        .padding(.leading, -3)
+                                }
+                            }.contentShape(Rectangle())
+                        }
+                    }.padding(.top, -11)
+                }
+                Spacer()
+                AntennaMenu()
+                    .padding(.trailing, 10)
+                UserListMenu()
+            }
+        })
     }
 }
 

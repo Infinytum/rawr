@@ -1,30 +1,30 @@
 //
-//  AntennaTimelineView.swift
+//  ListTimelineView.swift
 //  rawr.
 //
-//  Created by Nila on 24.08.2023.
+//  Created by Nila on 01.12.2023.
 //
 
 import MisskeyKit
 import SwiftUI
 
-struct AntennaTimelineView: View {
+struct ListTimelineView: View {
     
-    let antenna: AntennaModel
+    let list: ListModel
     
     var body: some View {
         VStack {
-            BetterTimeline(timelineContext: AntennaTimelineContext(self.antenna.id!))
+            BetterTimeline(timelineContext: ListTimelineContext(self.list.id!))
         }
         .fluentBackground()
         .safeAreaInset(edge: .top, spacing: 0) {
             BetterAppHeader(isNavLink: true) {
                 AppHeaderSimpleBody {
                     HStack {
-                        Image(systemName: "dot.radiowaves.left.and.right")
+                        Image(systemName: "list.bullet")
                             .font(.system(size: 14, weight: .bold))
                             .foregroundColor(.primary.opacity(0.7))
-                        Text(self.antenna.name!)
+                        Text(self.list.name!)
                             .foregroundColor(.primary.opacity(0.7))
                             .padding(.leading, -5)
                     }
@@ -36,6 +36,5 @@ struct AntennaTimelineView: View {
 }
 
 #Preview {
-    AntennaTimelineView(antenna: .preview)
-        .environmentObject(ViewContext())
+    ListTimelineView(list: .preview)
 }

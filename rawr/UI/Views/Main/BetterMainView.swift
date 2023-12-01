@@ -21,7 +21,7 @@ struct BetterMainView: View {
             VStack {
                 switch self.selectedTab {
                 case .home:
-                    BetterTimelineView()
+                    TimelineView()
                 case .chats:
                     MessagesView()
                 case .notifications:

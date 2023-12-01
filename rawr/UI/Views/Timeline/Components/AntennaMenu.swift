@@ -11,11 +11,8 @@ import SwiftUI
 struct AntennaMenu: View {
     
     @EnvironmentObject var context: ViewContext
-    @ObservedObject var viewReloader = ViewReloader()
     
     @State var antennas: [AntennaModel]?
-    @State var presentAntennaSheet = false
-    @State var presentedAntenna: AntennaModel?
     
     var body: some View {
         Menu {
@@ -25,20 +22,15 @@ struct AntennaMenu: View {
                 Text("No Antennas")
             } else {
                 ForEach(self.antennas!) { antenna in
-                    Button(antenna.name ?? "Unnamed Antenna") {
-                        self.presentedAntenna = antenna
-                        self.viewReloader.reloadView()
-                        self.presentAntennaSheet = true
+                    NavigationLink(destination: AntennaTimelineView(antenna: antenna).navigationBarBackButtonHidden(true)) {
+                        Text(antenna.name ?? "Unnamed Antenna")
                     }
                 }
             }
         } label: {
-            Image(systemName: "antenna.radiowaves.left.and.right")
+            Image(systemName: "dot.radiowaves.left.and.right")
                 .font(.system(size: 20))
         }.onAppear(perform: self.onAppear)
-        .sheet(isPresented: $presentAntennaSheet, content: {
-            AntennaTimelineView(antenna: self.presentedAntenna!)
-        })
     }
     
     private func onAppear() {
@@ -49,7 +41,6 @@ struct AntennaMenu: View {
                 self.antennas = []
                 return
             }
-            
             self.antennas = antennas
         }
     }

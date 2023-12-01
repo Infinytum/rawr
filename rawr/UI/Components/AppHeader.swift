@@ -30,7 +30,11 @@ struct AppHeader<Content: View>: View {
                         .cornerRadius(.infinity)
                 }
             } else {
-                RemoteImage(context.currentInstance?.getIconUrl())
+//                RemoteImage(context.currentInstance?.getIconUrl())
+//                    .frame(width: 50, height: 50)
+//                    .clipped()
+//                    .cornerRadius(11)
+                ProfileSwitcher()
                     .frame(width: 50, height: 50)
                     .clipped()
                     .cornerRadius(11)
@@ -52,13 +56,13 @@ struct AppHeader<Content: View>: View {
 //                        .offset(CGSize(width: -2.0, height: 2.0))
 //                }
 //                .padding(.trailing, 5)
-            ProfileSwitcher()
-                .frame(width: 50, height: 50)
-                .clipped()
-                .cornerRadius(.infinity)
+//            ProfileSwitcher()
+//                .frame(width: 50, height: 50)
+//                .clipped()
+//                .cornerRadius(.infinity)
         }
         .padding(.horizontal, 15)
-        .padding(.top)
+        .padding(.top, 10)
         .padding(.bottom, 10)
         .fluentBackground(.regular, fullscreen: false)
     }
