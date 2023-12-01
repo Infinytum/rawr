@@ -16,7 +16,7 @@ struct ContentView: View {
         VStack {
             if context.loggedIn {
                 if context.applicationReady {
-                    BetterMainView()
+                    MainView()
                 } else {
                     Spacer()
                     Text("Contacting your instance")
