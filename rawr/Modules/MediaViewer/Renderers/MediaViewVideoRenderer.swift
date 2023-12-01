@@ -15,6 +15,19 @@ struct MediaViewVideoRenderer: View {
     var body: some View {
         VideoPlayer(player: self.player)
             .clipped()
+            .onAppear(perform: self.configureAVAudioSession)
+            .onDisappear(perform: self.deconfigureAVAudioSession)
+    }
+    
+    // This will ensure audio is played even when the device has its ringer volume muted
+    func configureAVAudioSession() {
+        try? AVAudioSession.sharedInstance().setCategory(.playback, options: [.allowAirPlay, .allowBluetooth, .allowBluetoothA2DP])
+        try? AVAudioSession.sharedInstance().setActive(true)
+    }
+    
+    // This will ensure audio is played even when the device has its ringer volume muted
+    func deconfigureAVAudioSession() {
+        try? AVAudioSession.sharedInstance().setActive(false)
     }
 }
 
