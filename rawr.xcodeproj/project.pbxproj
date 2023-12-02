@@ -23,6 +23,7 @@
 		2011451B2B1A9B8600728E6D /* ListTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2011451A2B1A9B8600728E6D /* ListTimelineView.swift */; };
 		2011451D2B1A9BF100728E6D /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2011451C2B1A9BF100728E6D /* ListModel.swift */; };
 		2011451F2B1A9C9200728E6D /* UserListMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2011451E2B1A9C9200728E6D /* UserListMenu.swift */; };
+		201145232B1AAB6300728E6D /* TimelineSwitcherMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201145222B1AAB6300728E6D /* TimelineSwitcherMenu.swift */; };
 		201A50EB2A901F5000956489 /* HashtagTimelineContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A50EA2A901F5000956489 /* HashtagTimelineContext.swift */; };
 		201A50F22A90397300956489 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A50F12A90397300956489 /* Color.swift */; };
 		201A50F52A90DF5B00956489 /* InstanceCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A50F42A90DF5B00956489 /* InstanceCredentials.swift */; };
@@ -164,6 +165,7 @@
 		2011451A2B1A9B8600728E6D /* ListTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTimelineView.swift; sourceTree = "<group>"; };
 		2011451C2B1A9BF100728E6D /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		2011451E2B1A9C9200728E6D /* UserListMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListMenu.swift; sourceTree = "<group>"; };
+		201145222B1AAB6300728E6D /* TimelineSwitcherMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSwitcherMenu.swift; sourceTree = "<group>"; };
 		201A50EA2A901F5000956489 /* HashtagTimelineContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagTimelineContext.swift; sourceTree = "<group>"; };
 		201A50F12A90397300956489 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		201A50F42A90DF5B00956489 /* InstanceCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceCredentials.swift; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				20B7E14A2A935FB3003E3CE4 /* AntennaMenu.swift */,
+				201145222B1AAB6300728E6D /* TimelineSwitcherMenu.swift */,
 				2011451E2B1A9C9200728E6D /* UserListMenu.swift */,
 			);
 			path = Components;
@@ -1074,6 +1077,7 @@
 				204DA4042A890E5E00BB0598 /* MessageModel.swift in Sources */,
 				20B59F402AB8EBF6002B3039 /* MainViewFooter.swift in Sources */,
 				2068CC332A87C25B00F8A958 /* NoteHeader.swift in Sources */,
+				201145232B1AAB6300728E6D /* TimelineSwitcherMenu.swift in Sources */,
 				207C33DC2A8FB8B700500E33 /* TimelineItem.swift in Sources */,
 				207C33E62A8FC6AC00500E33 /* HomeTimelineContext.swift in Sources */,
 				205F1A912AB7BF88003A352A /* BetterTimeline.swift in Sources */,

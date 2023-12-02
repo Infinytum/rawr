@@ -25,39 +25,8 @@ struct TimelineView: View {
         .safeAreaInset(edge: .top, spacing: 0, content: {
             BetterAppHeader {
                 AppHeaderSimpleBody {
-                    HStack {
-                        Menu {
-                            Button("Home") {
-                                selectedTab = 0
-                            }
-                            Button("Local") {
-                                selectedTab = 1
-                            }
-                            Button("Global") {
-                                selectedTab = 2
-                            }
-                        } label: {
-                            VStack {
-                                HStack {
-                                    Group {
-                                        if (selectedTab == 0) {
-                                            Text("Home")
-                                        }
-                                        if (selectedTab == 1) {
-                                            Text("Local")
-                                        }
-                                        if (selectedTab == 2) {
-                                            Text("Global")
-                                        }
-                                    }.foregroundColor(.primary)
-                                    Image(systemName: "chevron.up.chevron.down")
-                                        .font(.system(size: 12, weight: .regular, design: .rounded))
-                                        .foregroundColor(.primary)
-                                        .padding(.leading, -3)
-                                }
-                            }.contentShape(Rectangle())
-                        }
-                    }.padding(.top, -11)
+                    TimelineSwitcherMenu(selectedTab: self.$selectedTab)
+                        .padding(.top, -11)
                 }
                 Spacer()
                 AntennaMenu()
