@@ -32,7 +32,7 @@ struct User: View {
                     }
                     .fluentBackground()
                         
-                    BetterTimeline(timelineContext: UserTimelineContext(self.user.id, self.selectedScope))
+                    Timeline(timelineContext: UserTimelineContext(self.user.id, self.selectedScope))
                         .frame(maxHeight: proxy.size.height)
                         .padding(.top, -10)
                 }

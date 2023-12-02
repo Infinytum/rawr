@@ -40,7 +40,7 @@ public extension MFMValues {
     }
     
     func isSet(_ key: String) -> Bool {
-        guard let val = self[key] else {
+        guard let _ = self[key] else {
             return false
         }
         return true

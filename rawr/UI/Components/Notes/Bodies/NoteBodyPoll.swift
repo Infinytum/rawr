@@ -53,5 +53,5 @@ struct NoteBodyPoll: View {
     @State var note: NoteModel = .preview
     note.poll = .preview
     note.renote!.poll = .preview
-    return Note(note: note).environmentObject(ViewContext())
+    return Note(note: note).environmentObject(ViewContext()).padding(.horizontal)
 }

@@ -20,7 +20,7 @@ struct Notification: View {
         VStack {
             HStack() {
                 RemoteImage(notification.user?.avatarUrl ?? self.context.currentInstance?.getIconUrl())
-                    .frame(width: 55, height: 55)
+                    .frame(width: 50, height: 50)
                     .cornerRadius(11)
                     .overlay(alignment: .bottomTrailing) {
                         VStack {
@@ -60,57 +60,7 @@ struct Notification: View {
                 Spacer()
             }
             if self.notification.note != nil {
-                VStack {
-                    VStack {
-                        NavigationLink(destination: NoteView(noteId: self.notification.note!.id!)) {
-                            Note(note: self.notification.note!)
-                                .navigationBarBackButtonHidden(true)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    }.padding(.vertical, 10)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        .padding(.top, 5)
-                }
-//                .frame(height: self.noteExpanded ? .infinity : 250, alignment: .top)
-//                .overlay(alignment: .bottom) {
-//                    if !self.noteExpanded {
-//                        ZStack(alignment: .bottom) {
-//                            Rectangle()
-//                                    .fill(.ultraThinMaterial)
-//                                    .mask {
-//                                        VStack(spacing: 0) {
-//                                            LinearGradient(
-//                                                colors: [
-//                                                    Color.primary.opacity(0),
-//                                                    Color.primary.opacity(0),
-//                                                    Color.primary.opacity(0.37),
-//                                                    Color.primary.opacity(0.8),
-//                                                    Color.primary.opacity(0.97),
-//                                                    Color.primary.opacity(1),
-//                                                ],
-//                                                startPoint: .top,
-//                                                endPoint: .bottom
-//                                            )
-//                                        }
-//                                    }.clipShape(RoundedRectangle(cornerRadius: 20))
-//                            VStack {
-//                                Text("Expand Note")
-//                                    .font(.system(size: 14, weight: .medium))
-//                                    .padding(.bottom, 5)
-//                                Image(systemName: "chevron.down")
-//                            }.padding(.bottom, 15).foregroundColor(.primary.opacity(0.7))
-//                        }.onTapGesture {
-//                            withAnimation {
-//                                self.noteExpanded = true
-//                            }
-//                        }
-//                    }
-//                }
-                .clipped()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.primary.opacity(0.2), lineWidth: 1)
-                ).padding(.top, 5)
+                NoteQuoteComponent(note: self.notification.note!)
             }
         }
     }

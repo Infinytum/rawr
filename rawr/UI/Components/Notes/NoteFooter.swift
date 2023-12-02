@@ -159,11 +159,8 @@ struct NoteFooter: View {
 }
 
 #Preview {
-    ScrollView {
-        Note(note: .preview)
-        Divider()
-        Note(note: .preview)
-        Divider()
-        Note(note: .preview)
-    }.environmentObject(ViewContext()).padding()
+    NoteFooter(note: .previewRenote)
+        .environmentObject(ViewContext())
+        .padding()
+        .fluentBackground(.thin, fullscreen: false)
 }

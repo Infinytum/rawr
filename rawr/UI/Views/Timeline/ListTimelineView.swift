@@ -14,7 +14,7 @@ struct ListTimelineView: View {
     
     var body: some View {
         VStack {
-            BetterTimeline(timelineContext: ListTimelineContext(self.list.id!))
+            Timeline(timelineContext: ListTimelineContext(self.list.id!))
         }
         .fluentBackground()
         .safeAreaInset(edge: .top, spacing: 0) {

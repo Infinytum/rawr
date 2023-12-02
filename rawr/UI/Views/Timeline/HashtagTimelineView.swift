@@ -14,7 +14,7 @@ struct HashtagTimelineView: View {
     
     var body: some View {
         VStack {
-            BetterTimeline(timelineContext: HashtagTimelineContext(self.hashtag))
+            Timeline(timelineContext: HashtagTimelineContext(self.hashtag))
         }
         .fluentBackground()
         .safeAreaInset(edge: .top, spacing: 0) {

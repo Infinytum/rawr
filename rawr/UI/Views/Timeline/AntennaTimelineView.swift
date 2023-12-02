@@ -14,7 +14,7 @@ struct AntennaTimelineView: View {
     
     var body: some View {
         VStack {
-            BetterTimeline(timelineContext: AntennaTimelineContext(self.antenna.id!))
+            Timeline(timelineContext: AntennaTimelineContext(self.antenna.id!))
         }
         .fluentBackground()
         .safeAreaInset(edge: .top, spacing: 0) {

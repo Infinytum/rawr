@@ -50,7 +50,7 @@ struct MainView: View {
                     .navigationBarBackButtonHidden(true)
             })
             .navigationDestination(for: NoteLink.self, destination: { note in
-                NoteView(noteId: note.id)
+                NoteDetailView(noteId: note.id)
                     .navigationBarBackButtonHidden(true)
             })
         }

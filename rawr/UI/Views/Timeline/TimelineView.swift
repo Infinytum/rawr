@@ -13,13 +13,13 @@ struct TimelineView: View {
     var body: some View {
         VStack {
             if selectedTab == 0 {
-                BetterTimeline(timelineContext: HomeTimelineContext())
+                Timeline(timelineContext: HomeTimelineContext())
             }
             if selectedTab == 1 {
-                BetterTimeline(timelineContext: LocalTimelineContext())
+                Timeline(timelineContext: LocalTimelineContext())
             }
             if selectedTab == 2 {
-                BetterTimeline(timelineContext: GlobalTimelineContext())
+                Timeline(timelineContext: GlobalTimelineContext())
             }
         }
         .safeAreaInset(edge: .top, spacing: 0, content: {

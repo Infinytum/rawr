@@ -63,5 +63,8 @@ struct NoteBodyReactions: View {
 }
 
 #Preview {
-    Note(note: .preview)
+    NoteBodyReactions(note: .previewRenote.renote!)
+        .environmentObject(ViewContext())
+        .padding()
+        .fluentBackground(.thin, fullscreen: false)
 }
