@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct TimelineView: View {
-    @State private var selectedTab = 0
+    
+    @AppStorage("TimelineView.selectedTab") var selectedTab: Int = 0
     
     var body: some View {
         VStack {
