@@ -50,7 +50,7 @@ struct Notification: View {
                             .lineLimit(2)
                             .overlay(alignment: .trailing) {
                                 if self.notification.reaction != nil {
-                                    Emoji(name: self.notification.reaction!)
+                                    Emoji(name: self.notification.reaction!, emojis: self.notification.note?.reactionEmojis ?? [])
                                         .environment(\.emojiRenderSize, CGSize(width: 25, height: 25))
                                         .offset(x: 25)
                                 }
