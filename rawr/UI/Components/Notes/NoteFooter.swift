@@ -106,7 +106,10 @@ struct NoteFooter: View {
                     Button(action: self.onCopyLink, label: {
                         Label("Copy Link", systemImage: "link")
                     })
-                    ShareLink(item: self.note.absoluteUrl())
+                    Button(action: self.onCopyOriginalLink, label: {
+                        Label("Copy Original Link", systemImage: "link.icloud")
+                    })
+                    ShareLink(item: self.note.absoluteLocalUrl())
 //                    Button(action: {}) {
 //                        Label("Open Original Page", systemImage: "point.3.connected.trianglepath.dotted")
 //                    }
@@ -153,6 +156,10 @@ struct NoteFooter: View {
     }
     
     private func onCopyLink() {
+        UIPasteboard.general.url = self.note.absoluteLocalUrl()
+    }
+    
+    private func onCopyOriginalLink() {
         UIPasteboard.general.url = self.note.absoluteUrl()
     }
     

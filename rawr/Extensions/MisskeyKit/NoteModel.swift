@@ -146,6 +146,10 @@ extension NoteModel: ObservableObject {
             return URL(string: "https://\(RawrKeychain().instanceHostname)/notes/\(self.id!)")!
         }
     }
+    
+    func absoluteLocalUrl() -> URL {
+        return URL(string: "https://\(RawrKeychain().instanceHostname)/notes/\(self.id!)")!
+    }
 }
 // MARK: - Poll
 extension Poll {
