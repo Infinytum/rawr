@@ -94,6 +94,7 @@
 		206F74622B1B94940059A05A /* NoteBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F74612B1B94940059A05A /* NoteBody.swift */; };
 		206F74642B1B97E40059A05A /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F74632B1B97E40059A05A /* Note.swift */; };
 		206F74672B1BF08A0059A05A /* NoteQuoteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F74662B1BF08A0059A05A /* NoteQuoteComponent.swift */; };
+		2072F4422B1E9A1400601093 /* ClipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2072F4412B1E9A1400601093 /* ClipModel.swift */; };
 		207C1E8F2B126FF700F49AAF /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C1E8E2B126FF700F49AAF /* NotificationName.swift */; };
 		207C1E912B13DEE500F49AAF /* RenderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C1E902B13DEE500F49AAF /* RenderingTests.swift */; };
 		207C1E932B1401BD00F49AAF /* MFMAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C1E922B1401BD00F49AAF /* MFMAnimationView.swift */; };
@@ -236,6 +237,7 @@
 		206F74612B1B94940059A05A /* NoteBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBody.swift; sourceTree = "<group>"; };
 		206F74632B1B97E40059A05A /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		206F74662B1BF08A0059A05A /* NoteQuoteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteQuoteComponent.swift; sourceTree = "<group>"; };
+		2072F4412B1E9A1400601093 /* ClipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipModel.swift; sourceTree = "<group>"; };
 		207C1E8E2B126FF700F49AAF /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		207C1E902B13DEE500F49AAF /* RenderingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingTests.swift; sourceTree = "<group>"; };
 		207C1E922B1401BD00F49AAF /* MFMAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFMAnimationView.swift; sourceTree = "<group>"; };
@@ -664,6 +666,7 @@
 				2001722F2A93FE950079268B /* UserModel.swift */,
 				2011451C2B1A9BF100728E6D /* ListModel.swift */,
 				20DFCA302B1AB1EC008151B0 /* Previews.swift */,
+				2072F4412B1E9A1400601093 /* ClipModel.swift */,
 			);
 			path = MisskeyKit;
 			sourceTree = "<group>";
@@ -993,6 +996,7 @@
 				200172322A9424CB0079268B /* MFMBody.swift in Sources */,
 				207C33E82A8FD13500500E33 /* LocalTimelineContext.swift in Sources */,
 				201A50FF2A913E1F00956489 /* MFMRenderNode.swift in Sources */,
+				2072F4422B1E9A1400601093 /* ClipModel.swift in Sources */,
 				209D67C02AD046B600E30ACD /* MessagesListEntry.swift in Sources */,
 				20B59F3A2AB8EAF7002B3039 /* View.swift in Sources */,
 				205F1A932AB7C5D1003A352A /* TimelineView.swift in Sources */,

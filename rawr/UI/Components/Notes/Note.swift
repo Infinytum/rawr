@@ -30,7 +30,7 @@ enum NoteComponents: Identifiable {
 
 struct Note: View {
     
-    let note: NoteModel
+    @ObservedObject var note: NoteModel
     /// Default Note Receipe
     /// 1. Reply Parent
     /// 2. Boost Decoration

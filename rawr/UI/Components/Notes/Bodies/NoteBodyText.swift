@@ -12,7 +12,7 @@ struct NoteBodyText: View {
     
     @EnvironmentObject var context: ViewContext
     
-    let note: NoteModel
+    @ObservedObject var note: NoteModel
     @State var renderedNote: MFMRender? = nil
     
     var body: some View {

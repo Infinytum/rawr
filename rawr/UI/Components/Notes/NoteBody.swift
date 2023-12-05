@@ -12,7 +12,7 @@ struct NoteBody: View {
     
     @State var cwOverride: Bool = false
     
-    let note: NoteModel
+    @ObservedObject var note: NoteModel
     
     var body: some View {
         VStack {
