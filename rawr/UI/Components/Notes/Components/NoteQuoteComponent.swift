@@ -20,9 +20,8 @@ struct NoteQuoteComponent: View {
             }
             .buttonStyle(PlainButtonStyle())
         }
-        .padding(.all, 10)
+        .padding(.all, 12)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .padding(.top, 5)
         .clipped()
         .overlay(
             RoundedRectangle(cornerRadius: 20)
