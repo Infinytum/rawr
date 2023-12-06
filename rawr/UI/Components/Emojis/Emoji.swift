@@ -24,6 +24,8 @@ struct Emoji: View {
     
     let name: String
     var emojis: [EmojiModel] = []
+    var allowPopover: Bool = true
+    
     
     @State var emojiUrl: String? = nil
     @State var presentEmojiPopover: Bool = false
@@ -41,17 +43,26 @@ struct Emoji: View {
         } else if self.emojiUrl == "" {
             Text(self.viewContext.defaultEmojis.charForEmoji(self.name) ?? self.name)
         } else {
-            RemoteImage(self.emojiUrl)
-                .popover(isPresented: $presentEmojiPopover, content: {
-                    RemoteImage(self.emojiUrl)
-                        .frame(width: 100, height: 100)
-                        .padding()
-                        .presentationCompactAdaptation(.popover)
-                }).onTapGesture {
-                    self.presentEmojiPopover = true
-                }.applyEmojiRenderSize(size: self.emojiRenderSize)
-                
+            if self.allowPopover {
+                remoteStaticEmoji
+                    .popover(isPresented: $presentEmojiPopover, content: {
+                        RemoteImage(self.emojiUrl)
+                            .frame(width: 100, height: 100)
+                            .padding()
+                            .presentationCompactAdaptation(.popover)
+                    })
+                    .onTapGesture {
+                        self.presentEmojiPopover = true
+                    }
+            } else {
+                remoteStaticEmoji
+            }
         }
+    }
+    
+    var remoteStaticEmoji: some View {
+        RemoteImage(self.emojiUrl)
+            .applyEmojiRenderSize(size: self.emojiRenderSize)
     }
     
     private func urlForEmoji(_ name: String) -> String? {

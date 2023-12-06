@@ -66,9 +66,22 @@ struct NoteFooter: View {
                 Button {
                     self.onReact()
                 } label: {
-                    Image(systemName: self.note.myReaction != nil ? "minus" : "star")
-                        .foregroundColor(.primary)
-                        .fontWeight(self.note.myReaction != nil ? .bold : .light)
+                    if self.note.myReaction == nil {
+                        Image(systemName: "star")
+                            .foregroundColor(.primary)
+                            .fontWeight(.light)
+                    } else {
+                        Emoji(name: self.note.myReaction!, emojis: self.note.reactionEmojis!, allowPopover: false)
+                            .environment(\.emojiRenderSize, CGSize(width: 23, height: 23))
+                            .frame(maxWidth: 23, maxHeight: 23)
+                            .background(
+                                Rectangle()
+                                    .frame(width: 48, height: 33)
+                                    .foregroundColor(.clear)
+                                    .background(.blue)
+                                    .cornerRadius(.infinity)
+                            )
+                    }
                 }
                 .frame(minWidth: NoteFooter.minButtonWidth,minHeight: NoteFooter.minButtonHeight)
                 .contentShape(Rectangle())

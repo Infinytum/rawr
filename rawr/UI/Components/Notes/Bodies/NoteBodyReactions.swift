@@ -25,18 +25,20 @@ struct NoteBodyReactions: View {
                     Emoji(name: key, emojis: note.emojis ?? [])
                         .environment(\.emojiRenderSize, CGSize(width: 20, height: 20))
                     Text(String(value))
-                }.padding(5).padding(.trailing, 5)
-                    .background(note.isMyReaction(key) ? .blue.opacity(1) : .clear)
-                    .foregroundStyle(note.isMyReaction(key) ? .white : .primary)
-                    .font(.system(size: 16))
-                    .fontWeight(.medium)
-                    .cornerRadius(5)
-                    .padding(.trailing, 5)
-                    .highPriorityGesture(TapGesture().onEnded({ _ in
-                        self.onReaction(key)
-                    }))
+                }
+                .padding(.vertical, 5)
+                .padding(.trailing, 5)
+                .background(.clear)
+                .foregroundStyle(.primary)
+                .font(.system(size: 16))
+                .fontWeight(.medium)
+                .cornerRadius(5)
+                .padding(.trailing, 5)
+                .highPriorityGesture(TapGesture().onEnded({ _ in
+                    self.onReaction(key)
+                }))
             }
-        }
+        }.padding(.leading, 3)
     }
     
     private func getEmojiUrl(_ emoji: String) -> String? {
