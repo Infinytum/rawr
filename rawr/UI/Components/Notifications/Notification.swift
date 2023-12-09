@@ -60,7 +60,7 @@ struct Notification: View {
                 Spacer()
             }
             if self.notification.note != nil {
-                NoteQuoteComponent(note: self.notification.note!)
+                NoteQuoteComponent(note: self.mainNote())
             }
         }
     }
@@ -134,6 +134,16 @@ struct Notification: View {
         case .achievementEarned:
             return AnyView(Text("Achievement earned!"))
         }
+    }
+    
+    private func mainNote() -> NoteModel {
+        if self.notification.note!.isRenote() {
+            if self.notification.note!.isQuoteRenote() {
+                return self.notification.note!
+            }
+            return self.notification.note!.renote!
+        }
+        return self.notification.note!
     }
 }
 
