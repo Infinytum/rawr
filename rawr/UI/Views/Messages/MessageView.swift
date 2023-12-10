@@ -31,10 +31,6 @@ struct MessageView: View {
     
     var body: some View {
         VStack {
-            AppHeader(isNavLink: true) {
-                Text(history.chatName(currentUserId: self.context.currentUserId) ?? "Chat")
-                    .lineLimit(1, reservesSpace: true)
-            }
             ScrollView {
                 LazyVStack(spacing: 0){
                     ForEach(Array(self.messageContext.items.enumerated()), id: \.1.id) { (index, item) in
@@ -55,10 +51,39 @@ struct MessageView: View {
             .flippedUpsideDown()
             MessageBar(messageContext: self.messageContext)
         }
+        .safeAreaInset(edge: .top, spacing: 0, content: {
+            BetterAppHeader(isNavLink: true) {
+                RemoteImage(self.remoteUser().avatarUrl)
+                    .frame(width: 50, height: 50)
+                    .cornerRadius(11)
+                HStack {
+                    VStack(alignment: .leading) {
+                        MFMBody(render: self.remoteUser().renderedDisplayName())
+                            .environment(\.emojiRenderSize, CGSize(width: 20, height: 20))
+                            .frame(maxHeight: 20, alignment: .top)
+                            .clipped()
+                        Text("@" + (self.remoteUser().userName())).foregroundStyle(.gray)
+                            .frame(maxHeight: 15)
+                            .lineLimit(1)
+                    }
+                    Spacer()
+                    UserSafetyRating(user: self.remoteUser())
+                }
+                .padding(.leading, 2)
+                .padding(.bottom, 2)
+            }
+        })
         .background(context.themeBackground)
         .onAppear {
             self.messageContext.requestInitialSetOfItems(remoteUserId: self.history.remoteUserId(currentUserId: context.currentUserId) ?? "")
         }
+    }
+    
+    private func remoteUser() -> UserModel {
+        if self.history.isOwnMessage(currentUserId: self.context.currentUserId) {
+            return self.history.recipient!
+        }
+        return self.history.user!
     }
 }
 
