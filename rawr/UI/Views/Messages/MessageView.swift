@@ -82,9 +82,6 @@ struct MessageView: View {
         }
         .safeAreaInset(edge: .top, spacing: 0, content: {
             BetterAppHeader(isNavLink: true) {
-                RemoteImage(self.history.remoteUser(currentUserId: self.context.currentUserId).avatarUrl)
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(11)
                 HStack {
                     VStack(alignment: .leading) {
                         MFMBody(render: self.history.remoteUser(currentUserId: self.context.currentUserId).renderedDisplayName())
@@ -98,7 +95,6 @@ struct MessageView: View {
                     Spacer()
                     UserSafetyRating(user: self.history.remoteUser(currentUserId: self.context.currentUserId))
                 }
-                .padding(.leading, 2)
                 .padding(.bottom, 2)
             }
         })
