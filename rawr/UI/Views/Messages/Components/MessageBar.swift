@@ -16,6 +16,8 @@ struct MessageBar: View {
     @State var messageText: String = ""
     @State var sendInProgress: Bool = false
     
+    @State var showEmojiPicker: Bool = false
+    
     var messageIsEmpty: Bool {
         return messageText.count == 0
     }
@@ -26,7 +28,12 @@ struct MessageBar: View {
                 TextField("Message", text: self.$messageText, axis: .vertical)
                     .lineLimit(...5)
                     .textFieldStyle(.roundedBorder)
-                    .cornerRadius(15)
+                    .cornerRadius(5)
+                Button(action: { self.showEmojiPicker.toggle() }) {
+                    Image(systemName: "face.smiling.inverse")
+                        .font(.system(size: 22))
+                }
+                .padding(.trailing, 3)
                 if self.sendInProgress {
                     ProgressView()
                         .frame(width: 18, height: 18)
@@ -45,7 +52,16 @@ struct MessageBar: View {
                     .disabled(self.messageIsEmpty)
                 }
             }
-        }.padding(.horizontal).padding(.vertical, 10).background(.thinMaterial)
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 10)
+        .background(.thinMaterial)
+        .sheet(isPresented: self.$showEmojiPicker) {
+            EmojiPicker { emoji in
+                self.messageText += ":\(emoji):"
+                showEmojiPicker = false
+            }.padding().presentationDetents([.fraction(0.45)])
+        }
     }
     
     private func onSend() {

@@ -44,9 +44,9 @@ public extension MessageHistoryModel {
         "onlineStatus": "online",
         "driveCapacityOverrideMb": null
     },
-    "recipientId": "9h6qyg5xy0",
+    "recipientId": "9hpu5tn1uqjzkx0j",
     "recipient": {
-        "id": "9h6qyg5xy0",
+        "id": "9hpu5tn1uqjzkx0j",
         "name": "Some user",
         "username": "randomuser",
         "host": null,
@@ -93,6 +93,13 @@ public extension MessageHistoryModel {
             return self.recipientId
         }
         return self.userId
+    }
+    
+    func remoteUser(currentUserId: String) -> UserModel {
+        if self.userId == currentUserId {
+            return self.recipient!
+        }
+        return self.user!
     }
     
     func text() -> String? {
