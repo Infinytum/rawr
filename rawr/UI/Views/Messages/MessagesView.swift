@@ -28,19 +28,23 @@ struct MessagesView: View {
                             .frame(height: 100)
                     } else {
                         VStack {
-                            LazyVStack() {
+                            LazyVStack(spacing: 0) {
                                 ForEach(self.messagesContext.items, id: \.id) { item in
                                     NavigationLink(destination: MessageView(history: item).navigationBarBackButtonHidden(true)) {
                                         MessagesListEntry(history: item)
+                                            .contentShape(Rectangle())
                                     }
                                     .buttonStyle(PlainButtonStyle())
                                     .padding(.horizontal)
-                                    .padding(.vertical, 5)
-                                    Divider()
-                                        .foregroundStyle(.gray.opacity(0.3))
-                                        .frame(height: 0.5)
+                                    if item.id != self.messagesContext.items.last?.id {
+                                        Divider()
+                                            .padding(.top, 10)
+                                            .padding(.bottom, 15)
+                                    }
                                 }
-                            }.padding(.top)
+                            }
+                            .padding(.vertical, 5)
+                            .padding(.top)
                         }.fluentBackground()
                     }
                 }
@@ -56,14 +60,23 @@ struct MessagesView: View {
             }
         }
         .safeAreaInset(edge: .top, spacing: 0, content: {
-            AppHeader {
-                Text("Messages")
+            BetterAppHeader {
+                AppHeaderSimpleBody {
+                    Text("Messages")
+                }
+                Spacer()
+                Button(action: {}) {
+                    Image(systemName: "plus.message")
+                        .font(.system(size: 20))
+                }.disabled(true)
             }
         })
     }
 }
 
 #Preview {
-    MessagesView()
-        .environmentObject(ViewContext())
+    NavigationStack {
+        MessagesView()
+            .environmentObject(ViewContext())
+    }
 }

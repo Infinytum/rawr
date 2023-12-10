@@ -16,46 +16,54 @@ struct MessagesListEntry: View {
     
     var body: some View {
         VStack {
-            HStack(alignment: .center) {
-                RemoteImage(self.history.avatarUrl(currentUserId: context.currentUserId))
-                    .aspectRatio(1, contentMode: .fill)
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(11)
-                    .shadow(radius: 2)
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(self.history.chatName(currentUserId: context.currentUserId) ?? "<No Name>")
-                            .font(.system(size: 18))
-                            .fontWeight(.bold)
-                            .lineLimit(1, reservesSpace: true)
-                        Spacer()
-                        Text(self.history.createdAt?.toDate()?.relative() ?? "Unknown")
-                            .font(.system(size: 14))
-                            .foregroundStyle(.primary.opacity(0.8))
+            NoteHeader(note: .init(createdAt: self.history.createdAt, user: self.remoteUser()))
+            NoteBody(note: .init(text: self.text()))
+                .padding(.vertical, 5)
+                .overlay(alignment: .trailing) {
+                    if self.history.isRead == false && !self.history.isOwnMessage(currentUserId: self.context.currentUserId) {
+                        Circle()
+                            .frame(width: 10, height: 10)
+                            .foregroundColor(.accentColor)
                     }
-                    .frame(height: 17)
-                    (self.getMessagePrefix() + self.getMessageText())
-                        .font(.system(size: 18))
-                        .lineLimit(1, reservesSpace: true)
-                    
-                }.padding(.leading, 5)
-            }
+                }
+                .foregroundColor(
+                    self.history.isOwnMessage(currentUserId: self.context.currentUserId) ?
+                        .primary.opacity(0.7) : .primary
+                )
         }
     }
     
-    private func getMessagePrefix() -> Text {
-        if self.history.isOwnMessage(currentUserId: context.currentUserId) {
-            return Text("You: ").foregroundColor(.gray)
+    private func remoteUser() -> UserModel? {
+        if self.history.recipientId == self.context.currentUserId {
+            return self.history.user
         }
-        return Text("")
+        return self.history.recipient
     }
     
-    private func getMessageText() -> Text {
-        return Text(self.history.text() ?? "<empty message>").font(.system(size: 18)).foregroundColor(.primary.opacity(0.7))
+    private func text() -> String? {
+        if self.history.isOwnMessage(currentUserId: self.context.currentUserId) {
+            return "**You**: " + (self.history.text() ?? "")
+        }
+        return self.history.text()
     }
 }
 
 #Preview {
-    MessagesListEntry(history: .preview)
-        .environmentObject(ViewContext())
+    NavigationView {
+        LazyVStack(spacing: 0) {
+            MessagesListEntry(history: .preview)
+                .environmentObject(ViewContext())
+            Divider().padding(.vertical, 10)
+            MessagesListEntry(history: .preview)
+                .environmentObject(ViewContext())
+            Divider().padding(.vertical, 10)
+            MessagesListEntry(history: .preview)
+                .environmentObject(ViewContext())
+            Divider().padding(.vertical, 10)
+            MessagesListEntry(history: .preview)
+                .environmentObject(ViewContext())
+        }
+        .padding(.horizontal)
+        .fluentBackground()
+    }
 }
