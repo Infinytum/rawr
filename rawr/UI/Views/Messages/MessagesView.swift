@@ -71,6 +71,9 @@ struct MessagesView: View {
                 }.disabled(true)
             }
         })
+        .onAppear {
+            self.messagesContext.initialize()
+        }
     }
 }
 
