@@ -38,7 +38,10 @@ struct NoteBodyPoll: View {
                 Text("\(note.poll!.totalVotes) votes")
                 Text("-")
                 if note.poll!.expiresAt != nil {
-                    Text("Closed \(note.poll!.expiresAt!.toDate()!.relative())")
+                    HStack {
+                        Text("Closed")
+                        RelativeDate(date: note.poll!.expiresAt!.toDate()!)
+                    }
                 } else {
                     Text("Final results")
                 }

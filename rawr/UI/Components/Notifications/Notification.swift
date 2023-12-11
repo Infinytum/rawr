@@ -38,7 +38,7 @@ struct Notification: View {
                             .clipped()
                             .lineLimit(1, reservesSpace: false)
                         Spacer()
-                        Text(self.notification.createdAt?.toDate()?.relative() ?? "Unknown")
+                        RelativeDate(date: self.notification.createdAt!.toDate()!)
                             .font(.system(size: 16))
                             .foregroundColor(.primary.opacity(0.7))
                             .lineLimit(1, reservesSpace: true)

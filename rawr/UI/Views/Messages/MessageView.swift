@@ -49,7 +49,7 @@ struct MessageView: View {
                                             .padding(.top, 10)
                                         HStack {
                                             Image(systemName: "chevron.up")
-                                            Text(self.messageContext.items[index + 1].createdAt!.toDate()!.relative(to: item.createdAt!.toDate()!).replacing("ago", with: "later"))
+                                            RelativeDate(date: self.messageContext.items[index + 1].createdAt!.toDate()!, to: item.createdAt!.toDate()!, later: true)
                                             Image(systemName: "chevron.down")
                                         }
                                         .flippedUpsideDown()

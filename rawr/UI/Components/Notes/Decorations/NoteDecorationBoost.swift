@@ -24,7 +24,7 @@ struct NoteDecorationBoost: View {
                 .font(.system(size: 17, weight: .bold, design: .rounded))
                 .padding(.leading, 12)
                 Spacer()
-                Text(self.note.relativeCreatedAtTime())
+                RelativeDate(date: self.note.createdAt!.toDate()!)
                     .foregroundColor(.primary.opacity(0.7))
                     .font(.system(size: 15))
             }

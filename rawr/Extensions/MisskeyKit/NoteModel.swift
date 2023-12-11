@@ -125,18 +125,6 @@ extension NoteModel: ObservableObject {
     func isQuoteRenote() -> Bool {
         return self.isRenote() && self.text != nil
     }
-
-    func relativeCreatedAtTime() -> String {
-        guard let createdAt = self.createdAt else {
-            return "Unknown"
-        }
-        
-        guard let createdAtDate = createdAt.toDate(withFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ") else {
-            return "Parse failed"
-        }
-        
-        return createdAtDate.relative()
-    }
     
     func absoluteUrl() -> URL {
         if self.url != nil {

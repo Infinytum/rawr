@@ -23,8 +23,6 @@ struct NoteHeader: View {
                         .frame(width: 50, height: 50)
                         .cornerRadius(11)
                     VStack(alignment: .leading) {
-//                        Text(self.note.user.displayName())
-//                            .lineLimit(1)
                         MFMBody(render: self.note.user.renderedDisplayName())
                             .environment(\.emojiRenderSize, CGSize(width: 20, height: 20))
                             .frame(maxHeight: 20, alignment: .top)
@@ -47,7 +45,7 @@ struct NoteHeader: View {
                         .foregroundStyle(.primary.opacity(0.7))
                         .padding(.leading, -3)
                 }
-                Text(self.note.relativeCreatedAtTime())
+                RelativeDate(date: self.note.createdAt!.toDate()!)
                     .lineLimit(1)
                     .font(.system(size: 15))
                     .padding(.top, -5)

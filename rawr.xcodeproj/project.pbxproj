@@ -95,6 +95,8 @@
 		206F74642B1B97E40059A05A /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F74632B1B97E40059A05A /* Note.swift */; };
 		206F74672B1BF08A0059A05A /* NoteQuoteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F74662B1BF08A0059A05A /* NoteQuoteComponent.swift */; };
 		2072F4422B1E9A1400601093 /* ClipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2072F4412B1E9A1400601093 /* ClipModel.swift */; };
+		2078DAE42B268D8200497A2D /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2078DAE32B268D8200497A2D /* Date.swift */; };
+		2078DAE62B26923300497A2D /* RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2078DAE52B26923300497A2D /* RelativeDate.swift */; };
 		207C1E8F2B126FF700F49AAF /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C1E8E2B126FF700F49AAF /* NotificationName.swift */; };
 		207C1E912B13DEE500F49AAF /* RenderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C1E902B13DEE500F49AAF /* RenderingTests.swift */; };
 		207C1E932B1401BD00F49AAF /* MFMAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207C1E922B1401BD00F49AAF /* MFMAnimationView.swift */; };
@@ -238,6 +240,8 @@
 		206F74632B1B97E40059A05A /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		206F74662B1BF08A0059A05A /* NoteQuoteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteQuoteComponent.swift; sourceTree = "<group>"; };
 		2072F4412B1E9A1400601093 /* ClipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipModel.swift; sourceTree = "<group>"; };
+		2078DAE32B268D8200497A2D /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		2078DAE52B26923300497A2D /* RelativeDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeDate.swift; sourceTree = "<group>"; };
 		207C1E8E2B126FF700F49AAF /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		207C1E902B13DEE500F49AAF /* RenderingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingTests.swift; sourceTree = "<group>"; };
 		207C1E922B1401BD00F49AAF /* MFMAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFMAnimationView.swift; sourceTree = "<group>"; };
@@ -684,6 +688,7 @@
 				2067831F2AD825D000099902 /* Environment.swift */,
 				207C1E8E2B126FF700F49AAF /* NotificationName.swift */,
 				207C1E942B1414A400F49AAF /* Task.swift */,
+				2078DAE32B268D8200497A2D /* Date.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -695,6 +700,7 @@
 				2068CC452A87EAFC00F8A958 /* ViewReloader.swift */,
 				200172312A9424CB0079268B /* MFMBody.swift */,
 				205F1A942AB876FE003A352A /* SingleAxisGeometryReader.swift */,
+				2078DAE52B26923300497A2D /* RelativeDate.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1043,6 +1049,7 @@
 				20B7E1542A936916003E3CE4 /* NotificationContext.swift in Sources */,
 				20F4BC7F2B1A9B1F00BE9B88 /* ListTimelineContext.swift in Sources */,
 				209D67C72AD0726D00E30ACD /* MessageContext.swift in Sources */,
+				2078DAE42B268D8200497A2D /* Date.swift in Sources */,
 				2068CC2E2A87C25B00F8A958 /* NoteBodyReactions.swift in Sources */,
 				204DA4272A8AC32D00BB0598 /* Visualizer.swift in Sources */,
 				3FBFED2B2A9511F100D53608 /* NoteBodyPoll.swift in Sources */,
@@ -1099,6 +1106,7 @@
 				2068CC332A87C25B00F8A958 /* NoteHeader.swift in Sources */,
 				201145232B1AAB6300728E6D /* TimelineSwitcherMenu.swift in Sources */,
 				207C33DC2A8FB8B700500E33 /* TimelineItem.swift in Sources */,
+				2078DAE62B26923300497A2D /* RelativeDate.swift in Sources */,
 				207C33E62A8FC6AC00500E33 /* HomeTimelineContext.swift in Sources */,
 				205F1A912AB7BF88003A352A /* Timeline.swift in Sources */,
 				2011451F2B1A9C9200728E6D /* UserListMenu.swift in Sources */,
